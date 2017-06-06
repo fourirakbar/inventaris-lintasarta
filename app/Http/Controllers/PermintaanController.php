@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class PermintaanController extends Controller
 {
@@ -16,6 +17,10 @@ class PermintaanController extends Controller
         //
     }
 
+    public function requestPage() {
+        return \View::make('request');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +28,12 @@ class PermintaanController extends Controller
      */
     public function create()
     {
-        //
+        $permintaan = new Permintaan();
+
+        $permintaan->BARANG_PERMINTAAN = Input::get('dua');
+        $permintaan->save();
+
+        // return Redirect::back();
     }
 
     /**

@@ -23,16 +23,16 @@
 					
 					<div class="panel-body">
 						<div class="col-md-6">
-							<form role="form">
-							
+							<!-- <form role="form"> -->
+							<form method="put" action="/request">
 								<div class="form-group">
 									<label>Nama Requester</label>
-									<input class="form-control" placeholder="Nama Requester">
+									<input class="form-control" placeholder="Nama Requester" name="satu">
 								</div>
 
 								<div class="form-group">
 									<label>Barang yang Dibutuhkan</label>
-									<input class="form-control" placeholder="Nama Barang">
+									<input class="form-control" placeholder="Nama Barang" name="dua">
 								</div>
 
 								
