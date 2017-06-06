@@ -14,3 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/request', 'PermintaanController@requestPage');
+Route::post('/request', array('uses' => 'PermintaanController@create'))
+
+Route::get('/login', 'LoginController@loginPage');
+Route::post('/login', 'LoginController@doLogin');
+
+Route::get('/register', 'RegisterController@index');
+
+// Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
