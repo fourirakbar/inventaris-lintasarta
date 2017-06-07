@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use App\Permintaan;
 
 class PermintaanController extends Controller
 {
@@ -14,11 +15,10 @@ class PermintaanController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $permintaan = Permintaan::orderBy('id','DESC')->paginate(5);
 
-    public function requestPage() {
-        return \View::make('request');
+        return view('request',compact('permintaan'))->with('i', ($request->input('page', 1) - 1) * 5);
+
     }
 
     /**
@@ -28,12 +28,8 @@ class PermintaanController extends Controller
      */
     public function create()
     {
-        $permintaan = new Permintaan();
+        return view('request');
 
-        $permintaan->BARANG_PERMINTAAN = Input::get('dua');
-        $permintaan->save();
-
-        // return Redirect::back();
     }
 
     /**
@@ -44,7 +40,18 @@ class PermintaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+
+            'BARANG_PERMINTAAN' => 'required'
+
+        ]);
+
+
+        Permintaan::create($request->all());
+
+        return redirect()->route('request')
+
+                        ->with('success','Item created successfully');
     }
 
     /**

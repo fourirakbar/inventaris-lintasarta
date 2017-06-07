@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/request', 'PermintaanController@requestPage');	
-Route::put('/request', array('uses' => 'PermintaanController@create'));
-
+// Route::get('/request', 'PermintaanController@requestPage');	
+// Route::put('/request', array('uses' => 'PermintaanController@create'));
+Route::resource('/request', 'PermintaanController');
 Route::get('/login', 'LoginController@loginPage');
 Route::post('/login', 'LoginController@doLogin');
 
