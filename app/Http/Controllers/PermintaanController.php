@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Input;
 use App\Permintaan;
 
 class PermintaanController extends Controller
@@ -15,10 +16,19 @@ class PermintaanController extends Controller
      */
     public function index()
     {
-        $permintaan = Permintaan::orderBy('id','DESC')->paginate(5);
+        return view('request');
+    }
 
-        return view('request',compact('permintaan'))->with('i', ($request->input('page', 1) - 1) * 5);
+    public function input() {
+        $data = Input::all();
+        echo $data['nama_peminta'];
+        echo $data['barang_permintaan'];
+        Permintaan::insertGetId(array(
+            'nama_peminta' => $data['nama_peminta'],
+            'barang_permintaan' => $data['barang_permintaan'],
+        ));
 
+        return redirect('request');
     }
 
     /**
@@ -28,7 +38,6 @@ class PermintaanController extends Controller
      */
     public function create()
     {
-        return view('request');
 
     }
 
@@ -42,7 +51,8 @@ class PermintaanController extends Controller
     {
         $this->validate($request, [
 
-            'BARANG_PERMINTAAN' => 'required'
+            'nama_peminta' => 'required',
+            'barang_permintaan' => 'required'
 
         ]);
 

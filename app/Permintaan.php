@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permintaan extends Model
 {
-    public $fillable = ['nama_barang'];
+	public $table = "permintaans";
+    protected $fillable = array(
+    	'nama_peminta',
+    	'barang_permintaan',
+    );
 }

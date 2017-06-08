@@ -1,6 +1,5 @@
 @extends('layouts.lumino')
 @section('content')
-@stop
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
 		<div class="row">
@@ -24,24 +23,17 @@
 					<div class="panel-body">
 						<div class="col-md-6">
 							<!-- <form role="form"> -->
-							<form method="put" action="/request">
+							<form method="POST" role="form" action="{{ URL::to('request2') }}">
 								<div class="form-group">
 									<label>Nama Requester</label>
-									<input class="form-control" placeholder="Nama Requester" name="satu">
+									<input class="form-control" placeholder="Nama Requester" name="nama_peminta">
 								</div>
-
+								{{csrf_field()}}
 								<div class="form-group">
 									<label>Barang yang Dibutuhkan</label>
-									<input class="form-control" placeholder="Nama Barang" name="dua">
+									<input class="form-control" placeholder="Nama Barang" name="barang_permintaan">
 								</div>
-
-								
-								
-																
-								
-								
-								
-								
+								{{csrf_field()}}								
 								<button type="submit" class="btn btn-primary">Submit</button>
 								<button type="reset" class="btn btn-default">Reset</button>
 							</div>
@@ -52,3 +44,4 @@
 		</div><!-- /.row -->
 		
 	</div><!--/.main-->
+@endsection

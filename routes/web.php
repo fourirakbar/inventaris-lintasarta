@@ -17,9 +17,11 @@ Route::get('/', function () {
 
 // Route::get('/request', 'PermintaanController@requestPage');	
 // Route::put('/request', array('uses' => 'PermintaanController@create'));
-Route::resource('/request', 'PermintaanController');
-Route::get('/login', 'LoginController@loginPage');
-Route::post('/login', 'LoginController@doLogin');
+Route::get('request', 'PermintaanController@index');
+Route::post('request2', 'PermintaanController@input');
+
+Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@login');
 
 Route::get('/register', 'RegisterController@index');
 
@@ -27,4 +29,5 @@ Route::get('/register', 'RegisterController@index');
 
 Route::get('/home', 'HomeController@index');
 
-
+#coba CRUD manual
+Route::resource('/barang', 'BarangController');

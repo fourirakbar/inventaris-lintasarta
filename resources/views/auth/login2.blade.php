@@ -25,6 +25,7 @@
 				<div class="panel-body">
 					<!-- <form role="form"> -->
 					<form method="post" action="/login">
+						{{ csrf_field() }}
 						<fieldset>
 							<div class="form-group">
 								<input class="form-control" placeholder="ID User" name="iduser" type="text" autofocus="">
