@@ -59,11 +59,8 @@
 								    	<TD>{{ $permintaan->DO }}</TD>
 								    	<TD>{{ $permintaan->BAST }}</TD> -->
 								    	<td>
-            								<form method="POST" action="/semua/lihat/{{ $jebret->ID_PERMINTAAN }}" accept-charset="UTF-8">
             								<input type="hidden" name="method" value="DELETE">
-            								{{ csrf_field() }}
             								<a class="btn green" style="height: 20px; line-height: 10px; padding: 0 1rem;" href="/semua/lihat/{{ $jebret->ID_PERMINTAAN }}"><i class="material-icons" title="Ubah pengumuman" style=" width: 1rem; font-size: 1rem; line-height: 1.5rem; margin-right: 0px;">mode_edit</i></a>
-            								</form>
 								    	</td>
 								    </tr>
 								    @endforeach

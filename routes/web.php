@@ -34,6 +34,8 @@ Route::post('login2', 'LoginController@login');
 Route::get('register', 'RegisterController@index');
 Route::post('register', 'RegisterController@create');
 
+Route::get('logout', 'LoginController@logout');
+
 // Auth::routes();
 
 Route::get('/home', 'HomeController@index');
