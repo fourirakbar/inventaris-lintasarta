@@ -20,10 +20,11 @@ Route::get('/', function () {
 Route::get('request', 'PermintaanController@index');
 Route::post('request2', 'PermintaanController@input');
 
-Route::get('/login', 'LoginController@index');
-Route::post('/login', 'LoginController@login');
+Route::get('login', 'LoginController@index');
+Route::post('login2', 'LoginController@login');
 
-Route::get('/register', 'RegisterController@index');
+Route::get('register', 'RegisterController@index');
+Route::post('register', 'RegisterController@create');
 
 // Auth::routes();
 

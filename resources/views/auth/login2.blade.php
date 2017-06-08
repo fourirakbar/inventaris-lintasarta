@@ -24,14 +24,14 @@
 				<div class="panel-heading">Log in SI Inventaris Lintas Arta</div>
 				<div class="panel-body">
 					<!-- <form role="form"> -->
-					<form method="post" action="/login">
+					<form method="post" action="{{ URL::to('login2') }}">
 						{{ csrf_field() }}
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="ID User" name="iduser" type="text" autofocus="">
+								<input class="form-control" placeholder="ID User" name="username" type="text" autofocus="">
 							</div>
 							<div class="form-group">
-								<input class="form-control" placeholder="Password" name="password" type="password" value="">
+								<input class="form-control" placeholder="Password" name="password" type="password">
 							</div>
 							<div class="checkbox">
 								<label>
