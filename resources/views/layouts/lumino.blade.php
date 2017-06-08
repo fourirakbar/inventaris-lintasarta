@@ -13,6 +13,8 @@
 	<script src="js/easypiechart.js"></script>
 	<script src="js/easypiechart-data.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="js/sweetalert2.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
 	<script>
 		$('#calendar').datepicker({
 		});

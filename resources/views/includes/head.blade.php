@@ -14,4 +14,7 @@ load bootstrap from a cdn
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/datepicker3.css" rel="stylesheet">
 <link href="css/styles.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/sweetalert2.css">
 <script src="js/lumino.glyphs.js"></script>
+<script type="text/javascript" src="js/sweetalert2.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
