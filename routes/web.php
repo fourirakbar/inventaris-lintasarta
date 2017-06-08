@@ -15,10 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/request', 'PermintaanController@requestPage');	
-// Route::put('/request', array('uses' => 'PermintaanController@create'));
+#user request barang
 Route::get('request', 'PermintaanController@index');
 Route::post('request2', 'PermintaanController@input');
+
+#user monitoring
+Route::get('monitoring', 'PermintaanController@monitoring');
+Route::get('monitoring2', 'PermintaanController@minputMonitoring');
+
+#karyawan cek semua permintaan
+Route::get('semua', 'PermintaanController@lihatSemua');
+Route::get('semoga/lihat/{ID_PERMINTAAN', 'PermintaanController@show');
+Route::get('/semua/{ID_PERMINTAAN}/tindakLanjut', 'PermintaanController@tindakLanjut');
 
 Route::get('/login', 'LoginController@index');
 Route::post('/login', 'LoginController@login');

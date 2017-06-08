@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use App\Permintaan;
@@ -16,20 +18,41 @@ class PermintaanController extends Controller
      */
     public function index()
     {
-        return view('request');
+        return view('permintaan.request');
     }
 
     public function input() {
         $data = Input::all();
-        echo $data['nama_peminta'];
-        echo $data['barang_permintaan'];
+        // echo $data['nama_peminta'];
+        echo $data['BARANG_PERMINTAAN'];
         Permintaan::insertGetId(array(
-            'nama_peminta' => $data['nama_peminta'],
-            'barang_permintaan' => $data['barang_permintaan'],
+            // 'nama_peminta' => $data['nama_peminta'],
+            'BARANG_PERMINTAAN' => $data['BARANG_PERMINTAAN'],
         ));
 
-        return redirect('request');
+        return view('permintaan.request');
     }
+
+    public function monitoring() {
+        return view('permintaan.monitoring');
+    }
+
+    public function lihatSemua(Request $request) {
+        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate(5);
+        return view('permintaan.semuaPermintaan', compact('jebret'))->with('i', ($request->input('page', 1) - 1) * 5);
+    } 
+
+    public function tindakLanjut($ID_PERMINTAAN) {
+        $jebret = Permintaan::find($ID_PERMINTAAN);
+        return view('permintaan.tindakLanjut',compact('jebret'));
+    }
+
+    
+
+    // public function edit() {
+    //     $data = Input::all();
+
+    // }
 
     /**
      * Show the form for creating a new resource.
