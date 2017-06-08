@@ -23,10 +23,10 @@ class PermintaanController extends Controller
 
     public function input() {
         $data = Input::all();
-        // echo $data['nama_peminta'];
+        echo $data['NAMA_REQUESTER'];
         echo $data['BARANG_PERMINTAAN'];
         Permintaan::insertGetId(array(
-            // 'nama_peminta' => $data['nama_peminta'],
+            'NAMA_REQUESTER' => $data['NAMA_REQUESTER'],
             'BARANG_PERMINTAAN' => $data['BARANG_PERMINTAAN'],
         ));
 
@@ -40,11 +40,17 @@ class PermintaanController extends Controller
     public function lihatSemua(Request $request) {
         $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate(5);
         return view('permintaan.semuaPermintaan', compact('jebret'))->with('i', ($request->input('page', 1) - 1) * 5);
+        // return view('permintaan.semuaPermintaan')->withObjects('jebret');
     } 
 
     public function tindakLanjut($ID_PERMINTAAN) {
         $jebret = Permintaan::find($ID_PERMINTAAN);
         return view('permintaan.tindakLanjut',compact('jebret'));
+    }
+
+    public function showSatuSatu($ID_PERMINTAAN) {
+        $item = Item::find($id_permintaan);
+        return view('perminta.satuSatu', compact('item'));
     }
 
     

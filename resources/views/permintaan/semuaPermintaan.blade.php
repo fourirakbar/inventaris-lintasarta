@@ -25,48 +25,58 @@
 							<div class="panel panel-default">
 							<div class="panel-heading">Data Permintaan dari User</div>
 							<div class="panel-body">
-								<table class="table table-bordered">
-								    <thead>	
-								    <tr>
+									<table class="table table-bordered">
+										<thead>
+									    <tr>
 								        <th>ID Permintaan</th>
+								        <th>Nama Requester</th>
 								        <th>Tanggal Permintaan</th>
 								        <th>Barang yang Diminta</th>
-								        <!-- <th>NO FPBJ</th>
-								        <th>Tgl Targe Selesai</th>
-								        <th>Keterangan</th>
-								        <th>Tgl Tindak Lanjut Terakhir</th>
-								        <th>Status</th>
-								        <th>FPB</th>
-								        <th>RFQ</th>
-								        <th>SPK</th>
-								        <th>Delivery Order</th>
-								        <th>Bast</th> -->
 								        <th>Action</th>
 								    </tr>
-								    @foreach ($jebret as $key => $permintaan)
+								    @foreach ($jebret as $key)
 								    <tr>
-								    	<td>{{ $permintaan->ID_PERMINTAAN }}</td>
-								    	<td>{{ $permintaan->TGL_PERMINTAAN }}</td>
-								    	<td>{{ $permintaan->BARANG_PERMINTAAN }}</td>
-								    	<!-- <td>{{ $permintaan->NO_FPBJ }}</td>
-								    	<td>{{ $permintaan->TARGET_SELESAI }}</td>
-								    	<td>{{ $permintaan->KETERANGAN }}</td>
-								    	<td>{{ $permintaan->TINDAK_LANJUT_AKHIR }}</td>
-								    	<td>{{ $permintaan->STATUS }}</td>
-								    	<TD>{{ $permintaan->FPB }}</TD>
-								    	<TD>{{ $permintaan->RFQ }}</TD>
-								    	<TD>{{ $permintaan->SPK }}</TD>
-								    	<TD>{{ $permintaan->DO }}</TD>
-								    	<TD>{{ $permintaan->BAST }}</TD> -->
+								    	<td>{{ $key->ID_PERMINTAAN }}</td>
+								    	<td>{{ $key->NAMA_REQUESTER }}</td>
+								    	<td>{{ $key->TGL_PERMINTAAN }}</td>
+								    	<td>{{ $key->BARANG_PERMINTAAN }}</td>
 								    	<td>
-            								<input type="hidden" name="method" value="DELETE">
-            								<a class="btn green" style="height: 20px; line-height: 10px; padding: 0 1rem;" href="/semua/lihat/{{ $jebret->ID_PERMINTAAN }}"><i class="material-icons" title="Ubah pengumuman" style=" width: 1rem; font-size: 1rem; line-height: 1.5rem; margin-right: 0px;">mode_edit</i></a>
+            								<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Show Detail</button>
 								    	</td>
 								    </tr>
 								    @endforeach
 								    </thead>
-								</table>
-								
+								    </table>
+								    <div id="myModal" class="modal fade" role="dialog">
+									  <div class="modal-dialog modal-lg">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal">&times;</button>
+									        <h4 class="modal-title">Modal Header</h4>
+									      </div>
+									      <div class="modal-body">
+									      <table class="table table-bordered">
+									      	<thead>
+										      <tr>
+										      	<th width="100px">Id Permintaan</th>
+										      	<td>{{ $key->ID_PERMINTAAN }}</td>
+										      </tr>
+										      <tr>
+										      	<th>Nama Requester</th>
+												<td>{{ $key->NAMA_REQUESTER }}</td>
+										      </tr>
+									      	</thead>
+									      </table>  
+
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									      </div>
+									    </div>
+
+									  </div>
+									</div>
+								{!! $jebret->render() !!}
 							</div>
 						</div>
 							
