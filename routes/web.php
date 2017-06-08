@@ -28,10 +28,11 @@ Route::get('semua', 'PermintaanController@lihatSemua');
 Route::get('semoga/lihat/{ID_PERMINTAAN', 'PermintaanController@show');
 Route::get('/semua/{ID_PERMINTAAN}/tindakLanjut', 'PermintaanController@tindakLanjut');
 
-Route::get('/login', 'LoginController@index');
-Route::post('/login', 'LoginController@login');
+Route::get('login', 'LoginController@index');
+Route::post('login2', 'LoginController@login');
 
-Route::get('/register', 'RegisterController@index');
+Route::get('register', 'RegisterController@index');
+Route::post('register', 'RegisterController@create');
 
 // Auth::routes();
 
