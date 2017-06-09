@@ -6,16 +6,17 @@
 	<title></title>
 </head>
 <body>
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="js/sweetalert2.js"></script>
-	<script type="text/javascript" src="js/custom.js"></script>
-	<script>
+<!-- <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
+	<script type="text/javascript" src="{{ URL::asset('/js/jquery-1.11.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('/js/chart.min.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('/js/chart-data.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('/js/easypiechart.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('/js/easypiechart-data.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('/js/bootstrap-datepicker.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('/js/coba.js') }}"></script>
+	
+	<script type="text/javascript">
 		$('#calendar').datepicker({
 		});
 
@@ -33,7 +34,7 @@
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
 	</script>
-	<script>
+	<script type="text/javascript">
 $(document).on("click", ".open-myModal", function () {
      var myBookId = $(this).data('id');
      console.log(myBookId);

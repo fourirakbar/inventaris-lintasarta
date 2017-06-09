@@ -24,7 +24,7 @@
             <div class="col-md-6"> 
               <!-- <form role="form"> --> 
               <form method="POST" role="form" action="{{ URL::to('request2') }}"> 
-                <<!-- div class="form-group"> 
+                <!-- div class="form-group"> 
                   <label>ID Requester</label> 
                   <input class="form-control" placeholder="" disabled=""> 
                 </div>  -->
@@ -48,3 +48,4 @@
     </div><!-- /.row --> 
      
   </div><!--/.main-->
+  

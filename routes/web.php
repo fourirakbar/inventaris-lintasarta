@@ -26,7 +26,8 @@ Route::get('monitoring2', 'PermintaanController@minputMonitoring');
 #karyawan cek semua permintaan
 Route::get('semua', 'PermintaanController@lihatSemua');
 Route::get('semua/lihat/{ID_PERMINTAAN}', 'PermintaanController@details');
-Route::get('/semua/{ID_PERMINTAAN}/tindakLanjut', 'PermintaanController@tindakLanjut');
+Route::get('semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doEdit');
+Route::put('semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doUpdate');
 
 Route::get('login', 'LoginController@index');
 Route::post('login2', 'LoginController@login');

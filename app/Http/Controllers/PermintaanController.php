@@ -53,6 +53,28 @@ class PermintaanController extends Controller
         return view('permintaan.details', compact('jebret'));
     }
 
+    public function doEdit($ID_PERMINTAAN) {
+        $jebret = Permintaan::find($ID_PERMINTAAN);
+        return view('permintaan.edit', compact('jebret'));
+    }
+
+    public function doUpdate(Request $request, $ID_PERMINTAAN) {
+        $this->validate($request. [
+            'NO_FPBJ' => $data['NO_FPBJ'],
+            'TARGET_SELESAI' => $data['TARGET_SELESAI'],
+            'KETERANGAN' => $data['KETERANGAN'],
+            'TINDAK_LANJUT_AKHIR' => $data['TINDAK_LANJUT_AKHIR'],
+            'STATUS' => $data['STATUS'],
+            'FPB' => $data['FPB'],
+            'RFQ' => $data['RFQ'],
+            'SPK' => $data['SPK'],
+            'DO' => $data['DO'],
+            'BAST' => $data['BAST'],
+        ]);
+        Permintaan::find($ID_PERMINTAAN)->update($request->all());
+        return redirect()->route('permintaan.semua')->with('success','sukses update');
+    }
+
     
 
     // public function edit() {
