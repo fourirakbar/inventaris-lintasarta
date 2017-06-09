@@ -29,6 +29,38 @@
 								<table class="table table-bordered">
 								    <thead>	
 								    <tr>
+								    	<th>ID Requester</th>
+								    	<th>Nama Requester</th>
+								    	<th>Tanggal Permintaan</th>
+								    	<th>Barang yang Diminta</th>
+								    	<th>No FPBJ</th>
+								    	<th>Tanggal Target Selesai</th>
+								    	<th>Keterangan</th>
+								    	<th>Tanggal Tindak Lanjut Akhir</th>
+								    	<th>Sttus</th>
+								    	<th>FPB</th>
+								    	<th>RFQ</th>
+								    	<th>SPK</th>
+								    	<th>Delivery Order</th>
+								    	<th>BAST</th>
+								    </tr>
+								    <tr>
+								    	<td>{{ $jebret->ID_PERMINTAAN }}</td>
+								    	<td>{{ $jebret->NAMA_REQUESTER }}</td>
+								    	<td>{{ $jebret->TGL_PERMINTAAN }}</td>
+								    	<td>{{ $jebret->BARANG_PERMINTAAN }}</td>
+								    	<td>{{ $jebret->NO_FPBJ }}</td>
+								    	<td>{{ $jebret->TARGET_SELESAI }}</td>
+								    	<td>{{ $jebret->KETERANGAN }}</td>
+								    	<td>{{ $jebret->TINDAK_LANJUT_AKHIR }}</td>
+								    	<td>{{ $jebret->STATUS }}</td>
+								    	<td>{{ $jebret->FPB }}</td>
+								    	<td>{{ $jebret->RFQ }}</td>
+								    	<td>{{ $jebret->SPK }}</td>
+								    	<td>{{ $jebret->DO }}</td>
+								    	<td>{{ $jebret->BAST }}</td>
+								    </tr>
+								    <!-- <tr>
 								        <th width="200px">ID Permintaan</th>
 								        <td>{{ $jebret->ID_PERMINTAAN }}</td>
 								    </tr>
@@ -83,7 +115,7 @@
 								    <tr>
 								        <th>BAST</th>
 								        <td>{{ $jebret->BAST }}</td>
-								    </tr>
+								    </tr> -->
 								    </thead>
 								</table>
 								
