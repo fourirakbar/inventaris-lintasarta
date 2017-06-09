@@ -32,7 +32,15 @@
 		$(window).on('resize', function () {
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
-	</script>	
+	</script>
+	<script>
+$(document).on("click", ".open-myModal", function () {
+     var myBookId = $(this).data('id');
+     console.log(myBookId);
+     $(".modal-body #bookId").text( myBookId );
+    $('#addBookDialog').modal('show');
+});
+</script>
 
 	<div class="container">
 		<header class="row">

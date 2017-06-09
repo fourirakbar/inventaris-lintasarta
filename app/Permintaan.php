@@ -13,4 +13,5 @@ class Permintaan extends Model
     	'BARANG_PERMINTAAN',
 
     );
+    public $primaryKey = "ID_PERMINTAAN";
 }

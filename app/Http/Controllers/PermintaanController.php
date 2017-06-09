@@ -48,9 +48,9 @@ class PermintaanController extends Controller
         return view('permintaan.tindakLanjut',compact('jebret'));
     }
 
-    public function showSatuSatu($ID_PERMINTAAN) {
-        $item = Item::find($id_permintaan);
-        return view('perminta.satuSatu', compact('item'));
+    public function details($ID_PERMINTAAN) {
+        $jebret = Permintaan::find($ID_PERMINTAAN);
+        return view('permintaan.details', compact('jebret'));
     }
 
     
