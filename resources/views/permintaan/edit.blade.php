@@ -93,18 +93,53 @@
 						                </div> 
 						                {{csrf_field()}}
 						                <div class="form-group"> 
-						                  <label>NO FPBJ</label> 
-						                  <input type="date" class="form-control" name="NO_FPBJ" id="calendar"> 
+						                  <label>No FPBJ</label> 
+						                  <input class="form-control" placeholder="No FPBJ" name="NO_FPBJ"> 
 						                </div> 
 						                {{csrf_field()}}
 						                <div class="form-group"> 
-						                  <label>Nama Requester</label> 
-						                  <input class="form-control" placeholder="{{ $jebret->NAMA_REQUESTER }}" name="BARANG_PERMINTAAN" disabled=""> 
+						                  <label>Target Selesai</label> 
+						                  <input type="date" class="form-control" name="TARGET_SELESAI" placeholder="Tanggal Target Selesai" id="calendar"> 
 						                </div> 
 						                {{csrf_field()}}
 						                <div class="form-group"> 
-						                  <label>Nama Requester</label> 
-						                  <input class="form-control" placeholder="{{ $jebret->NAMA_REQUESTER }}" name="BARANG_PERMINTAAN" disabled=""> 
+						                  <label>Keterangan</label> 
+						                  <input class="form-control" placeholder="Keterangan" name="KETERANGAN"> 
+						                </div> 
+						                {{csrf_field()}}
+						                <div class="form-group"> 
+						                  <label>Target asd</label> 
+						                  <input type="date" class="form-control" name="TARGET_SELESAI" placeholder="Tanggal Target Selesai" id="calendar1"> 
+						                </div> 
+						                {{csrf_field()}}
+						                <div class="form-group"> 
+						                  <label>Status</label> 
+						                  <input class="form-control" placeholder="Status" name="STATUS"> 
+						                </div> 
+						                {{csrf_field()}}
+						                <div class="form-group"> 
+						                  <label>FPB</label> 
+						                  <input type="date" class="form-control" name="FPB" placeholder="FPB" id="calendar"> 
+						                </div> 
+						                {{csrf_field()}}
+						                <div class="form-group"> 
+						                  <label>RFQ</label> 
+						                  <input type="date" class="form-control" name="RFQ" placeholder="RFQ" id="calendar"> 
+						                </div> 
+						                {{csrf_field()}}
+						                <div class="form-group"> 
+						                  <label>SPK</label> 
+						                  <input type="date" class="form-control" name="SPK" placeholder="SPK" id="calendar"> 
+						                </div> 
+						                {{csrf_field()}}
+						                <div class="form-group"> 
+						                  <label>Delivery Order</label> 
+						                  <input type="date" class="form-control" name="DO" placeholder="Delivery Order" id="calendar"> 
+						                </div> 
+						                {{csrf_field()}}
+						                <div class="form-group"> 
+						                  <label>BAST</label> 
+						                  <input type="date" class="form-control" name="BAST" placeholder="BAST" id="calendar"> 
 						                </div> 
 						                {{csrf_field()}}
 						                <button type="submit" class="btn btn-primary">Submit</button> 
