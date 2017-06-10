@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use App\Permintaan;
 
 class PermintaanController extends Controller
@@ -38,7 +39,7 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemua(Request $request) {
-        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate(5);
+        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate(10);
         return view('permintaan.semuaPermintaan', compact('jebret'))->with('i', ($request->input('page', 1) - 1) * 5);
         // return view('permintaan.semuaPermintaan')->withObjects('jebret');
     } 
@@ -59,20 +60,30 @@ class PermintaanController extends Controller
     }
 
     public function doUpdate(Request $request, $ID_PERMINTAAN) {
-        $this->validate($request. [
-            'NO_FPBJ' => $data['NO_FPBJ'],
-            'TARGET_SELESAI' => $data['TARGET_SELESAI'],
-            'KETERANGAN' => $data['KETERANGAN'],
-            'TINDAK_LANJUT_AKHIR' => $data['TINDAK_LANJUT_AKHIR'],
-            'STATUS' => $data['STATUS'],
-            'FPB' => $data['FPB'],
-            'RFQ' => $data['RFQ'],
-            'SPK' => $data['SPK'],
-            'DO' => $data['DO'],
-            'BAST' => $data['BAST'],
-        ]);
+        $jebret = Permintaan::find($ID_PERMINTAAN);
         Permintaan::find($ID_PERMINTAAN)->update($request->all());
-        return redirect()->route('permintaan.semua')->with('success','sukses update');
+        // return redirect()->route('/semua/lihat/{ID_PERMINTAAN}')->with('success','sukses update');
+        return Redirect::to('/semua/lihat/{$ID_PERMINTAAN}');
+
+        // $permintaan = Permintaan::find(1);
+        // $permintaan->update($request::all());
+        // return redirect('/semua/lihat{ID_PERMINTAAN}');
+        // $permintaan->update($request->all());
+        // return print_r($permintaan);
+        // $data = Input::all()->find($ID_PERMINTAAN);
+        // Permintaan::insertGetId(array(
+        //     'NO_FPBJ' => $data['NO_FPBJ'],
+        //     'TARGET_SELESAI' => $data['TARGET_SELESAI'],
+        //     'KETERANGAN' => $data['KETERANGAN'],
+        //     'TINDAK_LANJUT_AKHIR' => $data['TINDAK_LANJUT_AKHIR'],
+        //     'STATUS' => $data['STATUS'],
+        //     'FPB' => $data['FPB'],
+        //     'RFQ' => $data['RFQ'],
+        //     'SPK' => $data['SPK'],
+        //     'DO' => $data['DO'],
+        //     'BAST' => $data['BAST'],
+        // ));
+        // $data->save();
     }
 
     

@@ -26,7 +26,7 @@
 							<div class="panel panel-default">
 							<div class="panel-heading">Data Permintaan dari User</div>
 							<div class="panel-body">
-								<input type="hidden" name="method" value="DELETE">
+								<input type="hidden" name="method">
             					<a class="btn btn-primary pull-right" href="/semua/lihat/edit/{{ $jebret->ID_PERMINTAAN }}"><b class="material-icons" title="Ubah pengumuman">Edit Keterangan</b></a>
             					<br>
             					<br>

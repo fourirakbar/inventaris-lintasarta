@@ -1,5 +1,5 @@
   $( function() {
-    $( "#datepicker" ).datepicker({
+    $( ".calendar1" ).datepicker({
       changeMonth: true,
       changeYear: true
     });
