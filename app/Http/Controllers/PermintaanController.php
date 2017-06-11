@@ -62,8 +62,11 @@ class PermintaanController extends Controller
     public function doUpdate(Request $request, $ID_PERMINTAAN) {
         $jebret = Permintaan::find($ID_PERMINTAAN);
         Permintaan::find($ID_PERMINTAAN)->update($request->all());
+        $id = $jebret->ID_PERMINTAAN;
+        $url = '/semua/lihat/'.$id;
+        echo $url;
         // return redirect()->route('/semua/lihat/{ID_PERMINTAAN}')->with('success','sukses update');
-        return Redirect::to('/semua/lihat/{$ID_PERMINTAAN}');
+        return redirect($url);
 
         // $permintaan = Permintaan::find(1);
         // $permintaan->update($request::all());
