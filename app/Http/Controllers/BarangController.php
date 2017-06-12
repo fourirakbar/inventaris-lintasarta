@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class BarangController extends Controller
 {
+    public function lihatSemua(Request $request) {
+        
+    }
+
+
     /**
      * Display a listing of the resource.
      *
