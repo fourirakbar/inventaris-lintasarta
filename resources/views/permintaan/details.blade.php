@@ -36,7 +36,7 @@
 
 								<table class="table table-bordered">
 								    <thead>	
-								    <!-- <tr>
+								    <tr>
 								    	<th>ID Requester</th>
 								    	<th>Nama Requester</th>
 								    	<th>Tanggal Permintaan</th>
@@ -55,20 +55,21 @@
 								    <tr>
 								    	<td>{{ $jebret->ID_PERMINTAAN }}</td>
 								    	<td>{{ $jebret->NAMA_REQUESTER }}</td>
-								    	<td>{{ $jebret->TGL_PERMINTAAN }}</td>
+								    	<td><?php echo date('d F Y H:i:s', strtotime($jebret->TGL_PERMINTAAN)) ?> </td>
+								    	
 								    	<td>{{ $jebret->BARANG_PERMINTAAN }}</td>
 								    	<td>{{ $jebret->NO_FPBJ }}</td>
-								    	<td>{{ $jebret->TARGET_SELESAI }}</td>
+										<td><?php echo date('d F Y', strtotime($jebret->TARGET_SELESAI)) ?> </td>
 								    	<td>{{ $jebret->KETERANGAN }}</td>
-								    	<td>{{ $jebret->TINDAK_LANJUT_AKHIR }}</td>
+								    	<td><?php echo date('d F Y', strtotime($jebret->TINDAK_LANJUT_AKHIR)) ?> </td>
 								    	<td>{{ $jebret->STATUS }}</td>
-								    	<td>{{ $jebret->FPB }}</td>
-								    	<td>{{ $jebret->RFQ }}</td>
-								    	<td>{{ $jebret->SPK }}</td>
-								    	<td>{{ $jebret->DO }}</td>
-								    	<td>{{ $jebret->BAST }}</td>
-								    </tr> -->
-								    <tr>
+								    	<td><?php echo date('d F Y', strtotime($jebret->FPB)) ?> </td>
+								    	<td><?php echo date('d F Y', strtotime($jebret->RFQ)) ?> </td>
+								    	<td><?php echo date('d F Y', strtotime($jebret->SPK)) ?> </td>
+								    	<td><?php echo date('d F Y', strtotime($jebret->DO)) ?> </td>
+								    	<td><?php echo date('d F Y', strtotime($jebret->BAST)) ?> </td>
+								    </tr>
+								    <!-- <tr>
 								        <th width="200px">ID Permintaan</th>
 								        <td>{{ $jebret->ID_PERMINTAAN }}</td>
 								    </tr>
@@ -123,7 +124,7 @@
 								    <tr>
 								        <th>BAST</th>
 								        <td>{{ $jebret->BAST }}</td>
-								    </tr>
+								    </tr> -->
 								    </thead>
 								</table>
 								

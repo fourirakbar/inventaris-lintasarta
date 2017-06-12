@@ -62,31 +62,15 @@ class PermintaanController extends Controller
     public function doUpdate(Request $request, $ID_PERMINTAAN) {
         $jebret = Permintaan::find($ID_PERMINTAAN);
         Permintaan::find($ID_PERMINTAAN)->update($request->all());
-        $id = $jebret->ID_PERMINTAAN;
-        $url = '/semua/lihat/'.$id;
-        echo $url;
-        // return redirect()->route('/semua/lihat/{ID_PERMINTAAN}')->with('success','sukses update');
+        
+        $url = '/semua/lihat/'.$ID_PERMINTAAN;
+        
         return redirect($url);
+    }
 
-        // $permintaan = Permintaan::find(1);
-        // $permintaan->update($request::all());
-        // return redirect('/semua/lihat{ID_PERMINTAAN}');
-        // $permintaan->update($request->all());
-        // return print_r($permintaan);
-        // $data = Input::all()->find($ID_PERMINTAAN);
-        // Permintaan::insertGetId(array(
-        //     'NO_FPBJ' => $data['NO_FPBJ'],
-        //     'TARGET_SELESAI' => $data['TARGET_SELESAI'],
-        //     'KETERANGAN' => $data['KETERANGAN'],
-        //     'TINDAK_LANJUT_AKHIR' => $data['TINDAK_LANJUT_AKHIR'],
-        //     'STATUS' => $data['STATUS'],
-        //     'FPB' => $data['FPB'],
-        //     'RFQ' => $data['RFQ'],
-        //     'SPK' => $data['SPK'],
-        //     'DO' => $data['DO'],
-        //     'BAST' => $data['BAST'],
-        // ));
-        // $data->save();
+    public function dashboard()
+    {
+        return view('permintaan.dashboard');
     }
 
     

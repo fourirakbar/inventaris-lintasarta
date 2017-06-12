@@ -26,7 +26,7 @@ class LoginController extends Controller
         
         if (Auth::attempt($userdata,true))
         {
-            return redirect('/request');
+            return redirect('/semua');
         }
         else{
             return redirect('/login')->with('error','Username atau password salah');

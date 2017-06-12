@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::get('/', 'LoginController@index');
 #user request barang
 Route::get('request', 'PermintaanController@index');
 Route::post('request2', 'PermintaanController@input');
@@ -23,11 +21,13 @@ Route::post('request2', 'PermintaanController@input');
 Route::get('monitoring', 'PermintaanController@monitoring');
 Route::get('monitoring2', 'PermintaanController@minputMonitoring');
 
+Route::get('dashboard','PermintaanController@dashboard');
+
 #karyawan cek semua permintaan
 Route::get('/semua', 'PermintaanController@lihatSemua');
 Route::get('/semua/lihat/{ID_PERMINTAAN}', 'PermintaanController@details');
 Route::get('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doEdit');
-Route::put('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doUpdate');
+Route::put('/semua/lihat/edit/{a}', 'PermintaanController@doUpdate');
 
 Route::get('login', 'LoginController@index');
 Route::post('login2', 'LoginController@login');

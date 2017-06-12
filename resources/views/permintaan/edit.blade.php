@@ -5,8 +5,10 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-				<li class="active">Tindak Lanjut Request Barang</li>
+				<li><a href="#">Dashboard</a></li>
+				<li><a href="/semua">Semua Request Barang</a></li>
+				<li><a href="{{ url('/semua/lihat', $jebret->ID_PERMINTAAN) }}">Detail Request Barang</a></li>
+				<li class="actiove">Edit Request Barang</li>
 			</ol>
 		</div><!--/.row-->
 		
@@ -30,6 +32,7 @@
 								<table class="table table-bordered">
 								    <thead>	
 								    <form action="{{ url('/semua/lihat/edit', $jebret->ID_PERMINTAAN) }}" method="POST">
+								    
 								    	<input type="hidden" name="_method" value="PUT">
 								    	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						                <div class="form-group"> 
