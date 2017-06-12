@@ -12,6 +12,7 @@ class Permintaan extends Model
     	'NAMA_REQUESTER',
     	'BARANG_PERMINTAAN',
     	'NO_FPBJ',
+        'TGL_INPUT_FPBJ',
     	'TARGET_SELESAI',
     	'KETERANGAN',
     	'TINDAK_LANJUT_AKHIR',

@@ -28,19 +28,19 @@
 								<table class="table table-bordered">
 								    <thead>	
 								    <tr>
-								        <th>ID Permintaan</th>
-								        <th>Nama Requester</th>
-								        <th>Tanggal Permintaan</th>
-								        <th>Barang yang Diminta</th>
-								        <th>Action</th>
+								        <th style="text-align: center; vertical-align: middle; ">ID Permintaan</th>
+								        <th style="text-align: center; vertical-align: middle; ">Nama Requester</th>
+								        <th style="text-align: center; vertical-align: middle; ">Tanggal Permintaan</th>
+								        <th style="text-align: center; vertical-align: middle; ">Barang yang Diminta</th>
+								        <th style="text-align: center; vertical-align: middle; ">Action</th>
 								    </tr>
 								    @foreach ($jebret as $key)
 								    <tr>
-								    	<td>{{ $key->ID_PERMINTAAN }}</td>
+								    	<td style="text-align: center; vertical-align: middle; ">{{ $key->ID_PERMINTAAN }}</td>
 								    	<td>{{ $key->NAMA_REQUESTER }}</td>
-								    	<td>{{ $key->TGL_PERMINTAAN }}</td>
+								    	<td style="text-align: center; vertical-align: middle; ">{{ $key->TGL_PERMINTAAN }}</td>
 								    	<td>{{ $key->BARANG_PERMINTAAN }}</td>
-								    	<td>
+								    	<td style="text-align: center; vertical-align: middle; ">
             								<input type="hidden" name="method" value="DELETE">
             								<a class="btn btn-primary" href="/semua/lihat/{{ $key->ID_PERMINTAAN }}"><b class="material-icons" title="Ubah pengumuman">Show Details</b></a>
 								    	</td>

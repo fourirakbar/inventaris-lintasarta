@@ -15,3 +15,4 @@ load bootstrap from a cdn
 <link href="{{ URL::asset('css/datepicker3.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('css/styles.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('js/lumino.glyphs.js') }}" rel="stylesheet">
+<link href="{{ URL::asset('css/bootstrap-table.css') }}" rel="stylesheet">
