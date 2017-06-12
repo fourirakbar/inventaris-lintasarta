@@ -10,6 +10,12 @@
 				<li class="active">Detail Request Barang</li>
 			</ol>
 		</div><!--/.row-->
+
+		@if ($message = Session::get('success'))
+			<div class="alert alert-success">
+				<p>{{ $message }}</p>
+			</div>
+		@endif
 		
 		<div class="row">
 			<div class="col-lg-12">

@@ -65,7 +65,7 @@ class PermintaanController extends Controller
         
         $url = '/semua/lihat/'.$ID_PERMINTAAN;
         
-        return redirect($url);
+        return redirect($url)->with('success','Sukses Update Data');
     }
 
     public function dashboard()
