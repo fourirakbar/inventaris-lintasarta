@@ -43,7 +43,9 @@
 								    	<td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
 								    	<td>{{ $key->BARANG_PERMINTAAN }}</td>
 								    	<td style="text-align: center; vertical-align: middle; ">{{ $key->STATUS }}</td>
-								    	<?php $date1=date_create();
+								    	<?php 
+								    		 
+								    		 $date1=date_create();
 						    				 $date2=date_create($key->TGL_DEADLINE);
 						    				 $diff=date_diff($date1,$date2);
 
@@ -52,6 +54,7 @@
 
 						    				 if ($printInt < 0) {
 						    				 	$print = "0 Hari";
+						    				 	$_SESSION['kirim'] = $print;
 						    				 }
 
 						    				 if($print <=60 && $print > 10)
@@ -66,16 +69,14 @@
 						    				 {
 						    				 	echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
 						    				 }
+						    				 
 								    	 ?>
 								    	<td style="text-align: center; vertical-align: middle; ">
 
-								    		<?php
-								    			if ($print > 0) { ?>
+								    		
 								    			<input type="hidden" name="method" value="DELETE">
             									<a class="btn btn-primary" href="/semua/lihat/{{ $key->ID_PERMINTAAN }}"><b class="material-icons" title="Ubah pengumuman">Show Details</b></a>
-								    		<?php
-								    			}
-								    		?>
+								    		
 								    	</td>
 								    </tr>
 								    @endforeach

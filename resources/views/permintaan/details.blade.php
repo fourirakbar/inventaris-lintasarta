@@ -34,8 +34,13 @@
 							<div class="panel panel-default">
 							<div class="panel-heading">Data Permintaan dari User</div>
 							<div class="panel-body">
-								<input type="hidden" name="method">
+
+									
+										<input type="hidden" name="method">
             					<a class="btn btn-primary pull-left" href="/semua/lihat/edit/{{ $jebret->ID_PERMINTAAN }}"><b class="material-icons" title="Ubah pengumuman">Edit Keterangan</b></a>
+								
+
+								
             					<br>
             					<br>
 
@@ -66,7 +71,13 @@
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Target Selesai</th>
-								        <td><?php echo date('d F Y', strtotime($jebret->TARGET_SELESAI)) ?></td>
+								        <td>
+								        	<?php
+								        		if ($jebret->TARGET_SELESAI) {
+								        			echo date('d F Y', strtotime($jebret->TARGET_SELESAI));
+								        		}
+								        	?>
+								        </td>
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Keterangan</th>
@@ -74,7 +85,13 @@
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Tindak Lanjut Akhir</th>
-								        <td><?php echo date('d F Y', strtotime($jebret->TINDAK_LANJUT_AKHIR)) ?></td>
+								        <td>
+								        	<?php
+								        		if ($jebret->TINDAK_LANJUT_AKHIR) {
+								        			echo date('d F Y', strtotime($jebret->TINDAK_LANJUT_AKHIR));
+								        		}
+								        	?>
+								        </td>
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Status</th>
@@ -82,23 +99,53 @@
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">FPB</th>
-								        <td><?php echo date('d F Y', strtotime($jebret->FPB)) ?></td>
+								        <td>
+								        	<?php
+								        		if ($jebret->FPB) {
+								        			echo date('d F Y', strtotime($jebret->FPB));
+								        		}
+								        	?>
+								        </td>
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">RFQ</th>
-								        <td><?php echo date('d F Y', strtotime($jebret->RFQ)) ?></td>
+								        <td>
+								        	<?php
+								        		if ($jebret->RFQ) {
+								        			echo date('d F Y', strtotime($jebret->RFQ));
+								        		}
+								        	?>
+								        </td>
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">SPK</th>
-								        <td><?php echo date('d F Y', strtotime($jebret->SPK)) ?></td>
+								        <td>
+								        	<?php
+								        		if ($jebret->SPK) {
+								        			echo date('d F Y', strtotime($jebret->SPK));
+								        		}
+								        	?>
+								        </td>
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Delivery Order</th>
-								        <td><?php echo date('d F Y', strtotime($jebret->DO)) ?></td>
+								        <td>
+								        	<?php
+								        		if ($jebret->DO) {
+								        			echo date('d F Y', strtotime($jebret->DO));
+								        		}
+								        	?>
+								        </td>
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">BAST</th>
-								        <td><?php echo date('d F Y', strtotime($jebret->BAST)) ?></td>
+								        <td>
+								        	<?php
+								        		if ($jebret->BAST) {
+								        			echo date('d F Y', strtotime($jebret->BAST));
+								        		}
+								        	?>
+								        </td>
 								    </tr>
 								    </thead>
 								</table>
