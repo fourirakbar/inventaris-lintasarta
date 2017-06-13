@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Barang extends Model
 {
-    public $table = "barang";
+    public $table = "BARANG";
     public $fillable = array(
     	'RACK_ID',
     	'NO_REGISTRASI',
