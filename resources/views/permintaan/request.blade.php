@@ -56,7 +56,7 @@
                 {{csrf_field()}}
                 <div class="form-group"> 
                   <label>Tanggal Deadline</label> 
-                  <input id="datedead" class="form-control calendar1" placeholder="" name="TGL_DEADLINE" disabled="">
+                  <input id="datedead" class="form-control" placeholder="" name="TGL_DEADLINE" readonly>
                 </div> 
                 {{csrf_field()}}                 
                 <button type="submit" class="btn btn-primary">Submit</button> 
