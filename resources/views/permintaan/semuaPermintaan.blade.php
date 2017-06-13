@@ -38,19 +38,30 @@
 								        <th style="text-align: center; vertical-align: middle; ">Action</th>
 								    </tr>
 								    @foreach ($jebret as $key)
-								    <tr>
+								    <tr id="datete">
 								    	<td style="text-align: center; vertical-align: middle; ">{{ $key->NOMOR_TICKET }}</td>
 								    	<td>{{ $key->NAMA_REQUESTER }}</td>
 								    	<td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
 								    	<td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_DEADLINE)) ?></td>
 
-								    	<td> <?php $date1=date_create();
+								    	<?php $date1=date_create();
 								    				$date2=date_create($key->TGL_DEADLINE);
 								    				 $diff=date_diff($date1,$date2);
-								    				 echo $diff->format('%R%a Hari');;
+								    				 echo $diff->format('%R%a Hari');
+								    				 if($diff->format('%a') <=60 && $diff->format('%a') > 10)
+								    				 {
+								    				 	echo '<td style="background-color: green; color: white" >',$diff->format('%R%a Hari'),'</td>';
+								    				 }
+								    				 elseif($diff->format('%a') <=10 && $diff->format('%a') >=1)
+								    				 {
+								    				 	echo '<td style="background-color: yellow; color: black" >',$diff->format('%R%a Hari'),'</td>';
+								    				 }
+								    				 else
+								    				 {
+								    				 	echo '<td style="background-color: yellow; color: black" >',$diff->format('%R%a Hari'),'</td>';
+								    				 }
 
-
-								    	 ?></td>
+								    	 ?>
 								    	<td>{{ $key->BARANG_PERMINTAAN }}</td>
 								    	<td style="text-align: center; vertical-align: middle; ">{{ $key->STATUS }}</td>
 								    	<td style="text-align: center; vertical-align: middle; ">
