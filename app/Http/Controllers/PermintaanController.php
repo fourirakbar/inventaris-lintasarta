@@ -28,11 +28,13 @@ class PermintaanController extends Controller
         echo $data['NAMA_REQUESTER'];
         echo $data['BARANG_PERMINTAAN'];
         echo $data['TGL_PERMINTAAN'];
+        echo $data['TGL_DEADLINE'];
         Permintaan::insertGetId(array(
             'NOMOR_TICKET' => $data['NOMOR_TICKET'],
             'NAMA_REQUESTER' => $data['NAMA_REQUESTER'],
             'BARANG_PERMINTAAN' => $data['BARANG_PERMINTAAN'],
             'TGL_PERMINTAAN' => $data['TGL_PERMINTAAN'],
+            'TGL_DEADLINE' => $data['TGL_DEADLINE'],
         ));
 
         return redirect('/request')->with('success','Request Barang Sukses');

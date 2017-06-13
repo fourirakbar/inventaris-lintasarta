@@ -23,6 +23,7 @@ class Permintaan extends Model
     	'RFQ',
     	'DO',
     	'BAST',
+        'TGL_DEADLINE',
     );
     public $primaryKey = "ID_PERMINTAAN";
 }

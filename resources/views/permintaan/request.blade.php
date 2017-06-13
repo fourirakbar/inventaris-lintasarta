@@ -22,7 +22,7 @@
     </div><!--/.row--> 
          
      
-    <div class="row"> 
+    <div class="row" onclick="getdate()"> 
       <div class="col-lg-12"> 
         <div class="panel panel-default"> 
            
@@ -51,7 +51,12 @@
                 {{csrf_field()}}
                 <div class="form-group"> 
                   <label>Tanggal Request</label> 
-                  <input type="date" class="form-control calendar1" placeholder="Tanggal Request" name="TGL_PERMINTAAN"> 
+                  <input id="datereq" onclick="getdate()" type="date" class="form-control calendar1" placeholder="Tanggal Request" name="TGL_PERMINTAAN"> 
+                </div> 
+                {{csrf_field()}}
+                <div class="form-group"> 
+                  <label>Tanggal Deadline</label> 
+                  <input id="datedead" class="form-control calendar1" placeholder="" name="TGL_DEADLINE" disabled="">
                 </div> 
                 {{csrf_field()}}                 
                 <button type="submit" class="btn btn-primary">Submit</button> 
@@ -64,4 +69,25 @@
     </div><!-- /.row --> 
      
   </div><!--/.main-->
+
+  <script type="text/javascript">
+    function getdate() {
+        var tt = document.getElementById('datereq').value;
+
+        var date = new Date(tt);
+        var newdate = new Date(date);
+
+        newdate.setDate(newdate.getDate() + 60);
+        
+        var dd = newdate.getDate();
+        var mm = newdate.getMonth() + 1;
+        var y = newdate.getFullYear();
+        console.log(dd)
+        console.log(mm)
+        console.log(y)
+
+        var FormattedDate = y + '-' + mm + '-' + dd;
+        document.getElementById('datedead').value = FormattedDate;
+    }
+  </script>
   
