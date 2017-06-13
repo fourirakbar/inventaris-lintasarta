@@ -42,4 +42,4 @@ Route::get('logout', 'LoginController@logout');
 Route::get('/home', 'HomeController@index');
 
 #coba CRUD manual
-Route::resource('/barang', 'BarangController');
+Route::get('/barang', 'BarangController@index');

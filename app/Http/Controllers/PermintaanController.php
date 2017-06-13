@@ -24,14 +24,18 @@ class PermintaanController extends Controller
 
     public function input() {
         $data = Input::all();
+        echo $data['NOMOR_TICKET'];
         echo $data['NAMA_REQUESTER'];
         echo $data['BARANG_PERMINTAAN'];
+        echo $data['TGL_PERMINTAAN'];
         Permintaan::insertGetId(array(
+            'NOMOR_TICKET' => $data['NOMOR_TICKET'],
             'NAMA_REQUESTER' => $data['NAMA_REQUESTER'],
             'BARANG_PERMINTAAN' => $data['BARANG_PERMINTAAN'],
+            'TGL_PERMINTAAN' => $data['TGL_PERMINTAAN'],
         ));
 
-        return view('permintaan.request');
+        return redirect('/request')->with('success','Request Barang Sukses');
     }
 
     public function monitoring() {

@@ -9,6 +9,8 @@ class Permintaan extends Model
 
 	public $table = "PERMINTAAN";
     public $fillable = array(
+        'NOMOR_TICKET',
+        'TGL_PERMINTAAN',
     	'NAMA_REQUESTER',
     	'BARANG_PERMINTAAN',
     	'NO_FPBJ',

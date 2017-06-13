@@ -8,6 +8,12 @@
         <li class="active">Form Request Barang</li> 
       </ol> 
     </div><!--/.row--> 
+
+    @if ($message = Session::get('success'))
+      <div class="alert alert-success">
+        <p>{{ $message }}</p>
+      </div>
+    @endif
      
     <div class="row"> 
       <div class="col-lg-12"> 
@@ -29,6 +35,11 @@
                   <input class="form-control" placeholder="" disabled=""> 
                 </div>  -->
                 <div class="form-group"> 
+                  <label>Nomor Ticket</label> 
+                  <input class="form-control" placeholder="Nomor Ticket" name="NOMOR_TICKET"> 
+                </div> 
+                {{csrf_field()}} 
+                <div class="form-group"> 
                   <label>Nama Requester</label> 
                   <input class="form-control" placeholder="Nama Requester" name="NAMA_REQUESTER"> 
                 </div> 
@@ -36,6 +47,11 @@
                 <div class="form-group"> 
                   <label>Barang yang Dibutuhkan</label> 
                   <input class="form-control" placeholder="Nama Barang" name="BARANG_PERMINTAAN"> 
+                </div> 
+                {{csrf_field()}}
+                <div class="form-group"> 
+                  <label>Tanggal Request</label> 
+                  <input type="date" class="form-control calendar1" placeholder="Tanggal Request" name="TGL_PERMINTAAN"> 
                 </div> 
                 {{csrf_field()}}                 
                 <button type="submit" class="btn btn-primary">Submit</button> 

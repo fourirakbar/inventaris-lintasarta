@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Redirect;
 class BarangController extends Controller
 {
     public function lihatSemua(Request $request) {
-        
+        $data= Barang::orderBy('ID_BARANG','ASC')->paginate(10);
+        return view('barang.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
 

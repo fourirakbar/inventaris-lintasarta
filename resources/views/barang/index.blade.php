@@ -25,30 +25,35 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Permintaan Barang</div>
 					<div class="panel-body">
-						<table data-toggle="table" data-url="tables/data2.json" >
-						<!-- <table> -->
-						    <thead>
+						<table class="table table-bordered">
+						    <thead>	
 						    <tr>
-						    	<th>No</th>
-						        <th>Request Id</th>
-						        <th>Requester</th>
-						        <th>Barang yang Dibutuhkan</th>
-						        <th>Tanggal Request</th>
-						        <th>No FPBJ</th>
-						        <th>Tanggal Input FPBJ</th>
-						        <th>Target Selesai FPBJ</th>
-						        <th>Status Lanjutan</th>
-						        <th>Tanggal Tindak Lanjut Terakhir</th>
-						        <th>Status</th>
-						        <th>FPB</th>
-						        <th>RFQ</th>
-						        <th>SPK</th>
-						        <th>Delivery Order</th>
-						        <th>Bast</th>
+						        <th style="text-align: center; vertical-align: middle; ">No</th>
+						        <th style="text-align: center; vertical-align: middle; ">No Registrasi</th>
+						        <th style="text-align: center; vertical-align: middle; ">Nama Barang</th>
+						        <th style="text-align: center; vertical-align: middle; ">Jumlah</th>
+						        <th style="text-align: center; vertical-align: middle; ">Keterangan</th>
+						        <th style="text-align: center; vertical-align: middle; ">Lokasi</th>
+						        <th style="text-align: center; vertical-align: middle; ">Rack</th>
+						        <th style="text-align: center; vertical-align: middle; ">Alokasi Gudang</th>
+						        <th style="text-align: center; vertical-align: middle; ">Status Pemindahan</th>
 						    </tr>
+						    @foreach ($data as $key)
+						    <tr>
+						    	<td style="text-align: center; vertical-align: middle; ">{{ $key->ID_PERMINTAAN }}</td>
+						    	<td>{{ $key->NAMA_REQUESTER }}</td>
+						    	<td style="text-align: center; vertical-align: middle; ">{{ $key->TGL_PERMINTAAN }}</td>
+						    	<td>{{ $key->BARANG_PERMINTAAN }}</td>
+						    	<td style="text-align: center; vertical-align: middle; ">
+    								<input type="hidden" name="method" value="DELETE">
+    								<a class="btn btn-primary" href="/semua/lihat/{{ $key->ID_PERMINTAAN }}"><b class="material-icons" title="Ubah pengumuman">Show Details</b></a>
+						    	</td>
+						    </tr>
+						    @endforeach
 						    
 						    </thead>
 						</table>
+						{!! $jebret->render() !!}
 						
 					</div>
 				</div>
