@@ -36,8 +36,8 @@
 								    	<input type="hidden" name="_method" value="PUT">
 								    	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						                <div class="form-group"> 
-						                  <label>ID Permintaan</label> 
-						                  <input class="form-control" value="{{ $jebret->ID_PERMINTAAN }}" name="ID_PERMINTAAN" disabled=""> 
+						                  <label>Nomor Ticket</label> 
+						                  <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET" disabled=""> 
 						                </div> 
 						                
 						                <div class="form-group"> 

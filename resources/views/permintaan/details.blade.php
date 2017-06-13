@@ -45,8 +45,8 @@
 
 								    <thead>	
 								    <tr>
-								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">ID Permintaan</th>
-								        <td>{{ $jebret->ID_PERMINTAAN }}</td>
+								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Nomor Ticket</th>
+								        <td>{{ $jebret->NOMOR_TICKET }}</td>
 								    </tr>
 								    <tr>
 								        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Nama Requester</th>
