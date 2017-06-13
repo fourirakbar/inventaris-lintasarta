@@ -43,3 +43,6 @@ Route::get('/home', 'HomeController@index');
 
 #coba CRUD manual
 Route::resource('/barang', 'BarangController');
+
+Route::get('barang/tambah', 'TambahBarangController@index');
+// Route::post('barang/tambah', 'TambahBarangController@tambah');
