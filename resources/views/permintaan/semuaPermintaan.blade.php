@@ -31,6 +31,8 @@
 								        <th style="text-align: center; vertical-align: middle; ">No. Tiket</th>
 								        <th style="text-align: center; vertical-align: middle; ">Nama Requester</th>
 								        <th style="text-align: center; vertical-align: middle; ">Tanggal Permintaan</th>
+								        <th style="text-align: center; vertical-align: middle; ">Tanggal Deadline</th>
+								        <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
 								        <th style="text-align: center; vertical-align: middle; ">Barang yang Diminta</th>
 								        <th style="text-align: center; vertical-align: middle; ">Status</th>
 								        <th style="text-align: center; vertical-align: middle; ">Action</th>
@@ -40,6 +42,15 @@
 								    	<td style="text-align: center; vertical-align: middle; ">{{ $key->NOMOR_TICKET }}</td>
 								    	<td>{{ $key->NAMA_REQUESTER }}</td>
 								    	<td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
+								    	<td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_DEADLINE)) ?></td>
+
+								    	<td> <?php $date1=date_create();
+								    				$date2=date_create($key->TGL_DEADLINE);
+								    				 $diff=date_diff($date1,$date2);
+								    				 echo $diff->format('%R%a Hari');;
+
+
+								    	 ?></td>
 								    	<td>{{ $key->BARANG_PERMINTAAN }}</td>
 								    	<td style="text-align: center; vertical-align: middle; ">{{ $key->STATUS }}</td>
 								    	<td style="text-align: center; vertical-align: middle; ">
