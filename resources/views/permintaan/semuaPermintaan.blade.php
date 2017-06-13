@@ -56,15 +56,15 @@
 
 						    				 if($print <=60 && $print > 10)
 						    				 {
-						    				 	echo '<td style="background-color: green; color: white" >',$diff->format('%a Hari'),'</td>';
+						    				 	echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
 						    				 }
 						    				 elseif($print <=10 && $print >=1)
 						    				 {
-						    				 	echo '<td style="background-color: yellow; color: black" >',$diff->format('%a Hari'),'</td>';
+						    				 	echo '<td style="background-color: yellow; color: black; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
 						    				 }
 						    				 else
 						    				 {
-						    				 	echo '<td style="background-color: red; color: white" >',$print,'</td>';
+						    				 	echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
 						    				 }
 								    	 ?>
 								    	<td style="text-align: center; vertical-align: middle; ">
