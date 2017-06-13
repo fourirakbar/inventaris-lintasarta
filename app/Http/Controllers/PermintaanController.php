@@ -45,9 +45,13 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemua(Request $request) {
-        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate(10);
+        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->where('STATUS', '!=', 'done')->paginate(10);   
         return view('permintaan.semuaPermintaan', compact('jebret'))->with('i', ($request->input('page', 1) - 1) * 5);
-        // return view('permintaan.semuaPermintaan')->withObjects('jebret');
+    }
+
+    public function lihatSemuaSudah(Request $request) {
+        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->where('STATUS', 'done')->paginate(10);
+        return view('permintaan.semuaPermintaan', compact('jebret'))->with('i', ($request->input('page', 1) - 1) * 5);
     } 
 
     public function tindakLanjut($ID_PERMINTAAN) {

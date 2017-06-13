@@ -47,7 +47,14 @@
 								    	<td> <?php $date1=date_create();
 								    				$date2=date_create($key->TGL_DEADLINE);
 								    				 $diff=date_diff($date1,$date2);
-								    				 echo $diff->format('%R%a Hari');;
+								    				 $print = $diff->format('%R%a Hari');
+								    				 $printInt = (int)$print;
+
+								    				 if ($printInt < 0) {
+								    				 	$print = 0;
+								    				 }
+
+								    				 echo $print;
 
 
 								    	 ?></td>

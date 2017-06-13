@@ -13,10 +13,10 @@
 						<a href="/request"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Input Request</a>
 					</li>
 					<li>
-						<a href="/semua"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Request yang Sudah</a>
+						<a href="/semuaSudah"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Request yang Sudah</a>
 					</li>
 					<li>
-						<a href=""><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Request yang Belum</a>
+						<a href="/semua"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Request yang Belum</a>
 					</li>
 				</ul>
 			</li>
