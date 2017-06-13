@@ -105,7 +105,7 @@
 						                  <input type="date" class="form-control calendar1" name="BAST" placeholder="BAST" value="{{ $jebret->BAST }}"> 
 						                </div> 
 						                
-						                <button type="submit" class="btn btn-primary">Update</button> 
+						                <button type="submit" class="btn btn-primary">Update</button>&nbsp;&nbsp; 
 						                <button type="reset" class="btn btn-default">Reset</button> 
 						              </div> 
 						            </form> 
