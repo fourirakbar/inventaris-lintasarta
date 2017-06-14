@@ -44,3 +44,7 @@ Route::get('/home', 'HomeController@index');
 
 #coba CRUD manual
 Route::get('/barang', 'BarangController@index');
+
+Route::get('/pengaturanTgl', 'PengaturanTglController@doView');
+Route::get('/pengaturanTgl/edit', 'PengaturanTglController@doEdit');
+Route::put('/pengaturanTgl/edit/update', 'PengaturanTglController@doUpdate');

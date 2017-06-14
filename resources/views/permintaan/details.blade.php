@@ -1,4 +1,4 @@
- @extends('layouts.lumino')
+@extends('layouts.lumino')
 @section('content')
 
 @endsection
@@ -36,7 +36,7 @@
 							<div class="panel-body">
 
 									
-										<input type="hidden" name="method">
+								<input type="hidden" name="method">
             					<a class="btn btn-primary pull-left" href="/semua/lihat/edit/{{ $jebret->ID_PERMINTAAN }}"><b class="material-icons" title="Ubah pengumuman">Edit Keterangan</b></a>
 								
 
