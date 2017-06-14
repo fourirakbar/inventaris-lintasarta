@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title> SI MONITORING DAN DOKUMENTASI TI INFRATRUKTUR </title>
 	@include('includes.head')
-
-	<title></title>
 </head>
 <body>
-<!-- <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
+	<div class="container">
+		@include('includes.header')
+	</div>
+	<div id="sidebar">
+		@include('includes.sidebar')
+	</div>
+	<div id="main"> 
+		@yield('content')
+	</div>
+	
 	<script type="text/javascript" src="{{ URL::asset('/js/jquery-1.11.1.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ URL::asset('/js/chart.min.js') }}"></script>
@@ -35,30 +43,13 @@
 		})
 	</script>
 	<script type="text/javascript">
-$(document).on("click", ".open-myModal", function () {
-     var myBookId = $(this).data('id');
-     console.log(myBookId);
-     $(".modal-body #bookId").text( myBookId );
-    $('#addBookDialog').modal('show');
-});
-</script>
-
-	<div class="container">
-		<header class="row">
-			@include('includes.header')
-		</header>
-
-		<div id="main" class="row">
-			<div id="sidebar" class="col-md-4">
-				@include('includes.sidebar')
-			</div>
-			<div id="main" class="row"> 
-				@yield('content')
-			</div>
-		</div>
-
-		
-	</div>
+		$(document).on("click", ".open-myModal", function () {
+		    var myBookId = $(this).data('id');
+		    console.log(myBookId);
+		    $(".modal-body #bookId").text( myBookId );
+		    $('#addBookDialog').modal('show');
+		});
+	</script>
 
 </body>
 </html>
