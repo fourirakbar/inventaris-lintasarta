@@ -126,6 +126,10 @@
 			        	?>
 			        </td>
 			    </tr>
+			    <tr>
+			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Titik Proses</th>
+			        <td>{{ $jebret->titik_proses }}</td>
+			    </tr>
 			    </thead>
               </table>
             </div>
@@ -141,3 +145,4 @@
     </section>
 
 @endsection
+
