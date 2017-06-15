@@ -16,6 +16,6 @@
         <li><a href="#"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
         <li><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>
         <li><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Lihat Data Permintaan</span></a></li>
-        <li><a href="{{ URL::to('pengaturanTgl') }}"><i class="fa fa-book"></i> <span>Pengaturan Tanggal</span></a></li>
+        <li><a href="{{ URL::to('edittikpro') }}"><i class="fa fa-book"></i> <span>Pengaturan Tanggal</span></a></li>
       </ul>
     </section>

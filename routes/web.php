@@ -44,3 +44,5 @@ Route::get('/home', 'HomeController@index');
 
 #coba CRUD manual
 Route::get('/barang', 'BarangController@index');
+
+Route::get('edittikpro', 'TikproController@index');
