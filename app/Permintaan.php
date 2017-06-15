@@ -28,4 +28,8 @@ class Permintaan extends Model
         'TIKPRO_ID',
     );
     public $primaryKey = "ID_PERMINTAAN";
+
+    public function tikpro() {
+        return $this->belongsTo('Tikpro','TIKPRO_ID','ID_TIKPRO');
+    }
 }
