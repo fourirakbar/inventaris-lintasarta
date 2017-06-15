@@ -30,8 +30,8 @@
                         <th style="text-align: center; vertical-align: middle; ">Nama Requester</th>
                         <th style="text-align: center; vertical-align: middle; ">Tanggal Permintaan</th>
                         <th style="text-align: center; vertical-align: middle; ">Barang yang Diminta</th>
-                        <th style="text-align: center; vertical-align: middle; ">Status</th>
                         <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
+                        <th style="text-align: center; vertical-align: middle; ">Titik Proses</th>
                         <th style="text-align: center; vertical-align: middle; ">Action</th>
                 </tr>
                 </thead>
@@ -42,7 +42,6 @@
                       <td>{{ $key->NAMA_REQUESTER }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
                       <td>{{ $key->BARANG_PERMINTAAN }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $key->STATUS }}</td>
                       <?php 
                          
                          $date1=date_create();
@@ -68,12 +67,10 @@
                          }
                          
                        ?>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $key->titik_proses }}</td>
                       <td style="text-align: center; vertical-align: middle; ">
-
-                        
-                          <input type="hidden" name="method" value="DELETE">
-                              <a class="btn btn-primary" href="/semua/lihat/{{ $key->ID_PERMINTAAN }}"><b class="material-icons" title="Ubah pengumuman">Show Details</b></a>
-                        
+                        <input type="hidden" name="method" value="DELETE">
+                        <a class="btn btn-primary" href="/semua/lihat/{{ $key->ID_PERMINTAAN }}"><b class="material-icons" title="Ubah pengumuman">Show Details</b></a>
                       </td>
                     </tr>
                 @endforeach

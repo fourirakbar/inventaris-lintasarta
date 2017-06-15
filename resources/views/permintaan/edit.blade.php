@@ -104,6 +104,22 @@
 						                  <label>BAST</label> 
 						                  <input type="date" class="form-control calendar1" name="BAST" placeholder="BAST" value="{{ $jebret->BAST }}"> 
 						                </div> 
+
+						                <div class="form-group"> 
+						                  <label>Titik Proses</label> 
+						                  <input type="hidden" name="_method" value="PUT">
+						                  <select class="form-control" name="titik_proses">
+						                  	<option value="Input FPBJ">Input FPBJ</option>
+						                  	<option value="Approval GM">Approval GM</option>
+						                  	<option value="Approve Budget">Approve Budget</option>
+						                  	<option value="RFQ">RFQ</option>
+						                  	<option value="SPK">SPK</option>
+						                  	<option value="Delivery Order">Delivery Order</option>
+						                  	<option value="Pembuatan No. Registrasi">Pembuatan No. Registrasi</option>
+						                  	<option value="FMB">FMB</option>
+						                  	<option value="Pengiriman ke User">Pengiriman ke User</option>
+						                  </select>
+						                </div> 
 						                
 						                <button type="submit" class="btn btn-primary">Update</button>&nbsp;&nbsp; 
 						                <button type="reset" class="btn btn-default">Reset</button> 
