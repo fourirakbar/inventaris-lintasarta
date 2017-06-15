@@ -1,39 +1,36 @@
 @extends('layouts.lumino') 
-@section('content') 
-@endsection 
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">       
-    <div class="row">
+@section('content')
+<section class="content-header">
+      <h1>
+        General Form Elements
+        <small>Preview</small>
+      </h1>
       <ol class="breadcrumb">
-        <li><a href="#">Dashboard</a></li>
-        <li class="active">Semua Request Barang</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Forms</a></li>
+        <li class="active">General Elements</li>
       </ol>
-    </div><!--/.row-->
+    </section>
 
-    @if ($message = Session::get('success'))
-      <div class="alert alert-success">
-        <p>{{ $message }}</p>
-      </div>
-    @endif
-     
-    <div class="row"> 
-      <div class="col-lg-12"> 
-        <h1 class="page-header">Form Request Barang</h1> 
-      </div> 
-    </div><!--/.row--> 
-         
-     
-    <div class="row" onclick="getdate()"> 
-      <div class="col-lg-12"> 
-        <div class="panel panel-default"> 
-           
-          <div class="panel-body"> 
-            <div class="col-md-6"> 
-              <!-- <form role="form"> --> 
-              <form method="POST" role="form" action="{{ URL::to('request2') }}"> 
-                <!-- div class="form-group"> 
-                  <label>ID Requester</label> 
-                  <input class="form-control" placeholder="" disabled=""> 
-                </div>  -->
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            @if ($message = Session::get('success'))
+              <div class="alert alert-success">
+                <p>{{ $message }}</p>
+              </div>
+            @endif
+            <div class="box-header with-border">
+              <h3 class="box-title">Quick Example</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" method="POST" role="form" action="{{ URL::to('request2') }}" onclick="getdate()">
+              <div class="box-body">
                 <div class="form-group"> 
                   <label>Nomor Ticket</label> 
                   <input class="form-control" placeholder="Nomor Ticket" name="NOMOR_TICKET"> 
@@ -49,23 +46,94 @@
                   <input class="form-control" placeholder="Nama Barang" name="BARANG_PERMINTAAN"> 
                 </div> 
                 {{csrf_field()}}
-                <div class="form-group"> 
-                  <label>Tanggal Request</label> 
-                  <input id="datereq" onclick="getdate()" type="date" class="form-control calendar1" placeholder="Tanggal Request" name="TGL_PERMINTAAN"> 
-                </div> 
+                <div class="form-group">
+                <label>Date:</label>
+
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="date" class="form-control pull-right" id="datepicker" name="TGL_PERMINTAAN">
+                </div>
+                <!-- /.input group -->
+              </div> 
                 {{csrf_field()}}
                 <div class="form-group"> 
                   <label>Tanggal Deadline</label> 
                   <input id="datedead" class="form-control" placeholder="" name="TGL_DEADLINE" readonly>
                 </div> 
-                {{csrf_field()}}                 
-                <button type="submit" class="btn btn-primary">Submit</button> 
-                <button type="reset" class="btn btn-default">Reset</button> 
-              </div> 
-            </form> 
-          </div> 
-        </div> 
-      </div><!-- /.col--> 
-    </div><!-- /.row --> 
-     
-  </div><!--/.main-->
+                {{csrf_field()}}
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+
+              </form>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+    </section>
+@endsection
+@section('javas')
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+function getdate() {
+  var tt = document.getElementById('datepicker').value;
+
+  var date = new Date(tt);
+  var newdate = new Date(date);
+
+  newdate.setDate(newdate.getDate() + 60);
+
+  var dd = newdate.getDate();
+  var mm = newdate.getMonth() + 1;
+  var y = newdate.getFullYear();
+  console.log(dd)
+  console.log(mm)
+  console.log(y)
+
+  var FormattedDate = y + '-' + mm + '-' + dd;
+    document.getElementById('datedead').value = FormattedDate;
+}
+$(function () {
+      $('#daterange-btn').daterangepicker(
+          {
+            ranges: {
+              'Today': [moment(), moment()],
+              'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+              'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+              'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+              'This Month': [moment().startOf('month'), moment().endOf('month')],
+              'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment()
+          },
+          function (start, end) {
+            $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+          }
+      );
+
+      //Date picker
+      $('#datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true
+      });
+});
+</script>
+@endsection

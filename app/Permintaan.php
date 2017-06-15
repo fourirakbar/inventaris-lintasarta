@@ -24,7 +24,6 @@ class Permintaan extends Model
     	'DO',
     	'BAST',
         'TGL_DEADLINE',
-        'titik_proses',
     );
     public $primaryKey = "ID_PERMINTAAN";
 }
