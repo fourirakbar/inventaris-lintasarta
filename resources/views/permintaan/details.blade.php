@@ -19,11 +19,9 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3>
+              <h3 class="box-title">Hover Data Table</h3><br><br>
+              <a href="/semua/lihat/edit/{{ $jebret->ID_PERMINTAAN }}"><button type="button" class="btn btn-primary btn-lg">EDIT</button></a>
             </div>
-            <a class="btn btn-app" href="/semua/lihat/edit/{{ $jebret->ID_PERMINTAAN }}">
-                <i class="fa fa-edit"></i> Edit
-              </a>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
