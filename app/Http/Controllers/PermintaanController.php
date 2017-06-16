@@ -52,12 +52,12 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemuaBelum(Request $request) {
-        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->where('STATUS', 'in progress ')->paginate();
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'in progress ')->get();
         return view('permintaan.semuaPermintaan', compact('jebret'));
     }
 
     public function lihatSemuaSudah(Request $request) {
-        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->where('STATUS', 'done')->paginate();
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'done ')->get();
         return view('permintaan.semuaPermintaan', compact('jebret'));
     } 
 
