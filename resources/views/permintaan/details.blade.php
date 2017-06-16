@@ -3,13 +3,12 @@
 
 <section class="content-header">
       <h1>
-        Data Tables
-        <small>advanced tables</small>
+        Details Data
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Data tables</li>
+        <li><a href="/semua">Data Request Barang yang Belum Selesai</a></li>
+        <li class="active">Details Data</li>
       </ol>
     </section>
 
@@ -19,7 +18,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3><br><br>
+              <h3 class="box-title">Data</h3><br><br>
               <a href="/semua/lihat/edit/{{ $jebret->ID_PERMINTAAN }}"><button type="button" class="btn btn-primary btn-lg">EDIT</button></a>
             </div>
             <!-- /.box-header -->

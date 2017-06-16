@@ -2,13 +2,13 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Data Tables
-        <small>advanced tables</small>
+        Request Barang 
+        <small>yang Belum Selesai</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
-        <li class="active">Data tables</li>
+        <li class="active">Data Request Barang yang Belum Selesai</li>
+        
       </ol>
     </section>
 
@@ -19,7 +19,7 @@
           
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Table With Full Features</h3>
+              <h3 class="box-title">Data</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -42,31 +42,23 @@
                       <td>{{ $key->NAMA_REQUESTER }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
                       <td>{{ $key->BARANG_PERMINTAAN }}</td>
-                      <?php 
-                         
-                         $date1=date_create();
-                         $date2=date_create($key->TGL_DEADLINE);
-                         $diff=date_diff($date1,$date2);
-                         $print = $diff->format('%R%a Hari');
-                         $printInt = (int)$print;
-                         if ($printInt < 0) {
-                          $print = "0 Hari";
-                          $_SESSION['kirim'] = $print;
-                         }
-                         if($print <=60 && $print > 10)
-                         {
-                          echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
-                         }
-                         elseif($print <=10 && $print >=1)
-                         {
-                          echo '<td style="background-color: yellow; color: black; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
-                         }
-                         else
-                         {
-                          echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
-                         }
-                         
-                       ?>
+                      <td>
+                        <?php
+                          //tanggal hari ini
+                          $tanggala = date_create();
+
+                          //tanggal input permintaan
+                          $tanggalb = date_create($key->TGL_PERMINTAAN);
+
+                          //tanggal input permintaan + deadline
+                          $tanggalc = date('d F Y', strtotime("+".$key->DEADLINE."Days"));
+                          echo $tanggalc
+
+                          //buat ditampilin di kolom sisa bari
+                          
+                        ?>
+                      </td>
+                      
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">
