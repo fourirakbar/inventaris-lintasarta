@@ -1,84 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Log In LINTASARTA</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Registration Page</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{{ URL::asset('bootstrap/css/bootstrap.min.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ URL::asset('dist/css/AdminLTE.min.css') }}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{{ URL::asset('plugins/iCheck/square/blue.css') }}">
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/datepicker3.css" rel="stylesheet">
-<link href="css/styles.css" rel="stylesheet">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-<!--[if lt IE 9]>
-<script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script>
-<![endif]-->
-
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">
+    <b>SISTEM DOKUMENTASI</b><br>DAN MONITORING<br><b>TI INFRASTRUKTUR</b>
+  </div>
 
-<body>
-    
-    <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">Register Inventaris Lintas Arta</div>
-                <div class="panel-body">
-                    <!-- <form role="form"> -->
-                    <form method="post" action="{{ URL::to('register') }}">
-                        {{ csrf_field() }}
-                        <fieldset>
+  <div class="register-box-body">
+    <p class="login-box-msg">Register a new membership</p>
 
-                            <div class="form-group">
-                                <label>Nama</label>
-                                <input class="form-control" placeholder="Enter Your Name" name="nama" type="text">
-                            </div>
-                            <div class="form-group">
-                            <label>Username</label>
-                                <input class="form-control" placeholder="ID User" name="username" type="text" autofocus="">
-                            </div>
-                            <div class="form-group">
-                            <label>Password</label>
-                                <input class="form-control" placeholder="Password" name="password" type="password">
-                            </div>
+    <form action="../../index.html" method="post">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="Full name" name="nama">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="Username" nama=username>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password" nama=password>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
 
-                            <div class="checkbox">
-                                <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                </label>
-                            </div>
-                            <button class="btn btn-primary">Login</button>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div><!-- /.col-->
-    </div><!-- /.row -->    
-    
-        
+    <a href="{{ URL::to('login') }}" class="text-center">Back to Login Page</a>
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
 
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/chart.min.js"></script>
-    <script src="js/chart-data.js"></script>
-    <script src="js/easypiechart.js"></script>
-    <script src="js/easypiechart-data.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-    <script>
-        !function ($) {
-            $(document).on("click","ul.nav li.parent > a > span.icon", function(){        
-                $(this).find('em:first').toggleClass("glyphicon-minus");      
-            }); 
-            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-        }(window.jQuery);
-
-        $(window).on('resize', function () {
-          if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-        })
-        $(window).on('resize', function () {
-          if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-        })
-    </script>   
+<!-- jQuery 3.1.1 -->
+<script src="{{ URL::asset('plugins/jQuery/jquery-3.1.1.min.js') }}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{{ URL::asset('bootstrap/js/bootstrap.min.js') }}"></script>
+<!-- iCheck -->
+<script src="{{ URL::asset('plugins/iCheck/icheck.min.js') }}"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
 </body>
-
 </html>
-

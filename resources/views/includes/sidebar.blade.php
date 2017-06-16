@@ -13,10 +13,10 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="#"><i class="fa fa-book"></i> <span>Dashboard</span></a></li>
+        <li><a href="#"><i class="fa fa-home"></i> <span>Home</span></a></li>
         
         
-        <li><a href="{{ URL::to('edittikpro') }}"><i class="fa fa-book"></i> <span>Pengaturan Tanggal</span></a></li>
+        <li><a href="{{ URL::to('edittikpro') }}"><i class="fa fa-calendar"></i> <span>Pengaturan Tanggal</span></a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
