@@ -36,7 +36,7 @@
   <div class="register-box-body">
     <p class="login-box-msg">Register a new membership</p>
 
-    <form action="../../index.html" method="post">
+    <form action="{{URL::to('register')}}" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Full name" name="nama">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
