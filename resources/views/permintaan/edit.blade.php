@@ -23,7 +23,7 @@
               <h3 class="box-title">Quick Example</h3>
             </div>
 
-            <form action="{{ url('/semua/lihat/edit', $jebret->ID_PERMINTAAN) }}" method="POST">
+        <form action="{{ url('/semua/lihat/edit', $jebret->ID_PERMINTAAN) }}" method="POST">
 			    <div class="box-body" style="padding-right: 10%; padding-left: 10%; padding-bottom: 5%">
 			    	<input type="hidden" name="_method" value="PUT">
 			    	<input type="hidden" name="_token" value="{{ csrf_token() }}">

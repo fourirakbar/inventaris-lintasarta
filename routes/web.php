@@ -46,3 +46,4 @@ Route::get('/home', 'HomeController@index');
 Route::get('/barang', 'BarangController@index');
 
 Route::get('edittikpro', 'TikproController@index');
+Route::put('edittikpro', 'TikproController@update');

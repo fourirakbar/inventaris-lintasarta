@@ -22,101 +22,75 @@
             <div class="box-header with-border">
               <h3 class="box-title">Quick Example</h3>
             </div>
-
-            <form action="{{ url('/semua/lihat/edit', $jebret->ID_PERMINTAAN) }}" method="POST">
-			    <div class="box-body" style="padding-right: 10%; padding-left: 10%; padding-bottom: 5%">
-			    	<input type="hidden" name="_method" value="PUT">
-			    	<input type="hidden" name="_token" value="{{ csrf_token() }}">
-	                <div class="form-group"> 
-	                  <label>Nomor Ticket</label> 
-	                  <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET" disabled=""> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Nama Requester</label> 
-	                  <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER" disabled=""> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Tanggal Permintaan</label> 
-	                  <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN" disabled=""> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Barang yang Diminta</label> 
-	                  <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN" disabled=""> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>No FPBJ</label> 
-	                  <input class="form-control" placeholder="No FPBJ" name="NO_FPBJ" value="{{ $jebret->NO_FPBJ }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Target Selesai</label> 
-	                  <input type="date" class="form-control calendar1" name="TARGET_SELESAI" placeholder="Tanggal Target Selesai" value="{{ $jebret->TARGET_SELESAI }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Keterangan</label>
-	                  <textarea class="form-control" rows="3" name="KETERANGAN" value="{{ $jebret->KETERANGAN }}" placeholder="Keterangan"></textarea>
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Target Tindak Lanjut Akhir</label> 
-	                  <input type="date" class="form-control calendar1" name="TINDAK_LANJUT_AKHIR" placeholder="Tanggal Target Selesai" value="{{ $jebret->TINDAK_LANJUT_AKHIR }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Status</label> 
-	                  <input class="form-control" placeholder="Status" name="STATUS" value="{{ $jebret->STATUS }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>FPB</label> 
-	                  <input type="date" class="form-control calendar1" name="FPB" placeholder="FPB" value="{{ $jebret->FPB }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>RFQ</label> 
-	                  <input type="date" class="form-control calendar1" name="RFQ" placeholder="RFQ" value="{{ $jebret->RFQ }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>SPK</label> 
-	                  <input type="date" class="form-control calendar1" name="SPK" placeholder="SPK" value="{{ $jebret->SPK }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Delivery Order</label> 
-	                  <input type="date" class="form-control calendar1" name="DO" placeholder="Delivery Order" value="{{ $jebret->DO }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>BAST</label> 
-	                  <input type="date" class="form-control calendar1" name="BAST" placeholder="BAST" value="{{ $jebret->BAST }}"> 
-	                </div> 
-
-	                <div class="form-group"> 
-	                  <label>Titik Proses</label> 
-	                  <input type="hidden" name="_method" value="PUT">
-	                  <select class="form-control" name="TIKPRO_ID">
-	                  	<option value="1">Input FPBJ</option>
-	                  	<option value="2">Approval GM</option>
-	                  	<option value="3">Approve Budget</option>
-	                  	<option value="4">RFQ</option>
-	                  	<option value="5">SPK</option>
-	                  	<option value="6">Delivery Order</option>
-	                  	<option value="7">Pembuatan No. Registrasi</option>
-	                  	<option value="8">FMB</option>
-	                  	<option value="9">Pengiriman ke User</option>
-	                  </select>
-	                </div> 
-	                
-	                <button type="submit" class="btn btn-primary">Update</button>&nbsp;&nbsp; 
-	                <button type="reset" class="btn btn-default">Reset</button> 
-	              </div> 
-	            </form> 
+            @if ($message = Session::get('success'))
+              <div class="alert alert-success">
+                <p>{{ $message }}</p>
+              </div>
+            @endif
+            <form action="{{ URL::to('edittikpro') }}" method="POST">
+            <div class="box-body" style="padding-right: 30%">
+	            <table id="example1" class="table table-bordered table-striped">
+				  		<input type="hidden" name="_method" value="PUT">
+				    	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				    	<thead>
+		                <tr>
+		                        <th style="text-align: center; vertical-align: middle; ">ID TIKPRO</th>
+		                        <th style="text-align: center; vertical-align: middle; ">Nama Proses</th>
+		                        <th style="text-align: center; vertical-align: middle; ">Deadline</th>
+		                </tr>
+	                	</thead>
+	                	
+	                	<tbody>
+	                	<tr>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[0]->DEADLINE }} " name="DEADLINE1"></td>{{csrf_field()}}
+	                	</tr>
+	                	<tr>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[1]->DEADLINE }} " name="DEADLINE2"></td>{{csrf_field()}}
+	                	</tr>
+	                	<tr>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[2]->DEADLINE }} " name="DEADLINE3"></td>{{csrf_field()}}
+	                	</tr>
+	                	<tr>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[3]->DEADLINE }} " name="DEADLINE4"></td>{{csrf_field()}}
+	                	</tr>
+	                	<tr>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[4]->DEADLINE }} " name="DEADLINE5"></td>{{csrf_field()}}
+	                	</tr>
+	                	<tr>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[5]->DEADLINE }} " name="DEADLINE6"></td>{{csrf_field()}}
+	                	</tr>
+	                	<tr>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[6]->DEADLINE }} " name="DEADLINE7"></td>{{csrf_field()}}
+	                	</tr>
+	                	<tr>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[7]->DEADLINE }} " name="DEADLINE8"></td>{{csrf_field()}}
+	                	</tr>
+	                	<tr>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[8]->DEADLINE }} " name="DEADLINE9"></td>{{csrf_field()}}
+	                	</tr>
+	                	</tbody>
+		        </table>
+		        <button type="submit" class="btn btn-primary btn-lg pull-right">Update</button></a> 
+	        </div>
+	        </form>
             <!-- /.box-header -->
             <!-- form start -->
             
@@ -126,4 +100,20 @@
             <!-- /.box-body -->
           </div>
     </section>
+@endsection
+@section('javas')
+<!-- DataTables -->
+	<script src="{{URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+	<script src="{{URL::asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+	<script>
+	  $(function () {
+	    $('#example1').DataTable({
+	      "paging": false,
+	      "lengthChange": true,
+	      "searching": false,
+	      "ordering": true,
+	      "autoWidth": true
+	    });
+	  });
+	</script>
 @endsection
