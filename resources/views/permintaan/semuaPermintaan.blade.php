@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
                 @foreach ($jebret as $key)
-                    <tr id="datete">
+                    <tr>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NOMOR_TICKET }}</td>
                       <td>{{ $key->NAMA_REQUESTER }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
@@ -100,13 +100,11 @@
 @endsection
 @section('javas')
 <!-- DataTables -->
-	<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ URL::asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 	<script>
 	  $(function () {
-	    $('#example1').DataTable({
-	      "paging": true,
-	    });
+	    $('#example1').DataTable();
 	  });
 	</script>
 @endsection
