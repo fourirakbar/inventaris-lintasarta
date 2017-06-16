@@ -25,7 +25,8 @@ Route::get('dashboard','PermintaanController@dashboard');
 
 #karyawan cek semua permintaan
 Route::get('/semua', 'PermintaanController@lihatSemua');
-Route::get('/semuaSudah', 'PermintaanController@lihatSemuaSudah');
+Route::get('/semuabelum', 'PermintaanController@lihatSemuaBelum');
+Route::get('/semuasudah', 'PermintaanController@lihatSemuaSudah');
 Route::get('/semua/lihat/{ID_PERMINTAAN}', 'PermintaanController@details');
 Route::get('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doEdit');
 Route::put('/semua/lihat/edit/{a}', 'PermintaanController@doUpdate');

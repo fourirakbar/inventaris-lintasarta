@@ -45,8 +45,10 @@
                       <?php 
                          
                          $date1=date_create();
-                         $date2=date_create($key->TGL_DEADLINE);
-                         $diff=date_diff($date1,$date2);
+                         $date2=date_create($key->TGL_PERMINTAAN);
+                         $deadline = $key->DEADLINE;
+                         $new = date_add($date2,date_interval_create_from_date_string($deadline." days"));
+                         $diff=date_diff($date1,$new);
                          $print = $diff->format('%R%a Hari');
                          $printInt = (int)$print;
                          if ($printInt < 0) {
