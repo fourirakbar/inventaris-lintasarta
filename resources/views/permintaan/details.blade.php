@@ -126,7 +126,7 @@
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Titik Proses</th>
-			        <td>{{ $jebret->titik_proses }}</td>
+			        <td>{{ $query[0]->NAMA_TIKPRO }}</td>
 			    </tr>
 			    </thead>
               </table>

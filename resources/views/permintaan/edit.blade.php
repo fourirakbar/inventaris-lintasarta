@@ -51,56 +51,87 @@
 	                  <label>No FPBJ</label> 
 	                  <input class="form-control" placeholder="No FPBJ" name="NO_FPBJ" value="{{ $jebret->NO_FPBJ }}"> 
 	                </div> 
-	                
+
+	                <div class="form-group"> 
+	                  <label>Tanggal Input FPBJ</label> 
+	                  <input type="date" class="form-control calendar1" name="TGL_INPUT_FPBJ" placeholder="Tanggal Input FPBJ" value="{{ $jebret->TGL_INPUT_FPBJ }}"> 
+	                </div> 
+
 	                <div class="form-group"> 
 	                  <label>Target Selesai</label> 
 	                  <input type="date" class="form-control calendar1" name="TARGET_SELESAI" placeholder="Tanggal Target Selesai" value="{{ $jebret->TARGET_SELESAI }}"> 
-	                </div> 
-	                
+	                </div>
+
 	                <div class="form-group"> 
 	                  <label>Keterangan</label>
 	                  <textarea class="form-control" rows="3" name="KETERANGAN" value="{{ $jebret->KETERANGAN }}" placeholder="Keterangan"></textarea>
 	                </div> 
 	                
-	                <div class="form-group"> 
-	                  <label>Target Tindak Lanjut Akhir</label> 
-	                  <input type="date" class="form-control calendar1" name="TINDAK_LANJUT_AKHIR" placeholder="Tanggal Target Selesai" value="{{ $jebret->TINDAK_LANJUT_AKHIR }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Status</label> 
-	                  <input class="form-control" placeholder="Status" name="STATUS" value="{{ $jebret->STATUS }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>FPB</label> 
-	                  <input type="date" class="form-control calendar1" name="FPB" placeholder="FPB" value="{{ $jebret->FPB }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>RFQ</label> 
-	                  <input type="date" class="form-control calendar1" name="RFQ" placeholder="RFQ" value="{{ $jebret->RFQ }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>SPK</label> 
-	                  <input type="date" class="form-control calendar1" name="SPK" placeholder="SPK" value="{{ $jebret->SPK }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Delivery Order</label> 
-	                  <input type="date" class="form-control calendar1" name="DO" placeholder="Delivery Order" value="{{ $jebret->DO }}"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>BAST</label> 
-	                  <input type="date" class="form-control calendar1" name="BAST" placeholder="BAST" value="{{ $jebret->BAST }}"> 
-	                </div> 
+	                <?php
+	                	if (!empty($jebret->NO_FPBJ) && !empty($jebret->TGL_INPUT_FPBJ) && !empty($jebret->TARGET_SELESAI) && !empty($jebret->KETERANGAN)) { ?>
+			                <div class="form-group"> 
+			                  <label>Target Tindak Lanjut Akhir</label> 
+			                  <input type="date" class="form-control calendar1" name="TINDAK_LANJUT_AKHIR" placeholder="Tanggal Target Selesai" value="{{ $jebret->TINDAK_LANJUT_AKHIR }}"> 
+			                </div>
+
+			                <?php
+			                	if (!empty($jebret->TINDAK_LANJUT_AKHIR)) { ?>
+			                		<div class="form-group"> 
+					                  <label>FPB</label> 
+					                  <input type="date" class="form-control calendar1" name="FPB" placeholder="FPB" value="{{ $jebret->FPB }}"> 
+					                </div>
+
+					                <?php
+					                	if (!empty($jebret->FPB)) { ?>
+					                		<div class="form-group"> 
+							                  <label>RFQ</label> 
+							                  <input type="date" class="form-control calendar1" name="RFQ" placeholder="RFQ" value="{{ $jebret->RFQ }}"> 
+							                </div>
+
+							                <?php
+							                	if (!empty($jebret->RFQ)) { ?>
+							                		<div class="form-group"> 
+									                  <label>SPK</label> 
+									                  <input type="date" class="form-control calendar1" name="SPK" placeholder="SPK" value="{{ $jebret->SPK }}"> 
+									                </div> 
+
+									                <?php
+									                	if (!empty($jebret->SPK)) { ?>
+									                		<div class="form-group"> 
+											                  <label>Delivery Order</label> 
+											                  <input type="date" class="form-control calendar1" name="DO" placeholder="Delivery Order" value="{{ $jebret->DO }}"> 
+											                </div> 
+
+											                <?php
+											                	if (!empty($jebret->DO)) { ?>
+											                		<div class="form-group"> 
+													                  <label>BAST</label> 
+													                  <input type="date" class="form-control calendar1" name="BAST" placeholder="BAST" value="{{ $jebret->BAST }}"> 
+													                </div>
+											                <?php
+											                	}
+											                ?>
+									                <?php
+									                	}
+									                ?>
+							                <?php
+							                	}
+							                ?> 
+					                <?php
+					                	}
+					                ?>
+			                <?php
+			                	}
+			                ?>
+	                <?php
+	                	}
+	                ?>
 
 	                <div class="form-group"> 
 	                  <label>Titik Proses</label> 
 	                  <input type="hidden" name="_method" value="PUT">
 	                  <select class="form-control" name="TIKPRO_ID">
+	                  	<option value=""><b>Pilih Menu Dibawah</b></option>
 	                  	<option value="1">Input FPBJ</option>
 	                  	<option value="2">Approval GM</option>
 	                  	<option value="3">Approve Budget</option>

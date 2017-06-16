@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Permintaan;
+use App\Tikpro;
 
 class PermintaanController extends Controller
 {
@@ -45,7 +46,11 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemua(Request $request) {
-        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate();   
+        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get()->all()->paginate();
+        
+        // $query = DB::table('PERMINTAAN')->select('TIKPRO.NAMA_TIKPRO')->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
+        // $satu = 
+        // $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate();   
         return view('permintaan.semuaPermintaan', compact('jebret'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -55,13 +60,20 @@ class PermintaanController extends Controller
     } 
 
     public function tindakLanjut($ID_PERMINTAAN) {
-        $jebret = Permintaan::find($ID_PERMINTAAN);
-        return view('permintaan.tindakLanjut',compact('jebret'));
+        $jebret2 = Permintaan::find($ID_PERMINTAAN);
+        return view('permintaan.tindakLanjut',compact('jebret2'));
     }
 
     public function details($ID_PERMINTAAN) {
+        $query = DB::table('PERMINTAAN')->select('TIKPRO.NAMA_TIKPRO')->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get();
+
         $jebret = Permintaan::find($ID_PERMINTAAN);
-        return view('permintaan.details', compact('jebret'));
+        return view('permintaan.details', compact('jebret', 'query'));
+        // print_r($query);
+
+        // $jebret = Permintaan::find($ID_PERMINTAAN)->query()->get()->all();
+        // dd($jebret);
+        // return view('permintaan.details', compact('jebret'));
     }
 
     public function doEdit($ID_PERMINTAAN) {

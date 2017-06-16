@@ -67,7 +67,7 @@
                          }
                          
                        ?>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $key->titik_proses }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $query[0]->NAMA_TIKPRO }}</td>
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">
                         <a class="btn btn-primary" href="/semua/lihat/{{ $key->ID_PERMINTAAN }}"><b class="material-icons" title="Ubah pengumuman">Show Details</b></a>
