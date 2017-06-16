@@ -2,13 +2,12 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Edit Data .
-        <small>Preview</small>
+        Edit Data
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Data Request Barang yang Belum Selesai</a></li>
-        <li><a href="#">Details Data</a></li>
+        <li><a href="/semua">Data Request Barang yang Belum Selesai</a></li>
+        <li><a href="{{ url('/semua/lihat', $jebret->ID_PERMINTAAN) }}">Details Data</a></li>
         <li class="active">Edit Data</li>
       </ol>
     </section>
