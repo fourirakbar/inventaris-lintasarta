@@ -48,18 +48,17 @@ class PermintaanController extends Controller
     public function lihatSemua() {
         // $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate();   
         $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
-        // dd($jebret);
         return view('permintaan.semuaPermintaan', compact('jebret'));
-        // $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get()->all()->paginate();
-        
-        // $query = DB::table('PERMINTAAN')->select('TIKPRO.NAMA_TIKPRO')->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
-        // $satu = 
-        // return view('permintaan.semuaPermintaan', compact('jebret'));
+    }
+
+    public function lihatSemuaBelum(Request $request) {
+        $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->where('STATUS', 'in progress ')->paginate();
+        return view('permintaan.semuaPermintaan', compact('jebret'));
     }
 
     public function lihatSemuaSudah(Request $request) {
         $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->where('STATUS', 'done')->paginate();
-        return view('permintaan.semuaPermintaan', compact('jebret'))->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('permintaan.semuaPermintaan', compact('jebret'));
     } 
 
     public function tindakLanjut($ID_PERMINTAAN) {

@@ -42,23 +42,33 @@
                       <td>{{ $key->NAMA_REQUESTER }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
                       <td>{{ $key->BARANG_PERMINTAAN }}</td>
-                      <td>
-                        <?php
-                          //tanggal hari ini
-                          $tanggala = date_create();
-
-                          //tanggal input permintaan
-                          $tanggalb = date_create($key->TGL_PERMINTAAN);
-
-                          //tanggal input permintaan + deadline
-                          $tanggalc = date('d F Y', strtotime("+".$key->DEADLINE."Days"));
-                          echo $tanggalc
-
-                          //buat ditampilin di kolom sisa bari
-                          
-                        ?>
-                      </td>
-                      
+                      <?php 
+                         
+                         $date1=date_create();
+                         $date2=date_create($key->TGL_PERMINTAAN);
+                         $deadline = $key->DEADLINE;
+                         $new = date_add($date2,date_interval_create_from_date_string($deadline." days"));
+                         $diff=date_diff($date1,$new);
+                         $print = $diff->format('%R%a Hari');
+                         $printInt = (int)$print;
+                         if ($printInt < 0) {
+                          $print = "0 Hari";
+                          $_SESSION['kirim'] = $print;
+                         }
+                         if($print <=60 && $print > 10)
+                         {
+                          echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
+                         }
+                         elseif($print <=10 && $print >=1)
+                         {
+                          echo '<td style="background-color: yellow; color: black; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
+                         }
+                         else
+                         {
+                          echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
+                         }
+                         
+                       ?>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">
