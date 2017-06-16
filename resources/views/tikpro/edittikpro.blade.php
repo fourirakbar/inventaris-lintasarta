@@ -2,13 +2,12 @@
 @section('content')
 <section class="content-header">
       <h1>
-        General Form Elements
-        <small>Preview</small>
+        Pengaturan Tanggal
+        <small>Titik Proses</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
+        <li class="active">Pengaturan Tanggal</li>
       </ol>
     </section>
 
@@ -20,7 +19,7 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
+              <h3 class="box-title">Tanggal Titik Proses</h3>
             </div>
             @if ($message = Session::get('success'))
               <div class="alert alert-success">

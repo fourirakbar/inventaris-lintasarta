@@ -54,9 +54,7 @@
 		@yield('content')
 	</div>
 	
-	<footer class="main-footer">
-		@include('includes.footer')
-	</footer>
+	
 	
 	<aside class="control-sidebar control-sidebar-dark">
 		@include('includes.control')

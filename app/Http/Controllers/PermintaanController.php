@@ -25,6 +25,8 @@ class PermintaanController extends Controller
 
     public function input() {
         $data = Input::all();
+        $a = "in progress";
+        $b = "1";
         echo $data['NOMOR_TICKET'];
         echo $data['NAMA_REQUESTER'];
         echo $data['BARANG_PERMINTAAN'];
@@ -36,6 +38,8 @@ class PermintaanController extends Controller
             'BARANG_PERMINTAAN' => $data['BARANG_PERMINTAAN'],
             'TGL_PERMINTAAN' => $data['TGL_PERMINTAAN'],
             'TGL_DEADLINE' => $data['TGL_DEADLINE'],
+            'STATUS' => $a,
+            'TIKPRO_ID' => $b,
         ));
 
         return redirect('/request')->with('success','Request Barang Sukses');
