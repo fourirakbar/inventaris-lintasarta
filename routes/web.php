@@ -21,7 +21,9 @@ Route::post('request2', 'PermintaanController@input')->middleware('user');
 Route::get('monitoring', 'PermintaanController@monitoring')->middleware('user');
 Route::get('monitoring2', 'PermintaanController@minputMonitoring')->middleware('user');
 
-Route::get('dashboard','PermintaanController@dashboard')->middleware('user');
+Route::get('/home', function() {
+	return view('home');
+})->middleware('user');
 
 #karyawan cek semua permintaan
 Route::get('/semua', 'PermintaanController@lihatSemua')->middleware('user');
