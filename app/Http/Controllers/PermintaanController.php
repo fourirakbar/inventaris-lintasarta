@@ -52,8 +52,9 @@ class PermintaanController extends Controller
     public function lihatSemua() {
         // $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate();   
         $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
-        // dd($jebret);
-        return view('permintaan.semuaPermintaan', compact('jebret'));
+        $jebret2 = DB::table('TIKPRO')->get();
+        // dd($jebret2);
+        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
     }
 
     public function lihatSemuaBelum(Request $request) {

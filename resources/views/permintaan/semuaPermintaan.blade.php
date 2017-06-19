@@ -21,6 +21,17 @@
             <div class="box-header">
               <h3 class="box-title">Data</h3>
             </div>
+            <?php
+              $deadline1 = $jebret2[0]->DEADLINE;
+              $deadline2 = $jebret2[1]->DEADLINE + $deadline1;
+              $deadline3 = $jebret2[2]->DEADLINE + $deadline2;
+              $deadline4 = $jebret2[3]->DEADLINE + $deadline3;
+              $deadline5 = $jebret2[4]->DEADLINE + $deadline4;
+              $deadline6 = $jebret2[5]->DEADLINE + $deadline5;
+              $deadline7 = $jebret2[6]->DEADLINE + $deadline6;
+              $deadline8 = $jebret2[7]->DEADLINE + $deadline7;
+              $deadline9 = $jebret2[8]->DEADLINE + $deadline8;
+            ?>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -46,22 +57,40 @@
                          
                          $date1=date_create();
                          $date2=date_create($key->TGL_PERMINTAAN);
-                         $deadline = $key->DEADLINE;
+                         if($key->TIKPRO_ID == 1){
+                            $deadline = $deadline1+1;
+                         }
+                         elseif($key->TIKPRO_ID == 2){
+                            $deadline = $deadline2+1;
+                         }
+                         elseif($key->TIKPRO_ID == 3){
+                            $deadline = $deadline3+1;
+                         }
+                         elseif($key->TIKPRO_ID == 4){
+                            $deadline = $deadline4+1;
+                         }
+                         elseif($key->TIKPRO_ID == 5){
+                            $deadline = $deadline5+1;
+                         }
+                         elseif($key->TIKPRO_ID == 6){
+                            $deadline = $deadline6+1;
+                         }
+                         elseif($key->TIKPRO_ID == 7){
+                            $deadline = $deadline7+1;
+                         }
+                         elseif($key->TIKPRO_ID == 8){
+                            $deadline = $deadline8+1;
+                         }
+                         elseif($key->TIKPRO_ID == 9){
+                            $deadline = $deadline9+1;
+                         }
                          $new = date_add($date2,date_interval_create_from_date_string($deadline." days"));
                          $diff=date_diff($date1,$new);
                          $print = $diff->format('%R%a Hari');
                          $printInt = (int)$print;
-                         if ($printInt < 0) {
-                          $print = "0 Hari";
-                          $_SESSION['kirim'] = $print;
-                         }
-                         if($print <=60 && $print > 10)
+                         if($print >0)
                          {
-                          echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
-                         }
-                         elseif($print <=10 && $print >=1)
-                         {
-                          echo '<td style="background-color: yellow; color: black; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
+                          echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%R%a Hari'),'</td>';
                          }
                          else
                          {
