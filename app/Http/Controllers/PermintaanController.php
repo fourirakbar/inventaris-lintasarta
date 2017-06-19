@@ -59,13 +59,15 @@ class PermintaanController extends Controller
 
     public function lihatSemuaBelum(Request $request) {
         $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'in progress ')->get();
-        return view('permintaan.semuaPermintaan', compact('jebret'));
+        $jebret2 = DB::table('TIKPRO')->get();
+        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
         // dd($jebret);
     }
 
     public function lihatSemuaSudah(Request $request) {
         $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'done ')->get();
-        return view('permintaan.semuaPermintaan', compact('jebret'));
+        $jebret2 = DB::table('TIKPRO')->get();
+        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
     } 
 
     public function tindakLanjut($ID_PERMINTAAN) {

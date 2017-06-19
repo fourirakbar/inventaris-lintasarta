@@ -90,7 +90,7 @@
                          $printInt = (int)$print;
                          if($print >0)
                          {
-                          echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%R%a Hari'),'</td>';
+                          echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
                          }
                          else
                          {
