@@ -15,8 +15,13 @@
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="#"><i class="fa fa-home"></i> <span>Home</span></a></li>
         
+        @if (Auth::user()->jenis_user == 'admin')
+          <li><a href="{{ URL::to('edittikpro') }}"><i class="fa fa-calendar"></i> <span>Pengaturan Tanggal</span></a></li>
+        @else
+
+        @endif
         
-        <li><a href="{{ URL::to('edittikpro') }}"><i class="fa fa-calendar"></i> <span>Pengaturan Tanggal</span></a></li>
+
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
