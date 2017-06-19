@@ -58,31 +58,31 @@
                          $date1=date_create();
                          $date2=date_create($key->TGL_PERMINTAAN);
                          if($key->TIKPRO_ID == 1){
-                            $deadline = $deadline1+1;
+                            $deadline = $deadline1;
                          }
                          elseif($key->TIKPRO_ID == 2){
-                            $deadline = $deadline2+1;
+                            $deadline = $deadline2;
                          }
                          elseif($key->TIKPRO_ID == 3){
-                            $deadline = $deadline3+1;
+                            $deadline = $deadline3;
                          }
                          elseif($key->TIKPRO_ID == 4){
-                            $deadline = $deadline4+1;
+                            $deadline = $deadline4;
                          }
                          elseif($key->TIKPRO_ID == 5){
-                            $deadline = $deadline5+1;
+                            $deadline = $deadline5;
                          }
                          elseif($key->TIKPRO_ID == 6){
-                            $deadline = $deadline6+1;
+                            $deadline = $deadline6;
                          }
                          elseif($key->TIKPRO_ID == 7){
-                            $deadline = $deadline7+1;
+                            $deadline = $deadline7;
                          }
                          elseif($key->TIKPRO_ID == 8){
-                            $deadline = $deadline8+1;
+                            $deadline = $deadline8;
                          }
                          elseif($key->TIKPRO_ID == 9){
-                            $deadline = $deadline9+1;
+                            $deadline = $deadline9;
                          }
                          $new = date_add($date2,date_interval_create_from_date_string($deadline." days"));
                          $diff=date_diff($date1,$new);
