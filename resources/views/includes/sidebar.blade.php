@@ -13,7 +13,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+        <li><a href="/Home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         
         @if (Auth::user()->jenis_user == 'admin')
           <li><a href="{{ URL::to('edittikpro') }}"><i class="fa fa-calendar"></i> <span>Pengaturan Tanggal</span></a></li>
@@ -27,7 +27,7 @@
             <i class="fa fa-files-o"></i>
             <span>Permintaan</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              
             </span>
           </a>
           <ul class="treeview-menu">
