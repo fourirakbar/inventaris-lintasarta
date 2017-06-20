@@ -27,7 +27,7 @@
               </div>
             @endif
             <div class="box-body" style="padding-right: 30%">
-	            <table id="example1" class="table table-bordered table-striped">
+	            <table class="table table-bordered table-striped">
 		                <tr>
 		                        <th style="text-align: center; vertical-align: middle; ">ID TIKPRO</th>
 		                        <th style="text-align: center; vertical-align: middle; ">Nama Proses</th>
@@ -117,15 +117,4 @@
 <!-- DataTables -->
 	<script src="{{URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
-	<script>
-	  $(function () {
-	    $('#example1').DataTable({
-	      "paging": false,
-	      "lengthChange": true,
-	      "searching": false,
-	      "ordering": true,
-	      "autoWidth": true
-	    });
-	  });
-	</script>
 @endsection
