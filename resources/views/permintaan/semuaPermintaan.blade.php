@@ -58,7 +58,7 @@
                          $date1=date_create();
                          $date2=date_create($key->TGL_PERMINTAAN);
                          if($key->TIKPRO_ID == 1){
-                            $deadline = $deadline1;
+                            $deadline = $deadline1 + 1;
                          }
                          elseif($key->TIKPRO_ID == 2){
                             $deadline = $deadline2;

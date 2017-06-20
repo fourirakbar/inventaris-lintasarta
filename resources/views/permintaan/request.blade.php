@@ -38,10 +38,25 @@
                   <label>Nama Requester</label> 
                   <input class="form-control" placeholder="Nama Requester" name="NAMA_REQUESTER"> 
                 </div> 
-                {{csrf_field()}} 
+                {{csrf_field()}}
+                <div class="form-group"> 
+                  <label>Bagian</label> 
+                  <input class="form-control" placeholder="Nama Bagian" name="BAGIAN"> 
+                </div> 
+                {{csrf_field()}}
+                <div class="form-group"> 
+                  <label>Divisi</label> 
+                  <input class="form-control" placeholder="Nama Divisi" name="DIVISI"> 
+                </div> 
+                {{csrf_field()}}
                 <div class="form-group"> 
                   <label>Barang yang Dibutuhkan</label> 
                   <input class="form-control" placeholder="Nama Barang" name="BARANG_PERMINTAAN"> 
+                </div> 
+                {{csrf_field()}}
+                <div class="form-group"> 
+                  <label>Deskripsi</label> 
+                  <input class="form-control" placeholder="Deskripsi Barang" name="DESKIRPSI"> 
                 </div> 
                 {{csrf_field()}}
                 <div class="form-group">

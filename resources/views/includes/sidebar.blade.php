@@ -16,7 +16,7 @@
         <li><a href="/Home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         
         @if (Auth::user()->jenis_user == 'admin')
-          <li><a href="{{ URL::to('edittikpro') }}"><i class="fa fa-calendar"></i> <span>Pengaturan Tanggal</span></a></li>
+          <li><a href="{{ URL::to('edittikpro') }}"><i class="fa fa-calendar"></i> <span>Pengaturan Deadline</span></a></li>
         @else
 
         @endif
@@ -32,8 +32,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>
-            <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Sudah di Proses</span></a></li>
-            <li><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Belum di Proses</span></a></li>
+            <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
+            <li><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Sedang Diproses</span></a></li>
             <li><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Semua Permintaan</span></a></li>
           </ul>
         </li>
