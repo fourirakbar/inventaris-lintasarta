@@ -35,7 +35,10 @@ class PermintaanController extends Controller
         Permintaan::insertGetId(array(
             'NOMOR_TICKET' => $data['NOMOR_TICKET'],
             'NAMA_REQUESTER' => $data['NAMA_REQUESTER'],
+            'BAGIAN' => $data['BAGIAN'],
+            'DIVISI' => $data['DIVISI'],
             'BARANG_PERMINTAAN' => $data['BARANG_PERMINTAAN'],
+            'DESKRIPSI' => $data['DESKRIPSI'],
             'TGL_PERMINTAAN' => $data['TGL_PERMINTAAN'],
             'TGL_DEADLINE' => $data['TGL_DEADLINE'],
             'STATUS' => $a,
@@ -79,7 +82,9 @@ class PermintaanController extends Controller
         $query = DB::table('PERMINTAAN')->select('TIKPRO.NAMA_TIKPRO')->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get();
 
         $jebret = Permintaan::find($ID_PERMINTAAN);
-        return view('permintaan.details', compact('jebret', 'query'));
+        $jebret2 = DB::table('TIKPRO')->get();
+        // dd($jebret2);
+        return view('permintaan.details', compact('jebret', 'query', 'jebret2'));
         // print_r($query);
 
         // $jebret = Permintaan::find($ID_PERMINTAAN)->query()->get()->all();

@@ -54,9 +54,9 @@
                   <input class="form-control" placeholder="Nama Barang" name="BARANG_PERMINTAAN"> 
                 </div> 
                 {{csrf_field()}}
-                <div class="form-group"> 
+                <div class="textarea-group"> 
                   <label>Deskripsi</label> 
-                  <input class="form-control" placeholder="Deskripsi Barang" name="DESKIRPSI"> 
+                  <input class="form-control" placeholder="Deskripsi Barang" name="DESKRIPSI"> 
                 </div> 
                 {{csrf_field()}}
                 <div class="form-group">
