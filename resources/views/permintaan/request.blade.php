@@ -108,8 +108,8 @@ function getdate() {
 
   var date = new Date(tt);
   var newdate = new Date(date);
-
-  newdate.setDate(newdate.getDate() + 60);
+  var deadline = "<?php echo Session::get('totaltikpro');?>"
+  newdate.setDate(newdate.getDate() + parseInt(deadline));
 
   var dd = newdate.getDate();
   var mm = newdate.getMonth() + 1;

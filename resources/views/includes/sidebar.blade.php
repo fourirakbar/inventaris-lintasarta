@@ -16,7 +16,7 @@
         <li><a href="/Home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         
         @if (Auth::user()->jenis_user == 'admin')
-          <li><a href="{{ URL::to('edittikpro') }}"><i class="fa fa-calendar"></i> <span>Pengaturan Deadline</span></a></li>
+          <li><a href="{{ URL::to('showtikpro') }}"><i class="fa fa-calendar"></i> <span>Pengaturan Deadline</span></a></li>
         @else
 
         @endif
