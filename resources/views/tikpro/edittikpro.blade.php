@@ -98,7 +98,7 @@
 				                		foreach ($jebret as $key) {
 				                			$total += $key->DEADLINE;
 				                		}
-				                		echo $total;
+				                		echo $total." Hari";
 				                		?>
 		                			</td>
 		                		{{ Session::put('totaltikpro', $total) }}
@@ -141,7 +141,8 @@
 		    	total += parseInt(document.getElementsByName("DEADLINE[]")[i].value)
 		    }
 		    var total2 = document.getElementById("totalhari");
-			total2.innerHTML = total;
+		    var str2 = " Hari";
+			total2.innerHTML = String(total).concat(str2);
 		}
 	</script>
 @endsection

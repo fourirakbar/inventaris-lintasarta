@@ -39,47 +39,47 @@
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->ID_TIKPRO }}</td>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->DEADLINE }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->DEADLINE }} Hari</td>
 	                	</tr>
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->ID_TIKPRO }}</td>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->DEADLINE }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->DEADLINE }} Hari</td>
 	                	</tr>
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->ID_TIKPRO }}</td>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->DEADLINE }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->DEADLINE }} Hari</td>
 	                	</tr>
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->ID_TIKPRO }}</td>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->DEADLINE }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->DEADLINE }} Hari</td>
 	                	</tr>
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->ID_TIKPRO }}</td>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->DEADLINE }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->DEADLINE }} Hari</td>
 	                	</tr>
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->ID_TIKPRO }}</td>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->DEADLINE }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->DEADLINE }} Hari</td>
 	                	</tr>
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->ID_TIKPRO }}</td>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->DEADLINE }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->DEADLINE }} Hari</td>
 	                	</tr>
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->ID_TIKPRO }}</td>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->DEADLINE }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->DEADLINE }} Hari</td>
 	                	</tr>
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->ID_TIKPRO }}</td>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->DEADLINE }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->DEADLINE }} Hari</td>
 	                	</tr>
 	                	</tbody>
 		        </table>
@@ -94,7 +94,7 @@
 		                		foreach ($jebret as $key) {
 		                			$total += $key->DEADLINE;
 		                		}
-		                		echo $total;
+		                		echo $total." Hari";
 		                		?></td>
 		                		{{ Session::put('totaltikpro', $total) }}
 		                		</tr>
