@@ -88,6 +88,9 @@
                          $diff=date_diff($date1,$new);
                          $print = $diff->format('%R%a Hari');
                          $printInt = (int)$print;
+                         if($print == 0){
+                            $print = $diff->format('%a Hari');
+                         }
                          if($print >0)
                          {
                           echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';

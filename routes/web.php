@@ -48,5 +48,7 @@ Route::get('/home', 'HomeController@index')->middleware('user');
 #coba CRUD manual
 Route::get('/barang', 'BarangController@index')->middleware('user');
 
-Route::get('edittikpro', 'TikproController@index')->middleware('user');
+Route::get('showtikpro', 'TikproController@index')->middleware('user');
 Route::put('edittikpro', 'TikproController@update')->middleware('user');
+
+Route::get('edittikpro', 'TikproController@edit')->middleware('user');
