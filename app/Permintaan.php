@@ -12,7 +12,10 @@ class Permintaan extends Model
         'NOMOR_TICKET',
         'TGL_PERMINTAAN',
     	'NAMA_REQUESTER',
+        'BAGIAN',
+        'DIVISI',
     	'BARANG_PERMINTAAN',
+        'DESKRIPSI',
     	'NO_FPBJ',
         'TGL_INPUT_FPBJ',
     	'TARGET_SELESAI',
@@ -29,6 +32,6 @@ class Permintaan extends Model
     public $primaryKey = "ID_PERMINTAAN";
 
     public function tikpro() {
-        return $this->belongsTo('Tikpro','TIKPRO_ID','ID_TIKPRO');
+        return $this->belongsToMany('Tikpro','TIKPRO_ID','ID_TIKPRO');
     }
 }

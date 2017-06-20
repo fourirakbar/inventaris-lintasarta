@@ -34,12 +34,24 @@
 			        <td>{{ $jebret->NAMA_REQUESTER }}</td>
 			    </tr>
 			    <tr>
+			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Bagian</th>
+			        <td>{{ $jebret->BAGIAN }}</td>
+			    </tr>
+			    <tr>
+			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Divisi</th>
+			        <td>{{ $jebret->DIVISI }}</td>
+			    </tr>
+			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Permintaan</th>
 			        <td><?php echo date('d F Y', strtotime($jebret->TGL_PERMINTAAN)) ?></td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Barang yang Diminta</th>
 			        <td>{{ $jebret->BARANG_PERMINTAAN }}</td>
+			    </tr>
+			    <tr>
+			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Deskripsi</th>
+			        <td>{{ $jebret->DESKRIPSI }}</td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">No FPBJ</th>
@@ -127,6 +139,38 @@
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Titik Proses</th>
 			        <td>{{ $query[0]->NAMA_TIKPRO }}</td>
 			    </tr>
+			    </thead>
+              </table>
+            </div>
+
+            <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+			    	<tr>
+			    		<th style="text-align: center; vertical-align: middle; ">Nama Proses</th>
+			    		<th style="text-align: center; vertical-align: middle; ">Tgl Input</th>
+			    		<th style="text-align: center; vertical-align: middle; ">Tgl Selesai (Seharusnya)</th>
+			    		<th style="text-align: center; vertical-align: middle; ">Status</th>
+			    		<th style="text-align: center; vertical-align: middle; ">Durasi Waktu</th>
+			    	</tr>
+			    	@foreach($jebret2 as $key)
+			    	<tr>
+			    		<td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>
+			    		<td style="text-align: center; vertical-align: middle; ">
+			    			
+			    		</td>
+			    		<td style="text-align: center; vertical-align: middle; ">
+			    			<?php
+			    				$now = $jebret->TGL_PERMINTAAN;
+			    				$plus = $key->DEADLINE;
+			    				// echo $plus;
+			    				echo date('Y-m-d', strtotime($now. ' + ' .$plus. 'days'));
+			    			?>
+			    		</td>
+			    		<td></td>
+			    		<TD></TD>
+			    	</tr>
+			    	@endforeach
 			    </thead>
               </table>
             </div>

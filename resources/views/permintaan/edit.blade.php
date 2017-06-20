@@ -29,23 +29,38 @@
 			    	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	                <div class="form-group"> 
 	                  <label>Nomor Ticket</label> 
-	                  <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET" disabled=""> 
+	                  <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET"> 
 	                </div> 
 	                
 	                <div class="form-group"> 
 	                  <label>Nama Requester</label> 
-	                  <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER" disabled=""> 
-	                </div> 
+	                  <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER"> 
+	                </div>
+
+	                <div class="form-group"> 
+	                  <label>Bagian</label> 
+	                  <input class="form-control" value="{{ $jebret->BAGIAN }}" name="BAGIAN"> 
+	                </div>
+
+	                <div class="form-group"> 
+	                  <label>Divisi</label> 
+	                  <input class="form-control" value="{{ $jebret->DIVISI }}" name="DIVISI"> 
+	                </div> 	                
 	                
 	                <div class="form-group"> 
 	                  <label>Tanggal Permintaan</label> 
-	                  <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN" disabled=""> 
+	                  <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN"> 
 	                </div> 
 	                
 	                <div class="form-group"> 
 	                  <label>Barang yang Diminta</label> 
-	                  <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN" disabled=""> 
-	                </div> 
+	                  <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN"> 
+	                </div>
+
+	                <div class="form-group"> 
+	                  <label>Deskirpsi</label> 
+	                  <input class="form-control" value="{{ $jebret->DESKRIPSI }}" name="DESKRIPSI"> 
+	                </div>
 	                
 	                <div class="form-group"> 
 	                  <label>No FPBJ</label> 
