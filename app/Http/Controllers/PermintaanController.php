@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Permintaan;
+use App\Pembatalan;
 use App\Tikpro;
 use Session;
 
@@ -108,20 +109,33 @@ class PermintaanController extends Controller
     }
 
     
-
-    // public function edit() {
-    //     $data = Input::all();
-
-    // }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function hapus($ID_PERMINTAAN)
     {
+        $jebret = Permintaan::find($ID_PERMINTAAN);
+        return view('permintaan.hapus', compact('jebret'));
+    }
 
+    public function delete(Request $request, $ID_PERMINTAAN){
+        $file = $request->file('FILE_PEMBATALAN');
+        $destinationPath = 'uploads';
+        $file->move($destinationPath,"pembatalan_".$ID_PERMINTAAN.".jpg");
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
+        $jebret2 = DB::table('TIKPRO')->get();
+        Pembatalan::insertGetId(array(
+            'ALASAN_PEMBATALAN' => $request->ALASAN_PEMBATALAN,
+            'FILE_PEMBATALAN' => $destinationPath."/pembatalan_".$ID_PERMINTAAN.".jpg",
+            'STATUS_PEMBATALAN' => "in progress",
+        ));
+        // dd($permintaan2);
+        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
+   
+   }
+
+   public function showpembatalan()
+    {
+        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->get();
+        dd($jebret);
+        // return view('permintaan.adminhapus', compact('jebret'));
     }
 
     /**

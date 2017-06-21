@@ -28,10 +28,14 @@ class Permintaan extends Model
     	'BAST',
         'TGL_DEADLINE',
         'TIKPRO_ID',
+        'PEMBATALAN_ID',
     );
     public $primaryKey = "ID_PERMINTAAN";
 
     public function tikpro() {
         return $this->belongsToMany('Tikpro','TIKPRO_ID','ID_TIKPRO');
+    }
+    public function pembatalan() {
+        return $this->hasOne('Pembatalan','PEMBATALAN_ID','ID_PEMBATALAN');
     }
 }

@@ -35,6 +35,7 @@
             <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
             <li><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Sedang Diproses</span></a></li>
             <li><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Semua Permintaan</span></a></li>
+            <li><a href="{{ URL::to('adminhapus') }}"><i class="fa fa-book"></i> <span>Pengajuan Pembatalan</span></a></li>
           </ul>
         </li>
       </ul>

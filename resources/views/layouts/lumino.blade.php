@@ -54,11 +54,6 @@
 		@yield('content')
 	</div>
 	
-	
-	
-	<aside class="control-sidebar control-sidebar-dark">
-		@include('includes.control')
-	</aside>
 </div>
 	<div class="control-sidebar-bg"></div>
 	<script src="{{URL::asset('plugins/jQuery/jquery-3.1.1.min.js')}}"></script>
