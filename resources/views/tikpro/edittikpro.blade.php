@@ -28,14 +28,14 @@
             @endif
             <form action="{{ URL::to('edittikpro') }}" method="POST">
             <div class="box-body" style="padding-right: 30%">
-	            <table id="example1" class="table table-bordered table-striped">
+	            <table class="table table-bordered table-striped">
 				  		<input type="hidden" name="_method" value="PUT">
 				    	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				    	<thead>
 		                <tr>
-		                        <th style="text-align: center; vertical-align: middle; ">ID TIKPRO</th>
+		                        <th style="text-align: center; vertical-align: middle; ">No.</th>
 		                        <th style="text-align: center; vertical-align: middle; ">Nama Proses</th>
-		                        <th style="text-align: center; vertical-align: middle; ">Deadline</th>
+		                        <th style="text-align: center; vertical-align: middle; width: 20%;">Deadline</th>
 		                </tr>
 	                	</thead>
 	                	
@@ -86,7 +86,7 @@
 	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[8]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
 	                	</tr>
 	                	</tbody>
-		        </table>
+		        </table><br><br>
 		        <div class="col-md-6 pull-right">
 			        <table class="table table-bordered">
 					  		<tbody>
@@ -124,15 +124,7 @@
 	<script src="{{URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 	<script src="{{URL::asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
 	<script>
-	  $(function () {
-	    $('#example1').DataTable({
-	      "paging": false,
-	      "lengthChange": true,
-	      "searching": false,
-	      "ordering": true,
-	      "autoWidth": true
-	    });
-	  });
+	  
 	  function myFunction() {
 		    // var x = document.getElementById("fname").value;
 		    // document.getElementById("demo").innerHTML = x;
