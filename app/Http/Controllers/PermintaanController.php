@@ -138,13 +138,15 @@ class PermintaanController extends Controller
     public function delete(Request $request, $ID_PERMINTAAN){
         $file = $request->file('FILE_PEMBATALAN');
         $destinationPath = 'uploads';
-        $file->move($destinationPath,"pembatalan_".$ID_PERMINTAAN.".jpg");
+        $fileextension = $file->getClientOriginalExtension();
+        echo $fileextension;
+        $file->move($destinationPath,"pembatalan_".$ID_PERMINTAAN.".".$fileextension);
         $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
         $jebret2 = DB::table('TIKPRO')->get();
         Pembatalan::insertGetId(array(
             'PERMINTAAN_ID' => $ID_PERMINTAAN,
             'ALASAN_PEMBATALAN' => $request->ALASAN_PEMBATALAN,
-            'FILE_PEMBATALAN' => $destinationPath."/pembatalan_".$ID_PERMINTAAN.".jpg",
+            'FILE_PEMBATALAN' => $destinationPath."/pembatalan_".$ID_PERMINTAAN.".".$fileextension,
             'STATUS_PEMBATALAN' => "in progress",
         ));
         // dd($permintaan2);
