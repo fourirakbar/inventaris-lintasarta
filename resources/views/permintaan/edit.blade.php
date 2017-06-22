@@ -82,66 +82,6 @@
 	                  <textarea class="form-control" rows="3" name="KETERANGAN" value="{{ $jebret->KETERANGAN }}" placeholder="Keterangan"></textarea>
 	                </div>
 
-	                <?php
-	                	if (!empty($jebret->NO_FPBJ) && !empty($jebret->TGL_INPUT_FPBJ) && !empty($jebret->TARGET_SELESAI) && !empty($jebret->KETERANGAN)) { ?>
-			                <div class="form-group">
-			                  <label>Target Tindak Lanjut Akhir</label>
-			                  <input type="date" class="form-control calendar1" name="TINDAK_LANJUT_AKHIR" placeholder="Tanggal Target Selesai" value="{{ $jebret->TINDAK_LANJUT_AKHIR }}">
-			                </div>
-
-			                <?php
-			                	if (!empty($jebret->TINDAK_LANJUT_AKHIR)) { ?>
-			                		<div class="form-group">
-					                  <label>FPB</label>
-					                  <input type="date" class="form-control calendar1" name="FPB" placeholder="FPB" value="{{ $jebret->FPB }}">
-					                </div>
-
-					                <?php
-					                	if (!empty($jebret->FPB)) { ?>
-					                		<div class="form-group">
-							                  <label>RFQ</label>
-							                  <input type="date" class="form-control calendar1" name="RFQ" placeholder="RFQ" value="{{ $jebret->RFQ }}">
-							                </div>
-
-							                <?php
-							                	if (!empty($jebret->RFQ)) { ?>
-							                		<div class="form-group">
-									                  <label>SPK</label>
-									                  <input type="date" class="form-control calendar1" name="SPK" placeholder="SPK" value="{{ $jebret->SPK }}">
-									                </div>
-
-									                <?php
-									                	if (!empty($jebret->SPK)) { ?>
-									                		<div class="form-group">
-											                  <label>Delivery Order</label>
-											                  <input type="date" class="form-control calendar1" name="DO" placeholder="Delivery Order" value="{{ $jebret->DO }}">
-											                </div>
-
-											                <?php
-											                	if (!empty($jebret->DO)) { ?>
-											                		<div class="form-group">
-													                  <label>BAST</label>
-													                  <input type="date" class="form-control calendar1" name="BAST" placeholder="BAST" value="{{ $jebret->BAST }}">
-													                </div>
-											                <?php
-											                	}
-											                ?>
-									                <?php
-									                	}
-									                ?>
-							                <?php
-							                	}
-							                ?>
-					                <?php
-					                	}
-					                ?>
-			                <?php
-			                	}
-			                ?>
-	                <?php
-	                	}
-	                ?>
-
 	                <div class="form-group">
 	                  <label>Titik Proses</label>
 	                  <input type="hidden" name="_method" value="PUT">

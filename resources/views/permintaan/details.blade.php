@@ -26,48 +26,48 @@
                 <thead>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Nomor Ticket</th>
-			        <td>{{ $jebret->NOMOR_TICKET }}</td>
+			        <td colspan="5">{{ $jebret->NOMOR_TICKET }}</td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Nama Requester</th>
-			        <td>{{ $jebret->NAMA_REQUESTER }}</td>
+			        <td colspan="5">{{ $jebret->NAMA_REQUESTER }}</td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Bagian</th>
-			        <td>{{ $jebret->BAGIAN }}</td>
+			        <td colspan="5">{{ $jebret->BAGIAN }}</td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Divisi</th>
-			        <td>{{ $jebret->DIVISI }}</td>
+			        <td colspan="5">{{ $jebret->DIVISI }}</td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Permintaan</th>
-			        <td><?php echo date('d F Y', strtotime($jebret->TGL_PERMINTAAN)) ?></td>
+			        <td colspan="5"><?php echo date('d F Y', strtotime($jebret->TGL_PERMINTAAN)) ?></td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Barang yang Diminta</th>
-			        <td>{{ $jebret->BARANG_PERMINTAAN }}</td>
+			        <td colspan="5">{{ $jebret->BARANG_PERMINTAAN }}</td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Deskripsi</th>
-			        <td>{{ $jebret->DESKRIPSI }}</td>
+			        <td colspan="5">{{ $jebret->DESKRIPSI }}</td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">No FPBJ</th>
-			        <td>{{ $jebret->NO_FPBJ }}</td>
+			        <td colspan="5">{{ $jebret->NO_FPBJ }}</td>
 			    </tr>
 			    <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Target Selesai</th>
-              <td><?php echo date('d F Y', strtotime($jebret->TGL_DEADLINE)); ?></td>
+              <td colspan="5"><?php echo date('d F Y', strtotime($jebret->TGL_DEADLINE)); ?></td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Keterangan</th>
-			        <td>{{ $jebret->KETERANGAN }}</td>
+			        <td colspan="5">{{ $jebret->KETERANGAN }}</td>
 			    </tr>
 
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Titik Proses</th>
-			        <td>{{ $query[0]->NAMA_TIKPRO }}</td>
+			        <td colspan="5">{{ $query[0]->NAMA_TIKPRO }}</td>
 			    </tr>
 
 			     <tr>
