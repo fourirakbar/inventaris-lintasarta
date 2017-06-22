@@ -102,7 +102,7 @@ class PermintaanController extends Controller
         //dapet sesuai dengan Id Permintaannya masing-masing
         $jebret = Permintaan::find($ID_PERMINTAAN);
         // $jebret = Permintaan::find($ID_PERMINTAAN)->query('NAMA_TIKPRO')->join('TIKPRO', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN);
-        $jebret2 = TIkpro::query('NAMA_TIKPRO')->join('PERMINTAAN', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN);
+        $jebret2 = Tikpro::query('NAMA_TIKPRO')->join('PERMINTAAN', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get()[0];
 
         // dd($jebret);
         $boi = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get();
@@ -113,9 +113,9 @@ class PermintaanController extends Controller
 
         $a = DB::table('TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.TIKPRO_ID', '=', 'TIKPRO.ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get();
 
-        // dd($a);
+        // dd($jebret2->ID_TIKPRO);
 
-        return view('permintaan.edit', compact('moonRabbit', 'jebret', 'a', 'jebret2'));
+        return view('permintaan.edit', compact('moonRabbit', 'jebret', 'a', 'jebret2', 'listtikpro'));
     }
 
     public function doUpdate(Request $request, $ID_PERMINTAAN) {
