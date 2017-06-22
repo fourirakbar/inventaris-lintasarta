@@ -64,7 +64,7 @@ class PermintaanController extends Controller
 
     public function lihatSemua() {
         // $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate();
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal')->get();
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal','and','STATUS','!=','Request untuk dibatalkan')->get();
         $jebret2 = DB::table('TIKPRO')->get();
         // dd($jebret2);
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
@@ -106,7 +106,8 @@ class PermintaanController extends Controller
 
         // dd($jebret);
         $boi = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get();
-
+        $listtikpro = DB::table('TIKPRO')->select('ID_TIKPRO', 'NAMA_TIKPRO')->get();
+        // dd($listtikpro);
         //dapet sesuai dengan tikpro_id di table permintaan
         $moonRabbit = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.TIKPRO_ID', '=', 'HISTORY_TIKPRO.TIKPRO_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID', $ID_PERMINTAAN)->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get();
 
@@ -157,7 +158,7 @@ class PermintaanController extends Controller
             'FILE_PEMBATALAN' => $destinationPath."/pembatalan_".$ID_PERMINTAAN.".".$fileextension,
             'STATUS_PEMBATALAN' => "in progress",
         ));
-        // dd($permintaan2);
+        Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'Request untuk dibatalkan']);
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
 
    }

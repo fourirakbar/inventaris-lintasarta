@@ -105,7 +105,11 @@
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">
                         <a class="btn btn-block btn-primary" href="/semua/lihat/{{ $key->ID_PERMINTAAN }}"><b class="material-icons">Show Details</b>
+                        @if ($key->STATUS_PEMBATALANH === "Request untuk dibatalkan")
+                        
+                        @else
                         <a class="btn btn-block btn-danger" href="/semua/hapus/{{ $key->ID_PERMINTAAN }}"><b class="material-icons">Cancel Request</b></a>
+                        @endif
                       </td>
                     </tr>
                 @endforeach

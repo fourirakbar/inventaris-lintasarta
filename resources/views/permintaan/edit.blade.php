@@ -145,17 +145,11 @@
 	                <div class="form-group">
 	                  <label>Titik Proses</label>
 	                  <input type="hidden" name="_method" value="PUT">
-	                  <select class="form-control" name="TIKPRO_ID" >
-	                  	<option disabled selected value>-- Pilih Menu Dibawah --</option>
-	                  	<option value="1">Input FPBJ</option>
-	                  	<option value="2">Approval GM</option>
-	                  	<option value="3">Approve Budget</option>
-	                  	<option value="4">RFQ</option>
-	                  	<option value="5">SPK</option>
-	                  	<option value="6">Delivery Order</option>
-	                  	<option value="7">Pembuatan No. Registrasi</option>
-	                  	<option value="8">FMB</option>
-	                  	<option value="9">Pengiriman ke User</option>
+	                  <select class="form-control" name="TIKPRO_ID">
+	                   	<option disabled selected value><b>-- Pilih Menu Dibawah --</b></option>
+	                   	@foreach ($listtikpro as $tikpros)
+	                  		<option value="{{ $tikpros->ID_TIKPRO }}">{{ $tikpros->NAMA_TIKPRO }}</option>	    
+						@endforeach
 	                  </select>
 	                </div>
 
