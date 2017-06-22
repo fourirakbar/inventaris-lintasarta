@@ -146,7 +146,7 @@
 	                  <label>Titik Proses</label>
 	                  <input type="hidden" name="_method" value="PUT">
 	                  <select class="form-control" name="TIKPRO_ID">
-	                  	<option value=""><b>Pilih Menu Dibawah</b></option>
+	                  	<option disabled selected value><b>-- Pilih Menu Dibawah --</b></option>
 	                  	<option value="1">Input FPBJ</option>
 	                  	<option value="2">Approval GM</option>
 	                  	<option value="3">Approve Budget</option>
