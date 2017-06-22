@@ -56,3 +56,6 @@ Route::get('edittikpro', 'TikproController@edit')->middleware('user');
 Route::get('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@hapus')->middleware('user');
 Route::post('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@delete')->middleware('user');
 Route::get('adminhapus', 'PermintaanController@showpembatalan')->middleware('user');
+Route::get('adminhapus/request', 'PermintaanController@showpembatalanbelum')->middleware('user');
+Route::get('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@detailpembatalan')->middleware('user');
+Route::put('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@execpembatalan')->middleware('user');

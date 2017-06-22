@@ -63,7 +63,7 @@ class PermintaanController extends Controller
 
     public function lihatSemua() {
         // $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate();
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal')->get();
         $jebret2 = DB::table('TIKPRO')->get();
         // dd($jebret2);
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
@@ -131,6 +131,7 @@ class PermintaanController extends Controller
         $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
         $jebret2 = DB::table('TIKPRO')->get();
         Pembatalan::insertGetId(array(
+            'PERMINTAAN_ID' => $ID_PERMINTAAN,
             'ALASAN_PEMBATALAN' => $request->ALASAN_PEMBATALAN,
             'FILE_PEMBATALAN' => $destinationPath."/pembatalan_".$ID_PERMINTAAN.".jpg",
             'STATUS_PEMBATALAN' => "in progress",
@@ -143,75 +144,34 @@ class PermintaanController extends Controller
    public function showpembatalan()
     {
         $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->get();
-        dd($jebret);
-        // return view('permintaan.adminhapus', compact('jebret'));
+        // dd($jebret);
+        return view('permintaan.adminhapus', compact('jebret'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function showpembatalanbelum()
     {
-        $this->validate($request, [
-
-            'nama_peminta' => 'required',
-            'barang_permintaan' => 'required'
-
-        ]);
-
-
-        Permintaan::create($request->all());
-
-        return redirect()->route('request')
-
-                        ->with('success','Item created successfully');
+        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->where('STATUS_PEMBATALAN','!=','done')->get();
+        // dd($jebret);
+        return view('permintaan.adminhapus', compact('jebret'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function detailpembatalan($ID_PERMINTAAN)
     {
-        //
+        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->where('ID_PERMINTAAN','=',$ID_PERMINTAAN)->get()[0];
+        // dd($jebret);
+        return view('permintaan.detailadminhapus', compact('jebret'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function execpembatalan($ID_PERMINTAAN)
     {
-        //
+        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->get();
+        Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'batal']);
+        DB::table('PEMBATALAN')->where('PERMINTAAN_ID','=',$ID_PERMINTAAN)->update(['STATUS_PEMBATALAN' => 'done']);
+
+        $url = 'adminhapus';
+
+        return redirect($url)->with('success','Sukses Update Data');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

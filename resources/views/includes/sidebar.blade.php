@@ -27,15 +27,26 @@
             <i class="fa fa-files-o"></i>
             <span>Permintaan</span>
             <span class="pull-right-container">
-              
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>
             <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
             <li><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Sedang Diproses</span></a></li>
-            <li><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Semua Permintaan</span></a></li>
-            <li><a href="{{ URL::to('adminhapus') }}"><i class="fa fa-book"></i> <span>Pengajuan Pembatalan</span></a></li>
+            <li><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Histori Permintaan</span></a></li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-share"></i> <span>Pengajuan Pembatalan</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ URL::to('adminhapus/request') }}"><i class="fa fa-circle-o"></i> Permintaan Pembatalan</a></li>
+                <li><a href="{{ URL::to('adminhapus') }}"><i class="fa fa-circle-o"></i> Histori Pembatalan</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
