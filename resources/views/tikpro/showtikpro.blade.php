@@ -34,7 +34,7 @@
 		                        <th style="text-align: center; vertical-align: middle; ">Deadline</th>
 		                </tr>
 	                	</thead>
-	                	
+
 	                	<tbody>
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->ID_TIKPRO }}</td>
@@ -89,7 +89,7 @@
 		                		<tr>
 		                			<td style="text-align: center; vertical-align: middle; ">TOTAL</td>
 		                		<td style="text-align: center; vertical-align: middle; ">
-		                		<?php 
+		                		<?php
 		                		$total = 0;
 		                		foreach ($jebret as $key) {
 		                			$total += $key->DEADLINE;
@@ -101,11 +101,11 @@
 		                	</tbody>
 			        </table>
 		        </div><br><br><br><br>
-		        <a href="{{ URL::to('edittikpro') }}"><button class="btn btn-primary btn-lg pull-right">Update</button></a> 
+		        <a href="{{ URL::to('edittikpro') }}"><button class="btn btn-primary btn-lg pull-right">Edit</button></a> 
 	        </div>
             <!-- /.box-header -->
             <!-- form start -->
-            
+
           	</div>
 
             </div>

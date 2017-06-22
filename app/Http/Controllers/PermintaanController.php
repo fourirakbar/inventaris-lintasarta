@@ -110,26 +110,15 @@ class PermintaanController extends Controller
 
     public function doUpdate(Request $request, $ID_PERMINTAAN) {
         $jebret = Permintaan::find($ID_PERMINTAAN);
-
         $kelarBoi = Input::get('TGL_SELESAI');
-
-        // dd($kelarBoi);
-
         $vape = HistoryTikpro::query()->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get();
-
         Permintaan::find($ID_PERMINTAAN)->update($request->all());
         $notSoLazy = DB::table('PERMINTAAN')->select('TIKPRO_ID')->where('ID_PERMINTAAN', $ID_PERMINTAAN)->get();
         $komodoDream = explode(":", $notSoLazy);
         $komodoBreakfast = explode("}]", $komodoDream[1]);
-
         $notBadLiquid = "UPDATE HISTORY_TIKPRO SET TGL_SELESAI= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?";
         DB::update($notBadLiquid, array($kelarBoi, $komodoBreakfast[0], $ID_PERMINTAAN));
-
-        // $pinkBeach = DB::table('HISTORY_TIKPRO')->where('TIKPRO_ID', $komodoBreakfast[0])->where('PERMINTAAN_ID', $ID_PERMINTAAN)->update(['TGL_SELESAI' => '2017-06-29']);
-        // dd($pinkBeach);
-
         $url = '/semua/lihat/'.$ID_PERMINTAAN;
-
         return redirect($url)->with('success','Sukses Update Data');
     }
 

@@ -671,6 +671,13 @@
                                 		    			?>
                                 		    		</td>
                                           </tr>
+
+                                          <?php
+                                            if (!empty($boi[8]->TGL_SELESAI)) { ?>
+                                              $doneBoi = "done";
+                                          <?php
+                                            }
+                                          ?>
                                       <?php
                                         }
                                       ?>
