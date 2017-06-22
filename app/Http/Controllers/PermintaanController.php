@@ -39,6 +39,7 @@ class PermintaanController extends Controller
             'BARANG_PERMINTAAN' => $data['BARANG_PERMINTAAN'],
             'DESKRIPSI' => $data['DESKRIPSI'],
             'TGL_PERMINTAAN' => $data['TGL_PERMINTAAN'],
+            'TGL_DEADLINE' => $data['TGL_DEADLINE'],
             'STATUS' => $a,
             'TIKPRO_ID' => $b,
         ));
@@ -183,5 +184,5 @@ class PermintaanController extends Controller
         return redirect($url)->with('success','Sukses Update Data');
     }
 
-    
+
 }

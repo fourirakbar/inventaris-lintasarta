@@ -19,7 +19,6 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data</h3><br><br>
-              <a href="/semua/lihat/edit/{{ $jebret->ID_PERMINTAAN }}"><button type="button" class="btn btn-primary btn-lg">EDIT</button></a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -58,14 +57,8 @@
 			        <td>{{ $jebret->NO_FPBJ }}</td>
 			    </tr>
 			    <tr>
-			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Target Selesai</th>
-			        <td>
-			        	<?php
-			        		if ($jebret->TARGET_SELESAI) {
-			        			echo date('d F Y', strtotime($jebret->TARGET_SELESAI));
-			        		}
-			        	?>
-			        </td>
+              <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Target Selesai</th>
+              <td><?php echo date('d F Y', strtotime($jebret->TGL_DEADLINE)); ?></td>
 			    </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Keterangan</th>
@@ -711,6 +704,9 @@
 
 			    </thead>
               </table>
+              <div class="box-header">
+                <a href="/semua/lihat/edit/{{ $jebret->ID_PERMINTAAN }}"><button type="button" class="btn btn-primary btn-lg pull-right">EDIT</button></a>
+              </div>
             </div>
 
 
