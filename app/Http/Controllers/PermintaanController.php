@@ -98,17 +98,27 @@ class PermintaanController extends Controller
     }
 
     public function doEdit($ID_PERMINTAAN) {
+        //dapet sesuai dengan Id Permintaannya masing-masing
         $jebret = Permintaan::find($ID_PERMINTAAN);
-        $boi = DB::table('HISTORY_TIKPRO')->get();
-        return view('permintaan.edit', compact('jebret'));
+        $boi = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get();
+
+        //dapet sesuai dengan tikpro_id di table permintaan
+        $moonRabbit = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.TIKPRO_ID', '=', 'HISTORY_TIKPRO.TIKPRO_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID', $ID_PERMINTAAN)->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get();
+
+        return view('permintaan.edit', compact('moonRabbit', 'jebret'));
     }
 
     public function doUpdate(Request $request, $ID_PERMINTAAN) {
         $jebret = Permintaan::find($ID_PERMINTAAN);
+        $kelarBoi = Input::get('TGL_SELESAI');
+        $vape = HistoryTikpro::query()->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get();
         Permintaan::find($ID_PERMINTAAN)->update($request->all());
-
+        $notSoLazy = DB::table('PERMINTAAN')->select('TIKPRO_ID')->where('ID_PERMINTAAN', $ID_PERMINTAAN)->get();
+        $komodoDream = explode(":", $notSoLazy);
+        $komodoBreakfast = explode("}]", $komodoDream[1]);
+        $notBadLiquid = "UPDATE HISTORY_TIKPRO SET TGL_SELESAI= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?";
+        DB::update($notBadLiquid, array($kelarBoi, $komodoBreakfast[0], $ID_PERMINTAAN));
         $url = '/semua/lihat/'.$ID_PERMINTAAN;
-
         return redirect($url)->with('success','Sukses Update Data');
     }
 
@@ -117,7 +127,7 @@ class PermintaanController extends Controller
         return view('permintaan.dashboard');
     }
 
-    
+
     public function hapus($ID_PERMINTAAN)
     {
         $jebret = Permintaan::find($ID_PERMINTAAN);
@@ -138,7 +148,7 @@ class PermintaanController extends Controller
         ));
         // dd($permintaan2);
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
-   
+
    }
 
    public function showpembatalan()

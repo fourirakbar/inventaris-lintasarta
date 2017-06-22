@@ -27,101 +27,101 @@
 			    <div class="box-body" style="padding-right: 10%; padding-left: 10%; padding-bottom: 5%">
 			    	<input type="hidden" name="_method" value="PUT">
 			    	<input type="hidden" name="_token" value="{{ csrf_token() }}">
-	                <div class="form-group"> 
-	                  <label>Nomor Ticket</label> 
-	                  <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Nama Requester</label> 
-	                  <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER"> 
+	                <div class="form-group">
+	                  <label>Nomor Ticket</label>
+	                  <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET">
 	                </div>
 
-	                <div class="form-group"> 
-	                  <label>Bagian</label> 
-	                  <input class="form-control" value="{{ $jebret->BAGIAN }}" name="BAGIAN"> 
+	                <div class="form-group">
+	                  <label>Nama Requester</label>
+	                  <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER">
 	                </div>
 
-	                <div class="form-group"> 
-	                  <label>Divisi</label> 
-	                  <input class="form-control" value="{{ $jebret->DIVISI }}" name="DIVISI"> 
-	                </div> 	                
-	                
-	                <div class="form-group"> 
-	                  <label>Tanggal Permintaan</label> 
-	                  <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN"> 
-	                </div> 
-	                
-	                <div class="form-group"> 
-	                  <label>Barang yang Diminta</label> 
-	                  <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN"> 
+	                <div class="form-group">
+	                  <label>Bagian</label>
+	                  <input class="form-control" value="{{ $jebret->BAGIAN }}" name="BAGIAN">
 	                </div>
 
-	                <div class="form-group"> 
-	                  <label>Deskirpsi</label> 
-	                  <input class="form-control" value="{{ $jebret->DESKRIPSI }}" name="DESKRIPSI"> 
-	                </div>
-	                
-	                <div class="form-group"> 
-	                  <label>No FPBJ</label> 
-	                  <input class="form-control" placeholder="No FPBJ" name="NO_FPBJ" value="{{ $jebret->NO_FPBJ }}"> 
-	                </div> 
-
-	                <div class="form-group"> 
-	                  <label>Tanggal Input FPBJ</label> 
-	                  <input type="date" class="form-control calendar1" name="TGL_INPUT_FPBJ" placeholder="Tanggal Input FPBJ" value="{{ $jebret->TGL_INPUT_FPBJ }}"> 
-	                </div> 
-
-	                <div class="form-group"> 
-	                  <label>Target Selesai</label> 
-	                  <input type="date" class="form-control calendar1" name="TARGET_SELESAI" placeholder="Tanggal Target Selesai" value="{{ $jebret->TARGET_SELESAI }}"> 
+	                <div class="form-group">
+	                  <label>Divisi</label>
+	                  <input class="form-control" value="{{ $jebret->DIVISI }}" name="DIVISI">
 	                </div>
 
-	                <div class="form-group"> 
+	                <div class="form-group">
+	                  <label>Tanggal Permintaan</label>
+	                  <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN">
+	                </div>
+
+	                <div class="form-group">
+	                  <label>Barang yang Diminta</label>
+	                  <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN">
+	                </div>
+
+	                <div class="form-group">
+	                  <label>Deskirpsi</label>
+	                  <input class="form-control" value="{{ $jebret->DESKRIPSI }}" name="DESKRIPSI">
+	                </div>
+
+	                <div class="form-group">
+	                  <label>No FPBJ</label>
+	                  <input class="form-control" placeholder="No FPBJ" name="NO_FPBJ" value="{{ $jebret->NO_FPBJ }}">
+	                </div>
+
+	                <div class="form-group">
+	                  <label>Tanggal Input FPBJ</label>
+	                  <input type="date" class="form-control calendar1" name="TGL_INPUT_FPBJ" placeholder="Tanggal Input FPBJ" value="{{ $jebret->TGL_INPUT_FPBJ }}">
+	                </div>
+
+	                <div class="form-group">
+	                  <label>Target Selesai</label>
+	                  <input type="date" class="form-control calendar1" name="TARGET_SELESAI" placeholder="Tanggal Target Selesai" value="{{ $jebret->TARGET_SELESAI }}">
+	                </div>
+
+	                <div class="form-group">
 	                  <label>Keterangan</label>
 	                  <textarea class="form-control" rows="3" name="KETERANGAN" value="{{ $jebret->KETERANGAN }}" placeholder="Keterangan"></textarea>
-	                </div> 
-	                
+	                </div>
+
 	                <?php
 	                	if (!empty($jebret->NO_FPBJ) && !empty($jebret->TGL_INPUT_FPBJ) && !empty($jebret->TARGET_SELESAI) && !empty($jebret->KETERANGAN)) { ?>
-			                <div class="form-group"> 
-			                  <label>Target Tindak Lanjut Akhir</label> 
-			                  <input type="date" class="form-control calendar1" name="TINDAK_LANJUT_AKHIR" placeholder="Tanggal Target Selesai" value="{{ $jebret->TINDAK_LANJUT_AKHIR }}"> 
+			                <div class="form-group">
+			                  <label>Target Tindak Lanjut Akhir</label>
+			                  <input type="date" class="form-control calendar1" name="TINDAK_LANJUT_AKHIR" placeholder="Tanggal Target Selesai" value="{{ $jebret->TINDAK_LANJUT_AKHIR }}">
 			                </div>
 
 			                <?php
 			                	if (!empty($jebret->TINDAK_LANJUT_AKHIR)) { ?>
-			                		<div class="form-group"> 
-					                  <label>FPB</label> 
-					                  <input type="date" class="form-control calendar1" name="FPB" placeholder="FPB" value="{{ $jebret->FPB }}"> 
+			                		<div class="form-group">
+					                  <label>FPB</label>
+					                  <input type="date" class="form-control calendar1" name="FPB" placeholder="FPB" value="{{ $jebret->FPB }}">
 					                </div>
 
 					                <?php
 					                	if (!empty($jebret->FPB)) { ?>
-					                		<div class="form-group"> 
-							                  <label>RFQ</label> 
-							                  <input type="date" class="form-control calendar1" name="RFQ" placeholder="RFQ" value="{{ $jebret->RFQ }}"> 
+					                		<div class="form-group">
+							                  <label>RFQ</label>
+							                  <input type="date" class="form-control calendar1" name="RFQ" placeholder="RFQ" value="{{ $jebret->RFQ }}">
 							                </div>
 
 							                <?php
 							                	if (!empty($jebret->RFQ)) { ?>
-							                		<div class="form-group"> 
-									                  <label>SPK</label> 
-									                  <input type="date" class="form-control calendar1" name="SPK" placeholder="SPK" value="{{ $jebret->SPK }}"> 
-									                </div> 
+							                		<div class="form-group">
+									                  <label>SPK</label>
+									                  <input type="date" class="form-control calendar1" name="SPK" placeholder="SPK" value="{{ $jebret->SPK }}">
+									                </div>
 
 									                <?php
 									                	if (!empty($jebret->SPK)) { ?>
-									                		<div class="form-group"> 
-											                  <label>Delivery Order</label> 
-											                  <input type="date" class="form-control calendar1" name="DO" placeholder="Delivery Order" value="{{ $jebret->DO }}"> 
-											                </div> 
+									                		<div class="form-group">
+											                  <label>Delivery Order</label>
+											                  <input type="date" class="form-control calendar1" name="DO" placeholder="Delivery Order" value="{{ $jebret->DO }}">
+											                </div>
 
 											                <?php
 											                	if (!empty($jebret->DO)) { ?>
-											                		<div class="form-group"> 
-													                  <label>BAST</label> 
-													                  <input type="date" class="form-control calendar1" name="BAST" placeholder="BAST" value="{{ $jebret->BAST }}"> 
+											                		<div class="form-group">
+													                  <label>BAST</label>
+													                  <input type="date" class="form-control calendar1" name="BAST" placeholder="BAST" value="{{ $jebret->BAST }}">
 													                </div>
 											                <?php
 											                	}
@@ -131,7 +131,7 @@
 									                ?>
 							                <?php
 							                	}
-							                ?> 
+							                ?>
 					                <?php
 					                	}
 					                ?>
@@ -142,11 +142,11 @@
 	                	}
 	                ?>
 
-	                <div class="form-group"> 
-	                  <label>Titik Proses</label> 
+	                <div class="form-group">
+	                  <label>Titik Proses</label>
 	                  <input type="hidden" name="_method" value="PUT">
 	                  <select class="form-control" name="TIKPRO_ID">
-	                  	<option value=""><b>Pilih Menu Dibawah</b></option>
+	                  	<option disabled selected value><b>-- Pilih Menu Dibawah --</b></option>
 	                  	<option value="1">Input FPBJ</option>
 	                  	<option value="2">Approval GM</option>
 	                  	<option value="3">Approve Budget</option>
@@ -157,15 +157,19 @@
 	                  	<option value="8">FMB</option>
 	                  	<option value="9">Pengiriman ke User</option>
 	                  </select>
-	                </div> 
-	                
-	                <button type="submit" class="btn btn-primary">Update</button>&nbsp;&nbsp; 
-	                <button type="reset" class="btn btn-default">Reset</button> 
-	              </div> 
-	            </form> 
+	                </div>
+
+                  <div class="form-group">
+                    <label>Tanggal Ganti Titik Proses</label>
+                    <input type="date" class="form-control calendar1" name="TGL_SELESAI" placeholder="Tanggal Ganti Titik Proses" value="{{ $jebret->TGL_SELESAI }}"</div>
+
+	                <button type="submit" class="btn btn-primary">Update</button>&nbsp;&nbsp;
+	                <button type="reset" class="btn btn-default">Reset</button>
+	              </div>
+	            </form>
             <!-- /.box-header -->
             <!-- form start -->
-            
+
           	</div>
 
             </div>
