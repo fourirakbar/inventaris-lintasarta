@@ -64,16 +64,6 @@
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Keterangan</th>
 			        <td>{{ $jebret->KETERANGAN }}</td>
 			    </tr>
-			    <tr>
-			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Tindak Lanjut Akhir</th>
-			        <td>
-			        	<?php
-			        		if ($jebret->TINDAK_LANJUT_AKHIR) {
-			        			echo date('d F Y', strtotime($jebret->TINDAK_LANJUT_AKHIR));
-			        		}
-			        	?>
-			        </td>
-			    </tr>
 
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Titik Proses</th>
@@ -109,22 +99,37 @@
             </td>
 		    		<td style="text-align: center; vertical-align: middle; ">
 		    			<?php
+                //tanggal hari ini
 		    				$sekarang = new Datetime();
+
+                //tanggal input
+                $tglInputBoi = new Datetime(($jebret->TGL_PERMINTAAN));
+
+                //tanggal selesai (seharusnya)
 		    				$hasil_date = new Datetime($hasil);
-		    				$kuy = new Datetime(($boi[0]->TGL_SELESAI));
-		    				$diff = date_diff($sekarang,$hasil_date);
-		    				$diff_kuy = date_diff($sekarang,$kuy);
-		    				$print = $diff->format("%a");
-		    				$print_kuy = $diff_kuy->format("%a");
-		    				if ($print+1 < 0 && $print+1 < $print_kuy+1) {
-		    					echo "Overdue";
-		    				}
-		    				elseif ($print+1 > 0 && empty(($boi[0]->TGL_SELESAI))) {
-		    					echo "In Progress";
-		    				}
-		    				elseif ($print+1 > 0 && $print+1 > $print_kuy+1) {
-		    					echo "On Target";
-		    				}
+
+                //tanggal selesai (kenyataan)
+                $kuy = new Datetime(($boi[0]->TGL_SELESAI));
+
+                //dikurangin antara tanggal selesai (seharusnya) dengan tanggal input
+                $druga = date_diff($tglInputBoi, $hasil_date);
+                $newDruga = $druga->format("%a");
+
+                //dikurangin antara tanggal selesai kenyataan dengan tanggal input
+                $merlinRTA = date_diff($tglInputBoi, $kuy);
+                $newMerlinRTA = $merlinRTA->format("%a");
+
+                if (empty(($boi[0]->TGL_SELESAI))) {
+                  echo "In Progress";
+                }
+                elseif ($newDruga+1 >= $newMerlinRTA+1) {
+                  echo "On Target";
+                  // echo $newDruga, "+" ,$newMerlinRTA;
+                }
+                else {
+                  echo "Overdue";
+                  // echo $print, "+" ,$print_kuy;
+                }
 		    			?>
 		    		</td>
 		    		<td style="text-align: center; vertical-align: middle; ">
@@ -155,38 +160,38 @@
                   ?>
                 </td>
                 <td style="text-align: center; vertical-align: middle; ">
-    		    			<?php
+                  <?php
                     //tanggal hari ini
     		    				$sekarang = new Datetime();
+
+                    //tanggal input
+                    $tglInputBoi = new Datetime(($boi[0]->TGL_SELESAI));
 
                     //tanggal selesai (seharusnya)
     		    				$hasil_date = new Datetime($hasil);
 
                     //tanggal selesai (kenyataan)
-    		    				$kuy = new Datetime(($boi[1]->TGL_SELESAI));
+                    $kuy = new Datetime(($boi[1]->TGL_SELESAI));
 
-                    //dikurangin antara tanggal selesai seharusnya dengan tanggal hari ini
-    		    				$diff = date_diff($sekarang,$hasil_date);
+                    //dikurangin antara tanggal selesai (seharusnya) dengan tanggal input
+                    $druga = date_diff($tglInputBoi, $hasil_date);
+                    $newDruga = $druga->format("%a");
 
-                    //dikurangin antara tanggal selesai kenyataan dengan tanggal hari ini
-    		    				$diff_kuy = date_diff($sekarang,$kuy);
+                    //dikurangin antara tanggal selesai kenyataan dengan tanggal input
+                    $merlinRTA = date_diff($tglInputBoi, $kuy);
+                    $newMerlinRTA = $merlinRTA->format("%a");
 
-                    //print jumlah harinya saja dari variable $diff
-    		    				$print = $diff->format("%a");
-
-                    //print jumlah harinya saja dari varibale $diff_kuy
-    		    				$print_kuy = $diff_kuy->format("%a");
-
-    		    				if ($print+1 > 0 && empty(($boi[1]->TGL_SELESAI))) {
-    		    					echo "In Progress";
-    		    				}
-    		    				elseif ($print+1 > 0 && $print+1 > $print_kuy+1 || $print+1 == $print_kuy+1) {
-    		    					echo "On Target";
-    		    				}
+                    if (empty(($boi[1]->TGL_SELESAI))) {
+                      echo "In Progress";
+                    }
+                    elseif ($newDruga+1 >= $newMerlinRTA+1) {
+                      echo "On Target";
+                      // echo $newDruga, "+" ,$newMerlinRTA;
+                    }
                     else {
-    		    					echo "Overdue";
-                      // echo $print, "+", $print_kuy;
-    		    				}
+                      echo "Overdue";
+                      // echo $print, "+" ,$print_kuy;
+                    }
     		    			?>
     		    		</td>
                 <td style="text-align: center; vertical-align: middle; ">
@@ -222,38 +227,38 @@
                       ?>
                     </td>
                     <td style="text-align: center; vertical-align: middle; ">
-        		    			<?php
+                      <?php
                         //tanggal hari ini
         		    				$sekarang = new Datetime();
+
+                        //tanggal input
+                        $tglInputBoi = new Datetime(($boi[1]->TGL_SELESAI));
 
                         //tanggal selesai (seharusnya)
         		    				$hasil_date = new Datetime($hasil);
 
                         //tanggal selesai (kenyataan)
-        		    				$kuy = new Datetime(($boi[2]->TGL_SELESAI));
+                        $kuy = new Datetime(($boi[2]->TGL_SELESAI));
 
-                        //dikurangin antara tanggal selesai seharusnya dengan tanggal hari ini
-        		    				$diff = date_diff($sekarang,$hasil_date);
+                        //dikurangin antara tanggal selesai (seharusnya) dengan tanggal input
+                        $druga = date_diff($tglInputBoi, $hasil_date);
+                        $newDruga = $druga->format("%a");
 
-                        //dikurangin antara tanggal selesai kenyataan dengan tanggal hari ini
-        		    				$diff_kuy = date_diff($sekarang,$kuy);
+                        //dikurangin antara tanggal selesai kenyataan dengan tanggal input
+                        $merlinRTA = date_diff($tglInputBoi, $kuy);
+                        $newMerlinRTA = $merlinRTA->format("%a");
 
-                        //print jumlah harinya saja dari variable $diff
-        		    				$print = $diff->format("%a");
-
-                        //print jumlah harinya saja dari varibale $diff_kuy
-        		    				$print_kuy = $diff_kuy->format("%a");
-
-        		    				if ($print+1 > 0 && empty(($boi[2]->TGL_SELESAI))) {
-        		    					echo "In Progress";
-        		    				}
-        		    				elseif ($print+1 > 0 && $print+1 > $print_kuy+1 || $print+1 == $print_kuy+1) {
-        		    					echo "On Target";
-        		    				}
+                        if (empty(($boi[2]->TGL_SELESAI))) {
+                          echo "In Progress";
+                        }
+                        elseif ($newDruga+1 >= $newMerlinRTA+1) {
+                          echo "On Target";
+                          // echo $newDruga, "+" ,$newMerlinRTA;
+                        }
                         else {
-        		    					echo "Overdue";
-                          // echo $print, "+", $print_kuy;
-        		    				}
+                          echo "Overdue";
+                          // echo $print, "+" ,$print_kuy;
+                        }
         		    			?>
         		    		</td>
                     <td style="text-align: center; vertical-align: middle; ">
@@ -289,38 +294,38 @@
                           ?>
                         </td>
                         <td style="text-align: center; vertical-align: middle; ">
-            		    			<?php
+                          <?php
                             //tanggal hari ini
             		    				$sekarang = new Datetime();
+
+                            //tanggal input
+                            $tglInputBoi = new Datetime(($boi[2]->TGL_SELESAI));
 
                             //tanggal selesai (seharusnya)
             		    				$hasil_date = new Datetime($hasil);
 
                             //tanggal selesai (kenyataan)
-            		    				$kuy = new Datetime(($boi[3]->TGL_SELESAI));
+                            $kuy = new Datetime(($boi[3]->TGL_SELESAI));
 
-                            //dikurangin antara tanggal selesai seharusnya dengan tanggal hari ini
-            		    				$diff = date_diff($sekarang,$hasil_date);
+                            //dikurangin antara tanggal selesai (seharusnya) dengan tanggal input
+                            $druga = date_diff($tglInputBoi, $hasil_date);
+                            $newDruga = $druga->format("%a");
 
-                            //dikurangin antara tanggal selesai kenyataan dengan tanggal hari ini
-            		    				$diff_kuy = date_diff($sekarang,$kuy);
+                            //dikurangin antara tanggal selesai kenyataan dengan tanggal input
+                            $merlinRTA = date_diff($tglInputBoi, $kuy);
+                            $newMerlinRTA = $merlinRTA->format("%a");
 
-                            //print jumlah harinya saja dari variable $diff
-            		    				$print = $diff->format("%a");
-
-                            //print jumlah harinya saja dari varibale $diff_kuy
-            		    				$print_kuy = $diff_kuy->format("%a");
-
-            		    				if ($print+1 > 0 && empty(($boi[3]->TGL_SELESAI))) {
-            		    					echo "In Progress";
-            		    				}
-            		    				elseif ($print+1 > 0 && $print+1 > $print_kuy+1 || $print+1 == $print_kuy+1) {
-            		    					echo "On Target";
-            		    				}
+                            if (empty(($boi[3]->TGL_SELESAI))) {
+                              echo "In Progress";
+                            }
+                            elseif ($newDruga+1 >= $newMerlinRTA+1) {
+                              echo "On Target";
+                              // echo $newDruga, "+" ,$newMerlinRTA;
+                            }
                             else {
-            		    					echo "Overdue";
-                              // echo $print, "+", $print_kuy;
-            		    				}
+                              echo "Overdue";
+                              // echo $print, "+" ,$print_kuy;
+                            }
             		    			?>
             		    		</td>
                         <td style="text-align: center; vertical-align: middle; ">
@@ -356,38 +361,38 @@
                               ?>
                             </td>
                             <td style="text-align: center; vertical-align: middle; ">
-                		    			<?php
+                              <?php
                                 //tanggal hari ini
                 		    				$sekarang = new Datetime();
+
+                                //tanggal input
+                                $tglInputBoi = new Datetime(($boi[3]->TGL_SELESAI));
 
                                 //tanggal selesai (seharusnya)
                 		    				$hasil_date = new Datetime($hasil);
 
                                 //tanggal selesai (kenyataan)
-                		    				$kuy = new Datetime(($boi[4]->TGL_SELESAI));
+                                $kuy = new Datetime(($boi[4]->TGL_SELESAI));
 
-                                //dikurangin antara tanggal selesai seharusnya dengan tanggal hari ini
-                		    				$diff = date_diff($sekarang,$hasil_date);
+                                //dikurangin antara tanggal selesai (seharusnya) dengan tanggal input
+                                $druga = date_diff($tglInputBoi, $hasil_date);
+                                $newDruga = $druga->format("%a");
 
-                                //dikurangin antara tanggal selesai kenyataan dengan tanggal hari ini
-                		    				$diff_kuy = date_diff($sekarang,$kuy);
+                                //dikurangin antara tanggal selesai kenyataan dengan tanggal input
+                                $merlinRTA = date_diff($tglInputBoi, $kuy);
+                                $newMerlinRTA = $merlinRTA->format("%a");
 
-                                //print jumlah harinya saja dari variable $diff
-                		    				$print = $diff->format("%a");
-
-                                //print jumlah harinya saja dari varibale $diff_kuy
-                		    				$print_kuy = $diff_kuy->format("%a");
-
-                		    				if ($print+1 > 0 && empty(($boi[4]->TGL_SELESAI))) {
-                		    					echo "In Progress";
-                		    				}
-                		    				elseif ($print+1 > 0 && $print+1 > $print_kuy+1 || $print+1 == $print_kuy+1) {
-                		    					echo "On Target";
-                		    				}
+                                if (empty(($boi[4]->TGL_SELESAI))) {
+                                  echo "In Progress";
+                                }
+                                elseif ($newDruga+1 >= $newMerlinRTA+1) {
+                                  echo "On Target";
+                                  // echo $newDruga, "+" ,$newMerlinRTA;
+                                }
                                 else {
-                		    					echo "Overdue";
-                                  // echo $print, "+", $print_kuy;
-                		    				}
+                                  echo "Overdue";
+                                  // echo $print, "+" ,$print_kuy;
+                                }
                 		    			?>
                 		    		</td>
                             <td style="text-align: center; vertical-align: middle; ">
@@ -423,38 +428,38 @@
                                   ?>
                                 </td>
                                 <td style="text-align: center; vertical-align: middle; ">
-                    		    			<?php
+                                  <?php
                                     //tanggal hari ini
                     		    				$sekarang = new Datetime();
+
+                                    //tanggal input
+                                    $tglInputBoi = new Datetime(($boi[4]->TGL_SELESAI));
 
                                     //tanggal selesai (seharusnya)
                     		    				$hasil_date = new Datetime($hasil);
 
                                     //tanggal selesai (kenyataan)
-                    		    				$kuy = new Datetime(($boi[5]->TGL_SELESAI));
+                                    $kuy = new Datetime(($boi[5]->TGL_SELESAI));
 
-                                    //dikurangin antara tanggal selesai seharusnya dengan tanggal hari ini
-                    		    				$diff = date_diff($sekarang,$hasil_date);
+                                    //dikurangin antara tanggal selesai (seharusnya) dengan tanggal input
+                                    $druga = date_diff($tglInputBoi, $hasil_date);
+                                    $newDruga = $druga->format("%a");
 
-                                    //dikurangin antara tanggal selesai kenyataan dengan tanggal hari ini
-                    		    				$diff_kuy = date_diff($sekarang,$kuy);
+                                    //dikurangin antara tanggal selesai kenyataan dengan tanggal input
+                                    $merlinRTA = date_diff($tglInputBoi, $kuy);
+                                    $newMerlinRTA = $merlinRTA->format("%a");
 
-                                    //print jumlah harinya saja dari variable $diff
-                    		    				$print = $diff->format("%a");
-
-                                    //print jumlah harinya saja dari varibale $diff_kuy
-                    		    				$print_kuy = $diff_kuy->format("%a");
-
-                    		    				if ($print+1 > 0 && empty(($boi[5]->TGL_SELESAI))) {
-                    		    					echo "In Progress";
-                    		    				}
-                    		    				elseif ($print+1 > 0 && $print+1 > $print_kuy+1 || $print+1 == $print_kuy+1) {
-                    		    					echo "On Target";
-                    		    				}
+                                    if (empty(($boi[5]->TGL_SELESAI))) {
+                                      echo "In Progress";
+                                    }
+                                    elseif ($newDruga+1 >= $newMerlinRTA+1) {
+                                      echo "On Target";
+                                      // echo $newDruga, "+" ,$newMerlinRTA;
+                                    }
                                     else {
-                    		    					echo "Overdue";
-                                      // echo $print, "+", $print_kuy;
-                    		    				}
+                                      echo "Overdue";
+                                      // echo $print, "+" ,$print_kuy;
+                                    }
                     		    			?>
                     		    		</td>
                                 <td style="text-align: center; vertical-align: middle; ">
@@ -490,38 +495,38 @@
                                       ?>
                                     </td>
                                     <td style="text-align: center; vertical-align: middle; ">
-                        		    			<?php
+                                      <?php
                                         //tanggal hari ini
                         		    				$sekarang = new Datetime();
+
+                                        //tanggal input
+                                        $tglInputBoi = new Datetime(($boi[5]->TGL_SELESAI));
 
                                         //tanggal selesai (seharusnya)
                         		    				$hasil_date = new Datetime($hasil);
 
                                         //tanggal selesai (kenyataan)
-                        		    				$kuy = new Datetime(($boi[6]->TGL_SELESAI));
+                                        $kuy = new Datetime(($boi[6]->TGL_SELESAI));
 
-                                        //dikurangin antara tanggal selesai seharusnya dengan tanggal hari ini
-                        		    				$diff = date_diff($sekarang,$hasil_date);
+                                        //dikurangin antara tanggal selesai (seharusnya) dengan tanggal input
+                                        $druga = date_diff($tglInputBoi, $hasil_date);
+                                        $newDruga = $druga->format("%a");
 
-                                        //dikurangin antara tanggal selesai kenyataan dengan tanggal hari ini
-                        		    				$diff_kuy = date_diff($sekarang,$kuy);
+                                        //dikurangin antara tanggal selesai kenyataan dengan tanggal input
+                                        $merlinRTA = date_diff($tglInputBoi, $kuy);
+                                        $newMerlinRTA = $merlinRTA->format("%a");
 
-                                        //print jumlah harinya saja dari variable $diff
-                        		    				$print = $diff->format("%a");
-
-                                        //print jumlah harinya saja dari varibale $diff_kuy
-                        		    				$print_kuy = $diff_kuy->format("%a");
-
-                        		    				if ($print+1 > 0 && empty(($boi[6]->TGL_SELESAI))) {
-                        		    					echo "In Progress";
-                        		    				}
-                        		    				elseif ($print+1 > 0 && $print+1 > $print_kuy+1 || $print+1 == $print_kuy+1) {
-                        		    					echo "On Target";
-                        		    				}
+                                        if (empty(($boi[6]->TGL_SELESAI))) {
+                                          echo "In Progress";
+                                        }
+                                        elseif ($newDruga+1 >= $newMerlinRTA+1) {
+                                          echo "On Target";
+                                          // echo $newDruga, "+" ,$newMerlinRTA;
+                                        }
                                         else {
-                        		    					echo "Overdue";
-                                          // echo $print, "+", $print_kuy;
-                        		    				}
+                                          echo "Overdue";
+                                          // echo $print, "+" ,$print_kuy;
+                                        }
                         		    			?>
                         		    		</td>
                                     <td style="text-align: center; vertical-align: middle; ">
@@ -557,38 +562,38 @@
                                           ?>
                                         </td>
                                         <td style="text-align: center; vertical-align: middle; ">
-                            		    			<?php
+                                          <?php
                                             //tanggal hari ini
                             		    				$sekarang = new Datetime();
+
+                                            //tanggal input
+                                            $tglInputBoi = new Datetime(($boi[6]->TGL_SELESAI));
 
                                             //tanggal selesai (seharusnya)
                             		    				$hasil_date = new Datetime($hasil);
 
                                             //tanggal selesai (kenyataan)
-                            		    				$kuy = new Datetime(($boi[7]->TGL_SELESAI));
+                                            $kuy = new Datetime(($boi[7]->TGL_SELESAI));
 
-                                            //dikurangin antara tanggal selesai seharusnya dengan tanggal hari ini
-                            		    				$diff = date_diff($sekarang,$hasil_date);
+                                            //dikurangin antara tanggal selesai (seharusnya) dengan tanggal input
+                                            $druga = date_diff($tglInputBoi, $hasil_date);
+                                            $newDruga = $druga->format("%a");
 
-                                            //dikurangin antara tanggal selesai kenyataan dengan tanggal hari ini
-                            		    				$diff_kuy = date_diff($sekarang,$kuy);
+                                            //dikurangin antara tanggal selesai kenyataan dengan tanggal input
+                                            $merlinRTA = date_diff($tglInputBoi, $kuy);
+                                            $newMerlinRTA = $merlinRTA->format("%a");
 
-                                            //print jumlah harinya saja dari variable $diff
-                            		    				$print = $diff->format("%a");
-
-                                            //print jumlah harinya saja dari varibale $diff_kuy
-                            		    				$print_kuy = $diff_kuy->format("%a");
-
-                            		    				if ($print+1 > 0 && empty(($boi[7]->TGL_SELESAI))) {
-                            		    					echo "In Progress";
-                            		    				}
-                            		    				elseif ($print+1 > 0 && $print+1 > $print_kuy+1 || $print+1 == $print_kuy+1) {
-                            		    					echo "On Target";
-                            		    				}
+                                            if (empty(($boi[7]->TGL_SELESAI))) {
+                                              echo "In Progress";
+                                            }
+                                            elseif ($newDruga+1 >= $newMerlinRTA+1) {
+                                              echo "On Target";
+                                              // echo $newDruga, "+" ,$newMerlinRTA;
+                                            }
                                             else {
-                            		    					echo "Overdue";
-                                              // echo $print, "+", $print_kuy;
-                            		    				}
+                                              echo "Overdue";
+                                              // echo $print, "+" ,$print_kuy;
+                                            }
                             		    			?>
                             		    		</td>
                                         <td style="text-align: center; vertical-align: middle; ">
@@ -624,38 +629,38 @@
                                               ?>
                                             </td>
                                             <td style="text-align: center; vertical-align: middle; ">
-                                		    			<?php
+                                              <?php
                                                 //tanggal hari ini
                                 		    				$sekarang = new Datetime();
+
+                                                //tanggal input
+                                                $tglInputBoi = new Datetime(($boi[7]->TGL_SELESAI));
 
                                                 //tanggal selesai (seharusnya)
                                 		    				$hasil_date = new Datetime($hasil);
 
                                                 //tanggal selesai (kenyataan)
-                                		    				$kuy = new Datetime(($boi[8]->TGL_SELESAI));
+                                                $kuy = new Datetime(($boi[8]->TGL_SELESAI));
 
-                                                //dikurangin antara tanggal selesai seharusnya dengan tanggal hari ini
-                                		    				$diff = date_diff($sekarang,$hasil_date);
+                                                //dikurangin antara tanggal selesai (seharusnya) dengan tanggal input
+                                                $druga = date_diff($tglInputBoi, $hasil_date);
+                                                $newDruga = $druga->format("%a");
 
-                                                //dikurangin antara tanggal selesai kenyataan dengan tanggal hari ini
-                                		    				$diff_kuy = date_diff($sekarang,$kuy);
+                                                //dikurangin antara tanggal selesai kenyataan dengan tanggal input
+                                                $merlinRTA = date_diff($tglInputBoi, $kuy);
+                                                $newMerlinRTA = $merlinRTA->format("%a");
 
-                                                //print jumlah harinya saja dari variable $diff
-                                		    				$print = $diff->format("%a");
-
-                                                //print jumlah harinya saja dari varibale $diff_kuy
-                                		    				$print_kuy = $diff_kuy->format("%a");
-
-                                		    				if ($print+1 > 0 && empty(($boi[8]->TGL_SELESAI))) {
-                                		    					echo "In Progress";
-                                		    				}
-                                		    				elseif ($print+1 > 0 && $print+1 > $print_kuy+1 || $print+1 == $print_kuy+1) {
-                                		    					echo "On Target";
-                                		    				}
+                                                if (empty(($boi[8]->TGL_SELESAI))) {
+                                                  echo "In Progress";
+                                                }
+                                                elseif ($newDruga+1 >= $newMerlinRTA+1) {
+                                                  echo "On Target";
+                                                  // echo $newDruga, "+" ,$newMerlinRTA;
+                                                }
                                                 else {
-                                		    					echo "Overdue";
-                                                  // echo $print, "+", $print_kuy;
-                                		    				}
+                                                  echo "Overdue";
+                                                  // echo $print, "+" ,$print_kuy;
+                                                }
                                 		    			?>
                                 		    		</td>
                                             <td style="text-align: center; vertical-align: middle; ">
