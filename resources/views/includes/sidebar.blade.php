@@ -51,5 +51,19 @@
             @endif
           </ul>
         </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Barang</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ URL::to('barang') }}"><i class="fa fa-book"></i> <span>Input Barang</span></a></li>
+            <li><a href="{{ URL::to('showbarang') }}"><i class="fa fa-book"></i> <span>Lihat Semua Barang</span></a></li>
+          </ul>
+        </li>
       </ul>
     </section>
