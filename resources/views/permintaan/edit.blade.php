@@ -67,16 +67,6 @@
 	                  <input class="form-control" placeholder="No FPBJ" name="NO_FPBJ" value="{{ $jebret->NO_FPBJ }}">
 	                </div>
 
-	                <!-- <div class="form-group">
-	                  <label>Tanggal Input FPBJ</label>
-	                  <input type="date" class="form-control calendar1" name="TGL_INPUT_FPBJ" placeholder="Tanggal Input FPBJ" value="{{ $jebret->TGL_INPUT_FPBJ }}">
-	                </div> -->
-
-	                <!-- <div class="form-group">
-	                  <label>Target Selesai</label>
-	                  <input type="date" class="form-control calendar1" name="TARGET_SELESAI" placeholder="Tanggal Target Selesai" value="{{ $jebret->TARGET_SELESAI }}">
-	                </div> -->
-
 	                <div class="form-group">
 	                  <label>Keterangan</label>
 	                  <textarea class="form-control" rows="3" name="KETERANGAN" value="{{ $jebret->KETERANGAN }}" placeholder="Keterangan"></textarea>
@@ -100,6 +90,17 @@
                   <div class="form-group">
                     <label>Tanggal Ganti Titik Proses</label>
                     <input type="date" class="form-control calendar1" name="TGL_SELESAI" placeholder="Tanggal Ganti Titik Proses" value="{{ $jebret->TGL_SELESAI }}"</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Status</label>
+                    <input type="hidden" name="_method" value="PUT">
+                    <select class="form-control" name="STATUS">
+                      <option disabled selected value><b>-- Pilih Menu DIbawah --</b></option>
+                      <option value="in progress">In Progress</option>
+                      <option value="done">Done</option>
+                    </select>
+
                   </div>
 
 	                <button type="submit" class="btn btn-primary pull-right">Update</button>&nbsp;&nbsp;

@@ -58,10 +58,6 @@ class PermintaanController extends Controller
         return redirect('/request')->with('success','Request Barang Sukses');
     }
 
-    public function monitoring() {
-        return view('permintaan.monitoring');
-    }
-
     public function lihatSemua() {
         // $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate();
         $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal','and','STATUS','!=','Request untuk dibatalkan')->get();
@@ -130,11 +126,6 @@ class PermintaanController extends Controller
         DB::update($notBadLiquid, array($kelarBoi, $komodoBreakfast[0], $ID_PERMINTAAN));
         $url = '/semua/lihat/'.$ID_PERMINTAAN;
         return redirect($url)->with('success','Sukses Update Data');
-    }
-
-    public function dashboard()
-    {
-        return view('permintaan.dashboard');
     }
 
 
