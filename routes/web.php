@@ -45,9 +45,6 @@ Route::get('logout', 'LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->middleware('user');
 
-#coba CRUD manual
-Route::get('/barang', 'BarangController@index')->middleware('user');
-
 Route::get('showtikpro', 'TikproController@index')->middleware('user');
 Route::put('edittikpro', 'TikproController@update')->middleware('user');
 
@@ -59,3 +56,6 @@ Route::get('adminhapus', 'PermintaanController@showpembatalan')->middleware('use
 Route::get('adminhapus/request', 'PermintaanController@showpembatalanbelum')->middleware('user');
 Route::get('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@detailpembatalan')->middleware('user');
 Route::put('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@execpembatalan')->middleware('user');
+
+Route::get('/barang', 'BarangController@index')->middleware('user');
+Route::post('/barang2', 'BarangController@input')->middleware('user');

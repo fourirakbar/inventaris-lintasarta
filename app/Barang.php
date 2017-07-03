@@ -11,7 +11,7 @@ class Barang extends Model
     	'RACK_ID',
     	'NO_REGISTRASI',
     	'NAMA_BARANG',
-        'JUMLAH_BARANG',
+      'JUMLAH_BARANG',
     	'KETERANGAN',
     );
     public $primaryKey = "ID_BARANG";

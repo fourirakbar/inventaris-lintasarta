@@ -17,16 +17,30 @@ class BarangController extends Controller
         return view('barang.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
+    public function index() {
+        return view('barang.inputBarang');   
+    }
+
+    public function input() {
+        $data = Input::all();
+
+        Barang::insertGetId(array(
+            'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'] ,
+            'NAMA_BARANG' => $data['NAMA_BARANG'],
+            'JUMLAH' => $data['JUMLAH'],
+            'KETERANGAN' => $data['KETERANGAN'],
+            'LOKASI' => $data['LOKASI'],
+            'RACK_ID' => $data['RACK_ID'],
+        ));
+    }
+
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('barang.index');   
-    }
+    
 
     /**
      * Show the form for creating a new resource.
