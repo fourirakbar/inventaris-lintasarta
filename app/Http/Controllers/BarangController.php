@@ -29,7 +29,6 @@ class BarangController extends Controller
             'NAMA_BARANG' => $data['NAMA_BARANG'],
             'JUMLAH' => $data['JUMLAH'],
             'KETERANGAN' => $data['KETERANGAN'],
-            'LOKASI' => $data['LOKASI'],
             'RACK_ID' => $data['RACK_ID'],
         ));
     }

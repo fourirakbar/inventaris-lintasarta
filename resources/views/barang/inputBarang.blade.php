@@ -35,6 +35,11 @@
                 </div> 
                 {{csrf_field()}} 
                 <div class="form-group"> 
+                  <label>Nama Barang</label> 
+                  <input class="form-control" placeholder="Nama Barang" name="NAMA_BARANG"> 
+                </div> 
+                {{csrf_field()}}
+                <div class="form-group"> 
                   <label>Jumlah</label> 
                   <input class="form-control" placeholder="Jumlah" name="JUMLAH"> 
                 </div> 
@@ -42,11 +47,6 @@
                 <div class="form-group"> 
                   <label>Keterangan</label> 
                   <input class="form-control" placeholder="Keterangan" name="KETERANGAN"> 
-                </div> 
-                {{csrf_field()}}
-                <div class="form-group"> 
-                  <label>Lokasi</label> 
-                  <input class="form-control" placeholder="Lokasi" name="LOKASI"> 
                 </div> 
                 {{csrf_field()}}
                 <div class="form-group">
