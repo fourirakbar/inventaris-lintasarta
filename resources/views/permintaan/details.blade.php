@@ -22,7 +22,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
+              <table class="table table-bordered table-hover">
                 <thead>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Nomor Ticket</th>
@@ -731,4 +731,10 @@
       <!-- /.row -->
     </section>
 
+@endsection
+@section('javas')
+<!-- DataTables -->
+  <script src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ URL::asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+  
 @endsection
