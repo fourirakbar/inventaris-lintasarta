@@ -71,12 +71,12 @@
 			    </tr>
 
 			     <tr>
-		    		<th style="text-align: center; vertical-align: middle; ">Nama Proses</th>
-		    		<th style="text-align: center; vertical-align: middle; ">Tgl Input</th>
-		    		<th style="text-align: center; vertical-align: middle; ">Tgl Selesai (Seharusnya)</th>
-		    		<th style="text-align: center; vertical-align: middle; ">Tgl Selesai (Kenyataan)</th>
-		    		<th style="text-align: center; vertical-align: middle; ">Status</th>
-		    		<th style="text-align: center; vertical-align: middle; ">Durasi Waktu</th>
+		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Nama Proses</th>
+		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Tgl Input</th>
+		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Tgl Selesai (Seharusnya)</th>
+		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Tgl Selesai (Kenyataan)</th>
+		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Status</th>
+		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Durasi Waktu</th>
 		    	</tr>
 
 		    	<tr>
