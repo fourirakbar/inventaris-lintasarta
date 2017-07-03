@@ -7,7 +7,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Data Request Barang yang Belum Selesai</li>
+        <li class="active">Data Request Barang</li>
         
       </ol>
     </section>
@@ -108,7 +108,13 @@
                         @if ($key->STATUS_PEMBATALANH === "Request untuk dibatalkan")
                         
                         @else
-                        <a class="btn btn-block btn-danger" href="/semua/hapus/{{ $key->ID_PERMINTAAN }}"><b class="material-icons">Cancel Request</b></a>
+                        <?php
+                            if ($key->STATUS == "in progress") { ?>
+                              <a class="btn btn-block btn-danger" href="/semua/hapus/{{ $key->ID_PERMINTAAN }}"><b class="material-icons">Cancel Request</b></a>      
+                        <?php
+                            }
+                        ?>
+                        
                         @endif
                       </td>
                     </tr>
