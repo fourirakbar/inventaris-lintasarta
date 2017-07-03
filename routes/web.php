@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/', 'LoginController@index');
+Route::get('/', 'LoginController@index')->middleware('guest');
 #user request barang
 Route::get('request', 'PermintaanController@index')->middleware('user');
 Route::post('request2', 'PermintaanController@input')->middleware('user');
@@ -33,7 +33,7 @@ Route::get('/semua/lihat/{ID_PERMINTAAN}', 'PermintaanController@details')->midd
 Route::get('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doEdit')->middleware('user');
 Route::put('/semua/lihat/edit/{a}', 'PermintaanController@doUpdate')->middleware('user');
 
-Route::get('login', 'LoginController@index');
+Route::get('login', 'LoginController@index')->middleware('guest');;
 Route::post('login2', 'LoginController@login');
 
 Route::get('register', 'RegisterController@index');
