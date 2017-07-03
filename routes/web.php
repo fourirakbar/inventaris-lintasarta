@@ -59,3 +59,4 @@ Route::put('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@execpembata
 
 Route::get('/barang', 'BarangController@index')->middleware('user');
 Route::post('/barang2', 'BarangController@input')->middleware('user');
+Route::get('/showbarang', 'BarangController@show')->middleware('user');

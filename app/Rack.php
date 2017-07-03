@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rack extends Model
 {
-    public $table = "rack";
+    public $table = "RACK";
     public $fillable = array(
     	'NAMA_RACK',
     	'LOKASI_RACK',
