@@ -69,6 +69,11 @@
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Titik Proses</th>
 			        <td colspan="5">{{ $query[0]->NAMA_TIKPRO }}</td>
 			    </tr>
+          <tr border="0">
+              <td border="0">
+                  <br>
+              </td>
+          </tr>
 
 			     <tr>
 		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Nama Proses</th>
