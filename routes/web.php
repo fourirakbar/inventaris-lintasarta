@@ -31,7 +31,7 @@ Route::get('/semuabelum', 'PermintaanController@lihatSemuaBelum')->middleware('u
 Route::get('/semuasudah', 'PermintaanController@lihatSemuaSudah')->middleware('user');
 Route::get('/semua/lihat/{ID_PERMINTAAN}', 'PermintaanController@details')->middleware('user');
 Route::get('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doEdit')->middleware('user');
-Route::put('/semua/lihat/edit/{a}', 'PermintaanController@doUpdate')->middleware('user');
+Route::put('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doUpdate')->middleware('user');
 
 Route::get('login', 'LoginController@index');
 Route::post('login2', 'LoginController@login');
@@ -60,3 +60,10 @@ Route::put('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@execpembata
 Route::get('/barang', 'BarangController@index')->middleware('user');
 Route::post('/barang2', 'BarangController@input')->middleware('user');
 Route::get('/showbarang', 'BarangController@show')->middleware('user');
+
+Route::get('/rack', 'RackController@index')->middleware('user');
+Route::post('/rack2', 'RackController@input')->middleware('user');
+Route::get('/showrack', 'RackController@show')->middleware('user');
+Route::get('/rack/edit/{ID_RACK}', 'RackController@edit')->middleware('user');
+Route::put('/rack/edit/{ID_RACK}', 'RackController@update')->middleware('user');
+Route::get('/deleterack/{ID_RACK}', 'RackController@delete')->middleware('user');

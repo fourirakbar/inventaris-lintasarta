@@ -102,6 +102,7 @@
                          
                        ?>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>
+                      
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">
                         <a class="btn btn-block btn-primary" href="/semua/lihat/{{ $key->ID_PERMINTAAN }}"><b class="material-icons">Show Details</b>

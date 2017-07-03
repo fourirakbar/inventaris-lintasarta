@@ -63,6 +63,18 @@
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('barang') }}"><i class="fa fa-book"></i> <span>Input Barang</span></a></li>
             <li><a href="{{ URL::to('showbarang') }}"><i class="fa fa-book"></i> <span>Lihat Semua Barang</span></a></li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-share"></i> <span>Pengaturan Rack</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ URL::to('rack') }}"><i class="fa fa-circle-o"></i> Tambah Rack Baru</a></li>
+                <li><a href="{{ URL::to('showrack') }}"><i class="fa fa-circle-o"></i> Lihat Semua Rack</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
