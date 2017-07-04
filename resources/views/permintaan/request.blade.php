@@ -108,7 +108,7 @@ function getdate() {
 
   var date = new Date(tt);
   var newdate = new Date(date);
-  var deadline = "<?php echo Session::get('totaltikpro');?>"
+  var deadline = {{ $totaldeadline }}
   newdate.setDate(newdate.getDate() + parseInt(deadline));
 
   var dd = newdate.getDate();

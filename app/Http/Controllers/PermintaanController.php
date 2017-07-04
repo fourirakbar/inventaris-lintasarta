@@ -18,7 +18,13 @@ class PermintaanController extends Controller
 {
     public function index()
     {
-        return view('permintaan.request');
+        $totaldeadline = 0;
+        $deadline = DB::table('TIKPRO')->select('DEADLINE')->get();
+        foreach ($deadline as $key) {
+            $totaldeadline += $key->DEADLINE;
+        }
+        return view('permintaan.request', compact('totaldeadline'));
+        
     }
 
     public function input() {

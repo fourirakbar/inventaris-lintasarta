@@ -101,7 +101,6 @@
 				                		echo $total." Hari";
 				                		?>
 		                			</td>
-		                		{{ Session::put('totaltikpro', $total) }}
 		                		</tr>
 		                	</tbody>
 			        </table>
