@@ -30,27 +30,35 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="col-xs-2"></div>
+              <div class="col-xs-8">
               <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                          <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
-                          <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
-                          <th style="text-align: center; vertical-align: middle; ">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                @foreach ($rack as $index)
+                  <thead>
                     <tr>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_RACK }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->LOKASI_RACK }}</td>
-                      <td style="text-align: center; vertical-align: middle; "><input type="hidden" name="method" value="DELETE">
-                        <a class="btn btn-block btn-info" href="/rack/show/{{ $index->ID_RACK }}"><b class="material-icons">Lihat Rack</b>
-                        <input type="hidden" name="method" value="DELETE">
-                        <a class="btn btn-block btn-primary" href="/rack/edit/{{ $index->ID_RACK }}"><b class="material-icons">Edit Rack</b></td>
+                            <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
+                            <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
+                            <th style="text-align: center; vertical-align: middle; width: 30%;">Action</th>
                     </tr>
-                @endforeach
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                  @foreach ($rack as $index)
+                      <tr>
+                        <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_RACK }}</td>
+                        <td style="text-align: center; vertical-align: middle; ">{{ $index->LOKASI_RACK }}</td>
+                        <td style="text-align: center; vertical-align: middle; ">
+                          <a class="btn btn-info" href="/rack/show/{{ $index->ID_RACK }}">
+                            <i class="fa fa-inbox"></i> Lihat Isi Rack
+                          </a>
+                          <a class="btn btn-primary" href="/rack/edit/{{ $index->ID_RACK }}">
+                            <i class="fa fa-edit"></i> Edit Rack
+                          </a>
+                        </td>
+                      </tr>
+                  @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-xs-2"></div>
             </div>
             <!-- /.box-body -->
           </div>
