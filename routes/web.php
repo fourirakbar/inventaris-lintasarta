@@ -63,7 +63,8 @@ Route::get('/showbarang', 'BarangController@show')->middleware('user');
 
 Route::get('/rack', 'RackController@index')->middleware('user');
 Route::post('/rack2', 'RackController@input')->middleware('user');
-Route::get('/showrack', 'RackController@show')->middleware('user');
+Route::get('/rack/show', 'RackController@show')->middleware('user');
 Route::get('/rack/edit/{ID_RACK}', 'RackController@edit')->middleware('user');
 Route::put('/rack/edit/{ID_RACK}', 'RackController@update')->middleware('user');
-Route::get('/deleterack/{ID_RACK}', 'RackController@delete')->middleware('user');
+Route::get('/rack/delete/{ID_RACK}', 'RackController@delete')->middleware('user');
+Route::get('/rack/show/{ID_RACK}', 'RackController@showeach')->middleware('user');

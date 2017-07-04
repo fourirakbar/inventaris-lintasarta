@@ -24,13 +24,18 @@ class RackController extends Controller
         'LOKASI_RACK' => $data['LOKASI_RACK'],
       ));
 
-      return redirect('/showrack')->with('success','Tambah Rack Sukses');
+      return redirect('/rack/show')->with('success','Tambah Rack Sukses');
     }
 
     public function show() {
       $rack = DB::table('RACK')->select('*')->get();
 
       return view('rack.showRack', compact('rack'));
+    }
+
+    public function showeach($ID_RACK) {
+      $rack = DB::table('BARANG')->select('*')->where('RACK_ID', '=', $ID_RACK)->get();
+      return view('rack.showRackEach', compact('rack'));
     }
 
     public function edit($ID_RACK) {
@@ -43,14 +48,14 @@ class RackController extends Controller
       $rack = Rack::find($ID_RACK);
       Rack::find($ID_RACK)->update($request->all());
       // $url = '/rack/edit/'.$ID_RACK;
-      $url = '/showrack';
+      $url = '/rack/show';
       return redirect($url)->with('success','Sukses Update Data');
     }
 
     public function delete($ID_RACK) {
       $rack = Rack::find($ID_RACK);
       $rack->delete();
-
-      return redirect('/showrack')->with('success','Delete Rack Sukses');
+      // dd($rack);
+      return redirect('/rack/show')->with('success','Delete Rack Sukses');
     }
 }

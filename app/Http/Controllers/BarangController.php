@@ -38,4 +38,6 @@ class BarangController extends Controller
             // dd($barang);
             return view('barang.showBarang', compact('barang'));
     }
+
+
 }

@@ -32,23 +32,21 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                <tr>
-                        <th style="text-align: center; vertical-align: middle; ">ID Rack</th>
-                        <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
-                        <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
-                        <th style="text-align: center; vertical-align: middle; ">Action</th>
-                </tr>
+                  <tr>
+                          <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
+                          <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
+                          <th style="text-align: center; vertical-align: middle; ">Action</th>
+                  </tr>
                 </thead>
                 <tbody>
                 @foreach ($rack as $index)
                     <tr>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->ID_RACK }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_RACK }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->LOKASI_RACK }}</td>
                       <td style="text-align: center; vertical-align: middle; "><input type="hidden" name="method" value="DELETE">
-                        <a class="btn btn-block btn-primary" href="/rack/edit/{{ $index->ID_RACK }}"><b class="material-icons">Edit Rack</b>
+                        <a class="btn btn-block btn-info" href="/rack/show/{{ $index->ID_RACK }}"><b class="material-icons">Lihat Rack</b>
                         <input type="hidden" name="method" value="DELETE">
-                        <a class="btn btn-block btn-danger" href="/deleterack/{{ $index->ID_RACK }}"><b class="material-icons">Hapus Rack</b></td>
+                        <a class="btn btn-block btn-primary" href="/rack/edit/{{ $index->ID_RACK }}"><b class="material-icons">Edit Rack</b></td>
                     </tr>
                 @endforeach
                 </tbody>

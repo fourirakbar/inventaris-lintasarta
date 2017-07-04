@@ -72,7 +72,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ URL::to('rack') }}"><i class="fa fa-circle-o"></i> Tambah Rack Baru</a></li>
-                <li><a href="{{ URL::to('showrack') }}"><i class="fa fa-circle-o"></i> Lihat Semua Rack</a></li>
+                <li><a href="{{ URL::to('rack/show') }}"><i class="fa fa-circle-o"></i> Lihat Semua Rack</a></li>
               </ul>
             </li>
           </ul>
