@@ -2,7 +2,7 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Request Barang 
+        Data Permintaan 
         <small>yang Belum Selesai</small>
       </h1>
       <ol class="breadcrumb">

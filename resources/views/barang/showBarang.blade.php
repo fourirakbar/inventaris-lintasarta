@@ -40,9 +40,12 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php
+                  $indexNo=1;
+                ?>
                 @foreach ($barang as $index)
                     <tr>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->ID_BARANG }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_BARANG }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->JUMLAH }}</td>
