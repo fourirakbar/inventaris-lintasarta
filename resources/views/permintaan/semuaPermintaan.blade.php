@@ -42,14 +42,9 @@
                         <th style="text-align: center; vertical-align: middle; ">Tanggal Permintaan</th>
                         <th style="text-align: center; vertical-align: middle; ">Barang yang Diminta</th>
 
-                        @foreach ($jebret as $key)
-                          <?php
-                            if ($key->STATUS == "in progress") { ?>
+                        
                               <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>      
-                          <?php
-                            }
-                          ?>
-                        @endforeach
+                        
                         
                         <th style="text-align: center; vertical-align: middle; ">Titik Proses</th>
                         <th style="text-align: center; vertical-align: middle; ">Action</th>
@@ -109,7 +104,10 @@
                              {
                               echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
                              }
-                         }                   
+                         }               
+                         elseif ($key->STATUS == "done") {
+                               echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >DONE</td>';
+                          }    
                          
                        ?>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>
