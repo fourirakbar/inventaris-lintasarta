@@ -178,6 +178,4 @@ class PermintaanController extends Controller
 
         return redirect($url)->with('success','Sukses Update Data');
     }
-
-
 }

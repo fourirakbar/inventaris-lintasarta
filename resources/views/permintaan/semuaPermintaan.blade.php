@@ -41,7 +41,16 @@
                         <th style="text-align: center; vertical-align: middle; ">Nama Requester</th>
                         <th style="text-align: center; vertical-align: middle; ">Tanggal Permintaan</th>
                         <th style="text-align: center; vertical-align: middle; ">Barang yang Diminta</th>
-                        <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
+
+                        @foreach ($jebret as $key)
+                          <?php
+                            if ($key->STATUS == "in progress") { ?>
+                              <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>      
+                          <?php
+                            }
+                          ?>
+                        @endforeach
+                        
                         <th style="text-align: center; vertical-align: middle; ">Titik Proses</th>
                         <th style="text-align: center; vertical-align: middle; ">Action</th>
                 </tr>
@@ -55,50 +64,52 @@
                       <td>{{ $key->BARANG_PERMINTAAN }}</td>
                       <?php 
                          
-                         $date1=date_create();
-                         $date2=date_create($key->TGL_PERMINTAAN);
-                         if($key->TIKPRO_ID == 1){
-                            $deadline = $deadline1 + 1;
-                         }
-                         elseif($key->TIKPRO_ID == 2){
-                            $deadline = $deadline2;
-                         }
-                         elseif($key->TIKPRO_ID == 3){
-                            $deadline = $deadline3;
-                         }
-                         elseif($key->TIKPRO_ID == 4){
-                            $deadline = $deadline4;
-                         }
-                         elseif($key->TIKPRO_ID == 5){
-                            $deadline = $deadline5;
-                         }
-                         elseif($key->TIKPRO_ID == 6){
-                            $deadline = $deadline6;
-                         }
-                         elseif($key->TIKPRO_ID == 7){
-                            $deadline = $deadline7;
-                         }
-                         elseif($key->TIKPRO_ID == 8){
-                            $deadline = $deadline8;
-                         }
-                         elseif($key->TIKPRO_ID == 9){
-                            $deadline = $deadline9;
-                         }
-                         $new = date_add($date2,date_interval_create_from_date_string($deadline." days"));
-                         $diff=date_diff($date1,$new);
-                         $print = $diff->format('%R%a Hari');
-                         $printInt = (int)$print;
-                         if($print == 0){
-                            $print = $diff->format('%a Hari');
-                         }
-                         if($print >0)
-                         {
-                          echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
-                         }
-                         else
-                         {
-                          echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
-                         }
+                         if ($key->STATUS == "in progress") {
+                             $date1=date_create();
+                             $date2=date_create($key->TGL_PERMINTAAN);
+                             if($key->TIKPRO_ID == 1){
+                                $deadline = $deadline1 + 1;
+                             }
+                             elseif($key->TIKPRO_ID == 2){
+                                $deadline = $deadline2;
+                             }
+                             elseif($key->TIKPRO_ID == 3){
+                                $deadline = $deadline3;
+                             }
+                             elseif($key->TIKPRO_ID == 4){
+                                $deadline = $deadline4;
+                             }
+                             elseif($key->TIKPRO_ID == 5){
+                                $deadline = $deadline5;
+                             }
+                             elseif($key->TIKPRO_ID == 6){
+                                $deadline = $deadline6;
+                             }
+                             elseif($key->TIKPRO_ID == 7){
+                                $deadline = $deadline7;
+                             }
+                             elseif($key->TIKPRO_ID == 8){
+                                $deadline = $deadline8;
+                             }
+                             elseif($key->TIKPRO_ID == 9){
+                                $deadline = $deadline9;
+                             }
+                             $new = date_add($date2,date_interval_create_from_date_string($deadline." days"));
+                             $diff=date_diff($date1,$new);
+                             $print = $diff->format('%R%a Hari');
+                             $printInt = (int)$print;
+                             if($print == 0){
+                                $print = $diff->format('%a Hari');
+                             }
+                             if($print >0)
+                             {
+                              echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
+                             }
+                             else
+                             {
+                              echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
+                             }
+                         }                   
                          
                        ?>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>

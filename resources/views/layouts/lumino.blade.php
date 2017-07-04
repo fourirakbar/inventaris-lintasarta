@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="shortcut icon" href="{{URL::asset('dist/img/logo.jpg')}}">
 	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title> SI MONITORING DAN DOKUMENTASI TI INFRATRUKTUR </title>

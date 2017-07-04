@@ -2,12 +2,12 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Request Barang 
-        <small>yang Belum Selesai</small>
+        Show Barang 
+        <small>Lihat Semua Data Barang</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Data Request Barang</li>
+        <li class="active">Show Barang</li>
         
       </ol>
     </section>
@@ -16,7 +16,11 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-          
+          @if ($message = Session::get('success'))
+              <div class="alert alert-success">
+                <p>{{ $message }}</p>
+              </div>
+            @endif
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data</h3>
@@ -26,7 +30,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                        <th style="text-align: center; vertical-align: middle; ">ID Barang</th>
+                        <th style="text-align: center; vertical-align: middle; ">No</th>
                         <th style="text-align: center; vertical-align: middle; ">No. Registrasi</th>
                         <th style="text-align: center; vertical-align: middle; ">Nama Barang</th>
                         <th style="text-align: center; vertical-align: middle; ">Jumlah Barang</th>

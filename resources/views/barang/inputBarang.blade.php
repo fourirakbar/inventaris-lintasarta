@@ -50,22 +50,14 @@
                 </div> 
                 {{csrf_field()}}
                 <div class="form-group">
-                  <label>RACk</label>
+                  <label>RACK</label>
                   <input type="hidden" name="_method" value="POST">
                   <select class="form-control" name="RACK_ID">
                     <option disabled selected value><b>-- Pilih Menu DIbawah --</b></option>
-                    <option value="1">A-1</option>
-                    <option value="2">A-2</option>
-                    <option value="3">A-3</option>
-                    <option value="4">A-4</option>
-                    <option value="5">B-1</option>
-                    <option value="6">B-2</option>
-                    <option value="7">B-3</option>
-                    <option value="8">B-4</option>
-                    <option value="9">C-1</option>
-                    <option value="10">C-2</option>
-                    <option value="11">C-3</option>
-                    <option value="12">C-4</option>
+                    @foreach ($listRack as $key)
+                      <option value="{{ $key->ID_RACK }}">{{ $key->NAMA_RACK }}</option>
+                    @endforeach
+                    
                   </select>
                 </div>
               </div>
