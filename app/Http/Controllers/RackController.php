@@ -54,8 +54,15 @@ class RackController extends Controller
 
     public function delete($ID_RACK) {
       $rack = Rack::find($ID_RACK);
-      $rack->delete();
-      // dd($rack);
-      return redirect('/rack/show')->with('success','Delete Rack Sukses');
+      try {
+        $rack->delete();
+        return redirect('/rack/show')->with('success','Delete Rack Sukses');
+      } 
+      catch (\Exception $e) {
+        // dd($e->getMessage());
+        $url = '/rack/edit/'.$ID_RACK;
+        // echo $url;
+        return Redirect::to($url)->with('error','Kosongkan Rack Jika Ingin Menghapus Rack');
+      }
     }
 }

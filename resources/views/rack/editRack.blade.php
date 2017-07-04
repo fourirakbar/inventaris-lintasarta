@@ -18,6 +18,11 @@
         <div class="col-md-12">
           <!-- general form elements -->
           <div class="box box-primary">
+            @if ($message = Session::get('error'))
+              <div class="alert alert-danger">
+                <p>{{ $message }}</p>
+              </div>
+            @endif
             <div class="box-header with-border">
               <h3 class="box-title">Data</h3>
               <button class="btn btn-danger pull-right delete-rack">Hapus Rack</button>
