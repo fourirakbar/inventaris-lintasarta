@@ -20,7 +20,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Data</h3>
-              <a href="{{ URL::to('rack/delete', $rack->ID_RACK) }}"><button onclick="alertFunction()" class="btn btn-danger pull-right">Hapus Rack</button></a>
+              <button class="btn btn-danger pull-right delete-rack">Hapus Rack</button>
             </div>
         <div class="box-body" style="padding-right: 10%; padding-left: 10%; padding-bottom: 5%">    
           <form action="{{ url('/rack/edit', $rack->ID_RACK) }}" method="POST">
@@ -50,9 +50,8 @@
     </section>
 @endsection
 @section('javas')
-
 <script type="text/javascript">
-function alertFunction() {
+$("button.delete-rack").click(function() {
     swal({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -62,14 +61,8 @@ function alertFunction() {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then(function () {
-      swal(
-        'Deleted!',
-        'Your file has been deleted.',
-        'success'
-      )
+      window.location.href = "{{ URL::to('/rack/delete', $rack->ID_RACK) }}";
     })
-}
-
+});
 </script>
-
 @endsection
