@@ -15,9 +15,6 @@ class RegisterController extends Controller
 
     public function create() {
         $data = Input::all();
-        // echo $data['nama'];
-        // echo $data['username'];
-        // echo $data['password'];
         $pass=Hash::make($data['password']);
         User::insertGetId(array(
             'NAMA_REQUESTER' => $data['nama'],

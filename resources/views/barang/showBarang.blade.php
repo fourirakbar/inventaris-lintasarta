@@ -40,6 +40,8 @@
                 </tr>
                 </thead>
                 <tbody>
+                
+                <!-- buat index di kolom "NO" -->
                 <?php
                   $indexNo=1;
                 ?>

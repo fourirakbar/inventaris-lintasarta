@@ -13,7 +13,7 @@ class LoginController extends Controller
 {
     
     public function index() {
-        return view('auth.login2');
+        return view('auth.login2'); //return ke halaman login2
     }
 
     public function login(Request $request) {
@@ -24,11 +24,11 @@ class LoginController extends Controller
             'username'     => Input::get('username')
         );
         
-        if (Auth::attempt($userdata,true))
+        if (Auth::attempt($userdata,true)) //jika data yang diinputkan benar, maka akan ke redirect ke halaman /semua
         {
             return redirect('/semua');
         }
-        else{
+        else{ //jika data yang diinputkan salah, maka akan ke redirect ke halaman login kembali dengan keterangan error
             return redirect('/login')->with('error','Username atau password salah');
         } 
 
@@ -37,6 +37,7 @@ class LoginController extends Controller
     
 
     public function logout() {
+        //session destroy, dan ke redirect ke halaman /login 
         Auth::logout();
         return redirect('/login');
     }

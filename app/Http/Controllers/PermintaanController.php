@@ -28,7 +28,7 @@ class PermintaanController extends Controller
     }
 
     public function input() {
-        $data = Input::all();
+        $data = Input::all(); //ambil input permintaan
         $a = "in progress";
         $b = "1";
         $i = 1;
@@ -37,6 +37,8 @@ class PermintaanController extends Controller
         echo $data['BARANG_PERMINTAAN'];
         echo $data['TGL_PERMINTAAN'];
         echo $data['TGL_DEADLINE'];
+
+        //memasukkan data sesuai input ke dalam database Permintaan
         Permintaan::insertGetId(array(
             'NOMOR_TICKET' => $data['NOMOR_TICKET'],
             'NAMA_REQUESTER' => $data['NAMA_REQUESTER'],
@@ -50,98 +52,94 @@ class PermintaanController extends Controller
             'TIKPRO_ID' => $b,
         ));
 
-        $ticket = DB::table('PERMINTAAN')->select('ID_PERMINTAAN')->orderBy('ID_PERMINTAAN', 'DESC')->limit('1')->get();
-        $kuylah = explode(":", $ticket);
-        $bossku = explode("}]", $kuylah[1]);
+        $ticket = DB::table('PERMINTAAN')->select('ID_PERMINTAAN')->orderBy('ID_PERMINTAAN', 'DESC')->limit('1')->get(); //ambil ID_PERMINTAAN terakhir pada table PERMINTAAN
+        $kuylah = explode(":", $ticket); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+        $bossku = explode("}]", $kuylah[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
 
         for ($i=1; $i < 10; $i++) {
+            //memasukkan data ke dalam database HistoryTikpro
             HistoryTikpro::insertGetId(array(
                 'TIKPRO_ID' => $i,
                 'PERMINTAAN_ID' => $bossku[0],
             ));
         };
 
-        return redirect('/request')->with('success','Request Barang Sukses');
+        return redirect('/request')->with('success','Request Barang Sukses'); //return ke halaman request dengan keterangan sukses
     }
 
     public function lihatSemua() {
-        // $jebret = Permintaan::orderBy('ID_PERMINTAAN','ASC')->paginate();
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal','and','STATUS','!=','Request untuk dibatalkan')->get();
-        $jebret2 = DB::table('TIKPRO')->get();
-        // dd($jebret2);
-        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal','and','STATUS','!=','Request untuk dibatalkan')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
+        
+        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
     }
 
     public function lihatSemuaBelum(Request $request) {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'in progress ')->get();
-        $jebret2 = DB::table('TIKPRO')->get();
-        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
-        // dd($jebret);
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'in progress ')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
+        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2    
     }
 
     public function lihatSemuaSudah(Request $request) {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'done ')->get();
-        $jebret2 = DB::table('TIKPRO')->get();
-        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'done ')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
+        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
     }
 
     public function tindakLanjut($ID_PERMINTAAN) {
-        $jebret2 = Permintaan::find($ID_PERMINTAAN);
-        return view('permintaan.tindakLanjut',compact('jebret2'));
+        $jebret2 = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
+        return view('permintaan.tindakLanjut',compact('jebret2')); //return ke halaman tindakLanjut dengan data dari variable $jebret2
     }
 
     public function details($ID_PERMINTAAN) {
-        $query = DB::table('PERMINTAAN')->select('TIKPRO.NAMA_TIKPRO')->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get();
-
-        $jebret = Permintaan::find($ID_PERMINTAAN);
-        $jebret2 = DB::table('TIKPRO')->get();
-        $boi = DB::table('HISTORY_TIKPRO')->select('*')->join('PERMINTAAN','PERMINTAAN.ID_PERMINTAAN', '=', 'HISTORY_TIKPRO.PERMINTAAN_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get();
-        // dd($boi);
-        return view('permintaan.details', compact('jebret', 'query', 'jebret2', 'boi'));
+        $query = DB::table('PERMINTAAN')->select('TIKPRO.NAMA_TIKPRO')->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
+        $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
+        $boi = DB::table('HISTORY_TIKPRO')->select('*')->join('PERMINTAAN','PERMINTAAN.ID_PERMINTAAN', '=', 'HISTORY_TIKPRO.PERMINTAAN_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil data dari table HISTORY_TIKPRO dan table PERMINTAAN dengan ketentuan yang sudah diberikan
+        return view('permintaan.details', compact('jebret', 'query', 'jebret2', 'boi')); //return view ke halaman details dengan data dari variable $jebret, $query, $jebret2, dan $boi
     }
 
     public function doEdit($ID_PERMINTAAN) {
-        //dapet sesuai dengan Id Permintaannya masing-masing
-        $jebret = Permintaan::find($ID_PERMINTAAN);
-        // $jebret = Permintaan::find($ID_PERMINTAAN)->query('NAMA_TIKPRO')->join('TIKPRO', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN);
-        $jebret2 = Tikpro::query('NAMA_TIKPRO')->join('PERMINTAAN', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get()[0];
-
-        // dd($jebret);;
-        $listtikpro = DB::table('TIKPRO')->select('ID_TIKPRO', 'NAMA_TIKPRO')->get();
-        // dd($listtikpro);
-
-        return view('permintaan.edit', compact('jebret', 'jebret2', 'listtikpro'));
+        $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
+        $jebret2 = Tikpro::query('NAMA_TIKPRO')->join('PERMINTAAN', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get()[0]; //ambil data dari table TIKPRO dan tabel PERMINTAAN dengan ketentuan yang sudah diberikan
+        $listtikpro = DB::table('TIKPRO')->select('ID_TIKPRO', 'NAMA_TIKPRO')->get(); //ambil data pada kolom ID_TIKPRO dan NAMA_TIKRPO dari tabel TIKPRO
+        return view('permintaan.edit', compact('jebret', 'jebret2', 'listtikpro')); //return ke halaman edit dengan data dari variable $jebret, $jebret2, dan $listtikrpo
     }
 
     public function doUpdate(Request $request, $ID_PERMINTAAN) {
-        $jebret = Permintaan::find($ID_PERMINTAAN);
-        $kelarBoi = Input::get('TGL_SELESAI');
-        $vape = HistoryTikpro::query()->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get();
-        Permintaan::find($ID_PERMINTAAN)->update($request->all());
-        $notSoLazy = DB::table('PERMINTAAN')->select('TIKPRO_ID')->where('ID_PERMINTAAN', $ID_PERMINTAAN)->get();
-        $komodoDream = explode(":", $notSoLazy);
-        $komodoBreakfast = explode("}]", $komodoDream[1]);
-        $notBadLiquid = "UPDATE HISTORY_TIKPRO SET TGL_SELESAI= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?";
+        $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
+        $kelarBoi = Input::get('TGL_SELESAI'); //menginputkan sesuai nilai yang dimasukkan ke TGL_SELESAI
+        $vape = HistoryTikpro::query()->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get(); //ambil semua data dari tabel HISTORY_TIKPRO dengan ketentuan yang sudah diberikan
+        Permintaan::find($ID_PERMINTAAN)->update($request->all()); //update data pada tabel PERMINTAAN sesuai input yang diberikan oleh user
+        
+        $notSoLazy = DB::table('PERMINTAAN')->select('TIKPRO_ID')->where('ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil TIKPRO_ID dari tabel PERMINTAAN dengan ketentuan yang sudah diberikan
+        $komodoDream = explode(":", $notSoLazy); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+        $komodoBreakfast = explode("}]", $komodoDream[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+
+        $notBadLiquid = "UPDATE HISTORY_TIKPRO SET TGL_SELESAI= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?"; //update TGL_SELESAI pada tabel HISTORY_TIKPRO dengan ketentuan yang sudah diberikan
         DB::update($notBadLiquid, array($kelarBoi, $komodoBreakfast[0], $ID_PERMINTAAN));
+
         $url = '/semua/lihat/'.$ID_PERMINTAAN;
-        return redirect($url)->with('success','Sukses Update Data');
+        return redirect($url)->with('success','Sukses Update Data'); //return ke /semua/lihat dengan keterangan sukses
     }
 
 
     public function hapus($ID_PERMINTAAN)
     {
-        $jebret = Permintaan::find($ID_PERMINTAAN);
-        return view('permintaan.hapus', compact('jebret'));
+        $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
+        return view('permintaan.hapus', compact('jebret')); //return ke halaman hapus dengan data dari variable $jebret
     }
 
     public function delete(Request $request, $ID_PERMINTAAN){
-        $file = $request->file('FILE_PEMBATALAN');
+        $file = $request->file('FILE_PEMBATALAN'); //merequest input file dari FILE_PEMBATALAN
         $destinationPath = 'uploads';
         $fileextension = $file->getClientOriginalExtension();
         echo $fileextension;
         $file->move($destinationPath,"pembatalan_".$ID_PERMINTAAN.".".$fileextension);
         $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
         $jebret2 = DB::table('TIKPRO')->get();
+
+        //memasukkan data sesuai input ke dalam database PEMBATALAN
         Pembatalan::insertGetId(array(
             'PERMINTAAN_ID' => $ID_PERMINTAAN,
             'ALASAN_PEMBATALAN' => $request->ALASAN_PEMBATALAN,
@@ -155,33 +153,30 @@ class PermintaanController extends Controller
 
    public function showpembatalan()
     {
-        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->get();
-        // dd($jebret);
-        return view('permintaan.adminhapus', compact('jebret'));
+        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->get(); //ambil data dari table PERMINTAAN dan table PEMATALAN dengan ketentuan yang sudah diberikan
+        return view('permintaan.adminhapus', compact('jebret')); //return ke halaman adminhapus dengan data dari variable $jebret
     }
 
     public function showpembatalanbelum()
     {
-        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->where('STATUS_PEMBATALAN','!=','done')->get();
-        // dd($jebret);
-        return view('permintaan.adminhapus', compact('jebret'));
+        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->where('STATUS_PEMBATALAN','!=','done')->get(); //ambil data dari table PERMINTAAN dan table PEMATALAN dengan ketentuan yang sudah diberikan
+        return view('permintaan.adminhapus', compact('jebret')); //return ke halaman adminhapus dengan data dari variable $jebret
     }
 
     public function detailpembatalan($ID_PERMINTAAN)
     {
-        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->where('ID_PERMINTAAN','=',$ID_PERMINTAAN)->get()[0];
-        // dd($jebret);
-        return view('permintaan.detailadminhapus', compact('jebret'));
+        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->where('ID_PERMINTAAN','=',$ID_PERMINTAAN)->get()[0]; //ambil data dari table PERMINTAAN dan table PEMATALAN dengan ketentuan yang sudah diberikan
+        return view('permintaan.detailadminhapus', compact('jebret')); //return ke halaman detailadminhapus dengan data dari variable $jebret
     }
 
     public function execpembatalan($ID_PERMINTAAN)
     {
-        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->get();
-        Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'batal']);
-        DB::table('PEMBATALAN')->where('PERMINTAAN_ID','=',$ID_PERMINTAAN)->update(['STATUS_PEMBATALAN' => 'done']);
+        $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->get(); //ambil data dari table PERMINTAAN dan table PEMATALAN dengan ketentuan yang sudah diberikan
+
+        Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'batal']); //mencari data dengan kolom STATUS = batal dan sesuai dengan $ID_PERMINTAAAN
+        DB::table('PEMBATALAN')->where('PERMINTAAN_ID','=',$ID_PERMINTAAN)->update(['STATUS_PEMBATALAN' => 'done']); //update kolom STATUS_PEMBATALAN menjadi done di tabel PEMBATALAN sesuai dengan $ID_PERMINTAAN
 
         $url = 'adminhapus';
-
-        return redirect($url)->with('success','Sukses Update Data');
+        return redirect($url)->with('success','Sukses Update Data'); //return ke halaman adminhapus dengan keterangan sukses
     }
 }

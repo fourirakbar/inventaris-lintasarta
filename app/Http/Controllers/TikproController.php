@@ -13,17 +13,18 @@ use App\Tikpro;
 class TikproController extends Controller
 {
     public function index(Request $request) {
-        $jebret = Tikpro::orderBy('ID_TIKPRO','ASC')->get();   
-        return view('tikpro.showtikpro', compact('jebret'));
+        $jebret = Tikpro::orderBy('ID_TIKPRO','ASC')->get(); //ambil ID_TIKPRO dari tabel Tikpro dan diurutkan ASC
+        return view('tikpro.showtikpro', compact('jebret')); //return view ke halaman showtikpro dengan data dari $jebret
     }
 
     public function edit(Request $request) {
-        $jebret = Tikpro::orderBy('ID_TIKPRO','ASC')->get();   
-        return view('tikpro.edittikpro', compact('jebret'));
+        $jebret = Tikpro::orderBy('ID_TIKPRO','ASC')->get(); //ambil ID_TIKPRO dari tabel Tikpro dan diurutkan ASC  
+        return view('tikpro.edittikpro', compact('jebret')); //return view ke halaman edittikpro dengan data dari $jebret
     }
 
     public function update(Request $request){
     	
+      //ambil data DEADLINE dari tabel Tikrpo, dan dimasukkan ke masing2 variable dibawah
       $deadline1 = $request->DEADLINE[0];
       $deadline2 = $request->DEADLINE[1];
       $deadline3 = $request->DEADLINE[2];
@@ -33,7 +34,9 @@ class TikproController extends Controller
       $deadline7 = $request->DEADLINE[6];
       $deadline8 = $request->DEADLINE[7];
       $deadline9 = $request->DEADLINE[8];
-        $jebret = DB::statement("UPDATE TIKPRO
+
+      //update kolom DEADLINE pada tabel Tikpro sesuai dengan inputan yang diberikan oleh user
+      $jebret = DB::statement("UPDATE TIKPRO
                                    SET DEADLINE = CASE ID_TIKPRO 
                                                       WHEN '1' THEN '$deadline1'
                                                       WHEN '2' THEN '$deadline2'
@@ -48,7 +51,7 @@ class TikproController extends Controller
                                                       END
                                  WHERE ID_TIKPRO IN('1', '2', '3', '4', '5', '6', '7', '8', '9');");
     	  $url = 'showtikpro';
-        return redirect($url)->with('success','Sukses Update Data');
+        return redirect($url)->with('success','Sukses Update Data'); //return ke halaman shwotikpro dengan keterangan sukses
     }
 
 }

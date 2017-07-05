@@ -17,8 +17,9 @@ class BarangController extends Controller
     }
 
     public function input() {
-        $data = Input::all();
+        $data = Input::all(); //ambil input barang
 
+        //memasukkan data sesuai input ke dalam databse Barang
         Barang::insertGetId(array(
             'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'] ,
             'NAMA_BARANG' => $data['NAMA_BARANG'],
@@ -26,17 +27,18 @@ class BarangController extends Controller
             'KETERANGAN' => $data['KETERANGAN'],
             'RACK_ID' => $data['RACK_ID'],
         ));
-
-        return redirect('/showbarang')->with('success','Input Barang Sukses');
+        return redirect('/showbarang')->with('success','Input Barang Sukses'); //return ke /showbarang dengan keterangan sukses
     }
 
     public function show(){
+
+        //ambil data dari tabel barang join dengan tabel rack
         $barang = DB::table('BARANG')
             ->join('RACK', 'BARANG.RACK_ID', '=', 'RACK.ID_RACK')
             ->select('BARANG.*', 'RACK.*')
             ->get();
-            // dd($barang);
-            return view('barang.showBarang', compact('barang'));
+            
+        return view('barang.showBarang', compact('barang')); //return view halaman showBarang dengan data dari variable barang
     }
 
 
