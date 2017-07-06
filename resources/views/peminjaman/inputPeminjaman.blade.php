@@ -100,7 +100,6 @@
 <script type="text/javascript">
 
 $(function () {
-      
       $('#datepicker').datepicker({
         format: 'yyyy-mm-dd',
         changeMonth: true,
