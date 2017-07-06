@@ -71,7 +71,7 @@
                 <!-- /.input group -->
               </div> 
                 {{csrf_field()}}
-                <div class="form-group"> 
+                <div class="form-group" hidden=""> 
                   <label>Tanggal Deadline</label> 
                   <input id="datedead" class="form-control" placeholder="" name="TGL_DEADLINE" readonly>
                 </div> 
