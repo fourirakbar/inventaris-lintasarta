@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Redirect;
 class BarangController extends Controller
 {
     public function index() {
-        return view('barang.inputBarang');   
+        $listRack = DB::table('RACK')->select('ID_RACK','NAMA_RACK')->orderBy('NAMA_RACK','ASC')->get();
+
+        return view('barang.inputBarang', compact('listRack'));   
     }
 
     public function input() {
@@ -27,6 +29,7 @@ class BarangController extends Controller
             'KETERANGAN' => $data['KETERANGAN'],
             'RACK_ID' => $data['RACK_ID'],
         ));
+
         return redirect('/showbarang')->with('success','Input Barang Sukses'); //return ke /showbarang dengan keterangan sukses
     }
 
@@ -37,7 +40,7 @@ class BarangController extends Controller
             ->join('RACK', 'BARANG.RACK_ID', '=', 'RACK.ID_RACK')
             ->select('BARANG.*', 'RACK.*')
             ->get();
-            
+
         return view('barang.showBarang', compact('barang')); //return view halaman showBarang dengan data dari variable barang
     }
 

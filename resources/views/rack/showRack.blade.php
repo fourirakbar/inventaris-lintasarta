@@ -35,14 +35,19 @@
               <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                            <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
-                            <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
-                            <th style="text-align: center; vertical-align: middle; width: 30%;">Action</th>
+                        <th style="text-align: center; vertical-align: middle; ">No</th>
+                        <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
+                        <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
+                        <th style="text-align: center; vertical-align: middle; width: 30%;">Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                  <?php
+                    $indexa = 1;
+                  ?>
                   @foreach ($rack as $index)
                       <tr>
+                        <td style="text-align: center; vertical-align: middle; ">{{ $indexa++ }}</td>
                         <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_RACK }}</td>
                         <td style="text-align: center; vertical-align: middle; ">{{ $index->LOKASI_RACK }}</td>
                         <td style="text-align: center; vertical-align: middle; ">

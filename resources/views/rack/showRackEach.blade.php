@@ -2,12 +2,12 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Request Barang 
-        <small>yang Belum Selesai</small>
+        Show Details Rack
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Data Request Barang</li>
+        <li><a href="/rack/show"><i class="fa fa-dashboard"></i> Show Rack</a></li>
+        <li class="active">Show Details Rack</li>
         
       </ol>
     </section>

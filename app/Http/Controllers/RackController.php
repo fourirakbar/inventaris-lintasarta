@@ -28,7 +28,7 @@ class RackController extends Controller
     }
 
     public function show() {
-      $rack = DB::table('RACK')->select('*')->get(); //ambil semua data dari tabel Rack
+      $rack = DB::table('RACK')->select('*')->orderBy('NAMA_RACK','ASC')->get(); //ambil semua data dari tabel Rack
       return view('rack.showRack', compact('rack')); //return ke halaman showRack dengan data dari variable $rack
     }
 

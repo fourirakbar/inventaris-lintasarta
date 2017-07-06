@@ -68,3 +68,12 @@ Route::get('/rack/edit/{ID_RACK}', 'RackController@edit')->middleware('user');
 Route::put('/rack/edit/{ID_RACK}', 'RackController@update')->middleware('user');
 Route::get('/rack/delete/{ID_RACK}', 'RackController@delete')->middleware('user');
 Route::get('/rack/show/{ID_RACK}', 'RackController@showeach')->middleware('user');
+
+Route::get('/peminjaman', 'PinjamController@index')->middleware('user');
+Route::post('peminjaman2', 'PinjamController@input')->middleware('user');
+Route::get('/peminjaman/show', 'PinjamController@show')->middleware('user');
+Route::get('/peminjaman/show/belum','PinjamController@showBelum')->middleware('user');
+Route::get('/peminjaman/show/sudah','PinjamController@showSudah')->middleware('user');
+Route::get('/peminjaman/edit/{ID_PEMINJAMAN}','PinjamController@edit')->middleware('user');
+Route::put('/peminjaman/edit/{ID_PEMINJAMAN}','PinjamController@update')->middleware('user');
+Route::get('/peminjaman/delete/{ID_PEMINJAMAN}','PinjamController@delete')->middleware('user');
