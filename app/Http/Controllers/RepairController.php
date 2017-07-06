@@ -32,7 +32,12 @@ class RepairController extends Controller
 		        'CATATAN_REPAIR' => $data['CATATAN_REPAIR'],
 		        'STATUS_REPAIR' => "On Repair",
         	));
-        	DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_REPAIR']]);
+        	if ($data['CATATAN_REPAIR'] == "") {
+        		DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Diperbaiki"]);
+        	}
+        	else{
+        		DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_REPAIR']]);
+        	}
         }
         else {
         	Repair::insertGetId(array(
