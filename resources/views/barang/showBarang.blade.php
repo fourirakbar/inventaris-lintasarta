@@ -37,6 +37,7 @@
                         <th style="text-align: center; vertical-align: middle; ">Keterangan</th>
                         <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
                         <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
+                        <th style="text-align: center; vertical-align: middle; ">Catatan</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -54,6 +55,7 @@
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->KETERANGAN }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_RACK }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->LOKASI_RACK }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $index->STATUS_BARANG }}</td>
                     </tr>
                 @endforeach
                 </tbody>

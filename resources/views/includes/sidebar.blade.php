@@ -92,5 +92,21 @@
             <li><a href="{{ URL::to('/peminjaman/show') }}"><i class="fa fa-book"></i> <span>Histori Semua Peminjaman</span></a>
           </ul>
         </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Perbaikan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ URL::to('repair/input') }}"><i class="fa fa-book"></i> <span>Input Data Perbaikan</span></a></li>
+            <li><a href="{{ URL::to('repair/show/belum') }}"><i class="fa fa-book"></i> <span>Lihat Data Perbaikan Belum</span></a></li>
+            <li><a href="{{ URL::to('repair/show/sudah') }}"><i class="fa fa-book"></i> <span>Lihat Data Perbaikan Sudah</span></a></li>
+            <li><a href="{{ URL::to('repair/show') }}"><i class="fa fa-book"></i> <span>Lihat Semua Data Perbaikan</span></a></li>
+          </ul>
+        </li>
       </ul>
     </section>

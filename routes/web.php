@@ -77,3 +77,10 @@ Route::get('/peminjaman/show/sudah','PinjamController@showSudah')->middleware('u
 Route::get('/peminjaman/edit/{ID_PEMINJAMAN}','PinjamController@edit')->middleware('user');
 Route::put('/peminjaman/edit/{ID_PEMINJAMAN}','PinjamController@update')->middleware('user');
 Route::get('/peminjaman/delete/{ID_PEMINJAMAN}','PinjamController@delete')->middleware('user');
+
+Route::get('repair/input', 'RepairController@index');
+Route::post('repair/input', 'RepairController@input');
+Route::get('repair/show', 'RepairController@show');
+Route::get('repair/show/sudah', 'RepairController@showsudah');
+Route::get('repair/show/belum', 'RepairController@showbelum');
+Route::get('repair/selesai/{ID_PERBAIKAN}', 'RepairController@selesai');
