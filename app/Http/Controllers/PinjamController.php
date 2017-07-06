@@ -36,6 +36,16 @@ class PinjamController extends Controller {
         return view('peminjaman.showPeminjaman', compact('peminjaman')); //return ke halaman showPeminjaman dengan data dari variable $peminjaman
     }
 
+    public function showBelum (Request $request) {
+        $peminjaman = DB::table('PEMINJAMAN')->select('*')->where('KETERANGAN', 'in progress')->get();
+        return view('peminjaman.showPeminjaman', compact('peminjaman'));
+    }
+
+    public function showSUdah (Request $request) {
+        $peminjaman = DB::table('PEMINJAMAN')->select('*')->where('KETERANGAN', 'done')->get();
+        return view('peminjaman.showPeminjaman', compact('peminjaman')); 
+    }
+
     public function edit ($ID_PEMINJAMAN) {
         $peminjaman = Peminjaman::find($ID_PEMINJAMAN); //mencari data peminjaman sesuai dengan ID_PEMINJAMAN yang diklik pada web
         return view('peminjaman.editPeminjaman', compact('peminjaman')); //return ke halaman editPeminjaman dengan data dari variable $peminjaman
