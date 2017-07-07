@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Peminjaman;
+use App\Barang;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,21 +22,39 @@ class PinjamController extends Controller {
         $data = Input::all(); //ambil input dari form
         $a = "progress"; //defaul value untuk kolom keterangan
         //memasukkan data sesuai input ke dalam database PEMINJAMAN
-        Peminjaman::insertGetId(array(
-            'NAMA_PEMINJAM' => $data['NAMA_PEMINJAM'],
-            'PERANGKAT' => $data['PERANGKAT'],
-            'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'],
-            'TGL_PEMINJAMAN' => $data['TGL_PEMINJAMAN'],
-            'TGL_PENGEMBALIAN' => $data['TGL_PENGEMBALIAN'],
-            'KETERANGAN' => $a,
-        ));
-        $query1 = DB::select("UPDATE PEMINJAMAN SET TGL_SEKARANG = NOW()");
+            
+        //jika input peminjaman diambil dari databse gudang, maka ada value dari ID_BARANG
+        if (isset($data['ID_BARANG'])) {
+            Peminjaman::insertGetId(array(
+                'NAMA_PEMINJAM' => $data['NAMA_PEMINJAM'],
+                'PERANGKAT' => $data['PERANGKAT'],
+                'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'],
+                'TGL_PEMINJAMAN' => $data['TGL_PEMINJAMAN'],
+                'TGL_PENGEMBALIAN' => $data['TGL_PENGEMBALIAN'],
+                'KETERANGAN' => $a,
+                'ID_BARANG' => $data['ID_BARANG'],
+            ));    
 
-        $query2 = DB::select("UPDATE PEMINJAMAN SET SISA_HARI=(SELECT datediff(TGL_PENGEMBALIAN,TGL_SEKARANG))");
+            $query1 = DB::select("UPDATE PEMINJAMAN SET TGL_SEKARANG = NOW()");
+            $query2 = DB::select("UPDATE PEMINJAMAN SET SISA_HARI=(SELECT datediff(TGL_PENGEMBALIAN,TGL_SEKARANG))");
+            $query3 = DB::select("UPDATE PEMINJAMAN SET DEADLINE=(SELECT datediff(TGL_PENGEMBALIAN,TGL_PEMINJAMAN))");
+            $query4 = DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Dipinjam"]);
+        }
 
-        $query3 = DB::select("UPDATE PEMINJAMAN SET DEADLINE=(SELECT datediff(TGL_PENGEMBALIAN,TGL_PEMINJAMAN))");        
-
-        
+        //jika user mengisi sendiri input peminjaman dan tidak mengambil dari database barang, maka ID_BARANG tidak dimasukkan
+        else {
+            Peminjaman::insertGetId(array(
+                'NAMA_PEMINJAM' => $data['NAMA_PEMINJAM'],
+                'PERANGKAT' => $data['PERANGKAT'],
+                'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'],
+                'TGL_PEMINJAMAN' => $data['TGL_PEMINJAMAN'],
+                'TGL_PENGEMBALIAN' => $data['TGL_PENGEMBALIAN'],
+                'KETERANGAN' => $a,
+            ));
+            $query1 = DB::select("UPDATE PEMINJAMAN SET TGL_SEKARANG = NOW()");
+            $query2 = DB::select("UPDATE PEMINJAMAN SET SISA_HARI=(SELECT datediff(TGL_PENGEMBALIAN,TGL_SEKARANG))");
+            $query3 = DB::select("UPDATE PEMINJAMAN SET DEADLINE=(SELECT datediff(TGL_PENGEMBALIAN,TGL_PEMINJAMAN))");
+        }
 
         return redirect('/peminjaman/show')->with('success','Input Permintaan Sukses'); //return ke /showPeminjaman dengan keterangan sukses
     }
@@ -43,9 +62,7 @@ class PinjamController extends Controller {
     public function show () {
         $peminjaman = DB::table('PEMINJAMAN')->select('*')->get(); //ambil semua data dari tabel PEMINJAMAN
         $query1 = DB::select("UPDATE PEMINJAMAN SET TGL_SEKARANG = NOW()");
-
         $query2 = DB::select("UPDATE PEMINJAMAN SET SISA_HARI=(SELECT datediff(TGL_PENGEMBALIAN,TGL_SEKARANG))");
-
         $query3 = DB::select("UPDATE PEMINJAMAN SET DEADLINE=(SELECT datediff(TGL_PENGEMBALIAN,TGL_PEMINJAMAN))");        
         return view('peminjaman.showPeminjaman', compact('peminjaman')); //return ke halaman showPeminjaman dengan data dari variable $peminjaman
     }
@@ -70,6 +87,15 @@ class PinjamController extends Controller {
         Peminjaman::find($ID_PEMINJAMAN)->update($request->all()); //update data sesuai inputan pada tabel PEMINJAMAN dengan ID_PEMINJAMAN sesuai pada web
 
         $query = DB::select("UPDATE PEMINJAMAN SET SISA_HARI=(SELECT datediff(TGL_PENGEMBALIAN,TGL_PEMINJAMAN))");
+
+        $cek = DB::table('PEMINJAMAN')->where('ID_PEMINJAMAN', $ID_PEMINJAMAN)->get();
+        $idbarang = $cek[0]->ID_BARANG;
+        $keterangan = $cek[0]->KETERANGAN;
+        // dd($keterangan);
+
+        if ($keterangan == "done") {
+            DB::table('BARANG')->where('ID_BARANG', $idbarang)->update(['STATUS_BARANG' => NULL]);    
+        }
 
         $url = '/peminjaman/show';
         return redirect($url)->with('success','Sukses Update Data'); //return ke halaman /showPeminjaman dengan keterangan sukses
