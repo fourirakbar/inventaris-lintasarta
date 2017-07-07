@@ -47,12 +47,12 @@
 
               <div class="form-group">
                 <label>Tanggal Peminjaman</label>
-                <input type="date" class="form-control calendar1" name="TGL_PEMINJAMAN" placeholder="Tanggal Peminjaman" value="{{ $peminjaman->TGL_PEMINJAMAN }}"</div>
+                <input type="date" class="form-control calendar1" id="datepicker" name="TGL_PEMINJAMAN" placeholder="Tanggal Peminjaman" value="{{ $peminjaman->TGL_PEMINJAMAN }}"</div>
               </div>
 
               <div class="form-group">
                 <label>Tanggal Pengembalian</label>
-                <input type="date" class="form-control calendar1" name="TGL_PENGEMBALIAN" placeholder="Tanggal Pengembalian" value="{{ $peminjaman->TGL_PENGEMBALIAN }}"</div>
+                <input type="date" class="form-control calendar1" name="TGL_PENGEMBALIAN" placeholder="Tanggal Pengembalian" id="datepicker1" value="{{ $peminjaman->TGL_PENGEMBALIAN }}"</div>
               </div>
 
               <div class="form-group">
@@ -98,6 +98,27 @@ $("button.delete-peminjaman").click(function() {
     }).then(function () {
       window.location.href = "{{ URL::to('/peminjaman/delete', $peminjaman->ID_PEMINJAMAN) }}";
     })
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+
+$(function () {
+      $('#datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true
+      });
+      $('#datepicker1').datepicker({
+        format: 'yyyy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true
+      });
 });
 </script>
 @endsection
