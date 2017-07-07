@@ -84,3 +84,7 @@ Route::get('repair/show', 'RepairController@show');
 Route::get('repair/show/sudah', 'RepairController@showsudah');
 Route::get('repair/show/belum', 'RepairController@showbelum');
 Route::get('repair/selesai/{ID_PERBAIKAN}', 'RepairController@selesai');
+Route::get('repair/show/detail/{ID_PERBAIKAN}', 'RepairController@showdetail');
+Route::get('repair/show/edit/{ID_PERBAIKAN}', 'RepairController@showedit');
+Route::put('repair/show/edit/{ID_PERBAIKAN}','RepairController@update');
+

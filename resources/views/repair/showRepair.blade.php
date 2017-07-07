@@ -39,8 +39,7 @@
                             <th style="text-align: center; vertical-align: middle; ">No. Registrasi</th>
                             <th style="text-align: center; vertical-align: middle; ">Problem</th>
                             <th style="text-align: center; vertical-align: middle; ">Vendor</th>
-                            <th style="text-align: center; vertical-align: middle; ">Keterangan</th>
-                            <th style="text-align: center; vertical-align: middle; ">Catatan</th>
+                            <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
                             <th style="text-align: center; vertical-align: middle; ">Action</th>
                     </tr>
                   </thead>
@@ -55,17 +54,33 @@
                         <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
                         <td style="text-align: center; vertical-align: middle; ">{{ $index->PROBLEM }}</td>
                         <td style="text-align: center; vertical-align: middle; ">{{ $index->VENDOR }}</td>
-                        <td style="text-align: center; vertical-align: middle; ">{{ $index->KETERANGAN_REPAIR }}</td>
-                        <td style="text-align: center; vertical-align: middle; ">{{ $index->CATATAN_REPAIR }}</td>
-                        @if ($index->STATUS_REPAIR !== "Done")
-                          <td style="text-align: center; vertical-align: middle; ">
-                            <a class="btn btn-info" href="/repair/selesai/{{ $index->ID_PERBAIKAN }}">
-                              <i class="fa fa-inbox"></i> Selesai Diperbaiki
-                            </a>
-                          </td>
+                        <?php
+                            $datenow=date_create();
+                            $datefinish=date_create($index->PERKIRAAN_SELESAI);
+                            $diff=date_diff($datenow,$datefinish);
+                            $print = $diff->format('%R%a Hari');
+                            $printInt = (int)$print;
+                        ?>
+                        @if($print > 3)
+                          <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
+                        @elseif ($print <= 3)
+                          <td style="background-color: yellow; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
                         @else
-                          <td style="text-align: center; vertical-align: middle; ">-</td>
+                          <td style="background-color: red; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
                         @endif
+                        <td style="text-align: center; vertical-align: middle; ">
+                          <a class="btn btn-info" href="/repair/show/detail/{{ $index->ID_PERBAIKAN }}">
+                            <i class="fa fa-search"></i> Detail
+                          </a>
+                          @if ($index->STATUS_REPAIR !== "Done")
+                            <a class="btn btn-primary" href="/repair/selesai/{{ $index->ID_PERBAIKAN }}">
+                              <i class="fa fa-check"></i> Selesai
+                            </a>
+                          @else
+                            
+                          @endif
+                        </td>
+                        
                       </tr>
                   @endforeach
                   </tbody>

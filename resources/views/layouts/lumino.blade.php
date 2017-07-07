@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <head>
 	<link rel="shortcut icon" href="{{URL::asset('dist/img/logo.jpg')}}">
 	<meta charset="utf-8">
@@ -86,4 +84,3 @@
 		@yield('javas')
 	</div>
 </body>
-</html>

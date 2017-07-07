@@ -12,6 +12,9 @@ class Repair extends Model
     	'NOMOR_REGISTRASI',
     	'PROBLEM',
     	'VENDOR',
+    	'TANGGAL_REPAIR',
+    	'PERKIRAAN_SELESAI',
+    	'CATATAN_REPAIR',
     );
     public $primaryKey = "ID_PERBAIKAN";
 }

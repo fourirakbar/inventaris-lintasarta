@@ -75,6 +75,30 @@
                   <textarea class="form-control" placeholder="Masukkan catatan. contoh: 'diperbaiki 1 buah' dan sebagainya. Kosongkan jika tidak ada catatan." name="CATATAN_REPAIR" id="catrep"></textarea>
                 </div> 
                 {{csrf_field()}}
+                <div class="form-group">
+                  <label>Tanggal Barang Diperbaiki (YYYY-MM-DD)</label>
+
+                  <div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="date" class="form-control pull-right" id="datestart" name="TANGGAL_REPAIR">
+                  </div>
+                  <!-- /.input group -->
+                </div> 
+                {{csrf_field()}}
+                <div class="form-group">
+                  <label>Tanggal Perkiraan Barang Selesai (YYYY-MM-DD)</label>
+
+                  <div class="input-group date">
+                    <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="date" class="form-control pull-right" id="datefinish" name="PERKIRAAN_SELESAI">
+                  </div>
+                  <!-- /.input group -->
+                </div> 
+                {{csrf_field()}}
               </div>
               <!-- /.box-body -->
 
@@ -89,22 +113,22 @@
             <!-- /.box-body -->
           </div>
           <div class="modal fade" id="myModal" role="dialog">
-		    <div class="modal-dialog modal-lg">
-		      <div class="modal-content">
-		        <div class="modal-header">
-		          <button type="button" class="close" data-dismiss="modal">&times;</button>
-		          <h4 class="modal-title">Data Barang Dari Gudang</h4>
-		        </div>
-		        <div class="modal-body">
-		          <table id="example1" class="table table-bordered table-hover">
-	                <thead>
-	                <tr>
-	                        <th style="text-align: center; vertical-align: middle; ">No</th>
-	                        <th style="text-align: center; vertical-align: middle; display: none;">ID Barang</th>
-	                        <th style="text-align: center; vertical-align: middle; ">No. Registrasi</th>
-	                        <th style="text-align: center; vertical-align: middle; ">Nama Barang</th>
-	                        <th style="text-align: center; vertical-align: middle; ">Jumlah Barang</th>
-	                        <th style="text-align: center; vertical-align: middle; ">Keterangan</th>
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Data Barang Dari Gudang</h4>
+            </div>
+            <div class="modal-body">
+              <table id="example1" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                          <th style="text-align: center; vertical-align: middle; ">No</th>
+                          <th style="text-align: center; vertical-align: middle; display: none;">ID Barang</th>
+                          <th style="text-align: center; vertical-align: middle; ">No. Registrasi</th>
+                          <th style="text-align: center; vertical-align: middle; ">Nama Barang</th>
+                          <th style="text-align: center; vertical-align: middle; ">Jumlah Barang</th>
+                          <th style="text-align: center; vertical-align: middle; ">Keterangan</th>
 	                </tr>
 	                </thead>
 	                <tbody>
@@ -143,6 +167,31 @@
 <!-- DataTables -->
 	<script src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ URL::asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+  <script src="{{ URL::asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+  <!-- bootstrap datepicker -->
+  <script src="{{ URL::asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+  <script type="text/javascript">
+  
+  $(function () {
+        //Date picker
+        $('#datestart').datepicker({
+          format: 'yyyy-mm-dd',
+          changeMonth: true,
+          changeYear: true,
+          autoclose: true
+        });
+  });
+  $(function () {
+        //Date picker
+        $('#datefinish').datepicker({
+          format: 'yyyy-mm-dd',
+          changeMonth: true,
+          changeYear: true,
+          autoclose: true
+        });
+  });
+  </script>
 	<script>
 	  $(function () {
 	    $('#example1').DataTable();

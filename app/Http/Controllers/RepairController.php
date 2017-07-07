@@ -31,6 +31,8 @@ class RepairController extends Controller
 		        'KETERANGAN_REPAIR' => "Barang Gudang",
 		        'CATATAN_REPAIR' => $data['CATATAN_REPAIR'],
 		        'STATUS_REPAIR' => "On Repair",
+                'TANGGAL_REPAIR' => $data['TANGGAL_REPAIR'],
+                'PERKIRAAN_SELESAI' => $data['PERKIRAAN_SELESAI'],
         	));
         	if ($data['CATATAN_REPAIR'] == "") {
         		DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Diperbaiki"]);
@@ -82,4 +84,29 @@ class RepairController extends Controller
 		DB::table('BARANG')->where('ID_BARANG', $idbarang)->update(['STATUS_BARANG' => NULL]);
 		return redirect('repair/show/belum')->with('success','Barang Selesai Diperbaiki');
 	}
+
+    public function showdetail($ID_PERBAIKAN){
+
+        $repair = DB::table('REPAIR')->select('*')->where('ID_PERBAIKAN', '=', $ID_PERBAIKAN)->get();
+        $data = $repair[0];
+        return view('repair.showDetailRepair', compact('data')); //return view halaman showRepair
+
+    }
+
+    public function showedit($ID_PERBAIKAN){
+
+        $repair = DB::table('REPAIR')->select('*')->where('ID_PERBAIKAN', '=', $ID_PERBAIKAN)->get();
+        $data = $repair[0];
+        return view('repair.showEditRepair', compact('data')); //return view halaman showRepair
+
+    }
+
+    public function update (Request $request, $ID_PERBAIKAN) {
+        // dd($request);
+        Repair::find($ID_PERBAIKAN)->update($request->all()); //update data sesuai inputan pada tabel PEMINJAMAN dengan ID_PEMINJAMAN sesuai pada web
+
+        $url = 'repair/show/detail/'.$ID_PERBAIKAN;
+        // echo $url;
+        return redirect($url)->with('success','Sukses Update Data'); //return ke halaman /showPeminjaman dengan keterangan sukses
+    }
 }
