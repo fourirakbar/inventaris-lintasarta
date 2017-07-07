@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Redirect;
 
 class PinjamController extends Controller {
     public function index () {
-        return view('peminjaman.inputPeminjaman'); //return ke halaman inputPeminjaman
+        $barang = DB::table('BARANG')->select('*')->get();
+
+        return view('peminjaman.inputPeminjaman', compact('barang')); //return ke halaman inputPeminjaman
     }
 
     public function input () {
@@ -27,17 +29,29 @@ class PinjamController extends Controller {
             'TGL_PENGEMBALIAN' => $data['TGL_PENGEMBALIAN'],
             'KETERANGAN' => $a,
         ));
+        $query1 = DB::select("UPDATE PEMINJAMAN SET TGL_SEKARANG = NOW()");
+
+        $query2 = DB::select("UPDATE PEMINJAMAN SET SISA_HARI=(SELECT datediff(TGL_PENGEMBALIAN,TGL_SEKARANG))");
+
+        $query3 = DB::select("UPDATE PEMINJAMAN SET DEADLINE=(SELECT datediff(TGL_PENGEMBALIAN,TGL_PEMINJAMAN))");        
+
+        
 
         return redirect('/peminjaman/show')->with('success','Input Permintaan Sukses'); //return ke /showPeminjaman dengan keterangan sukses
     }
 
     public function show () {
         $peminjaman = DB::table('PEMINJAMAN')->select('*')->get(); //ambil semua data dari tabel PEMINJAMAN
+        $query1 = DB::select("UPDATE PEMINJAMAN SET TGL_SEKARANG = NOW()");
+
+        $query2 = DB::select("UPDATE PEMINJAMAN SET SISA_HARI=(SELECT datediff(TGL_PENGEMBALIAN,TGL_SEKARANG))");
+
+        $query3 = DB::select("UPDATE PEMINJAMAN SET DEADLINE=(SELECT datediff(TGL_PENGEMBALIAN,TGL_PEMINJAMAN))");        
         return view('peminjaman.showPeminjaman', compact('peminjaman')); //return ke halaman showPeminjaman dengan data dari variable $peminjaman
     }
 
     public function showBelum (Request $request) {
-        $peminjaman = DB::table('PEMINJAMAN')->select('*')->where('KETERANGAN', 'in progress')->get();
+        $peminjaman = DB::table('PEMINJAMAN')->select('*')->where('KETERANGAN', 'progress')->get();
         return view('peminjaman.showPeminjaman', compact('peminjaman'));
     }
 
@@ -54,6 +68,8 @@ class PinjamController extends Controller {
     public function update (Request $request, $ID_PEMINJAMAN) {
         $peminjaman = Peminjaman::find($ID_PEMINJAMAN); //mencari data peminjaman sesuai dengan ID_PEMINJAMAN yang diklik pada web
         Peminjaman::find($ID_PEMINJAMAN)->update($request->all()); //update data sesuai inputan pada tabel PEMINJAMAN dengan ID_PEMINJAMAN sesuai pada web
+
+        $query = DB::select("UPDATE PEMINJAMAN SET SISA_HARI=(SELECT datediff(TGL_PENGEMBALIAN,TGL_PEMINJAMAN))");
 
         $url = '/peminjaman/show';
         return redirect($url)->with('success','Sukses Update Data'); //return ke halaman /showPeminjaman dengan keterangan sukses

@@ -54,14 +54,18 @@
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PEMINJAMAN)) ?></td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PENGEMBALIAN)) ?></td>
-
-                      <?php
-                        $date1 = date_create();
-                        $date2 = date_create($index->TGL_PEMINJAMAN);
-                        $date3 = date_create($index->TGL_PENGEMBALIAN);
-                      ?>
-
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->SISA_HARI }}</td>
+                      <?php $sisa = $index->DEADLINE - $index->SISA_HARI;
+                       ?>
+                      @if ($index->SISA_HARI > 0 AND $index->KETERANGAN == "progress")
+                        <td style="background-color: green; color: white; text-align: center; vertical-align: middle;">{{ $index->SISA_HARI }} <?php echo " Hari"; ?></td>  
+                      @elseif ($index->SISA_HARI < 0 AND $index->KETERANGAN == "progress")
+                        <td style="background-color: red; color: white; text-align: center; vertical-align: middle;">{{ $index->SISA_HARI }} <?php echo " Hari"; ?></td>  
+                      @elseif ($index->SISA_HARI == 0 AND $index->KETERANGAN == "progress")
+                        <td style="background-color: yellow; color: black; text-align: center; vertical-align: middle;">{{ $index->SISA_HARI }} <?php echo " Hari"; ?></td>  
+                      @elseif ($index->KETERANGAN == "done")
+                        <td style="background-color: green; color: white; text-align: center; vertical-align: middle;">DONE</td>  
+                      @endif
+                      
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">
                         <a class="btn btn-block btn-primary" href="/peminjaman/edit/{{ $index->ID_PEMINJAMAN }}"><b class="material-icons">Edit Data</b>

@@ -85,19 +85,60 @@
     </section>
 @endsection
 @section('javas')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../plugins/datepicker/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
-$("button.delete-peminjaman").click(function() {
-    swal({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then(function () {
-      window.location.href = "{{ URL::to('/peminjaman/delete', $peminjaman->ID_PEMINJAMAN) }}";
-    })
+
+$(function () {
+      $('#datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true
+      });
+      $('#datepicker1').datepicker({
+        format: 'yyyy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        autoclose: true
+      });
 });
 </script>
+<script src="{{ URL::asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ URL::asset('plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+  <script>
+    $(function () {
+      $('#example1').DataTable();
+    });
+
+    $("tbody tr").click(function(){
+       var noreg=$(this).find('td:eq(2)').text();
+       var nambar=$(this).find('td:eq(3)').text();
+       var idbar=$(this).find('td:eq(1)').text();
+       document.getElementById("nambar").value = nambar;
+       document.getElementById("noreg").value = noreg;
+       document.getElementById("idbar").value = idbar;
+       document.getElementById("nambar").readOnly = true;
+       document.getElementById("noreg").readOnly = true;
+       document.getElementById("idbar").disabled = false;
+       document.getElementById("idbar").readOnly = true;
+        document.getElementById("problem").value = "";
+        document.getElementById("vendor").value = "";
+        document.getElementById("catrep").value = "";
+    });
+
+    $("#baranguser").click(function(){
+        document.getElementById("nambar").readOnly = false;
+        document.getElementById("noreg").readOnly = false;
+        document.getElementById("nambar").value = "";
+        document.getElementById("idbar").disabled = true;
+        document.getElementById("noreg").value = "";
+        document.getElementById("problem").value = "";
+        document.getElementById("vendor").value = "";
+        document.getElementById("catrep").value = "";
+    });
+
+  </script>
 @endsection
