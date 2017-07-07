@@ -55,7 +55,38 @@
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Barang</span>
+            <span>Peminjaman</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ URL::to('/peminjaman') }}"><i class="fa fa-book"></i> <span>Input Peminjaman</span></a></li>
+            <li><a href="{{ URL::to('/peminjaman/show/belum') }}"><i class="fa fa-book"></i> <span>Lihat Data Peminjaman Belum</span></a></li>
+            <li><a href="{{ URL::to('/peminjaman/show/sudah') }}"><i class="fa fa-book"></i> <span>Lihat Data Peminjaman Sudah</span></a>
+            <li><a href="{{ URL::to('/peminjaman/show') }}"><i class="fa fa-book"></i> <span>Histori Data Peminjaman</span></a>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Perbaikan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ URL::to('repair/input') }}"><i class="fa fa-book"></i> <span>Input Data Perbaikan</span></a></li>
+            <li><a href="{{ URL::to('repair/show/belum') }}"><i class="fa fa-book"></i> <span>Lihat Data Perbaikan Belum</span></a></li>
+            <li><a href="{{ URL::to('repair/show/sudah') }}"><i class="fa fa-book"></i> <span>Lihat Data Perbaikan Sudah</span></a></li>
+            <li><a href="{{ URL::to('repair/show') }}"><i class="fa fa-book"></i> <span>Histori Data Perbaikan</span></a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Database Barang</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -75,37 +106,6 @@
                 <li><a href="{{ URL::to('rack/show') }}"><i class="fa fa-circle-o"></i> Lihat Semua Rack</a></li>
               </ul>
             </li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Peminjaman</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ URL::to('/peminjaman') }}"><i class="fa fa-book"></i> <span>Input Peminjaman</span></a></li>
-            <li><a href="{{ URL::to('/peminjaman/show/belum') }}"><i class="fa fa-book"></i> <span>Histori Peminjaman Belum</span></a></li>
-            <li><a href="{{ URL::to('/peminjaman/show/sudah') }}"><i class="fa fa-book"></i> <span>Histori Peminjaman Sudah</span></a>
-            <li><a href="{{ URL::to('/peminjaman/show') }}"><i class="fa fa-book"></i> <span>Histori Semua Peminjaman</span></a>
-          </ul>
-        </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Perbaikan</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ URL::to('repair/input') }}"><i class="fa fa-book"></i> <span>Input Data Perbaikan</span></a></li>
-            <li><a href="{{ URL::to('repair/show/belum') }}"><i class="fa fa-book"></i> <span>Lihat Data Perbaikan Belum</span></a></li>
-            <li><a href="{{ URL::to('repair/show/sudah') }}"><i class="fa fa-book"></i> <span>Lihat Data Perbaikan Sudah</span></a></li>
-            <li><a href="{{ URL::to('repair/show') }}"><i class="fa fa-book"></i> <span>Lihat Semua Data Perbaikan</span></a></li>
           </ul>
         </li>
       </ul>
