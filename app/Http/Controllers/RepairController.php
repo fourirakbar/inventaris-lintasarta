@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 class RepairController extends Controller
 {
     public function index() {
-    	$barang = DB::table('BARANG')->select('*')->get();
+    	$barang = DB::table('BARANG')->select('*')->where('STATUS_BARANG', '=', NULL)->get();
         return view('repair.inputRepair', compact('barang'));   
     }
 
@@ -79,7 +79,7 @@ class RepairController extends Controller
 		$cek = DB::table('REPAIR')->where('ID_PERBAIKAN', $ID_PERBAIKAN)->get();
 		$idbarang = $cek[0]->ID_BARANG;
 		DB::table('REPAIR')->where('ID_PERBAIKAN', $ID_PERBAIKAN)->update(['STATUS_REPAIR' => 'Done']);
-		DB::table('BARANG')->where('ID_BARANG', $idbarang)->update(['STATUS_BARANG' => ""]);
+		DB::table('BARANG')->where('ID_BARANG', $idbarang)->update(['STATUS_BARANG' => NULL]);
 		return redirect('repair/show/belum')->with('success','Barang Selesai Diperbaiki');
 	}
 }

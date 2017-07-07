@@ -72,7 +72,7 @@
                 {{csrf_field()}}
                 <div class="form-group"> 
                   <label>Catatan</label> 
-                  <textarea class="form-control" placeholder="Masukkan catatan. contoh: 'diperbaiki 1 buah' dan sebagainya" name="CATATAN_REPAIR" id="catrep"></textarea>
+                  <textarea class="form-control" placeholder="Masukkan catatan. contoh: 'diperbaiki 1 buah' dan sebagainya. Kosongkan jika tidak ada catatan." name="CATATAN_REPAIR" id="catrep"></textarea>
                 </div> 
                 {{csrf_field()}}
               </div>

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class PinjamController extends Controller {
     public function index () {
-        $barang = DB::table('BARANG')->select('*')->get();
+        $barang = DB::table('BARANG')->select('*')->where('STATUS_BARANG', '=', NULL)->get();
 
         return view('peminjaman.inputPeminjaman', compact('barang')); //return ke halaman inputPeminjaman
     }
