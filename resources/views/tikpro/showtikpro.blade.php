@@ -29,58 +29,20 @@
             <div class="box-body" style="padding-right: 30%">
 	            <table class="table table-bordered table-striped">
 		                <tr>
-		                        <th style="text-align: center; vertical-align: middle; ">ID TIKPRO</th>
+		                        <th style="text-align: center; vertical-align: middle; ">NO TIKPRO</th>
 		                        <th style="text-align: center; vertical-align: middle; ">Nama Proses</th>
 		                        <th style="text-align: center; vertical-align: middle; ">Deadline</th>
 		                </tr>
 	                	</thead>
 
 	                	<tbody>
+	                	@foreach ($jebret as $key)
 	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->DEADLINE }} Hari</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $key->ID_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>
+	                		<td style="text-align: center; vertical-align: middle; ">{{ $key->DEADLINE }} Hari</td>
 	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->DEADLINE }} Hari</td>
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->DEADLINE }} Hari</td>
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->DEADLINE }} Hari</td>
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->DEADLINE }} Hari</td>
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->DEADLINE }} Hari</td>
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->DEADLINE }} Hari</td>
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->DEADLINE }} Hari</td>
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->DEADLINE }} Hari</td>
-	                	</tr>
+	                	@endforeach
 	                	</tbody>
 		        </table>
 		        <div class="col-md-6 pull-right">
@@ -96,7 +58,6 @@
 		                		}
 		                		echo $total." Hari";
 		                		?></td>
-		                		{{ Session::put('totaltikpro', $total) }}
 		                		</tr>
 		                	</tbody>
 			        </table>

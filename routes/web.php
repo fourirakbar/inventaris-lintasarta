@@ -47,8 +47,10 @@ Route::get('/home', 'HomeController@index')->middleware('user');
 
 Route::get('showtikpro', 'TikproController@index')->middleware('user');
 Route::put('edittikpro', 'TikproController@update')->middleware('user');
-
 Route::get('edittikpro', 'TikproController@edit')->middleware('user');
+Route::get('addtikpro/{ID_TIKPRO}', 'TikproController@add')->middleware('user');
+Route::get('removetikpro/{ID_TIKPRO}', 'TikproController@remove')->middleware('user');
+
 
 Route::get('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@hapus')->middleware('user');
 Route::post('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@delete')->middleware('user');

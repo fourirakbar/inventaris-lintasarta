@@ -33,58 +33,21 @@
 				    	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				    	<thead>
 		                <tr>
-		                        <th style="text-align: center; vertical-align: middle; ">No.</th>
 		                        <th style="text-align: center; vertical-align: middle; ">Nama Proses</th>
 		                        <th style="text-align: center; vertical-align: middle; width: 20%;">Deadline</th>
 		                </tr>
 	                	</thead>
 	                	
 	                	<tbody>
+	                	@foreach ($jebret as $key)
 	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[0]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[0]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
+	                		<td style="text-align: center; vertical-align: middle;" hidden=""><input name="ID_TIKPRO[]" value="{{ $key->ID_TIKPRO }}"></td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $key->NAMA_TIKPRO }}" name="NAMA_TIKPRO[]"></td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $key->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
+	                		<td style="text-align: center; vertical-align: middle; width: 5%;"><a href="{{ URL::to('addtikpro', $key->ID_TIKPRO) }}"><button type="button" class="fa fa-plus"></button></a></td>
+	                		<td style="text-align: center; vertical-align: middle; width: 5%;"><a href="{{ URL::to('removetikpro', $key->ID_TIKPRO) }}"><button type="button" class="fa fa-minus"></button></a></td>
 	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[1]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[1]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[2]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[2]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[3]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[3]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[4]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[4]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[5]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[5]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[6]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[6]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[7]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[7]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
-	                	</tr>
-	                	<tr>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->ID_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; ">{{ $jebret[8]->NAMA_TIKPRO }}</td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $jebret[8]->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
-	                	</tr>
+	                	@endforeach
 	                	</tbody>
 		        </table><br><br>
 		        <div class="col-md-6 pull-right">

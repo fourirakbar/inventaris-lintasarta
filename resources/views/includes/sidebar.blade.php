@@ -16,7 +16,18 @@
         <li><a href="/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
 
         @if (Auth::user()->jenis_user == 'admin')
-          <li><a href="{{ URL::to('showtikpro') }}"><i class="fa fa-calendar"></i> <span>Pengaturan Deadline</span></a></li>
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-calendar"></i>
+              <span>Pengaturan Tikpro</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{ URL::to('showtikpro') }}"><i class="fa fa-book"></i> <span>Pengaturan Deadline</span></a></li>
+            </ul>
+          </li>
         @else
 
         @endif
