@@ -1,0 +1,30 @@
+tabel tikpro
+bikin tabel baru kalo buat proses permintaan yg udah selesai
+
+tikpro di +1 nama prosesnya
+
+user bisa search no ticket sendiri
+jangan ditampilin semuanya. cuma yg dia tau no ticketnya
+
+pembatalan ->
+di tambahin "cancel request" dan diberi alasan kenapa kok di cancel request
+
+tulisan done dibatalkan -> harusnya diganti "done cancel"
+=========================================================
+barang ->
+tabel catatan namanya diganti jadi status
+=========================================================
+algo ngitung sisa hari di peminjan salah
+=========================================================
+
+=========================================================
+menu user -> cuma bisa monitoring
+1. permintaan
+2. peminjaman
+
+menu admin
+1. semua
+=========================================================
+1. user baru cuma bisa didaftarin lewat admin, enggak daftar sendiri
+2. semua field kolom di required
+=========================================================
