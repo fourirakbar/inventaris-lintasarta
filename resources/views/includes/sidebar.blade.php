@@ -15,8 +15,7 @@
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
 
-        @if (Auth::user()->jenis_user == 'admin')
-          <li class="treeview">
+        <li class="treeview">
             <a href="#">
               <i class="fa fa-calendar"></i>
               <span>Pengaturan Tikpro</span>
@@ -28,9 +27,6 @@
               <li><a href="{{ URL::to('showtikpro') }}"><i class="fa fa-book"></i> <span>Pengaturan Deadline</span></a></li>
             </ul>
           </li>
-        @else
-
-        @endif
 
 
         <li class="treeview">
@@ -43,10 +39,10 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>
+            @if(Auth::user()->jenis_user == 'admin')
             <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
             <li><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Sedang Diproses</span></a></li>
             <li><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Histori Permintaan</span></a></li>
-            @if (Auth::user()->jenis_user == 'admin')
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-share"></i> <span>Pengajuan Pembatalan</span>
@@ -59,6 +55,8 @@
                 <li><a href="{{ URL::to('adminhapus') }}"><i class="fa fa-circle-o"></i> Histori Pembatalan</a></li>
               </ul>
             </li>
+            @else
+            <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
             @endif
           </ul>
         </li>
