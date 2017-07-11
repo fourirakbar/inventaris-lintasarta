@@ -37,7 +37,7 @@
                         <th style="text-align: center; vertical-align: middle; ">Keterangan</th>
                         <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
                         <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
-                        <th style="text-align: center; vertical-align: middle; ">Catatan</th>
+                        <th style="text-align: center; vertical-align: middle; ">Status</th>
                 </tr>
                 </thead>
                 <tbody>

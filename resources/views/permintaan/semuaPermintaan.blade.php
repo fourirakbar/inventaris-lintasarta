@@ -107,7 +107,12 @@
                          elseif ($key->STATUS == "done") {
                                echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >DONE</td>';
                           }    
-                         
+                         elseif($key->STATUS == "Request untuk dibatalkan") {
+                              echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >Proses Pembatalan</td>';
+                         }
+                         elseif($key->STATUS == "batal") {
+                              echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >Permintaan Batal</td>';
+                         }
                        ?>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>
                       
