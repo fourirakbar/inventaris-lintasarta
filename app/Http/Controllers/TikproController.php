@@ -46,6 +46,7 @@ class TikproController extends Controller
       $query2 = "UPDATE TIKPRO SET DEADLINE = CASE ID_TIKPRO ";
       $query3 = "ELSE DEADLINE END";
       $fullquery1 = $query2.$query1.$query3;
+      // dd($fullquery1);
 
       $querya = "";
       for ($i=0; $i < count($namatikproarray); $i++) { 
