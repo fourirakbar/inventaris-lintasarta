@@ -58,7 +58,7 @@
           </ul>
         </li>
         @else
-        <li><a href="#"><i class="fa fa-search"></i> Cari Permintaan</a></li>
+        <li><a href="{{ URL::to('caripermintaan') }}"><i class="fa fa-search"></i> Cari Permintaan</a></li>
         @endif
         @if(Auth::user()->jenis_user == 'admin')
         <li class="treeview">

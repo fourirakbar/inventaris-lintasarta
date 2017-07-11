@@ -201,4 +201,16 @@ class PermintaanController extends Controller
         $url = 'adminhapus';
         return redirect($url)->with('success','Sukses Update Data'); //return ke halaman adminhapus dengan keterangan sukses
     }
+
+    public function caripermintaan(){
+        return view('permintaan.caripermintaan');
+    }
+
+    public function showpermintaan(Request $request){
+        // dd($request);
+        $showdata = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal')->where('NOMOR_TICKET', '=', $request->NOMOR_TICKET)->where('STATUS','!=','Request untuk dibatalkan')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        // dd($showdata);
+        $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
+        return view('permintaan.usershowpermintaan', compact('showdata', 'jebret2'));
+    }
 }

@@ -25,7 +25,7 @@ Route::get('/home', function() {
 Route::get('/semua', 'PermintaanController@lihatSemua')->middleware('admin');
 Route::get('/semuabelum', 'PermintaanController@lihatSemuaBelum')->middleware('admin');
 Route::get('/semuasudah', 'PermintaanController@lihatSemuaSudah')->middleware('admin');
-Route::get('/semua/lihat/{ID_PERMINTAAN}', 'PermintaanController@details')->middleware('admin');
+Route::get('/semua/lihat/{ID_PERMINTAAN}', 'PermintaanController@details')->middleware('user');
 Route::get('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doEdit')->middleware('admin');
 Route::put('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doUpdate')->middleware('admin');
 
@@ -89,3 +89,10 @@ Route::get('404', function() {
 	return view('404');
 });
 
+//user section
+Route::get('caripermintaan', 'PermintaanController@caripermintaan')->middleware('user');
+Route::post('caripermintaan', 'PermintaanController@showpermintaan')->middleware('user');
+
+Route::get('caripeminjaman', 'PinjamController@userpeminjaman')->middleware('user');
+Route::post('caripeminjaman', 'PinjamController@caripeminjaman')->middleware('user');
+Route::post('showpeminjaman', 'PinjamController@showpeminjaman')->middleware('user');
