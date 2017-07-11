@@ -48,18 +48,34 @@ class PermintaanController extends Controller
             'DESKRIPSI' => $data['DESKRIPSI'],
             'TGL_PERMINTAAN' => $data['TGL_PERMINTAAN'],
             'TGL_DEADLINE' => $data['TGL_DEADLINE'],
-            'STATUS' => $a,
             'TIKPRO_ID' => $b,
+            'STATUS' => $a,
         ));
-
+        
         $ticket = DB::table('PERMINTAAN')->select('ID_PERMINTAAN')->orderBy('ID_PERMINTAAN', 'DESC')->limit('1')->get(); //ambil ID_PERMINTAAN terakhir pada table PERMINTAAN
         $kuylah = explode(":", $ticket); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
         $bossku = explode("}]", $kuylah[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
 
-        for ($i=1; $i < 10; $i++) {
+        $count = DB::table('TIKPRO')->whereNotNull('NAMA_TIKPRO')->count();
+        $insertnama = DB::table('TIKPRO')->select('NAMA_TIKPRO')->get();
+        $insertdeadline = DB::table('TIKPRO')->select('DEADLINE')->get();
+        $namatikproarray = array();
+        $deadlinetikproarray = array();
+
+
+        foreach ($insertnama as $key) {
+            array_push($namatikproarray, $key->NAMA_TIKPRO);
+        }
+        foreach ($insertdeadline as $key) {
+            array_push($deadlinetikproarray, $key->DEADLINE);
+        }
+        // dd($deadlinetikproarray);
+        for ($i=1; $i < $count+1; $i++) {
             //memasukkan data ke dalam database HistoryTikpro
             HistoryTikpro::insertGetId(array(
                 'TIKPRO_ID' => $i,
+                'TIKPRO_NAMA' => $namatikproarray[$i-1],
+                'DEADLINE' => $deadlinetikproarray[$i-1],
                 'PERMINTAAN_ID' => $bossku[0],
             ));
         };
@@ -72,6 +88,8 @@ class PermintaanController extends Controller
         $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
         
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
+
+        // dd($jebret);
     }
 
     public function lihatSemuaBelum(Request $request) {
@@ -94,15 +112,19 @@ class PermintaanController extends Controller
     public function details($ID_PERMINTAAN) {
         $query = DB::table('PERMINTAAN')->select('TIKPRO.NAMA_TIKPRO')->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
-        $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
+        $jebret2 = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get(); //ambil semua data dari tabel TIKPRO
         $boi = DB::table('HISTORY_TIKPRO')->select('*')->join('PERMINTAAN','PERMINTAAN.ID_PERMINTAAN', '=', 'HISTORY_TIKPRO.PERMINTAAN_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil data dari table HISTORY_TIKPRO dan table PERMINTAAN dengan ketentuan yang sudah diberikan
-        return view('permintaan.details', compact('jebret', 'query', 'jebret2', 'boi')); //return view ke halaman details dengan data dari variable $jebret, $query, $jebret2, dan $boi
+        // $count = DB::table('TIKPRO')->whereNotNull('NAMA_TIKPRO')->count();
+        $count = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->count();
+        // dd($count);
+        return view('permintaan.details', compact('jebret', 'query', 'jebret2', 'boi', 'count')); //return view ke halaman details dengan data dari variable $jebret, $query, $jebret2, dan $boi
     }
 
     public function doEdit($ID_PERMINTAAN) {
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
         $jebret2 = Tikpro::query('NAMA_TIKPRO')->join('PERMINTAAN', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get()[0]; //ambil data dari table TIKPRO dan tabel PERMINTAAN dengan ketentuan yang sudah diberikan
-        $listtikpro = DB::table('TIKPRO')->select('ID_TIKPRO', 'NAMA_TIKPRO')->get(); //ambil data pada kolom ID_TIKPRO dan NAMA_TIKRPO dari tabel TIKPRO
+        $listtikpro = DB::table('HISTORY_TIKPRO')->select('TIKPRO_ID', 'TIKPRO_NAMA')->where('PERMINTAAN_ID',$ID_PERMINTAAN)->get(); //ambil data pada kolom ID_TIKPRO dan NAMA_TIKRPO dari tabel TIKPRO
+        // dd($listtikpro);
         return view('permintaan.edit', compact('jebret', 'jebret2', 'listtikpro')); //return ke halaman edit dengan data dari variable $jebret, $jebret2, dan $listtikrpo
     }
 
