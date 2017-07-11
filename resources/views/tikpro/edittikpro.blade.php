@@ -42,8 +42,8 @@
 	                	@foreach ($jebret as $key)
 	                	<tr>
 	                		<td style="text-align: center; vertical-align: middle;" hidden=""><input name="ID_TIKPRO[]" value="{{ $key->ID_TIKPRO }}"></td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $key->NAMA_TIKPRO }}" name="NAMA_TIKPRO[]"></td>
-	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $key->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()"></td>{{csrf_field()}}
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $key->NAMA_TIKPRO }}" name="NAMA_TIKPRO[]" required=""></td>
+	                		<td style="text-align: center; vertical-align: middle; "><input class="form-control" style="text-align: center; vertical-align: middle; " value="{{ $key->DEADLINE }}" name="DEADLINE[]" onkeyup="myFunction()" required=""></td>{{csrf_field()}}
 	                		<td style="text-align: center; vertical-align: middle; width: 5%;"><a href="{{ URL::to('addtikpro', $key->ID_TIKPRO) }}"><button type="button" class="fa fa-plus"></button></a></td>
 	                		<td style="text-align: center; vertical-align: middle; width: 5%;"><a href="{{ URL::to('removetikpro', $key->ID_TIKPRO) }}"><button type="button" class="fa fa-minus"></button></a></td>
 	                	</tr>
