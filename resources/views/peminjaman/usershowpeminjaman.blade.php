@@ -30,13 +30,13 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                        <th style="text-align: center; vertical-align: middle; ">No</th>
-                        <th style="text-align: center; vertical-align: middle; ">Nama Peminjam</th>
-                        <th style="text-align: center; vertical-align: middle; ">Perangkat</th>
-                        <th style="text-align: center; vertical-align: middle; ">Nomor Registrasi</th>
-                        <th style="text-align: center; vertical-align: middle; ">Tanggal Peminjaman</th>
-                        <th style="text-align: center; vertical-align: middle; ">Tanggal Pengembalian</th>
-                        <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
+                    <th style="text-align: center; vertical-align: middle; ">No</th>
+                    <th style="text-align: center; vertical-align: middle; ">Nama Peminjam</th>
+                    <th style="text-align: center; vertical-align: middle; ">Perangkat</th>
+                    <th style="text-align: center; vertical-align: middle; ">Nomor Registrasi</th>
+                    <th style="text-align: center; vertical-align: middle; ">Tanggal Peminjaman</th>
+                    <th style="text-align: center; vertical-align: middle; ">Tanggal Pengembalian</th>
+                    <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
                 </tr>
                 </thead>
                 <tbody>
