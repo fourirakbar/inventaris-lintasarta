@@ -2,7 +2,7 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Show Rack 
+        Show Repair
         <small>Lihat Semua Data Repair</small>
       </h1>
       <ol class="breadcrumb">
@@ -61,12 +61,14 @@
                             $print = $diff->format('%R%a Hari');
                             $printInt = (int)$print;
                         ?>
-                        @if($print > 3)
+                        @if($print > 3 && ($index->STATUS_REPAIR) != "Done")
                           <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
-                        @elseif ($print <= 3)
-                          <td style="background-color: yellow; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
-                        @else
+                        @elseif ($print <= 3 && $print >=1 && ($index->STATUS_REPAIR) != "Done")
+                          <td style="background-color: yellow; color: black; text-align: center; vertical-align: middle; ">{{ $print }}</td>
+                        @elseif ($print < 0 && ($index->STATUS_REPAIR) != "Done")
                           <td style="background-color: red; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
+                        @elseif (($index->STATUS_REPAIR) == "Done")
+                          <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">Done</td>
                         @endif
                         <td style="text-align: center; vertical-align: middle; ">
                           <a class="btn btn-info" href="/repair/show/detail/{{ $index->ID_PERBAIKAN }}">

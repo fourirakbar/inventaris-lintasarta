@@ -43,7 +43,6 @@
                 <div class="form-group"> 
                   <label>Pilih Jenis Barang</label><br>
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><b class="material-icons">Barang Dari Gudang</b></button>
-                  <button type="button" class="btn btn-default" id="baranguser"><b class="material-icons">Barang Dari User</b></button>
                 </div>
                 <div class="form-group"> 
                   <label>Nama Peminjam</label> 

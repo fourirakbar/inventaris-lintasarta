@@ -80,7 +80,8 @@
               </table>
               @if( $jebret->STATUS_PEMBATALAN === "done")
               @else
-                <button style="margin: 5% 0 5% 0" type="submit" class="btn btn-danger pull-right">Setujui Pembatalan</button>
+                <button style="margin: 5% 0 5% 0" type="submit" class="btn btn-danger pull-right">Cancel Pembatalan</button>
+                <button style="margin: 5% 0 5% 0" type="submit" class="btn btn-primary pull-right">Setujui Pembatalan</button>
               @endif
               </form>
             </div>

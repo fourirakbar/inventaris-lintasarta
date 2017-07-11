@@ -79,7 +79,7 @@
 
                         <div class="clearfix hidden-md"></div>
 
-                        <button type="submit" class="btn btn-primary pull-right">Update</button>  
+                        <button type="submit" class="btn btn-primary pull-right">Batalkan Permintaan</button>  
                       </div> 
                     </form> 
             <!-- /.box-header -->

@@ -14,7 +14,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
-
+        @if(Auth::user()->jenis_user == 'admin')
         <li class="treeview">
             <a href="#">
               <i class="fa fa-calendar"></i>
@@ -27,8 +27,8 @@
               <li><a href="{{ URL::to('showtikpro') }}"><i class="fa fa-book"></i> <span>Pengaturan Deadline</span></a></li>
             </ul>
           </li>
-
-
+        @endif
+        @if(Auth::user()->jenis_user == 'admin')
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -39,7 +39,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>
-            @if(Auth::user()->jenis_user == 'admin')
+            
             <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
             <li><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Sedang Diproses</span></a></li>
             <li><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Histori Permintaan</span></a></li>
@@ -54,13 +54,13 @@
                 <li><a href="{{ URL::to('adminhapus/request') }}"><i class="fa fa-circle-o"></i> Permintaan Pembatalan</a></li>
                 <li><a href="{{ URL::to('adminhapus') }}"><i class="fa fa-circle-o"></i> Histori Pembatalan</a></li>
               </ul>
-            </li>
-            @else
-            <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
-            @endif
+            </li>            
           </ul>
         </li>
-
+        @else
+        <li><a href="#"><i class="fa fa-search"></i> Cari Permintaan</a></li>
+        @endif
+        @if(Auth::user()->jenis_user == 'admin')
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -71,12 +71,17 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('/peminjaman') }}"><i class="fa fa-book"></i> <span>Input Peminjaman</span></a></li>
+            
             <li><a href="{{ URL::to('/peminjaman/show/belum') }}"><i class="fa fa-book"></i> <span>Lihat Data Peminjaman Belum</span></a></li>
             <li><a href="{{ URL::to('/peminjaman/show/sudah') }}"><i class="fa fa-book"></i> <span>Lihat Data Peminjaman Sudah</span></a>
             <li><a href="{{ URL::to('/peminjaman/show') }}"><i class="fa fa-book"></i> <span>Histori Data Peminjaman</span></a>
+
           </ul>
         </li>
-
+        @else
+        <li><a href="#"><i class="fa fa-search"></i> <span>Cari Peminjaman</span></a></li>
+        @endif
+        @if(Auth::user()->jenis_user == 'admin')
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -92,6 +97,8 @@
             <li><a href="{{ URL::to('repair/show') }}"><i class="fa fa-book"></i> <span>Histori Data Perbaikan</span></a></li>
           </ul>
         </li>
+        @endif
+        @if(Auth::user()->jenis_user == 'admin')
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -117,5 +124,6 @@
             </li>
           </ul>
         </li>
+        @endif
       </ul>
     </section>

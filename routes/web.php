@@ -69,14 +69,14 @@ Route::get('/rack/show/{ID_RACK}', 'RackController@showeach')->middleware('admin
 
 Route::get('/peminjaman', 'PinjamController@index')->middleware('user');
 Route::post('peminjaman2', 'PinjamController@input')->middleware('user');
-Route::get('/peminjaman/show', 'PinjamController@show')->middleware('user');
+Route::get('/peminjaman/show', 'PinjamController@show')->middleware('admin');
 Route::get('/peminjaman/show/belum','PinjamController@showBelum')->middleware('admin');
 Route::get('/peminjaman/show/sudah','PinjamController@showSudah')->middleware('admin');
 Route::get('/peminjaman/edit/{ID_PEMINJAMAN}','PinjamController@edit')->middleware('admin');
 Route::put('/peminjaman/edit/{ID_PEMINJAMAN}','PinjamController@update')->middleware('admin');
 Route::get('/peminjaman/delete/{ID_PEMINJAMAN}','PinjamController@delete')->middleware('admin');
 
-Route::get('repair/input', 'RepairController@index')->middleware('user');
+Route::get('repair/input', 'RepairController@index')->middleware('admin');
 Route::post('repair/input', 'RepairController@input')->middleware('user');
 Route::get('repair/show', 'RepairController@show')->middleware('admin');
 Route::get('repair/show/sudah', 'RepairController@showsudah')->middleware('admin');
