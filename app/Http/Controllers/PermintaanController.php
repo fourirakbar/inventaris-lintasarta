@@ -84,7 +84,7 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemua() {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal','and','STATUS','!=','Request untuk dibatalkan')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal')->where('STATUS','!=','Request untuk dibatalkan')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
         $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
         
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
@@ -195,10 +195,17 @@ class PermintaanController extends Controller
     {
         $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->get(); //ambil data dari table PERMINTAAN dan table PEMATALAN dengan ketentuan yang sudah diberikan
 
-        Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'batal']); //mencari data dengan kolom STATUS = batal dan sesuai dengan $ID_PERMINTAAAN
-        DB::table('PEMBATALAN')->where('PERMINTAAN_ID','=',$ID_PERMINTAAN)->update(['STATUS_PEMBATALAN' => 'done']); //update kolom STATUS_PEMBATALAN menjadi done di tabel PEMBATALAN sesuai dengan $ID_PERMINTAAN
+        if (Input::get('yaa')) {
+            Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'batal']); //mencari data dengan kolom STATUS = batal dan sesuai dengan $ID_PERMINTAAAN
+            DB::table('PEMBATALAN')->where('PERMINTAAN_ID','=',$ID_PERMINTAAN)->update(['STATUS_PEMBATALAN' => 'done']); //update kolom STATUS_PEMBATALAN menjadi done di tabel PEMBATALAN sesuai dengan $ID_PERMINTAAN
 
-        $url = 'adminhapus';
-        return redirect($url)->with('success','Sukses Update Data'); //return ke halaman adminhapus dengan keterangan sukses
+            $url = 'adminhapus';
+            return redirect($url)->with('success','Sukses Update Data'); //return ke halaman adminhapus dengan keterangan sukses
+        }
+        elseif (Input::get('tidak')) {
+            Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => NULL]);
+            $url = 'adminhapus';
+            return redirect($url)->with('success','Sukses Batalkan Request Pembatalan'); //return ke halaman adminhapus dengan keterangan sukses   
+        }
     }
 }
