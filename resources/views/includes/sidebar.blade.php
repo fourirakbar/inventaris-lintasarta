@@ -79,7 +79,7 @@
           </ul>
         </li>
         @else
-        <li><a href="#"><i class="fa fa-search"></i> <span>Cari Peminjaman</span></a></li>
+        <li><a href="{{ URL::to('caripeminjaman') }}"><i class="fa fa-search"></i> <span>Cari Peminjaman</span></a></li>
         @endif
         @if(Auth::user()->jenis_user == 'admin')
         <li class="treeview">

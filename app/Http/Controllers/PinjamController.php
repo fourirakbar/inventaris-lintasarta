@@ -113,4 +113,16 @@ class PinjamController extends Controller {
           return Redirect::to($url)->with('error','Gagal Delete Data Peminjaman');
         }
     }
+
+    public function caripeminjaman(){
+        return view('peminjaman.caripeminjaman');
+    }
+
+    public function showpeminjaman(Request $request){
+        $peminjaman = DB::table('PEMINJAMAN')->select('*')->where('ID_PEMINJAMAN', '=', $request->ID_PEMINJAMAN)->get(); //ambil semua data dari tabel PEMINJAMAN
+        $query1 = DB::select("UPDATE PEMINJAMAN SET TGL_SEKARANG = NOW()");
+        $query2 = DB::select("UPDATE PEMINJAMAN SET SISA_HARI=(SELECT datediff(TGL_PENGEMBALIAN,TGL_SEKARANG))");
+        $query3 = DB::select("UPDATE PEMINJAMAN SET DEADLINE=(SELECT datediff(TGL_PENGEMBALIAN,TGL_PEMINJAMAN))");        
+        return view('peminjaman.usershowpeminjaman', compact('peminjaman')); 
+    }
 }

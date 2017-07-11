@@ -93,6 +93,5 @@ Route::get('404', function() {
 Route::get('caripermintaan', 'PermintaanController@caripermintaan')->middleware('user');
 Route::post('caripermintaan', 'PermintaanController@showpermintaan')->middleware('user');
 
-Route::get('caripeminjaman', 'PinjamController@userpeminjaman')->middleware('user');
-Route::post('caripeminjaman', 'PinjamController@caripeminjaman')->middleware('user');
-Route::post('showpeminjaman', 'PinjamController@showpeminjaman')->middleware('user');
+Route::get('caripeminjaman', 'PinjamController@caripeminjaman')->middleware('user');
+Route::post('caripeminjaman', 'PinjamController@showpeminjaman')->middleware('user');
