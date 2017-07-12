@@ -216,7 +216,7 @@ class PermintaanController extends Controller
 
     public function showpermintaan(Request $request){
         // dd($request);
-        $showdata = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS','!=','batal')->where('NOMOR_TICKET', '=', $request->NO_TIKET)->where('STATUS','!=','Request untuk dibatalkan')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $showdata = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('NOMOR_TICKET', '=', $request->NO_TIKET)->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
         // dd($showdata);
         $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
 
