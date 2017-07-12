@@ -125,5 +125,9 @@
           </ul>
         </li>
         @endif
+          
+        @if(Auth::user()->jenis_user == 'admin')
+          <li><a href="{{ URL::to('register') }}"><i class="fa fa-user"></i> <span>Tambah User Baru</span></a></li>
+        @endif
       </ul>
     </section>

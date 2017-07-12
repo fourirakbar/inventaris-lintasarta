@@ -110,6 +110,7 @@ class PinjamController extends Controller {
 
     public function showpeminjaman(Request $request){
         $peminjaman = DB::table('PEMINJAMAN')->select('*')->where('ID_PEMINJAMAN', '=', $request->ID_PEMINJAMAN)->get(); //ambil semua data dari tabel PEMINJAMAN
+        // dd($peminjaman);
         return view('peminjaman.usershowpeminjaman', compact('peminjaman')); 
     }
 }

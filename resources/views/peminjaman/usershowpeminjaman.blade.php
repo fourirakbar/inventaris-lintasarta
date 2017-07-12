@@ -53,17 +53,25 @@
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PEMINJAMAN)) ?></td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PENGEMBALIAN)) ?></td>
-                      <?php $sisa = $index->DEADLINE - $index->SISA_HARI;
-                       ?>
-                      @if ($index->SISA_HARI > 0 AND $index->KETERANGAN == "progress")
-                        <td style="background-color: green; color: white; text-align: center; vertical-align: middle;">{{ $index->SISA_HARI }} <?php echo " Hari"; ?></td>  
-                      @elseif ($index->SISA_HARI < 0 AND $index->KETERANGAN == "progress")
-                        <td style="background-color: red; color: white; text-align: center; vertical-align: middle;">{{ $index->SISA_HARI }} <?php echo " Hari"; ?></td>  
-                      @elseif ($index->SISA_HARI == 0 AND $index->KETERANGAN == "progress")
-                        <td style="background-color: yellow; color: black; text-align: center; vertical-align: middle;">{{ $index->SISA_HARI }} <?php echo " Hari"; ?></td>  
-                      @elseif ($index->KETERANGAN == "done")
-                        <td style="background-color: green; color: white; text-align: center; vertical-align: middle;">DONE</td>  
-                      @endif
+                      <?php
+                            $datenow=date_create();
+                            $datefinish=date_create($index->TGL_PENGEMBALIAN);
+                            $new = date_add($datefinish,date_interval_create_from_date_string("1 days"));
+                            $diff=date_diff($datenow,$new);
+                            $print = $diff->format('%R%a Hari');
+                            if($print == 0){
+                                $print = $diff->format('%a Hari');
+                            }
+                            $printInt = (int)$print;
+                        ?>
+
+                        @if($print > 0 && ($index->KETERANGAN) == "progress")
+                          <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
+                        @elseif ($print <= 0 && ($index->KETERANGAN) == "progress")
+                          <td style="background-color: red; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
+                        @elseif (($index->KETERANGAN) == "done")
+                          <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">Done</td>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>

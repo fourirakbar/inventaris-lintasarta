@@ -21,15 +21,16 @@
               <h3 class="box-title">Data</h3>
             </div>
             <?php
-              $deadline1 = $jebret2[0]->DEADLINE;
-              $deadline2 = $jebret2[1]->DEADLINE + $deadline1;
-              $deadline3 = $jebret2[2]->DEADLINE + $deadline2;
-              $deadline4 = $jebret2[3]->DEADLINE + $deadline3;
-              $deadline5 = $jebret2[4]->DEADLINE + $deadline4;
-              $deadline6 = $jebret2[5]->DEADLINE + $deadline5;
-              $deadline7 = $jebret2[6]->DEADLINE + $deadline6;
-              $deadline8 = $jebret2[7]->DEADLINE + $deadline7;
-              $deadline9 = $jebret2[8]->DEADLINE + $deadline8;
+
+              $deadline = array();
+              for ($i = 1 ; $i <= count($jebret2) ; $i++){
+                if (empty($deadline)) {
+                  array_push($deadline, $jebret2[$i-1]->DEADLINE);
+                }
+                else{
+                  array_push($deadline, $jebret2[$i-1]->DEADLINE + $deadline[$i-2]); 
+                }
+              }
             ?>
             <!-- /.box-header -->
             <div class="box-body">
@@ -61,34 +62,20 @@
                          if ($key->STATUS == "in progress") {
                              $date1=date_create();
                              $date2=date_create($key->TGL_PERMINTAAN);
-                             if($key->TIKPRO_ID == 1){
-                                $deadline = $deadline1 + 1;
+                             for ($i=1; $i<=count($deadline) ; $i++) {
+                              if ($i == 1) {
+                                if($key->TIKPRO_ID == $i){
+                                  $deadline2 = $deadline[$i-1] + 1;
+                                }
+                              }
+                              else{
+                                if($key->TIKPRO_ID == $i){
+                                  $deadline2 = $deadline[$i-1];
+                                }
+                              }
                              }
-                             elseif($key->TIKPRO_ID == 2){
-                                $deadline = $deadline2;
-                             }
-                             elseif($key->TIKPRO_ID == 3){
-                                $deadline = $deadline3;
-                             }
-                             elseif($key->TIKPRO_ID == 4){
-                                $deadline = $deadline4;
-                             }
-                             elseif($key->TIKPRO_ID == 5){
-                                $deadline = $deadline5;
-                             }
-                             elseif($key->TIKPRO_ID == 6){
-                                $deadline = $deadline6;
-                             }
-                             elseif($key->TIKPRO_ID == 7){
-                                $deadline = $deadline7;
-                             }
-                             elseif($key->TIKPRO_ID == 8){
-                                $deadline = $deadline8;
-                             }
-                             elseif($key->TIKPRO_ID == 9){
-                                $deadline = $deadline9;
-                             }
-                             $new = date_add($date2,date_interval_create_from_date_string($deadline." days"));
+                             
+                             $new = date_add($date2,date_interval_create_from_date_string($deadline2." days"));
                              $diff=date_diff($date1,$new);
                              $print = $diff->format('%R%a Hari');
                              $printInt = (int)$print;
@@ -107,7 +94,12 @@
                          elseif ($key->STATUS == "done") {
                                echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >DONE</td>';
                           }    
-                         
+                         elseif($key->STATUS == "Request untuk dibatalkan") {
+                              echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >Proses Pembatalan</td>';
+                         }
+                         elseif($key->STATUS == "batal") {
+                              echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >Permintaan Batal</td>';
+                         }
                        ?>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>
                       

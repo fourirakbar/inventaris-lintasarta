@@ -43,7 +43,7 @@
                         
                         <div class="form-group col-md-6"> 
                           <label>Deskirpsi</label> 
-                          <textarea class="form-control" value="{{ $jebret->DESKRIPSI }}" name="DESKRIPSI" disabled=""></textarea>
+                          <textarea class="form-control" name="DESKRIPSI" disabled="">{{ $jebret->DESKRIPSI }}</textarea>
                         </div>
 
                         <div class="clearfix hidden-md"></div>
@@ -55,7 +55,7 @@
 
                         <div class="form-group col-md-6"> 
                           <label>Alasan Pembatalan</label> 
-                          <textarea class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="ALASAN_PEMBATALAN"></textarea> 
+                          <textarea class="form-control" name="ALASAN_PEMBATALAN" required=""></textarea> 
                         </div>
 
                         <div class="clearfix hidden-md"></div>
@@ -67,7 +67,7 @@
 
                         <div class="form-group col-md-6"> 
                           <label>Upload File Pembatalan</label> 
-                          <input type="file" name="FILE_PEMBATALAN" enctype="multipart/form-data"> 
+                          <input type="file" name="FILE_PEMBATALAN" enctype="multipart/form-data" required=""> 
                         </div>                  
 
                         <div class="clearfix hidden-md"></div>

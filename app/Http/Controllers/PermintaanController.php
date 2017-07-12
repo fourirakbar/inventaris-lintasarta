@@ -150,6 +150,7 @@ class PermintaanController extends Controller
     public function hapus($ID_PERMINTAAN)
     {
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
+        // dd($jebret);
         return view('permintaan.hapus', compact('jebret')); //return ke halaman hapus dengan data dari variable $jebret
     }
 
@@ -187,12 +188,12 @@ class PermintaanController extends Controller
         else {
             if(Auth::user()->jenis_user == 'admin') {
                 $url = '/semua';
-                return redirect($url)->with('gagal','Gagal Mengajukan Request Pembatalan');
+                return redirect($url)->with('gagal','Anda sudah pernah menjukan pembatalan');
             }
 
             else {
                 $url = '/caripermintaan';
-                return redirect($url)->with('gagal','Gagal Mengajukan Request Pembatalan');    
+                return redirect($url)->with('gagal','Anda sudah pernah menjukan pembatalan');    
             }
         }
 
@@ -227,7 +228,7 @@ class PermintaanController extends Controller
             DB::table('PEMBATALAN')->where('PERMINTAAN_ID','=',$ID_PERMINTAAN)->update(['STATUS_PEMBATALAN' => 'done']); //update kolom STATUS_PEMBATALAN menjadi done di tabel PEMBATALAN sesuai dengan $ID_PERMINTAAN
 
             $url = 'adminhapus';
-            return redirect($url)->with('success','Sukses Update Data'); //return ke halaman adminhapus dengan keterangan sukses
+            return redirect($url)->with('success','Sukses Setujui Request Pembatalan'); //return ke halaman adminhapus dengan keterangan sukses
         }
         elseif (Input::get('tidak')) {
             Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => "in progress"]);

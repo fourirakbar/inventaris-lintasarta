@@ -16,6 +16,15 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
+          @if ($message = Session::get('success'))
+              <div class="alert alert-success">
+                <p>{{ $message }}</p>
+              </div>
+          @elseif ($message = Session::get('gagal'))
+            <div class="alert alert-warning">
+                <p>{{ $message }}</p>
+            </div>
+          @endif
           
           <div class="box">
             <div class="box-header">
