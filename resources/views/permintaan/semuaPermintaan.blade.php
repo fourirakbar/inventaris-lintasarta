@@ -41,11 +41,7 @@
                         <th style="text-align: center; vertical-align: middle; ">Nama Requester</th>
                         <th style="text-align: center; vertical-align: middle; ">Tanggal Permintaan</th>
                         <th style="text-align: center; vertical-align: middle; ">Barang yang Diminta</th>
-
-                        
-                              <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>      
-                        
-                        
+                        <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>      
                         <th style="text-align: center; vertical-align: middle; ">Titik Proses</th>
                         <th style="text-align: center; vertical-align: middle; ">Action</th>
                 </tr>
