@@ -14,6 +14,7 @@ class Pembatalan extends Model
         'TGL_PEMBATALAN',
         'FILE_PEMBATALAN',
         'STATUS_PEMBATALAN',
+        'COUNTER',
     );
     public function permintaan() {
     	return $this->belongsTo('Permintaan', 'PERMINTAAN_ID', 'ID_PERMINTAAN');
