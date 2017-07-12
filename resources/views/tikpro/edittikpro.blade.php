@@ -91,7 +91,7 @@
 		    // var x = document.getElementById("fname").value;
 		    // document.getElementById("demo").innerHTML = x;
 		    var total = 0;
-		    for(i=0 ; i<9; i++){
+		    for(i=0 ; i<{{ count($jebret) }}; i++){
 		    	total += parseInt(document.getElementsByName("DEADLINE[]")[i].value)
 		    }
 		    var total2 = document.getElementById("totalhari");
