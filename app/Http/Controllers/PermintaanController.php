@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use App\Permintaan;
 use App\Pembatalan;
 use App\Tikpro;
@@ -161,15 +162,41 @@ class PermintaanController extends Controller
         $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get();
         $jebret2 = DB::table('TIKPRO')->get();
 
-        //memasukkan data sesuai input ke dalam database PEMBATALAN
-        Pembatalan::insertGetId(array(
-            'PERMINTAAN_ID' => $ID_PERMINTAAN,
-            'ALASAN_PEMBATALAN' => $request->ALASAN_PEMBATALAN,
-            'FILE_PEMBATALAN' => $destinationPath."/pembatalan_".$ID_PERMINTAAN.".".$fileextension,
-            'STATUS_PEMBATALAN' => "in progress",
-        ));
-        Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'Request untuk dibatalkan']);
-        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2'));
+        // $search = Pembatalan::query()->select('PERMINTAAN_ID')->where('PERMINTAAN_ID',$ID_PERMINTAAN)->get();
+        $search = DB::select("SELECT PERMINTAAN_ID FROM PEMBATALAN WHERE PERMINTAAN_ID = $ID_PERMINTAAN");
+        if (empty($search)) {
+            Pembatalan::insertGetId(array(
+                'PERMINTAAN_ID' => $ID_PERMINTAAN,
+                'ALASAN_PEMBATALAN' => $request->ALASAN_PEMBATALAN,
+                'FILE_PEMBATALAN' => $destinationPath."/pembatalan_".$ID_PERMINTAAN.".".$fileextension,
+                'STATUS_PEMBATALAN' => "in progress",
+            ));
+            Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'Request untuk dibatalkan']);
+
+            if(Auth::user()->jenis_user == 'admin') {
+                $url = '/semua';
+                return redirect($url)->with('success','Sukses Mengajukan Request Pembatalan');    
+            }
+
+            else {
+                $url = '/caripermintaan';
+                return redirect($url)->with('success','Sukses Mengajukan Request Pembatalan');    
+            }
+            
+        }
+        else {
+            if(Auth::user()->jenis_user == 'admin') {
+                $url = '/semua';
+                return redirect($url)->with('gagal','Gagal Mengajukan Request Pembatalan');
+            }
+
+            else {
+                $url = '/caripermintaan';
+                return redirect($url)->with('gagal','Gagal Mengajukan Request Pembatalan');    
+            }
+        }
+
+        
 
    }
 
