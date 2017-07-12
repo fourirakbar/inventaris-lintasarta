@@ -57,7 +57,7 @@
 			            {{csrf_field()}}
 			            <div class="form-group"> 
 			              <label>Problem</label> 
-			              <textarea class="form-control" placeholder="Jelaskan Masalah yang Dialami" name="PROBLEM" id="problem" value="{{ $data->PROBLEM }}"></textarea> 
+			              <textarea class="form-control" placeholder="Jelaskan Masalah yang Dialami" name="PROBLEM" id="problem" >{{ $data->PROBLEM }}</textarea> 
 			            </div> 
 			            {{csrf_field()}} 
 			            <div class="form-group"> 
@@ -72,7 +72,7 @@
 			            {{csrf_field()}}
 			            <div class="form-group"> 
 			              <label>Catatan</label> 
-			              <textarea class="form-control" placeholder="Masukkan catatan. contoh: 'diperbaiki 1 buah' dan sebagainya. Kosongkan jika tidak ada catatan." name="CATATAN_REPAIR" id="catrep" value="{{ $data->CATATAN_REPAIR }}"></textarea>
+			              <textarea class="form-control" placeholder="Masukkan catatan. contoh: 'diperbaiki 1 buah' dan sebagainya. Kosongkan jika tidak ada catatan." name="CATATAN_REPAIR" id="catrep" >{{ $data->CATATAN_REPAIR }}</textarea>
 			            </div> 
 			            {{csrf_field()}}
 			    	</div>

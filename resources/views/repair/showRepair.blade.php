@@ -57,7 +57,8 @@
                         <?php
                             $datenow=date_create();
                             $datefinish=date_create($index->PERKIRAAN_SELESAI);
-                            $diff=date_diff($datenow,$datefinish);
+                            $new = date_add($datefinish,date_interval_create_from_date_string("1 days"));
+                            $diff=date_diff($datenow,$new);
                             $print = $diff->format('%R%a Hari');
                             if($print == 0){
                                 $print = $diff->format('%a Hari');

@@ -78,12 +78,12 @@
 	                  <select class="form-control" name="TIKPRO_ID">
 	                   	<option disabled selected value><b>-- Pilih Menu Dibawah --</b></option>
 	                   	@foreach ($listtikpro as $tikpros)
-	                   		@if ($tikpros->TIKPRO_ID)
-	                  			<option value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>
-	                  		
-	                  			
-							@endif
-						@endforeach
+	                   		@if ($tikpros->TIKPRO_ID == $jebret2->ID_TIKPRO)
+                        <option selected="" value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>
+	                  		@else
+                        <option value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>	
+	                  		@endif
+          						@endforeach
 	                  </select>
 	                </div>
 
@@ -96,9 +96,15 @@
                     <label>Status</label>
                     <input type="hidden" name="_method" value="PUT">
                     <select class="form-control" name="STATUS">
-                      <option disabled selected value><b>-- Pilih Menu DIbawah --</b></option>
-                      <option value="in progress">In Progress</option>
+                      @if ($jebret->STATUS == "in progress")
+                      <option selected="" value="in progress">In Progress</option>
                       <option value="done">Done</option>
+                      @else
+                      <option selected="" value="done">Done</option>
+                      <option  value="in progress">In Progress</option>
+                      @endif
+                      
+                      
                     </select>
 
                   </div>
