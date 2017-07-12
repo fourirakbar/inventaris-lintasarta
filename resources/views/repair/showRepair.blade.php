@@ -59,13 +59,14 @@
                             $datefinish=date_create($index->PERKIRAAN_SELESAI);
                             $diff=date_diff($datenow,$datefinish);
                             $print = $diff->format('%R%a Hari');
+                            if($print == 0){
+                                $print = $diff->format('%a Hari');
+                            }
                             $printInt = (int)$print;
                         ?>
-                        @if($print > 3 && ($index->STATUS_REPAIR) != "Done")
+                        @if($print > 0 && ($index->STATUS_REPAIR) != "Done")
                           <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
-                        @elseif ($print <= 3 && $print >=1 && ($index->STATUS_REPAIR) != "Done")
-                          <td style="background-color: yellow; color: black; text-align: center; vertical-align: middle; ">{{ $print }}</td>
-                        @elseif ($print < 0 && ($index->STATUS_REPAIR) != "Done")
+                        @elseif ($print <= 0 && ($index->STATUS_REPAIR) != "Done")
                           <td style="background-color: red; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
                         @elseif (($index->STATUS_REPAIR) == "Done")
                           <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">Done</td>

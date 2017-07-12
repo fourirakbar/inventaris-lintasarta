@@ -58,10 +58,8 @@
                        ?>
                       @if ($index->SISA_HARI > 0 AND $index->KETERANGAN == "progress")
                         <td style="background-color: green; color: white; text-align: center; vertical-align: middle;">{{ $index->SISA_HARI }} <?php echo " Hari"; ?></td>  
-                      @elseif ($index->SISA_HARI < 0 AND $index->KETERANGAN == "progress")
+                      @elseif ($index->SISA_HARI <= 0 AND $index->KETERANGAN == "progress")
                         <td style="background-color: red; color: white; text-align: center; vertical-align: middle;">{{ $index->SISA_HARI }} <?php echo " Hari"; ?></td>  
-                      @elseif ($index->SISA_HARI == 0 AND $index->KETERANGAN == "progress")
-                        <td style="background-color: yellow; color: black; text-align: center; vertical-align: middle;">{{ $index->SISA_HARI }} <?php echo " Hari"; ?></td>  
                       @elseif ($index->KETERANGAN == "done")
                         <td style="background-color: green; color: white; text-align: center; vertical-align: middle;">DONE</td>  
                       @endif
