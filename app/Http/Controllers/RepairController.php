@@ -33,6 +33,7 @@ class RepairController extends Controller
 		        'STATUS_REPAIR' => "On Repair",
                 'TANGGAL_REPAIR' => $data['TANGGAL_REPAIR'],
                 'PERKIRAAN_SELESAI' => $data['PERKIRAAN_SELESAI'],
+                'NOMOR_TICKET' => $data['NOMOR_TICKET'],
         	));
         	if ($data['CATATAN_REPAIR'] == "") {
         		DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Diperbaiki"]);
@@ -50,6 +51,7 @@ class RepairController extends Controller
 		        'KETERANGAN_REPAIR' => "Barang User",
 		        'CATATAN_REPAIR' => $data['CATATAN_REPAIR'],
 		        'STATUS_REPAIR' => "On Repair",
+                'NOMOR_TICKET' => $data['NOMOR_TICKET'],
         	));	
         }
         

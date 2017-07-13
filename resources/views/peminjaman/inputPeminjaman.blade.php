@@ -45,6 +45,11 @@
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><b class="material-icons">Barang Dari Gudang</b></button>
                 </div>
                 <div class="form-group"> 
+                  <label>Nomor Ticket</label> 
+                  <input class="form-control" placeholder="Masukkan Nomor Ticket" name="NOMOR_TICKET" id="nomorticket"> 
+                </div> 
+                {{csrf_field()}}
+                <div class="form-group"> 
                   <label>Nama Peminjam</label> 
                   <input class="form-control" placeholder="Masukkan Nama Peminjam" name="NAMA_PEMINJAM" id="namapeminjam"> 
                 </div> 

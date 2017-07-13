@@ -31,6 +31,11 @@
               <input type="hidden" name="_method" value="PUT">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
+                <label>Nomor Ticket</label>
+                <input class="form-control" value="{{ $peminjaman->NOMOR_TICKET }}" name="NOMOR_TICKET">
+              </div>
+              
+              <div class="form-group">
                 <label>Nama Peminjam</label>
                 <input class="form-control" value="{{ $peminjaman->NAMA_PEMINJAM }}" name="NAMA_PEMINJAM">
               </div>

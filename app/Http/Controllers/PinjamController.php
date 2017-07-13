@@ -33,20 +33,9 @@ class PinjamController extends Controller {
                 'TGL_PENGEMBALIAN' => $data['TGL_PENGEMBALIAN'],
                 'KETERANGAN' => $a,
                 'ID_BARANG' => $data['ID_BARANG'],
+                'NOMOR_TICKET' => $data['NOMOR_TICKET'],
             ));    
             $query4 = DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Dipinjam"]);
-        }
-
-        //jika user mengisi sendiri input peminjaman dan tidak mengambil dari database barang, maka ID_BARANG tidak dimasukkan
-        else {
-            Peminjaman::insertGetId(array(
-                'NAMA_PEMINJAM' => $data['NAMA_PEMINJAM'],
-                'PERANGKAT' => $data['PERANGKAT'],
-                'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'],
-                'TGL_PEMINJAMAN' => $data['TGL_PEMINJAMAN'],
-                'TGL_PENGEMBALIAN' => $data['TGL_PENGEMBALIAN'],
-                'KETERANGAN' => $a,
-            ));
         }
 
         return redirect('/peminjaman/show')->with('success','Input Permintaan Sukses'); //return ke /showPeminjaman dengan keterangan sukses

@@ -31,6 +31,7 @@
                 <thead>
                 <tr>
                         <th style="text-align: center; vertical-align: middle; ">No</th>
+                        <th style="text-align: center; vertical-align: middle; ">No. Ticket</th>
                         <th style="text-align: center; vertical-align: middle; ">Nama Peminjam</th>
                         <th style="text-align: center; vertical-align: middle; ">Perangkat</th>
                         <th style="text-align: center; vertical-align: middle; ">Nomor Registrasi</th>
@@ -49,6 +50,7 @@
                 @foreach ($peminjaman as $index)
                     <tr>
                       <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_TICKET }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_PEMINJAM }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->PERANGKAT }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
