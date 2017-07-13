@@ -8,24 +8,116 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use App\Tikpro;
+use App\TikproLama;
+use App\TikproTemp;
+use App\Log;
 
 class TikproController extends Controller
 {
     public function index(Request $request) {
+        $count = DB::table('TIKPRO')->select('ID_TIKPRO')->count(); 
+        $id1 = DB::table('TIKPRO')->select('ID_TIKPRO')->get();
+        $nama1 = DB::table('TIKPRO')->select('NAMA_TIKPRO')->get();
+        $deadline1 = DB::table('TIKPRO')->select('DEADLINE')->get();
+
+        $idLama = array();
+        $namaLama = array();
+        $deadlineLama = array();
+
+        foreach ($id1 as $key) {
+          array_push($idLama, $key->ID_TIKPRO);
+        }
+        foreach ($nama1 as $key) {
+         array_push($namaLama, $key->NAMA_TIKPRO); 
+        }
+        foreach ($deadline1 as $key) {
+          array_push($deadlineLama, $key->DEADLINE);
+        }
+        $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
+        $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+        $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+        $lastint = (int)$last3[0];
+        // dd($lastint);
+
+        $check = DB::table('TIKPRO_LAMA')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
+        $check2 = explode(":", $check);
+        $check3 = explode("}]", $check2[1]);
+        $checkint = (int)$check3[0];
+
+        if ($lastint+1 != $checkint) {
+          for ($i=0; $i < $count ; $i++) { 
+            TikproLama::insertGetId(array(
+                'ID_TIKPRO_LAMA' => $idLama[$i],
+                'LOG_ID' => $lastint+1,
+                'NAMA_TIKPRO_LAMA' => $namaLama[$i],
+                'DEADLINE_TIKPRO_LAMA' => $deadlineLama[$i],
+            ));
+          }  
+        }
+
+        
         $jebret = Tikpro::orderBy('ID_TIKPRO','ASC')->get(); //ambil ID_TIKPRO dari tabel Tikpro dan diurutkan ASC
         // dd($jebret);
         return view('tikpro.showtikpro', compact('jebret')); //return view ke halaman showtikpro dengan data dari $jebret
     }
 
+    public function indexo(Request $request) {
+        $jebret = Tikpro::orderBy('ID_TIKPRO','ASC')->get(); //ambil ID_TIKPRO dari tabel Tikpro dan diurutkan ASC
+        // dd($jebret);
+        return view('tikpro.showtikproo', compact('jebret')); //return view ke halaman showtikpro dengan data dari $jebret 
+    }
+
     public function edit(Request $request) {
+        
+
         $jebret = Tikpro::orderBy('ID_TIKPRO','ASC')->get(); //ambil ID_TIKPRO dari tabel Tikpro dan diurutkan ASC  
         return view('tikpro.edittikpro', compact('jebret')); //return view ke halaman edittikpro dengan data dari $jebret
     }
 
     public function update(Request $request){
-    	
-      // ambil data DEADLINE dari tabel Tikrpo, dan dimasukkan ke masing2 variable dibawah
+        $count = DB::table('TIKPRO')->select('ID_TIKPRO')->count(); 
+        $id1 = DB::table('TIKPRO')->select('ID_TIKPRO')->get();
+        $nama1 = DB::table('TIKPRO')->select('NAMA_TIKPRO')->get();
+        $deadline1 = DB::table('TIKPRO')->select('DEADLINE')->get();
+
+        $idLama = array();
+        $namaLama = array();
+        $deadlineLama = array();
+
+        foreach ($id1 as $key) {
+          array_push($idLama, $key->ID_TIKPRO);
+        }
+        foreach ($nama1 as $key) {
+         array_push($namaLama, $key->NAMA_TIKPRO); 
+        }
+        foreach ($deadline1 as $key) {
+          array_push($deadlineLama, $key->DEADLINE);
+        }
+        $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
+        $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+        $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+        $lastint = (int)$last3[0];
+        // dd($lastint);
+
+        // $check = DB::table('TIKPRO_TEMP')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
+        // $check2 = explode(":", $check);
+        // $check3 = explode("}]", $check2[1]);
+        // $checkint = (int)$check3[0];
+
+        // if ($lastint+1 != $checkint) {
+          for ($i=0; $i < $count ; $i++) { 
+            TikproTemp::insertGetId(array(
+                'ID_TIKPRO_LAMA' => $idLama[$i],
+                'LOG_ID' => $lastint+1,
+                'NAMA_TIKPRO_LAMA' => $namaLama[$i],
+                'DEADLINE_TIKPRO_LAMA' => $deadlineLama[$i],
+            ));
+          }  
+        // }
+
+    	      // ambil data DEADLINE dari tabel Tikrpo, dan dimasukkan ke masing2 variable dibawah
       $deadlinearray = array();
       foreach ($request->DEADLINE as $deadline) {
         array_push($deadlinearray, $deadline);
@@ -59,7 +151,15 @@ class TikproController extends Controller
       // dd($fullquery2);
       DB::statement("$fullquery1");
       DB::statement("$fullquery2");
-      $url = 'showtikpro';
+      $url = 'showtikproo';
+
+      $userlogin = Auth::user()->username;
+      $datenow = date_create();
+      $datenow2 = $datenow->format('d F Y');
+      $isi = $userlogin." telah mengupdate titik proses";
+      $log = "insert into LOG_CLICK (ISI) VALUES ('".$isi."')";
+      DB::statement("$log");
+
       return redirect($url)->with('success','Sukses Update Data'); //return ke halaman shwotikpro dengan keterangan sukses
     }
 
@@ -69,7 +169,7 @@ class TikproController extends Controller
       $query2 = "INSERT INTO TIKPRO (ID_TIKPRO, NAMA_TIKPRO) VALUES (".$index.", '')";
       // dd($query1);
       DB::statement("$query1");
-      DB::statement("$query2");
+      DB::statement("$query2"); 
       $url = 'edittikpro';
       return redirect($url)->with('success','Sukses Tambah Tikpro'); //return ke halaman shwotikpro dengan keterangan sukses
     }
@@ -85,4 +185,22 @@ class TikproController extends Controller
       return redirect($url)->with('success','Sukses Hapus Tikpro'); //return ke halaman shwotikpro dengan keterangan sukses
     }
 
+    public function logClick () {
+      $isi = Log::orderBy('updated_at','ASC')->get();
+      $tikproLama = TikproLama::query()->join('LOG_CLICK','TIKPRO_LAMA.LOG_ID','=','LOG_CLICK.ID_LOG')->get();
+      // dd($isi);
+      $tikproBaru = Tikpro::orderBy('ID_TIKPRO','ASC')->get();
+      return view('tikpro.logClick', compact('isi','tikproLama','tikproBaru'));
+    }
+    public function detailLogClick ($ID_LOG) {
+      $jebret = Log::find($ID_LOG); 
+      $jebret2 = DB::table('TIKPRO_LAMA')->where('LOG_ID', $ID_LOG)->get(); //ambil semua data dari tabel TIKPRO
+      // dd($jebret);
+      $jebret3 = DB::table('TIKPRO')->get();
+      // $boi = DB::table('HISTORY_TIKPRO')->select('*')->join('PERMINTAAN','PERMINTAAN.ID_PERMINTAAN', '=', 'HISTORY_TIKPRO.PERMINTAAN_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil data dari table HISTORY_TIKPRO dan table PERMINTAAN dengan ketentuan yang sudah diberikan
+      // $count = DB::table('TIKPRO')->whereNotNull('NAMA_TIKPRO')->count();
+      // $count = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->count();
+      // dd($count);
+      return view('tikpro.detailLog', compact('jebret', 'jebret2', 'jebret3')); //return view ke halaman details dengan data dari variable $jebret, $query, $jebret2, dan $boi
+    }
 }

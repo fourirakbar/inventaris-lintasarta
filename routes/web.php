@@ -42,11 +42,13 @@ Route::get('logout', 'LoginController@logout');
 Route::get('/home', 'HomeController@index')->middleware('user');
 
 Route::get('showtikpro', 'TikproController@index')->middleware('admin');
+Route::get('showtikproo', 'TikproController@indexo')->middleware('admin');
 Route::put('edittikpro', 'TikproController@update')->middleware('admin');
 Route::get('edittikpro', 'TikproController@edit')->middleware('admin');
 Route::get('addtikpro/{ID_TIKPRO}', 'TikproController@add')->middleware('admin');
 Route::get('removetikpro/{ID_TIKPRO}', 'TikproController@remove')->middleware('admin');
-
+Route::get('log_click', 'TikproController@logClick')->middleware('admin');
+Route::get('/log_click/details/{ID_LOG}', 'TikproController@detailLogClick')->middleware('admin');
 
 Route::get('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@hapus')->middleware('user');
 Route::post('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@delete')->middleware('user');

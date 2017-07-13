@@ -25,6 +25,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{ URL::to('showtikpro') }}"><i class="fa fa-book"></i> <span>Pengaturan Deadline</span></a></li>
+              <li><a href="{{ URL::to('log_click') }}"><i class="fa fa-search"></i> <span>Log Update Tikpro</span></a></li>
             </ul>
           </li>
         @endif
