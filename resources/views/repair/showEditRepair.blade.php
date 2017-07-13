@@ -45,6 +45,11 @@
          	<div class="col-xs-12">
 				
 				    <div class="col-xs-6">
+				    	<div class="form-group"> 
+			              <label>No. Ticket</label> 
+			              <input class="form-control" placeholder="Masukkan No. Ticket" name="NOMOR_TICKET" id="nambar" value="{{ $data->NOMOR_TICKET }}"> 
+			            </div> 
+			            {{csrf_field()}}
 			      		<div class="form-group"> 
 			              <label>Nama Barang</label> 
 			              <input class="form-control" placeholder="Masukkan Nama Barang" name="NAMA_BARANG" id="nambar" value="{{ $data->NAMA_BARANG }}"> 

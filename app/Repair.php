@@ -15,6 +15,7 @@ class Repair extends Model
     	'TANGGAL_REPAIR',
     	'PERKIRAAN_SELESAI',
     	'CATATAN_REPAIR',
+        'NOMOR_TICKET',
     );
     public $primaryKey = "ID_PERBAIKAN";
 }

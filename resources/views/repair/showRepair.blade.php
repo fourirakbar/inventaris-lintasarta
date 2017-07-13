@@ -35,6 +35,7 @@
                   <thead>
                     <tr>
                             <th style="text-align: center; vertical-align: middle; ">No.</th>
+                            <th style="text-align: center; vertical-align: middle; ">No. Ticket</th>
                             <th style="text-align: center; vertical-align: middle; ">Nama Barang</th>
                             <th style="text-align: center; vertical-align: middle; ">No. Registrasi</th>
                             <th style="text-align: center; vertical-align: middle; ">Problem</th>
@@ -50,6 +51,7 @@
                   @foreach ($repair as $index)
                       <tr>
                         <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
+                        <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_TICKET }}</td>
                         <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_BARANG}}</td>
                         <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
                         <td style="text-align: center; vertical-align: middle; ">{{ $index->PROBLEM }}</td>
