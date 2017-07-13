@@ -64,9 +64,15 @@
                 <label>Status</label>
                 <input type="hidden" name="_method" value="PUT">
                 <select class="form-control" name="KETERANGAN">
-                  <option disabled selected value><b>-- Pilih Menu DIbawah --</b></option>
-                  <option value="in progress">In Progress</option>
-                  <option value="done">Done</option>
+                  @if ($peminjaman->KETERANGAN == 'progress')
+                    <option disabled><b>-- Pilih Menu DIbawah --</b></option>
+                    <option selected value="in progress">In Progress</option>
+                    <option value="done">Done</option>
+                  @elseif ($peminjaman->KETERANGAN == 'done')
+                    <option disabled><b>-- Pilih Menu DIbawah --</b></option>
+                    <option value="in progress">In Progress</option>
+                    <option selected value="done">Done</option>
+                  @endif
                 </select>
               </div>
               
