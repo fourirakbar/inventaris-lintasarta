@@ -246,7 +246,7 @@
             <br>
             <div class="s-bar">
                <form role="form" method="POST" role="form" action="{{ URL::to('user-search') }}">
-                <input type="text" name="NO_TIKET" value="Masukkan nomor tiket" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Masukkan nomor tiket';}">
+                <input autocomplete="off" type="text" name="NO_TIKET" value="Masukkan nomor tiket" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Masukkan nomor tiket';}">
                 {{csrf_field()}}
                 <input type="submit"  value="Search"/>
               </form>

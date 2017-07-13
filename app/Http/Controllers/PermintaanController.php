@@ -14,6 +14,7 @@ use App\Pembatalan;
 use App\Tikpro;
 use App\HistoryTikpro;
 use Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PermintaanController extends Controller
 {
@@ -249,5 +250,31 @@ class PermintaanController extends Controller
         $jebret2 = DB::table('TIKPRO')->get(); //ambil semua data dari tabel TIKPRO
 
         return view('permintaan.usershowpermintaan', compact('showdata', 'jebret2'));
+    }
+
+    public function exporttoexcel(){
+        $permintaans = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('NOMOR_TICKET', 'TGL_PERMINTAAN', 'TGL_DEADLINE', 'NAMA_REQUESTER', 'BAGIAN', 'DIVISI', 'BARANG_PERMINTAAN', 'DESKRIPSI', 'NO_FPBJ', 'KETERANGAN', 'STATUS')->get();
+        // dd($permintaans);
+        $permintaanArray = [];
+        $permintaanArray[] = ['NOMOR_TICKET', 'TGL_PERMINTAAN', 'TGL_DEADLINE', 'NAMA_REQUESTER', 'BAGIAN', 'DIVISI', 'BARANG_PERMINTAAN', 'DESKRIPSI', 'NO_FPBJ', 'KETERANGAN', 'STATUS',];
+
+        foreach ($permintaans as $key => $permintaan) {
+            $permintaanArray[] = $permintaan->toArray();
+        }
+        // dd($permintaanArray);
+        Excel::create('payments', function($excel) use ($permintaanArray) {
+
+            // Set the spreadsheet title, creator, and description
+            $excel->setTitle('Permintaan');
+            $excel->setCreator('Laravel')->setCompany('TI Infrastruktur, LINTASARTA');
+            $excel->setDescription('payments file');
+
+            // Build the spreadsheet, passing in the payments array
+            $excel->sheet('sheet1', function($sheet) use ($permintaanArray) {
+                $sheet->fromArray($permintaanArray, null, 'A1', false, false);
+            });
+
+        })->download('xlsx');
+
     }
 }

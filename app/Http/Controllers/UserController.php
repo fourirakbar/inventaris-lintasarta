@@ -41,5 +41,8 @@ class UserController extends Controller
             // dd($data);
             return view('repair.usershowrepair', compact('data')); //return view halaman showRepair
     	}
+        else{
+            return view('userinterface.usersearchnotfound');   
+        }
     }
 }

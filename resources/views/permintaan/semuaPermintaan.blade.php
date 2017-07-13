@@ -126,6 +126,7 @@
                 @endforeach
                 </tbody>
               </table>
+              <a href="export/permintaan" class="btn btn-primary pull-left">Download Excel File</a>
             </div>
             <!-- /.box-body -->
           </div>
