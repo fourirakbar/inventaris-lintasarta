@@ -36,15 +36,27 @@ class TikproController extends Controller
           array_push($deadlineLama, $key->DEADLINE);
         }
         $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
-        $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
-        $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
-        $lastint = (int)$last3[0];
+        // dd($last);
+        
+        
+          $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+          $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+          $lastint = (int)$last3[0];  
+        
+      
         // dd($lastint);
 
         $check = DB::table('TIKPRO_LAMA')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
-        $check2 = explode(":", $check);
-        $check3 = explode("}]", $check2[1]);
-        $checkint = (int)$check3[0];
+        // dd($check);
+        if (!isset($check->items)) {
+          $checkint = 1;
+        }
+        else {
+          $check2 = explode(":", $check);
+          $check3 = explode("}]", $check2[1]);
+          $checkint = (int)$check3[0];
+        }
+        
 
         if ($lastint+1 != $checkint) {
           for ($i=0; $i < $count ; $i++) { 
