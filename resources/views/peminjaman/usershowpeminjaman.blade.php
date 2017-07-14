@@ -15,40 +15,47 @@
             @endif
           <div class="box">
             <div class="box-header">
-              <h3 >Data Peminjaman</h3>
+              <h3 >Data barang yang anda pinjam</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
             @foreach($peminjaman as $index)
-              <table style="width: 40%; float: left; margin: 5%;" class="table table-bordered table-hover">
+              <table style="width: 40%; float: left; margin: 5%;" class="table">
                 <tr>
-                  <th style="text-align: center; vertical-align: middle; ">No. Ticket</th>
-                  <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_TICKET }}</td>
+                  <th style="text-align: left; vertical-align: middle; ">No. Ticket</th>
+                  <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+                  <td style="text-align: left; vertical-align: middle; ">{{ $index->NOMOR_TICKET }}</td>
                 </tr>
                 <tr>
-                  <th style="text-align: center; vertical-align: middle; ">Nama Peminjam</th>
-                  <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_PEMINJAM }}</td>
+                  <th style="text-align: left; vertical-align: middle; ">Nama Peminjam</th>
+                  <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+                  <td style="text-align: left; vertical-align: middle; ">{{ $index->NAMA_PEMINJAM }}</td>
                 </tr>
                 <tr>
-                  <th style="text-align: center; vertical-align: middle; ">Perangkat</th>
-                  <td style="text-align: center; vertical-align: middle; ">{{ $index->PERANGKAT }}</td>
+                  <th style="text-align: left; vertical-align: middle; ">Perangkat</th>
+                  <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+                  <td style="text-align: left; vertical-align: middle; ">{{ $index->PERANGKAT }}</td>
                 </tr>
                 <tr>
-                  <th style="text-align: center; vertical-align: middle; ">Nomor Registrasi</th>
-                  <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
+                  <th style="text-align: left; vertical-align: middle; ">Nomor Registrasi</th>
+                  <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+                  <td style="text-align: left; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
                 </tr>
               </table>
-              <table style="width: 40%; float: right; margin: 5%;" class="table table-bordered table-hover">
+              <table style="width: 40%; float: right; margin: 5%;" class="table">
                 <tr>
-                  <th style="text-align: center; vertical-align: middle; ">Tanggal Peminjaman</th>
-                  <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PEMINJAMAN)); ?></td>
+                  <th style="text-align: left; vertical-align: middle; ">Tanggal Peminjaman</th>
+                  <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+                  <td style="text-align: left; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PEMINJAMAN)); ?></td>
                 </tr>
                 <tr>
-                  <th style="text-align: center; vertical-align: middle; ">Tanggal Pengembalian</th>
-                  <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PENGEMBALIAN)); ?></td>
+                  <th style="text-align: left; vertical-align: middle; ">Tanggal Pengembalian</th>
+                  <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+                  <td style="text-align: left; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PENGEMBALIAN)); ?></td>
                 </tr>
                 <tr>
-                  <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
+                  <th style="text-align: left; vertical-align: middle; ">Sisa Hari</th>
+                  <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
                   <?php
                       $datenow=date_create();
                       $datefinish=date_create($index->TGL_PENGEMBALIAN);
@@ -61,16 +68,17 @@
                       $printInt = (int)$print;
                   ?>
                   @if($print > 0 && ($index->KETERANGAN) == "in progress")
-                    <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
+                    <td style="background-color: green; color: white; text-align: left; vertical-align: middle; ">{{ $print }}</td>
                   @elseif ($print <= 0 && ($index->KETERANGAN) == "in progress")
-                    <td style="background-color: red; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
+                    <td style="background-color: red; color: white; text-align: left; vertical-align: middle; ">{{ $print }}</td>
                   @elseif (($index->KETERANGAN) == "done")
-                    <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">Done</td>
+                    <td style="background-color: green; color: white; text-align: left; vertical-align: middle; ">Done</td>
                   @endif
                 </tr>
               </table>
               @endforeach
             </div>
+            <h3><a href="{{URL::to('user-search')}}"><span style="color: #3C8DBC; margin-bottom: 3%; margin-left: 3%;" class="fa fa-arrow-circle-o-left" aria-hidden="true">Cari Lagi</a></h3>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

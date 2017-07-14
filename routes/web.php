@@ -101,3 +101,5 @@ Route::post('caripeminjaman', 'PinjamController@showpeminjaman')->middleware('us
 Route::get('user-search', 'UserController@index')->middleware('user');
 Route::post('user-search', 'UserController@show')->middleware('user');
 
+Route::get('export/permintaan', 'PermintaanController@exporttoexcel');
+

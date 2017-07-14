@@ -15,51 +15,61 @@
             @endif
           <div class="box">
             <div class="box-header">
-              <h3 >Data Peminjaman</h3>
+              <h3 >Data barang yang anda minta</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
             @foreach($showdata as $jebret)
-            <table class="table table-bordered table-hover">
+            <table class="table">
                 <thead>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Nomor Ticket</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5">{{ $jebret->NOMOR_TICKET }}</td>
           </tr>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Nama Requester</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5">{{ $jebret->NAMA_REQUESTER }}</td>
           </tr>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Bagian</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5">{{ $jebret->BAGIAN }}</td>
           </tr>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Divisi</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5">{{ $jebret->DIVISI }}</td>
           </tr>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Permintaan</th>
-              <td colspan="5"><?php echo date('d F Y', strtotime($jebret->TGL_PERMINTAAN)) ?></td>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+              <td colspan="5"><?php echo date('d F Y', strtotime($jebret->TGL_PERMINTAAN)); ?></td>
           </tr>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Barang yang Diminta</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5">{{ $jebret->BARANG_PERMINTAAN }}</td>
           </tr>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Deskripsi</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5">{{ $jebret->DESKRIPSI }}</td>
           </tr>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">No FPBJ</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5">{{ $jebret->NO_FPBJ }}</td>
           </tr>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Target Selesai</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5"><?php echo date('d F Y', strtotime($jebret->TGL_DEADLINE)); ?></td>
           </tr>
           <tr>
               <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Keterangan</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5">{{ $jebret->KETERANGAN }}</td>
           </tr>
 
@@ -215,6 +225,7 @@
               </table>  
             @endforeach
             </div>
+            <h3><a href="{{URL::to('user-search')}}"><span style="color: #3C8DBC; margin-bottom: 3%; margin-left: 3%;" class="fa fa-arrow-circle-o-left" aria-hidden="true">Cari Lagi</a></h3>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

@@ -15,7 +15,7 @@
             @endif
           <div class="box">
             <div class="box-header">
-              <h3 >Data Peminjaman</h3>
+              <h3 >Data barang yang direpair oleh vendor</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -80,6 +80,7 @@
                 </div>
               </div>
             </div>
+            <h3><a href="{{URL::to('user-search')}}"><span style="color: #3C8DBC; margin-bottom: 3%; margin-left: 3%;" class="fa fa-arrow-circle-o-left" aria-hidden="true">Cari Lagi</a></h3>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
