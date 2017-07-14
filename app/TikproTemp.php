@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TikproLama extends Model
+class TikproTemp extends Model
 {
     public $table = "TIKPRO_TEMP";
     public $fillable = array(

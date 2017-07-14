@@ -65,7 +65,7 @@
                 <input type="hidden" name="_method" value="PUT">
                 <select class="form-control" name="KETERANGAN">
                   <option disabled selected value><b>-- Pilih Menu DIbawah --</b></option>
-                  <option value="in progress">In Progress</option>
+                  <option value="progress">In Progress</option>
                   <option value="done">Done</option>
                 </select>
               </div>

@@ -62,8 +62,8 @@
                   @foreach ($jebret3 as $index)
                       <tr>
                         <td style="text-align: center; vertical-align: middle; " data-dismiss="modal" >{{ $indexNo++ }}</td>
-                        <td style="text-align: center; vertical-align: middle;" data-dismiss="modal" >{{ $index->NAMA_TIKPRO }}</td>
-                        <td style="text-align: center; vertical-align: middle;" data-dismiss="modal" >{{ $index->DEADLINE }}</td>
+                        <td style="text-align: center; vertical-align: middle;" data-dismiss="modal" >{{ $index->NAMA_TIKPRO_TEMP }}</td>
+                        <td style="text-align: center; vertical-align: middle;" data-dismiss="modal" >{{ $index->DEADLINE_TIKPRO_TEMP }}</td>
                       </tr>
                   @endforeach
                   </tbody>
