@@ -66,11 +66,11 @@
                 <select class="form-control" name="KETERANGAN">
                   @if ($peminjaman->KETERANGAN == 'progress')
                     <option disabled><b>-- Pilih Menu DIbawah --</b></option>
-                    <option selected value="in progress">In Progress</option>
+                    <option selected value="progress">In Progress</option>
                     <option value="done">Done</option>
                   @elseif ($peminjaman->KETERANGAN == 'done')
                     <option disabled><b>-- Pilih Menu DIbawah --</b></option>
-                    <option value="in progress">In Progress</option>
+                    <option value="progress">In Progress</option>
                     <option selected value="done">Done</option>
                   @endif
                 </select>

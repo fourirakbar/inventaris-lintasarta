@@ -192,14 +192,11 @@ class TikproController extends Controller
       return view('tikpro.logClick', compact('isi','tikproLama','tikproBaru'));
     }
     public function detailLogClick ($ID_LOG) {
+      // $idlogg = $ID_LOG+1;
       $jebret = Log::find($ID_LOG); 
       $jebret2 = DB::table('TIKPRO_LAMA')->where('LOG_ID', $ID_LOG)->get(); //ambil semua data dari tabel TIKPRO
-      dd($jebret2);
       $jebret3 = DB::table('TIKPRO_TEMP')->where('LOG_ID',$ID_LOG)->get();
-      // $boi = DB::table('HISTORY_TIKPRO')->select('*')->join('PERMINTAAN','PERMINTAAN.ID_PERMINTAAN', '=', 'HISTORY_TIKPRO.PERMINTAAN_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil data dari table HISTORY_TIKPRO dan table PERMINTAAN dengan ketentuan yang sudah diberikan
-      // $count = DB::table('TIKPRO')->whereNotNull('NAMA_TIKPRO')->count();
-      // $count = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->count();
-      // dd($count);
-      // return view('tikpro.detailLog', compact('jebret', 'jebret2', 'jebret3')); //return view ke halaman details dengan data dari variable $jebret, $query, $jebret2, dan $boi
+      // dd($jebret3);
+      return view('tikpro.detailLog', compact('jebret', 'jebret2', 'jebret3')); //return view ke halaman details dengan data dari variable $jebret, $query, $jebret2, dan $boi
     }
 }

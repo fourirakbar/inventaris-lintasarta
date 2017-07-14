@@ -7,8 +7,8 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/semua">Data Request Barang yang Belum Selesai</a></li>
-        <li class="active">Details Data</li>
+        <li><a href="/log_click">Log Titik Proses</a></li>
+        <li class="active">Details Perubahan</li>
       </ol>
     </section>
 
