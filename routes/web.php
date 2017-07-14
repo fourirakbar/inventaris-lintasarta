@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/', 'LoginController@UserController@index')->middleware('guest');
+Route::get('/', 'UserController@UserController@index')->middleware('guest');
 #user request barang
 Route::get('request', 'PermintaanController@index')->middleware('user');
 Route::post('request2', 'PermintaanController@input')->middleware('user');
