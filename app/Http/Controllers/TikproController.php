@@ -48,15 +48,10 @@ class TikproController extends Controller
 
         $check = DB::table('TIKPRO_LAMA')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
         // dd($check);
-        if (!isset($check->items)) {
-          $checkint = 1;
-        }
-        else {
           $check2 = explode(":", $check);
           $check3 = explode("}]", $check2[1]);
           $checkint = (int)$check3[0];
-        }
-        
+  
 
         if ($lastint+1 != $checkint) {
           for ($i=0; $i < $count ; $i++) { 
