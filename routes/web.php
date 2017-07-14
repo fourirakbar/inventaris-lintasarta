@@ -99,4 +99,4 @@ Route::post('caripeminjaman', 'PinjamController@showpeminjaman')->middleware('us
 Route::get('user-search', 'UserController@index');
 Route::post('user-search', 'UserController@show');
 
-Route::get('export/permintaan', 'PermintaanController@exporttoexcel')-.middleware('admin');
+Route::get('export/permintaan', 'PermintaanController@exporttoexcel')->middleware('admin');
