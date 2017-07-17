@@ -39,6 +39,6 @@ class LoginController extends Controller
     public function logout() {
         //session destroy, dan ke redirect ke halaman /login 
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
     }
 }

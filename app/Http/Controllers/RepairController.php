@@ -54,6 +54,8 @@ class RepairController extends Controller
                 'TANGGAL_REPAIR' => $data['TANGGAL_REPAIR'],
                 'PERKIRAAN_SELESAI' => $data['PERKIRAAN_SELESAI'],
                 'NOMOR_TICKET' => $data['NOMOR_TICKET'],
+                'TANGGAL_REPAIR' => $data['TANGGAL_REPAIR'],
+                'PERKIRAAN_SELESAI' => $data['PERKIRAAN_SELESAI'],
         	));	
         }
         
