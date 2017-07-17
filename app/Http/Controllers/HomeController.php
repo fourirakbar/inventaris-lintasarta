@@ -19,12 +19,27 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+    	return view('home');
+        // echo $counter;
     }
 
     public function show()
     {
-        $msg = "This is a simple message.";
-        return response()->json(array('msg'=> $msg), 200);
+        $createnow = date_create();
+        $datenow = date_format($createnow, 'Y-m-d');
+        $pembatalandate = DB::table('PEMBATALAN')->select('updated_at')->get();
+        $arraydatebatal=array();
+        foreach ($pembatalandate as $batal) {
+        	array_push($arraydatebatal, date_format(date_create($batal->updated_at), 'Y-m-d'));
+        }
+        $counter = 0;
+        foreach ($arraydatebatal as $arraybatal) {
+        	$diff=date_diff(date_create($datenow),date_create($arraybatal));
+        	$beda = $diff->format("%a");
+        	if ($beda == 0) {
+        		$counter++;
+        	}
+        }
+        return response()->json(['success' => true, 'batal' => $counter]);
     }
 }

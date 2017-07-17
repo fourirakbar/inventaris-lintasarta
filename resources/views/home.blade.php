@@ -1,4 +1,7 @@
 @extends('layouts.lumino')
+@section('additionalcss')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+@endsection
 @section('content')
 
 <section class="content">
@@ -8,12 +11,12 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3 id="count1" onload="getMessage()"></h3>
+          <h3 id="count1"></h3>
 
-          <p>New Orders</p>
+          <p>Permintaan Pembatalan Hari Ini</p>
         </div>
         <div class="icon">
-          <i class="ion ion-bag"></i>
+          <i class="ion ion-android-mail"></i>
         </div>
         <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
@@ -70,16 +73,19 @@
 
 @endsection
 @section('javas')
-<script>
- function getMessage(){
-    $.ajax({
-       type:'POST',
-       url:'/getmsg',
-       data:'_token = {{csrf_token()}}',
-       success: function(data){
-          $("#count1").html(data.msg);
-       }
-    });
- }
+<script type="text/javascript">
+var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+setInterval(function(){
+  $.ajax({
+    url: 'getmsg',
+    type: 'POST',
+    data: {_token: CSRF_TOKEN},
+    dataType: 'JSON',
+    success: function (data) {
+      console.log(data);
+      $('#count1').text(data.batal);
+    }
+  });
+},2000);
 </script>
 @endsection
