@@ -166,6 +166,7 @@ class PermintaanController extends Controller
 
         // $search = Pembatalan::query()->select('PERMINTAAN_ID')->where('PERMINTAAN_ID',$ID_PERMINTAAN)->get();
         $search = DB::select("SELECT PERMINTAAN_ID FROM PEMBATALAN WHERE PERMINTAAN_ID = $ID_PERMINTAAN");
+
         if (empty($search)) {
             Pembatalan::insertGetId(array(
                 'PERMINTAAN_ID' => $ID_PERMINTAAN,
@@ -175,25 +176,26 @@ class PermintaanController extends Controller
             ));
             Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'Request untuk dibatalkan']);
 
-            if(Auth::user()->jenis_user == 'admin') {
+            if(!Auth::guest()) {
                 $url = '/semua';
                 return redirect($url)->with('success','Sukses Mengajukan Request Pembatalan');    
             }
 
             else {
-                $url = '/caripermintaan';
+                // echo "333h";
+                $url = '/user-search ';
                 return redirect($url)->with('success','Sukses Mengajukan Request Pembatalan');    
             }
             
         }
         else {
-            if(Auth::user()->jenis_user == 'admin') {
+            if(!Auth::guest()) {
                 $url = '/semua';
                 return redirect($url)->with('gagal','Anda sudah pernah menjukan pembatalan');
             }
 
             else {
-                $url = '/caripermintaan';
+                $url = '/user-search';
                 return redirect($url)->with('gagal','Anda sudah pernah menjukan pembatalan');    
             }
         }
