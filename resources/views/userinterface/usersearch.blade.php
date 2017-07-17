@@ -242,6 +242,15 @@
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
+            @if ($message = Session::get('success'))
+              <div class="alert alert-success">
+                <p>{{ $message }}</p>
+              </div>
+            @elseif ($message = Session::get('gagal'))
+            <div class="alert alert-warning">
+                <p>{{ $message }}</p>
+              </div>
+            @endif
             <h1><span class="fa fa-search"></span> Cari nomor tiket anda disini!</h1>
             <br>
             <div class="s-bar">

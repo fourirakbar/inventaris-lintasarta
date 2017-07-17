@@ -70,7 +70,7 @@
               	</tr>
               	<tr>
               		<th style="vertical-align: middle; width: 15%;">File Pembatalan</th>
-              		<td style="vertical-align: middle; width: 20%;"><a href="{{ URL::asset($jebret->FILE_PEMBATALAN) }}" class="btn btn-app"><i class="glyphicon glyphicon-download-alt"></i>Download File</a>
+              		<td style="vertical-align: middle; width: 20%;"><a href="{{ URL::asset($jebret->FILE_PEMBATALAN) }}" class="btn btn-app" download=""><i class="glyphicon glyphicon-download-alt"></i>Download File</a>
                   {{-- <img id="myImg" src="{{ URL::asset($jebret->FILE_PEMBATALAN) }}" height="100px" width="auto"></td> --}}
               	</tr>
               	<tr>

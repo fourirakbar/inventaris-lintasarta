@@ -17,9 +17,8 @@ Route::get('/', 'UserController@index')->middleware('guest');
 Route::get('request', 'PermintaanController@index')->middleware('user');
 Route::post('request2', 'PermintaanController@input')->middleware('user');
 
-Route::get('/home', function() {
-	return view('home');
-})->middleware('user', 'admin');
+Route::get('home', 'HomeController@index')->middleware('admin');
+Route::post('getmsg', 'HomeController@show')->middleware('admin');
 
 #karyawan cek semua permintaan
 Route::get('/semua', 'PermintaanController@lihatSemua')->middleware('admin');
@@ -51,7 +50,7 @@ Route::get('log_click', 'TikproController@logClick')->middleware('admin');
 Route::get('/log_click/details/{ID_LOG}', 'TikproController@detailLogClick')->middleware('admin');
 
 Route::get('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@hapus')->middleware('user');
-Route::post('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@delete')->middleware('user');
+Route::post('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@delete');
 Route::get('adminhapus', 'PermintaanController@showpembatalan')->middleware('admin');
 Route::get('adminhapus/request', 'PermintaanController@showpembatalanbelum')->middleware('admin');
 Route::get('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@detailpembatalan')->middleware('admin');
