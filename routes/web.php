@@ -99,5 +99,11 @@ Route::post('caripeminjaman', 'PinjamController@showpeminjaman')->middleware('us
 
 Route::get('user-search', 'UserController@index');
 Route::post('user-search', 'UserController@show');
+Route::get('user-search/cancel', 'UserController@showCancel');
+Route::post('user-search/cancel', 'UserController@cancel');
 
 Route::get('export/permintaan', 'PermintaanController@exporttoexcel')->middleware('admin');
+
+Route::get('/barangkeluar', 'BarangKeluarController@index');
+Route::post('/barangkeluar', 'BarangKeluarController@input');
+Route::get('/barangkeluar/show', 'BarangKeluarController@show');

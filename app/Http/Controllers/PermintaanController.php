@@ -124,6 +124,7 @@ class PermintaanController extends Controller
 
     public function doEdit($ID_PERMINTAAN) {
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
+        // dd($jebret);
         $jebret2 = Tikpro::query('NAMA_TIKPRO')->join('PERMINTAAN', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get()[0]; //ambil data dari table TIKPRO dan tabel PERMINTAAN dengan ketentuan yang sudah diberikan
         $listtikpro = DB::table('HISTORY_TIKPRO')->select('TIKPRO_ID', 'TIKPRO_NAMA')->where('PERMINTAAN_ID',$ID_PERMINTAAN)->get(); //ambil data pada kolom ID_TIKPRO dan NAMA_TIKRPO dari tabel TIKPRO
         // dd($jebret);
@@ -133,6 +134,7 @@ class PermintaanController extends Controller
     public function doUpdate(Request $request, $ID_PERMINTAAN) {
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
         $kelarBoi = Input::get('TGL_SELESAI'); //menginputkan sesuai nilai yang dimasukkan ke TGL_SELESAI
+        $nama = Input::get('NAMA');
         $vape = HistoryTikpro::query()->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get(); //ambil semua data dari tabel HISTORY_TIKPRO dengan ketentuan yang sudah diberikan
         Permintaan::find($ID_PERMINTAAN)->update($request->all()); //update data pada tabel PERMINTAAN sesuai input yang diberikan oleh user
         
@@ -141,10 +143,12 @@ class PermintaanController extends Controller
         $komodoBreakfast = explode("}]", $komodoDream[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
 
         $notBadLiquid = "UPDATE HISTORY_TIKPRO SET TGL_SELESAI= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?"; //update TGL_SELESAI pada tabel HISTORY_TIKPRO dengan ketentuan yang sudah diberikan
+        $updatedb = "UPDATE HISTORY_TIKPRO SET NAMA= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?";
         DB::update($notBadLiquid, array($kelarBoi, $komodoBreakfast[0], $ID_PERMINTAAN));
+        DB::update($updatedb, array($nama, $komodoBreakfast[0], $ID_PERMINTAAN));
 
         $url = '/semua/lihat/'.$ID_PERMINTAAN;
-        return redirect($url)->with('success','Sukses Update Data'); //return ke /semua/lihat dengan keterangan sukses
+        return redirect($url)->with ('success','Sukses Update Data'); //return ke /semua/lihat dengan keterangan sukses
     }
 
 

@@ -224,167 +224,18 @@
           </thead>
               </table>  
             @endforeach
-            <h3><a href="{{URL::to('user-search')}}"><span style="color: #3C8DBC;" class="fa fa-arrow-circle-o-left" aria-hidden="true">Cari Lagi</a></h3>
-            @if($jebret->STATUS == "in progress")
-              <button type="button" class="btn btn-danger btn-lg pull-right" data-toggle="modal" data-target="#myModal">Batalkan Permintaan</button>
-            @endif
             </div>
+            <h3><a href="{{URL::to('user-search')}}"><span style="color: #3C8DBC; margin-bottom: 0%; margin-left: 3%;" class="fa fa-arrow-circle-o-left" aria-hidden="true"> Cari Lagi</a></h3>
+            <h3><a href="{{URL::to('user-search')}}"><span style="color: #3C8DBC; margin-bottom: 3%; margin-left: 3%;" class="fa fa-arrow-circle-o-left" aria-hidden="true"> Cancel Permintaan</a></h3>
+
+
             <!-- /.box-body -->
           </div>
-
-          <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Data Barang Dari Gudang</h4>
-            </div>
-            <form action="{{ url('/semua/hapus', $jebret->ID_PERMINTAAN) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="modal-body">
-                <div class="form-group col-md-6"> 
-                  <label>Nomor Ticket</label> 
-                  <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET" disabled=""> 
-                </div>
-
-                <div class="form-group col-md-6"> 
-                  <label>Barang yang Diminta</label> 
-                  <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN" disabled=""> 
-                </div>
-
-                <div class="form-group col-md-6"> 
-                  <label>Nama Requester</label> 
-                  <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER" disabled=""> 
-                </div>
-                
-                <div class="form-group col-md-6"> 
-                  <label>Deskirpsi</label> 
-                  <textarea class="form-control" name="DESKRIPSI" disabled="">{{ $jebret->DESKRIPSI }}</textarea>
-                </div>
-
-                <div class="clearfix hidden-md"></div>
-
-                <div class="form-group col-md-6"> 
-                  <label>Bagian</label> 
-                  <input class="form-control" value="{{ $jebret->BAGIAN }}" name="BAGIAN" disabled=""> 
-                </div>
-
-                <div class="form-group col-md-6"> 
-                  <label>Alasan Pembatalan</label> 
-                  <textarea class="form-control" name="ALASAN_PEMBATALAN" required=""></textarea> 
-                </div>
-
-                <div class="clearfix hidden-md"></div>
-
-                <div class="form-group col-md-6"> 
-                  <label>Divisi</label> 
-                  <input class="form-control" value="{{ $jebret->DIVISI }}" name="DIVISI" disabled=""> 
-                </div> 
-
-                <div class="form-group col-md-6"> 
-                  <label>Upload File Pembatalan</label> 
-                  <input type="file" name="FILE_PEMBATALAN" enctype="multipart/form-data" required=""> 
-                </div>                  
-
-                <div class="clearfix hidden-md"></div>
-                
-                <div class="form-group col-md-6"> 
-                  <label>Tanggal Permintaan</label> 
-                  <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN" disabled=""> 
-                </div> 
-
-                <div class="clearfix hidden-md"></div>
-
-                <button type="submit" class="btn btn-primary pull-right">Batalkan Permintaan</button>
-              </div>
-            </form>
-            <div class="modal-footer">
-              
-            </div>
-          </div>
-        </div>
-      </div>
-
           <!-- /.box -->
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
-      <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Form Pengajuan Pembatalan</h4>
-              </div>
-              <div class="modal-body">
-                <form action="{{ url('/semua/hapus', $jebret->ID_PERMINTAAN) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-                <div class="box-body" style="padding-right: 10%; padding-left: 10%; padding-bottom: 5%">
-                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="form-group col-md-6"> 
-                          <label>Nomor Ticket</label> 
-                          <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET" readonly=""> 
-                        </div>
-
-                        <div class="form-group col-md-6"> 
-                          <label>Barang yang Diminta</label> 
-                          <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN" readonly=""> 
-                        </div>
-
-                        <div class="form-group col-md-6"> 
-                          <label>Nama Requester</label> 
-                          <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER" readonly=""> 
-                        </div>
-                        
-                        <div class="form-group col-md-6"> 
-                          <label>Deskirpsi</label> 
-                          <textarea class="form-control" name="DESKRIPSI" readonly="">{{ $jebret->DESKRIPSI }}</textarea>
-                        </div>
-
-                        <div class="clearfix hidden-md"></div>
-
-                        <div class="form-group col-md-6"> 
-                          <label>Bagian</label> 
-                          <input class="form-control" value="{{ $jebret->BAGIAN }}" name="BAGIAN" readonly=""> 
-                        </div>
-
-                        <div class="form-group col-md-6"> 
-                          <label>Alasan Pembatalan</label> 
-                          <textarea class="form-control" name="ALASAN_PEMBATALAN" required=""></textarea> 
-                        </div>
-
-                        <div class="clearfix hidden-md"></div>
-
-                        <div class="form-group col-md-6"> 
-                          <label>Divisi</label> 
-                          <input class="form-control" value="{{ $jebret->DIVISI }}" name="DIVISI" readonly=""> 
-                        </div> 
-
-                        <div class="form-group col-md-6"> 
-                          <label>Upload File Pembatalan</label> 
-                          <input type="file" name="FILE_PEMBATALAN" enctype="multipart/form-data" required=""> 
-                        </div>                  
-
-                        <div class="clearfix hidden-md"></div>
-                        
-                        <div class="form-group col-md-6"> 
-                          <label>Tanggal Permintaan</label> 
-                          <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN" readonly=""> 
-                        </div> 
-
-                        <div class="clearfix hidden-md"></div>
-
-                        <button type="submit" class="btn btn-primary pull-right">Batalkan Permintaan</button>  
-                      </div> 
-                    </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
 @endsection

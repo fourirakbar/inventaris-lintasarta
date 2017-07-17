@@ -88,6 +88,11 @@
 	                </div>
 
                   <div class="form-group">
+                    <label>Nama</label>
+                    <input class="form-control" placeholder="Nama" name="NAMA" value="{{ $jebret->NAMA }}">
+                  </div>
+
+                  <div class="form-group">
                     <label>Tanggal Ganti Titik Proses</label>
                     <input type="date" class="form-control calendar1" name="TGL_SELESAI" placeholder="Tanggal Ganti Titik Proses" value="{{ $jebret->TGL_SELESAI }}"</div>
                   </div>
