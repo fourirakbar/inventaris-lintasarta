@@ -63,6 +63,21 @@
         @endif
         @if(Auth::user()->jenis_user == 'admin')
         <li class="treeview">
+            <a href="#">
+              <i class="fa fa-calendar"></i>
+              <span>Alokasi Barang Keluar</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="{{ URL::to('/barangkeluar') }}"><i class="fa fa-book"></i> <span>Input Barang Keluar</span></a></li>
+              <li><a href="{{ URL::to('/barangkeluar/show') }}"><i class="fa fa-search"></i> <span>Histori Barang Keluar</span></a></li>
+            </ul>
+          </li>
+        @endif
+        @if(Auth::user()->jenis_user == 'admin')
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Peminjaman</span>
