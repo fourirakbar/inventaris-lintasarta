@@ -45,4 +45,12 @@ class UserController extends Controller
             return view('userinterface.usersearchnotfound');   
         }
     }
+
+    public function showCancel(Request $request) {
+        dd($request);
+    }
+
+    public function cancel() {
+
+    }
 }

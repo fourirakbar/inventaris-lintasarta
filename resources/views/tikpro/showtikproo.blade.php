@@ -62,7 +62,6 @@
                       </tbody>
               </table>
             </div><br><br><br><br>
-            <a href="{{ URL::to('edittikpro') }}"><button class="btn btn-primary btn-lg pull-right">Edit</button></a> 
           </div>
             <!-- /.box-header -->
             <!-- form start -->

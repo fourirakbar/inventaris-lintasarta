@@ -72,8 +72,9 @@
           </tr>
 
 			     <tr>
-		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Nama Proses</th>
-		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Tgl Input</th>
+            <th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Nama Proses</th>
+            <th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Nama</th>
+            <th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Tgl Input</th>
 		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Tgl Selesai (Seharusnya)</th>
 		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Tgl Selesai (Kenyataan)</th>
 		    		<th style="text-align: center; vertical-align: middle; background-color: gray; color: white;">Status</th>
@@ -86,6 +87,7 @@
             for ($i=0; $i <($count) ; $i++) {
               if ($i == 0) { ?>
                 <td style="text-align: center; vertical-align: middle; ">{{ $jebret2[$i]->TIKPRO_NAMA }}</td>
+                <td>{{ $jebret2[$i]->NAMA }}</td>
                 <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($jebret->TGL_PERMINTAAN)) ?></td>    
                 <td style="text-align: center; vertical-align: middle; ">
                   <?php
@@ -148,6 +150,7 @@
                   if (!empty($boi[$i-1]->TGL_SELESAI)) { ?>
                     <tr>
                       <td style="text-align: center; vertical-align: middle; ">{{ $jebret2[$i]->TIKPRO_NAMA }}</td>
+                      <td>{{ $jebret2[$i]->NAMA }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($boi[$i-1]->TGL_SELESAI)) ?></td>
                       <td style="text-align: center; vertical-align: middle; ">
                         <?php
