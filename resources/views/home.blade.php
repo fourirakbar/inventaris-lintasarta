@@ -11,14 +11,14 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3 id="count1"></h3>
+          <h3 id="count1">Counting...</h3>
 
           <p>Permintaan Pembatalan Hari Ini</p>
         </div>
         <div class="icon">
           <i class="ion ion-android-mail"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="{{ URL::to('adminhapus/request') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -26,9 +26,9 @@
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>53<sup style="font-size: 20px">%</sup></h3>
+          <h3 id="count2">Counting...</h3>
 
-          <p>Bounce Rate</p>
+          <p>Permintaan yang prosesnya terlambat</p>
         </div>
         <div class="icon">
           <i class="ion ion-stats-bars"></i>
@@ -41,14 +41,14 @@
       <!-- small box -->
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>44</h3>
+          <h3 id="count3">Counting...</h3>
 
-          <p>User Registrations</p>
+          <p>Peminjaman lewat dari hari pengembalian</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="{{ URL::to('peminjaman/show/belum') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -56,14 +56,14 @@
       <!-- small box -->
       <div class="small-box bg-red">
         <div class="inner">
-          <h3>65</h3>
+          <h3 id="count4">Counting...</h3>
 
-          <p>Unique Visitors</p>
+          <p>Perbaikan lewat dari tanggal perkiraan selesai</p>
         </div>
         <div class="icon">
           <i class="ion ion-pie-graph"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="{{ URL::to('repair/show/belum') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -77,13 +77,43 @@
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 setInterval(function(){
   $.ajax({
-    url: 'getmsg',
+    url: 'getmsg1',
     type: 'POST',
     data: {_token: CSRF_TOKEN},
     dataType: 'JSON',
     success: function (data) {
       console.log(data);
       $('#count1').text(data.batal);
+    }
+  });
+  $.ajax({
+    url: 'getmsg2',
+    type: 'POST',
+    data: {_token: CSRF_TOKEN},
+    dataType: 'JSON',
+    success: function (data) {
+      console.log(data);
+      $('#count2').text(data.minta);
+    }
+  });
+  $.ajax({
+    url: 'getmsg3',
+    type: 'POST',
+    data: {_token: CSRF_TOKEN},
+    dataType: 'JSON',
+    success: function (data) {
+      console.log(data);
+      $('#count3').text(data.pinjam);
+    }
+  });
+  $.ajax({
+    url: 'getmsg4',
+    type: 'POST',
+    data: {_token: CSRF_TOKEN},
+    dataType: 'JSON',
+    success: function (data) {
+      console.log(data);
+      $('#count4').text(data.repair);
     }
   });
 },2000);

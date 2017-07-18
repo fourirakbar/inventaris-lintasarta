@@ -18,7 +18,10 @@ Route::get('request', 'PermintaanController@index')->middleware('user');
 Route::post('request2', 'PermintaanController@input')->middleware('user');
 
 Route::get('home', 'HomeController@index')->middleware('admin');
-Route::post('getmsg', 'HomeController@show')->middleware('admin');
+Route::post('getmsg1', 'HomeController@showbatal')->middleware('admin');
+Route::post('getmsg2', 'HomeController@showminta')->middleware('admin');
+Route::post('getmsg3', 'HomeController@showpinjam')->middleware('admin');
+Route::post('getmsg4', 'HomeController@showrepair')->middleware('admin');
 
 #karyawan cek semua permintaan
 Route::get('/semua', 'PermintaanController@lihatSemua')->middleware('admin');
