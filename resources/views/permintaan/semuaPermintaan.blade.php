@@ -31,14 +31,37 @@
             <?php
 
               $deadline = array();
-              for ($i = 1 ; $i <= count($jebret2) ; $i++){
-                if (empty($deadline)) {
-                  array_push($deadline, $jebret2[$i-1]->DEADLINE);
+              $deadline2 = array();
+              $deadline3 = array();
+              $deadline4 = array();
+              foreach ($jebret2 as $key) {
+                foreach ($key as $value) {
+                  array_push($deadline, ["idpermintaan" => $value->ID_PERMINTAAN, "deadline" => $value->DEADLINE, "idtikpro" => $value->TIKPRO_ID]);
                 }
-                else{
-                  array_push($deadline, $jebret2[$i-1]->DEADLINE + $deadline[$i-2]); 
-                }
+                array_push($deadline2, $deadline);
+                $deadline = array();
+
               }
+              for ($i=1; $i <= count($deadline2) ; $i++) {
+                for ($j=1; $j <= count($deadline2[$i-1]) ; $j++) { 
+                  
+                  if (empty($deadline3)) {
+                    array_push($deadline3, ["idpermintaan" => $deadline2[$i-1][$j-1]["idpermintaan"], "deadline" => $deadline2[$i-1][$j-1]["deadline"], "idtikpro" => $deadline2[$i-1][$j-1]["idtikpro"]]);
+                  }
+                  else{
+                    array_push($deadline3, ["idpermintaan" => $deadline2[$i-1][$j-1]["idpermintaan"], "deadline" => $deadline2[$i-1][$j-1]["deadline"]+ $deadline3[$j-2]["deadline"], "idtikpro" => $deadline2[$i-1][$j-1]["idtikpro"]]); 
+                  }
+                }
+                array_push($deadline4, $deadline3);
+                $deadline3 = array();
+              }
+              // dd($deadline4);
+              // foreach ($deadline4 as $jumlaharray) {
+              //    foreach ($jumlaharray as $eacharray) {
+              //      print_r($eacharray);
+              //    }
+              //  }
+
             ?>
             <!-- /.box-header -->
             <div class="box-body">
@@ -66,23 +89,18 @@
                          if ($key->STATUS == "in progress") {
                              $date1=date_create();
                              $date2=date_create($key->TGL_PERMINTAAN);
-                             for ($i=1; $i<=count($deadline) ; $i++) {
-                              if ($i == 1) {
-                                if($key->TIKPRO_ID == $i){
-                                  $deadline2 = $deadline[$i-1] + 1;
-                                }
+                             foreach ($deadline4 as $jumlaharray) {
+                              for ($i=0; $i < count($jumlaharray) ; $i++) { 
+                                if ($key->TIKPRO_ID == $i && $key->ID_PERMINTAAN == $jumlaharray[$i]["idpermintaan"]) {
+                                   $deaddead = $jumlaharray[$i]["deadline"];
+                                  // echo "true";
+                                  }
                               }
-                              else{
-                                if($key->TIKPRO_ID == $i){
-                                  $deadline2 = $deadline[$i-1];
-                                }
-                              }
-                             }
-                             
-                             $new = date_add($date2,date_interval_create_from_date_string($deadline2." days"));
+                            }
+                             // echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$deaddead,'</td>';
+                             $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead-3)." days"));
                              $diff=date_diff($date1,$new);
                              $print = $diff->format('%R%a Hari');
-                             $printInt = (int)$print;
                              if($print == 0){
                                 $print = $diff->format('%a Hari');
                              }
