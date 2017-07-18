@@ -144,7 +144,9 @@
                 @endforeach
                 </tbody>
               </table>
-              <a href="export/permintaan" class="btn btn-primary pull-left">Download Excel File</a>
+              @if(\Request::is('semua'))
+                <a href="export/permintaan" class="btn btn-primary pull-left">Download Excel File</a>
+              @endif
             </div>
             <!-- /.box-body -->
           </div>
