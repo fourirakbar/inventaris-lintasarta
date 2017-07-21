@@ -45,10 +45,10 @@
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><b class="material-icons">Barang Dari Gudang</b></button>
                   <button type="button" class="btn btn-default" id="baranguser"><b class="material-icons">Barang Dari User</b></button>
                 </div>
-                <div class="form-group">
-                  <label>Nomor Ticket</label>
-                  <input class="form-control" placeholder="Masukkan Nomor Ticket" name="NOMOR_TICKET" id="notik">
-                </div>
+                <div class="form-group"> 
+                  <label>Nomor Ticket</label> 
+                  <input class="form-control" placeholder="Masukkan Nomor Ticket" name="NOMOR_TICKET" id="notik" autocomplete="off"> 
+                </div> 
                 {{csrf_field()}}
                 <div class="form-group">
                   <label>Nama Barang</label>

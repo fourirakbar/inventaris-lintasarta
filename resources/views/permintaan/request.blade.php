@@ -29,10 +29,15 @@
             <!-- form start -->
             <form role="form" method="POST" role="form" action="{{ URL::to('request2') }}" onclick="getdate()">
               <div class="box-body">
-                <div class="form-group">
-                  <label>Nomor Ticket</label>
-                  <input class="form-control" placeholder="Nomor Ticket" name="NOMOR_TICKET">
-                </div>
+                <div class="form-group"> 
+                  <label>Nomor Ticket</label> 
+                  <input class="form-control" placeholder="Nomor Ticket" name="NOMOR_TICKET" autocomplete="off"> 
+                </div> 
+                {{csrf_field()}} 
+                <div class="form-group"> 
+                  <label>Nama Requester</label> 
+                  <input class="form-control" placeholder="Nama Requester" name="NAMA_REQUESTER"> 
+                </div> 
                 {{csrf_field()}}
                 <div class="form-group">
                   <label>Nama Requester</label>

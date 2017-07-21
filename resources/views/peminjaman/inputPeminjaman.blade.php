@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group"> 
                   <label>Nomor Ticket</label> 
-                  <input class="form-control" placeholder="Masukkan Nomor Ticket" name="NOMOR_TICKET" id="nomorticket"> 
+                  <input class="form-control" placeholder="Masukkan Nomor Ticket" name="NOMOR_TICKET" id="nomorticket" autocomplete="off"> 
                 </div> 
                 {{csrf_field()}}
                 <div class="form-group"> 
