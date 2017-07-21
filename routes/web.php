@@ -54,6 +54,7 @@ Route::get('/log_click/details/{ID_LOG}', 'TikproController@detailLogClick')->mi
 
 Route::get('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@hapus')->middleware('user');
 Route::post('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@delete');
+Route::post('/semua/reject/{ID_PERMINTAAN}', 'PermintaanController@reject')->middleware('admin');;
 Route::get('adminhapus', 'PermintaanController@showpembatalan')->middleware('admin');
 Route::get('adminhapus/request', 'PermintaanController@showpembatalanbelum')->middleware('admin');
 Route::get('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@detailpembatalan')->middleware('admin');

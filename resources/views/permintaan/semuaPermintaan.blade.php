@@ -2,12 +2,12 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Data Permintaan 
+        Data Permintaan
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Data Request Barang</li>
-        
+        <li class="active">Data Permintaan</li>
+
       </ol>
     </section>
 
@@ -43,13 +43,13 @@
 
               }
               for ($i=1; $i <= count($deadline2) ; $i++) {
-                for ($j=1; $j <= count($deadline2[$i-1]) ; $j++) { 
-                  
+                for ($j=1; $j <= count($deadline2[$i-1]) ; $j++) {
+
                   if (empty($deadline3)) {
                     array_push($deadline3, ["idpermintaan" => $deadline2[$i-1][$j-1]["idpermintaan"], "deadline" => $deadline2[$i-1][$j-1]["deadline"], "idtikpro" => $deadline2[$i-1][$j-1]["idtikpro"]]);
                   }
                   else{
-                    array_push($deadline3, ["idpermintaan" => $deadline2[$i-1][$j-1]["idpermintaan"], "deadline" => $deadline2[$i-1][$j-1]["deadline"]+ $deadline3[$j-2]["deadline"], "idtikpro" => $deadline2[$i-1][$j-1]["idtikpro"]]); 
+                    array_push($deadline3, ["idpermintaan" => $deadline2[$i-1][$j-1]["idpermintaan"], "deadline" => $deadline2[$i-1][$j-1]["deadline"]+ $deadline3[$j-2]["deadline"], "idtikpro" => $deadline2[$i-1][$j-1]["idtikpro"]]);
                   }
                 }
                 array_push($deadline4, $deadline3);
@@ -68,29 +68,35 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                        <th style="text-align: center; vertical-align: middle; ">No</th>
                         <th style="text-align: center; vertical-align: middle; ">No. Tiket</th>
                         <th style="text-align: center; vertical-align: middle; ">Nama Requester</th>
                         <th style="text-align: center; vertical-align: middle; ">Tanggal Permintaan</th>
                         <th style="text-align: center; vertical-align: middle; ">Barang yang Diminta</th>
-                        <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>      
+                        <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
                         <th style="text-align: center; vertical-align: middle; ">Titik Proses</th>
                         <th style="text-align: center; vertical-align: middle; ">Action</th>
                 </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    $indexNo = 1;
+                  ?>
                 @foreach ($jebret as $key)
+
                     <tr>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NOMOR_TICKET }}</td>
                       <td>{{ $key->NAMA_REQUESTER }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
                       <td>{{ $key->BARANG_PERMINTAAN }}</td>
-                      <?php 
-                         
+                      <?php
+
                          if ($key->STATUS == "in progress") {
                              $date1=date_create();
                              $date2=date_create($key->TGL_PERMINTAAN);
                              foreach ($deadline4 as $jumlaharray) {
-                              for ($i=0; $i < count($jumlaharray) ; $i++) { 
+                              for ($i=0; $i < count($jumlaharray) ; $i++) {
                                 if ($key->TIKPRO_ID == $i && $key->ID_PERMINTAAN == $jumlaharray[$i]["idpermintaan"]) {
                                    $deaddead = $jumlaharray[$i]["deadline"];
                                   // echo "true";
@@ -112,10 +118,10 @@
                              {
                               echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
                              }
-                         }               
+                         }
                          elseif ($key->STATUS == "done") {
                                echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >DONE</td>';
-                          }    
+                          }
                          elseif($key->STATUS == "Request untuk dibatalkan") {
                               echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >Proses Pembatalan</td>';
                          }
@@ -124,20 +130,20 @@
                          }
                        ?>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_TIKPRO }}</td>
-                      
+
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">
                         <a class="btn btn-block btn-primary" href="/semua/lihat/{{ $key->ID_PERMINTAAN }}"><b class="material-icons">Show Details</b>
                         @if ($key->STATUS_PEMBATALANH === "Request untuk dibatalkan")
-                        
+
                         @else
                         <?php
                             if ($key->STATUS == "in progress") { ?>
-                              <a class="btn btn-block btn-danger" href="/semua/hapus/{{ $key->ID_PERMINTAAN }}"><b class="material-icons">Cancel Request</b></a>      
+                              <a class="btn btn-block btn-danger" href="/semua/hapus/{{ $key->ID_PERMINTAAN }}"><b class="material-icons">Cancel Request</b></a>
                         <?php
                             }
                         ?>
-                        
+
                         @endif
                       </td>
                     </tr>

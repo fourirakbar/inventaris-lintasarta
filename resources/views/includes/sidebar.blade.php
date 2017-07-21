@@ -40,7 +40,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>
-            
+
             <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
             <li><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Sedang Diproses</span></a></li>
             <li><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Histori Permintaan</span></a></li>
@@ -55,7 +55,7 @@
                 <li><a href="{{ URL::to('adminhapus/request') }}"><i class="fa fa-circle-o"></i> Permintaan Pembatalan</a></li>
                 <li><a href="{{ URL::to('adminhapus') }}"><i class="fa fa-circle-o"></i> Histori Pembatalan</a></li>
               </ul>
-            </li>            
+            </li>
           </ul>
         </li>
         @else
@@ -87,7 +87,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ URL::to('/peminjaman') }}"><i class="fa fa-book"></i> <span>Input Peminjaman</span></a></li>
-            
+
             <li><a href="{{ URL::to('/peminjaman/show/belum') }}"><i class="fa fa-book"></i> <span>Lihat Data Peminjaman Belum</span></a></li>
             <li><a href="{{ URL::to('/peminjaman/show/sudah') }}"><i class="fa fa-book"></i> <span>Lihat Data Peminjaman Sudah</span></a>
             <li><a href="{{ URL::to('/peminjaman/show') }}"><i class="fa fa-book"></i> <span>Histori Data Peminjaman</span></a>
@@ -141,7 +141,7 @@
           </ul>
         </li>
         @endif
-          
+
         {{-- @if(Auth::user()->jenis_user == 'admin')
           <li><a href="{{ URL::to('register') }}"><i class="fa fa-user"></i> <span>Tambah User Baru</span></a></li>
         @endif --}}

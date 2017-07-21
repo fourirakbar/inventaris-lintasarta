@@ -72,6 +72,36 @@
               <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
               <td colspan="5">{{ $jebret->KETERANGAN }}</td>
           </tr>
+          <tr>
+              <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Status</th>
+              <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+              <td colspan="5">
+                <?php
+                  if (($jebret->STATUS) == "batal") {
+                    echo "Permintaan Berhasil Dibatalkan";
+                  }
+                  else if (($jebret->STATUS) == "in progress" && !isset($jebret->ALASAN_REJECT)) {
+                    echo "Permintaan Sedang Dalam Proses";
+                  }
+                  else if (($jebret->STATUS) == "done") {
+                    echo "Permintaan Selesai Sampai Titik Proses Terakhir";
+                  }
+                  else if (($jebret->STATUS) == "in progress" && isset($jebret->ALASAN_REJECT)) {
+                    echo "Permintaan Pembatalan Di Reject";
+                  }
+                ?>
+              </td>
+          </tr>
+          <?php
+            if (isset($jebret->ALASAN_REJECT)) { ?>
+              <tr>
+                  <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Alasan Reject</th>
+                  <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+                  <td colspan="5">{{ $jebret->ALASAN_REJECT }}</td>
+              </tr>
+          <?php
+            }
+          ?>
 
           <tr border="0">
               <td border="0">
@@ -94,7 +124,7 @@
             for ($i=0; $i <($count) ; $i++) {
               if ($i == 0) { ?>
                 <td style="text-align: center; vertical-align: middle; ">{{ $jebret2[$i]->TIKPRO_NAMA }}</td>
-                <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($jebret->TGL_PERMINTAAN)) ?></td>    
+                <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($jebret->TGL_PERMINTAAN)) ?></td>
                 <td style="text-align: center; vertical-align: middle; ">
                   <?php
                     $now = ($jebret->TGL_PERMINTAAN);
@@ -216,13 +246,13 @@
                 <?php
                   }
                 }
-              ?>           
+              ?>
           <?php
             }
-          ?>            
+          ?>
           </tr>
           </thead>
-              </table>  
+              </table>
             @endforeach
             <h3><a href="{{URL::to('user-search')}}"><span style="color: #3C8DBC;" class="fa fa-arrow-circle-o-left" aria-hidden="true">Cari Lagi</a></h3>
             @if($jebret->STATUS == "in progress")
@@ -242,56 +272,56 @@
             <form action="{{ url('/semua/hapus', $jebret->ID_PERMINTAAN) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="modal-body">
-                <div class="form-group col-md-6"> 
-                  <label>Nomor Ticket</label> 
-                  <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET" disabled=""> 
+                <div class="form-group col-md-6">
+                  <label>Nomor Ticket</label>
+                  <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET" disabled="">
                 </div>
 
-                <div class="form-group col-md-6"> 
-                  <label>Barang yang Diminta</label> 
-                  <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN" disabled=""> 
+                <div class="form-group col-md-6">
+                  <label>Barang yang Diminta</label>
+                  <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN" disabled="">
                 </div>
 
-                <div class="form-group col-md-6"> 
-                  <label>Nama Requester</label> 
-                  <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER" disabled=""> 
+                <div class="form-group col-md-6">
+                  <label>Nama Requester</label>
+                  <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER" disabled="">
                 </div>
-                
-                <div class="form-group col-md-6"> 
-                  <label>Deskirpsi</label> 
+
+                <div class="form-group col-md-6">
+                  <label>Deskirpsi</label>
                   <textarea class="form-control" name="DESKRIPSI" disabled="">{{ $jebret->DESKRIPSI }}</textarea>
                 </div>
 
                 <div class="clearfix hidden-md"></div>
 
-                <div class="form-group col-md-6"> 
-                  <label>Bagian</label> 
-                  <input class="form-control" value="{{ $jebret->BAGIAN }}" name="BAGIAN" disabled=""> 
+                <div class="form-group col-md-6">
+                  <label>Bagian</label>
+                  <input class="form-control" value="{{ $jebret->BAGIAN }}" name="BAGIAN" disabled="">
                 </div>
 
-                <div class="form-group col-md-6"> 
-                  <label>Alasan Pembatalan</label> 
-                  <textarea class="form-control" name="ALASAN_PEMBATALAN" required=""></textarea> 
+                <div class="form-group col-md-6">
+                  <label>Alasan Pembatalan</label>
+                  <textarea class="form-control" name="ALASAN_PEMBATALAN" required=""></textarea>
                 </div>
 
                 <div class="clearfix hidden-md"></div>
 
-                <div class="form-group col-md-6"> 
-                  <label>Divisi</label> 
-                  <input class="form-control" value="{{ $jebret->DIVISI }}" name="DIVISI" disabled=""> 
-                </div> 
+                <div class="form-group col-md-6">
+                  <label>Divisi</label>
+                  <input class="form-control" value="{{ $jebret->DIVISI }}" name="DIVISI" disabled="">
+                </div>
 
-                <div class="form-group col-md-6"> 
-                  <label>Upload File Pembatalan</label> 
-                  <input type="file" name="FILE_PEMBATALAN" enctype="multipart/form-data" required=""> 
-                </div>                  
+                <div class="form-group col-md-6">
+                  <label>Upload File Pembatalan</label>
+                  <input type="file" name="FILE_PEMBATALAN" enctype="multipart/form-data" required="">
+                </div>
 
                 <div class="clearfix hidden-md"></div>
-                
-                <div class="form-group col-md-6"> 
-                  <label>Tanggal Permintaan</label> 
-                  <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN" disabled=""> 
-                </div> 
+
+                <div class="form-group col-md-6">
+                  <label>Tanggal Permintaan</label>
+                  <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN" disabled="">
+                </div>
 
                 <div class="clearfix hidden-md"></div>
 
@@ -299,7 +329,7 @@
               </div>
             </form>
             <div class="modal-footer">
-              
+
             </div>
           </div>
         </div>
@@ -321,61 +351,61 @@
                 <form action="{{ url('/semua/hapus', $jebret->ID_PERMINTAAN) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                 <div class="box-body" style="padding-right: 10%; padding-left: 10%; padding-bottom: 5%">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="form-group col-md-6"> 
-                          <label>Nomor Ticket</label> 
-                          <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET" readonly=""> 
+                        <div class="form-group col-md-6">
+                          <label>Nomor Ticket</label>
+                          <input class="form-control" value="{{ $jebret->NOMOR_TICKET }}" name="NOMOR_TICKET" readonly="">
                         </div>
 
-                        <div class="form-group col-md-6"> 
-                          <label>Barang yang Diminta</label> 
-                          <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN" readonly=""> 
+                        <div class="form-group col-md-6">
+                          <label>Barang yang Diminta</label>
+                          <input class="form-control" value="{{ $jebret->BARANG_PERMINTAAN }}" name="BARANG_PERMINTAAN" readonly="">
                         </div>
 
-                        <div class="form-group col-md-6"> 
-                          <label>Nama Requester</label> 
-                          <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER" readonly=""> 
+                        <div class="form-group col-md-6">
+                          <label>Nama Requester</label>
+                          <input class="form-control" value="{{ $jebret->NAMA_REQUESTER }}" name="NAMA_REQUESTER" readonly="">
                         </div>
-                        
-                        <div class="form-group col-md-6"> 
-                          <label>Deskirpsi</label> 
+
+                        <div class="form-group col-md-6">
+                          <label>Deskirpsi</label>
                           <textarea class="form-control" name="DESKRIPSI" readonly="">{{ $jebret->DESKRIPSI }}</textarea>
                         </div>
 
                         <div class="clearfix hidden-md"></div>
 
-                        <div class="form-group col-md-6"> 
-                          <label>Bagian</label> 
-                          <input class="form-control" value="{{ $jebret->BAGIAN }}" name="BAGIAN" readonly=""> 
+                        <div class="form-group col-md-6">
+                          <label>Bagian</label>
+                          <input class="form-control" value="{{ $jebret->BAGIAN }}" name="BAGIAN" readonly="">
                         </div>
 
-                        <div class="form-group col-md-6"> 
-                          <label>Alasan Pembatalan</label> 
-                          <textarea class="form-control" name="ALASAN_PEMBATALAN" required=""></textarea> 
+                        <div class="form-group col-md-6">
+                          <label>Alasan Pembatalan</label>
+                          <textarea class="form-control" name="ALASAN_PEMBATALAN" required=""></textarea>
                         </div>
 
                         <div class="clearfix hidden-md"></div>
 
-                        <div class="form-group col-md-6"> 
-                          <label>Divisi</label> 
-                          <input class="form-control" value="{{ $jebret->DIVISI }}" name="DIVISI" readonly=""> 
-                        </div> 
+                        <div class="form-group col-md-6">
+                          <label>Divisi</label>
+                          <input class="form-control" value="{{ $jebret->DIVISI }}" name="DIVISI" readonly="">
+                        </div>
 
-                        <div class="form-group col-md-6"> 
-                          <label>Upload File Pembatalan</label> 
-                          <input type="file" name="FILE_PEMBATALAN" enctype="multipart/form-data" required=""> 
-                        </div>                  
-
-                        <div class="clearfix hidden-md"></div>
-                        
-                        <div class="form-group col-md-6"> 
-                          <label>Tanggal Permintaan</label> 
-                          <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN" readonly=""> 
-                        </div> 
+                        <div class="form-group col-md-6">
+                          <label>Upload File Pembatalan</label>
+                          <input type="file" name="FILE_PEMBATALAN" enctype="multipart/form-data" required="">
+                        </div>
 
                         <div class="clearfix hidden-md"></div>
 
-                        <button type="submit" class="btn btn-primary pull-right">Batalkan Permintaan</button>  
-                      </div> 
+                        <div class="form-group col-md-6">
+                          <label>Tanggal Permintaan</label>
+                          <input class="form-control" value="{{ $jebret->TGL_PERMINTAAN }} " name="TGL_PERMINTAAN" readonly="">
+                        </div>
+
+                        <div class="clearfix hidden-md"></div>
+
+                        <button type="submit" class="btn btn-primary pull-right">Batalkan Permintaan</button>
+                      </div>
                     </form>
               </div>
               <div class="modal-footer">

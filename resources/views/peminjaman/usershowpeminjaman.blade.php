@@ -67,12 +67,12 @@
                       }
                       $printInt = (int)$print;
                   ?>
-                  @if($print > 0 && ($index->KETERANGAN) == "in progress")
-                    <td style="background-color: green; color: white; text-align: left; vertical-align: middle; ">{{ $print }}</td>
-                  @elseif ($print <= 0 && ($index->KETERANGAN) == "in progress")
-                    <td style="background-color: red; color: white; text-align: left; vertical-align: middle; ">{{ $print }}</td>
+                  @if($print > 0 && ($index->KETERANGAN) == "progress")
+                    <td tyle="text-align: left; vertical-align: middle; ">{{ $print }}</td>
+                  @elseif ($print <= 0 && ($index->KETERANGAN) == "progress")
+                    <td tyle="text-align: left; vertical-align: middle; ">{{ $print }}</td>
                   @elseif (($index->KETERANGAN) == "done")
-                    <td style="background-color: green; color: white; text-align: left; vertical-align: middle; ">Done</td>
+                    <td tyle="text-align: left; vertical-align: middle; ">Done</td>
                   @endif
                 </tr>
               </table>
