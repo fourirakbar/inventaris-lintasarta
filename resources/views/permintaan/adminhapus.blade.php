@@ -2,13 +2,11 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Pembatalan Permintaan
+        Permintaan Pembatalan
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/semua">Data Request Barang yang Belum Selesai</a></li>
-        <li><a href="{{ url('/semua/lihat') }}">Details Data</a></li>
-        <li class="active">Edit Data</li>
+        <li class="active">Permintaan Pembatalan</li>
       </ol>
     </section>
 
@@ -28,7 +26,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data</h3>
+              <h3 class="box-title">Data Permintaan Pembatalan</h3>
             </div>
             <!-- /.box-header -->
             <div style="margin: 0 10% 0 10%;" class="box-body">

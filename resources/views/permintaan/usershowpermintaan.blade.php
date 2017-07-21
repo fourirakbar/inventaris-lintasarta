@@ -267,7 +267,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Data Barang Dari Gudang</h4>
+              <h4 class="modal-title">Detail Permintaan</h4>
             </div>
             <form action="{{ url('/semua/hapus', $jebret->ID_PERMINTAAN) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -325,7 +325,7 @@
 
                 <div class="clearfix hidden-md"></div>
 
-                <button type="submit" class="btn btn-primary pull-right">Batalkan Permintaan</button>
+                <button type="submit" class="btn btn-primary pull-right ">Batalkan Permintaan</button>
               </div>
             </form>
             <div class="modal-footer">
@@ -404,7 +404,7 @@
 
                         <div class="clearfix hidden-md"></div>
 
-                        <button type="submit" class="btn btn-primary pull-right">Batalkan Permintaan</button>
+                        <button type="submit" class="btn btn-primary pull-right batalkan-permintaan">Batalkan Permintaan</button>
                       </div>
                     </form>
               </div>
@@ -433,5 +433,20 @@
       "autoWidth": false
     });
     });
+  </script>
+  <script type="text/javascript">
+  $("button.batalkan-permintaan").click(function() {
+      swal({
+        title: 'Apakah Anda Yakin?',
+        text: "Anda hanya bisa melakukannya sekali saja",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, batalkan ini!'
+      }).then(function () {
+        window.location.href = "{{ URL::to('/user-search') }}";
+      })
+  });
   </script>
 @endsection

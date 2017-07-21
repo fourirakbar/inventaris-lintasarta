@@ -81,7 +81,7 @@
 	                   		@if ($tikpros->TIKPRO_ID == $jebret2->ID_TIKPRO)
                         <option selected="" value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>
 	                  		@else
-                        <option value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>	
+                        <option value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>
 	                  		@endif
           						@endforeach
 	                  </select>
@@ -97,22 +97,29 @@
                     <input type="date" class="form-control calendar1" name="TGL_SELESAI" placeholder="Tanggal Ganti Titik Proses" value="{{ $jebret->TGL_SELESAI }}"</div>
                   </div>
 
-                  <div class="form-group">
-                    <label>Status</label>
-                    <input type="hidden" name="_method" value="PUT">
-                    <select class="form-control" name="STATUS">
-                      @if ($jebret->STATUS == "in progress")
-                      <option selected="" value="in progress">In Progress</option>
-                      <option value="done">Done</option>
-                      @else
-                      <option selected="" value="done">Done</option>
-                      <option  value="in progress">In Progress</option>
-                      @endif
-                      
-                      
-                    </select>
+                  <?php
+                    if (($listtikpro[$hitungmin]->TGL_SELESAI)) { ?>
+                      <div class="form-group">
+                        <label>Status Akhir</label>
+                        <input type="hidden" name="_method" value="PUT">
+                        <select class="form-control" name="STATUS">
+                          @if ($jebret->STATUS == "in progress")
+                          <option selected="" value="in progress">In Progress</option>
+                          <option value="done">Done</option>
+                          @else
+                          <option selected="" value="done">Done</option>
+                          <option  value="in progress">In Progress</option>
+                          @endif
 
-                  </div>
+
+                        </select>
+
+                      </div>
+                  <?php
+                    }
+                  ?>
+
+
 
 	                <button type="submit" class="btn btn-primary pull-right">Update</button>&nbsp;&nbsp;
 	                <button type="reset" class="btn btn-default pull-right">Reset</button>&nbsp;&nbsp;
