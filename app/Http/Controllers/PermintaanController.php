@@ -284,7 +284,11 @@ class PermintaanController extends Controller
             $permintaanArray[] = $permintaan->toArray();
         }
         // dd($permintaanArray);
-        Excel::create('payments', function($excel) use ($permintaanArray) {
+        $datenow = date_create();
+        $newdate = date_format($datenow,"d-m-Y");
+        $namafile = "laporan-permintaan_".$newdate;
+        // dd($namafile);
+        Excel::create($namafile, function($excel) use ($permintaanArray) {
 
             // Set the spreadsheet title, creator, and description
             $excel->setTitle('Permintaan');

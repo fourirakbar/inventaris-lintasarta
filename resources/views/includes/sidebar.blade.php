@@ -15,7 +15,7 @@
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
         @if(Auth::user()->jenis_user == 'admin')
-        <li class="treeview">
+        <li class="treeview @if(\Request::is('showtikpro') || \Request::is('log_click') || \Request::is('showtikproo') || \Request::is('edittikpro')) active @endif">
             <a href="#">
               <i class="fa fa-calendar"></i>
               <span>Pengaturan Tikpro</span>
@@ -24,13 +24,13 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{ URL::to('showtikpro') }}"><i class="fa fa-book"></i> <span>Pengaturan Deadline</span></a></li>
-              <li><a href="{{ URL::to('log_click') }}"><i class="fa fa-search"></i> <span>Log Update Tikpro</span></a></li>
+              <li @if(\Request::is('showtikpro') || \Request::is('showtikproo') || \Request::is('edittikpro')) class="active" @endif ><a href="{{ URL::to('showtikpro') }}"><i class="fa fa-book"></i> <span>Pengaturan Deadline</span></a></li>
+              <li @if(\Request::is('log_click') || \Request::is('log_click/details/{ID_LOG}')) class="active" @endif ><a href="{{ URL::to('log_click') }}"><i class="fa fa-search"></i> <span>Log Update Tikpro</span></a></li>
             </ul>
           </li>
         @endif
         @if(Auth::user()->jenis_user == 'admin')
-        <li class="treeview">
+        <li class="treeview @if(\Request::is('request') || \Request::is('semua') || \Request::is('semuasudah') || \Request::is('semuabelum')) active @endif">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Permintaan</span>
@@ -39,11 +39,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>
-            
-            <li><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
-            <li><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Sedang Diproses</span></a></li>
-            <li><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Histori Permintaan</span></a></li>
+            <li @if(\Request::is('request')) class="active" @endif><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>            
+            <li @if(\Request::is('semuasudah')) class="active" @endif><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
+            <li @if(\Request::is('semuabelum')) class="active" @endif><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Sedang Diproses</span></a></li>
+            <li @if(\Request::is('semua')) class="active" @endif><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Histori Permintaan</span></a></li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-share"></i> <span>Pengajuan Pembatalan</span>
