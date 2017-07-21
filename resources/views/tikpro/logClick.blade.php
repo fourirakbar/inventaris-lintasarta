@@ -2,12 +2,12 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Data Permintaan 
+        Log Update Titik Proses
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Data Request Barang</li>
-        
+        <li class="active">Log Update Titik Proses</li>
+
       </ol>
     </section>
 
@@ -26,7 +26,7 @@
             @endif
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data</h3>
+              <h3 class="box-title">Log Update Titik Proses</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

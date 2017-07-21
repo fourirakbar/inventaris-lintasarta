@@ -25,7 +25,7 @@
                 <p>{{ $message }}</p>
             </div>
           @endif
-          
+
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Data</h3>
@@ -35,21 +35,24 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                        <th style="text-align: center; vertical-align: middle; ">ID PERMINTAAN</th>
+                        <th style="text-align: center; vertical-align: middle; ">No</th>
+                        <th style="text-align: center; vertical-align: middle; ">Nomor Ticket</th>
                         <th style="text-align: center; vertical-align: middle; ">Nama Requester</th>
                         <th style="text-align: center; vertical-align: middle; ">Status Pembatalan</th>
                         <th style="text-align: center; vertical-align: middle; ">Action</th>
                 </tr>
                 </thead>
                 <tbody>
+                  <?php $indexNo=1; ?>
                 @foreach ($jebret as $key)
                     <tr>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $key->ID_PERMINTAAN }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $key->NOMOR_TICKET }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_REQUESTER }}</td>
                       @if($key->STATUS_PEMBATALAN === "done")
                         <td style="text-align: center; vertical-align: middle; background-color: green; color: white;">{{ $key->STATUS_PEMBATALAN }}</td>
                       @else
-                        <td style="text-align: center; vertical-align: middle; background-color: red; color: white;">{{ $key->STATUS_PEMBATALAN }}</td> 
+                        <td style="text-align: center; vertical-align: middle; background-color: red; color: white;">{{ $key->STATUS_PEMBATALAN }}</td>
                       @endif
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">

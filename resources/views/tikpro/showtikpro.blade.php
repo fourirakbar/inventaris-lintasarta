@@ -2,12 +2,12 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Pengaturan Tanggal
+        Pengaturan Deadline
         <small>Titik Proses</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Pengaturan Tanggal</li>
+        <li class="active">Pengaturan Deadline</li>
       </ol>
     </section>
 
@@ -62,7 +62,7 @@
 		                	</tbody>
 			        </table>
 		        </div><br><br><br><br>
-		        <a href="{{ URL::to('edittikpro') }}"><button class="btn btn-primary btn-lg pull-right">Edit</button></a> 
+		        <a href="{{ URL::to('edittikpro') }}"><button class="btn btn-primary btn-lg pull-right">Edit</button></a>
 	        </div>
             <!-- /.box-header -->
             <!-- form start -->

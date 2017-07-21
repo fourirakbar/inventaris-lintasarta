@@ -53,11 +53,11 @@
 	<aside style="position: fixed;" class="main-sidebar">
 		@include('includes.sidebar')
 	</aside>
-	
-	<div class="content-wrapper"> 
+
+	<div class="content-wrapper">
 		@yield('content')
 	</div>
-	
+
 </div>
 	<div class="control-sidebar-bg"></div>
 	<script src="{{URL::asset('plugins/jQuery/jquery-3.1.1.min.js')}}"></script>

@@ -19,7 +19,6 @@ class UserController extends Controller
     }
 
     public function show(Request $request){
-        
     	$permintaan = DB::table('PERMINTAAN')->select('*')->where('NOMOR_TICKET', '=', $request->NO_TIKET)->get();
     	$peminjaman = DB::table('PEMINJAMAN')->select('*')->where('NOMOR_TICKET', '=', $request->NO_TIKET)->get();
     	$repair = DB::table('REPAIR')->select('*')->where('NOMOR_TICKET', '=', $request->NO_TIKET)->get();
@@ -42,7 +41,7 @@ class UserController extends Controller
             return view('repair.usershowrepair', compact('data')); //return view halaman showRepair
     	}
         else{
-            return view('userinterface.usersearchnotfound');   
+            return view('userinterface.usersearchnotfound');
         }
     }
 

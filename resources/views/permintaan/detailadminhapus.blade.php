@@ -81,7 +81,8 @@
               @if( $jebret->STATUS_PEMBATALAN === "done")
 
               @else
-                <button style="margin: 5% 0 5% 0" type="submit" name="tidak" value="tidak" class="btn btn-danger pull-right">Cancel Pembatalan</button>
+                <button style="margin: 5% 0 5% 0" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger pull-right">Reject Request Pembatalan</button>
+                <!-- <button style="margin: 5% 0 5% 0" type="submit" name="tidak" value="tidak" class="btn btn-danger pull-right">Cancel Pembatalan</button> -->
                 <button style="margin: 5% 0 5% 0" type="submit" name="yaa" value="yaa" class="btn btn-primary pull-right">Setujui Pembatalan</button>
               @endif
               </form>
@@ -90,6 +91,36 @@
           </div>
           <!-- /.box -->
         </div>
+
+        <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Data Barang Dari Gudang</h4>
+          </div>
+          <form action="{{ url('/semua/reject',  $jebret->ID_PERMINTAAN) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="modal-body">
+              <div class="form-group col-md-6">
+                <label>Alasan Reject</label>
+                <textarea class="form-control" name="ALASAN_REJECT" required=""></textarea>
+              </div>
+              <!-- <button type="submit" class="btn btn-primary pull-right">Reject Permintaan</button> -->
+              <div class="box-footer">
+                <button style="margin: 5% 0 5% 0" type="submit" class="btn btn-danger pull-left">Reject Request Pembatalan</button>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
         <!-- /.col -->
       </div>
       <!-- /.row -->

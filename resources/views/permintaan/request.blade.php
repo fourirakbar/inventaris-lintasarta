@@ -1,12 +1,12 @@
-@extends('layouts.lumino') 
+@extends('layouts.lumino')
 @section('content')
 <section class="content-header">
       <h1>
-        Form Input Request
+        Form Input Permintaan
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Form Input Request</li>
+        <li class="active">Form Input Permintaan</li>
       </ol>
     </section>
 
@@ -23,7 +23,7 @@
               </div>
             @endif
             <div class="box-header with-border">
-              <h3 class="box-title">Form Input Request</h3>
+              <h3 class="box-title">Form Input Permintaan</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -39,25 +39,30 @@
                   <input class="form-control" placeholder="Nama Requester" name="NAMA_REQUESTER"> 
                 </div> 
                 {{csrf_field()}}
-                <div class="form-group"> 
-                  <label>Bagian</label> 
-                  <input class="form-control" placeholder="Nama Bagian" name="BAGIAN"> 
-                </div> 
+                <div class="form-group">
+                  <label>Nama Requester</label>
+                  <input class="form-control" placeholder="Nama Requester" name="NAMA_REQUESTER">
+                </div>
                 {{csrf_field()}}
-                <div class="form-group"> 
-                  <label>Divisi</label> 
-                  <input class="form-control" placeholder="Nama Divisi" name="DIVISI"> 
-                </div> 
+                <div class="form-group">
+                  <label>Bagian</label>
+                  <input class="form-control" placeholder="Nama Bagian" name="BAGIAN">
+                </div>
                 {{csrf_field()}}
-                <div class="form-group"> 
-                  <label>Barang yang Dibutuhkan</label> 
-                  <input class="form-control" placeholder="Nama Barang" name="BARANG_PERMINTAAN"> 
-                </div> 
+                <div class="form-group">
+                  <label>Divisi</label>
+                  <input class="form-control" placeholder="Nama Divisi" name="DIVISI">
+                </div>
                 {{csrf_field()}}
-                <div class="textarea-group"> 
-                  <label>Deskripsi</label> 
-                  <input class="form-control" placeholder="Deskripsi Barang" name="DESKRIPSI"> 
-                </div> 
+                <div class="form-group">
+                  <label>Barang yang Dibutuhkan</label>
+                  <input class="form-control" placeholder="Nama Barang" name="BARANG_PERMINTAAN">
+                </div>
+                {{csrf_field()}}
+                <div class="textarea-group">
+                  <label>Deskripsi</label>
+                  <input class="form-control" placeholder="Deskripsi Barang" name="DESKRIPSI">
+                </div>
                 {{csrf_field()}}
                 <div class="form-group">
                 <label>Date:</label>
@@ -69,12 +74,12 @@
                   <input type="date" class="form-control pull-right" id="datepicker" name="TGL_PERMINTAAN">
                 </div>
                 <!-- /.input group -->
-              </div> 
+              </div>
                 {{csrf_field()}}
-                <div class="form-group" hidden=""> 
-                  <label>Tanggal Deadline</label> 
+                <div class="form-group" hidden="">
+                  <label>Tanggal Deadline</label>
                   <input id="datedead" class="form-control" placeholder="" name="TGL_DEADLINE" readonly>
-                </div> 
+                </div>
                 {{csrf_field()}}
               </div>
               <!-- /.box-body -->

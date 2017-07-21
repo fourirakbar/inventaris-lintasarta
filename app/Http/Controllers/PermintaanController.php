@@ -26,7 +26,7 @@ class PermintaanController extends Controller
             $totaldeadline += $key->DEADLINE;
         }
         return view('permintaan.request', compact('totaldeadline'));
-        
+
     }
 
     public function input() {
@@ -53,7 +53,7 @@ class PermintaanController extends Controller
             'TIKPRO_ID' => $b,
             'STATUS' => $a,
         ));
-        
+
         $ticket = DB::table('PERMINTAAN')->select('ID_PERMINTAAN')->orderBy('ID_PERMINTAAN', 'DESC')->limit('1')->get(); //ambil ID_PERMINTAAN terakhir pada table PERMINTAAN
         $kuylah = explode(":", $ticket); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
         $bossku = explode("}]", $kuylah[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
@@ -86,7 +86,7 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemua() {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->orderBy('PERMINTAAN.ID_PERMINTAAN','DESC')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
         $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
         $jebret2 = array();
         foreach ($jebret3 as $key) {
@@ -94,7 +94,7 @@ class PermintaanController extends Controller
             array_push($jebret2, $jebret2a);
         }
         // dd($jebret2);
-        
+
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
 
         // dd($jebret);
@@ -108,7 +108,7 @@ class PermintaanController extends Controller
             $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get(); //ambil semua data dari tabel TIKPRO
             array_push($jebret2, $jebret2a);
         }
-        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2    
+        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
     }
 
     public function lihatSemuaSudah(Request $request) {
@@ -153,7 +153,7 @@ class PermintaanController extends Controller
         $nama = Input::get('NAMA');
         $vape = HistoryTikpro::query()->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get(); //ambil semua data dari tabel HISTORY_TIKPRO dengan ketentuan yang sudah diberikan
         Permintaan::find($ID_PERMINTAAN)->update($request->all()); //update data pada tabel PERMINTAAN sesuai input yang diberikan oleh user
-        
+
         $notSoLazy = DB::table('PERMINTAAN')->select('TIKPRO_ID')->where('ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil TIKPRO_ID dari tabel PERMINTAAN dengan ketentuan yang sudah diberikan
         $komodoDream = explode(":", $notSoLazy); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
         $komodoBreakfast = explode("}]", $komodoDream[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
@@ -173,6 +173,14 @@ class PermintaanController extends Controller
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
         // dd($jebret);
         return view('permintaan.hapus', compact('jebret')); //return ke halaman hapus dengan data dari variable $jebret
+    }
+
+    public function reject(Request $request, $ID_PERMINTAAN) {
+      Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => "in progress"]);
+      DB::table('PEMBATALAN')->where('PERMINTAAN_ID','=',$ID_PERMINTAAN)->update(['STATUS_PEMBATALAN' => 'reject']);
+      DB::table('PERMINTAAN')->where('ID_PERMINTAAN', $ID_PERMINTAAN)->update(['ALASAN_REJECT' => $request->ALASAN_REJECT]);
+      $url = '/adminhapus';
+      return redirect($url)->with('success', 'Sukses Reject Request Pembatalan');
     }
 
     public function delete(Request $request, $ID_PERMINTAAN){
@@ -198,15 +206,15 @@ class PermintaanController extends Controller
 
             if(!Auth::guest()) {
                 $url = '/semua';
-                return redirect($url)->with('success','Sukses Mengajukan Request Pembatalan');    
+                return redirect($url)->with('success','Sukses Mengajukan Request Pembatalan');
             }
 
             else {
                 // echo "333h";
                 $url = '/user-search ';
-                return redirect($url)->with('success','Sukses Mengajukan Request Pembatalan');    
+                return redirect($url)->with('success','Sukses Mengajukan Request Pembatalan');
             }
-            
+
         }
         else {
             if(!Auth::guest()) {
@@ -216,11 +224,11 @@ class PermintaanController extends Controller
 
             else {
                 $url = '/user-search';
-                return redirect($url)->with('gagal','Anda sudah pernah menjukan pembatalan');    
+                return redirect($url)->with('gagal','Anda sudah pernah menjukan pembatalan');
             }
         }
 
-        
+
 
    }
 
@@ -246,7 +254,7 @@ class PermintaanController extends Controller
     {
         $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->get(); //ambil data dari table PERMINTAAN dan table PEMATALAN dengan ketentuan yang sudah diberikan
 
-        if (Input::get('yaa')) {    
+        if (Input::get('yaa')) {
             Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => 'batal']); //mencari data dengan kolom STATUS = batal dan sesuai dengan $ID_PERMINTAAAN
             DB::table('PEMBATALAN')->where('PERMINTAAN_ID','=',$ID_PERMINTAAN)->update(['STATUS_PEMBATALAN' => 'done']); //update kolom STATUS_PEMBATALAN menjadi done di tabel PEMBATALAN sesuai dengan $ID_PERMINTAAN
 
@@ -257,7 +265,7 @@ class PermintaanController extends Controller
             Permintaan::find($ID_PERMINTAAN)->update(['STATUS' => "in progress"]);
             DB::table('PEMBATALAN')->where('PERMINTAAN_ID','=',$ID_PERMINTAAN)->update(['STATUS_PEMBATALAN' => 'reject']); //
             $url = 'adminhapus';
-            return redirect($url)->with('success','Sukses Batalkan Request Pembatalan'); //return ke halaman adminhapus dengan keterangan sukses   
+            return redirect($url)->with('success','Sukses Batalkan Request Pembatalan'); //return ke halaman adminhapus dengan keterangan sukses
         }
     }
 
