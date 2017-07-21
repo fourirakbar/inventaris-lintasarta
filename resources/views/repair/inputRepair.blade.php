@@ -13,11 +13,11 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Form Input Repair
+        Form Input Data Perbaikan
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Form Input Repair</li>
+        <li class="active">Form Input Data Perbaikan</li>
       </ol>
     </section>
 
@@ -34,13 +34,13 @@
               </div>
             @endif
             <div class="box-header with-border">
-              <h3 class="box-title">Form Input Repair</h3>
+              <h3 class="box-title">Form Input Data Perbaikan</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form" method="POST" role="form" action="{{ URL::to('repair/input') }}">
               <div class="box-body">
-              	<div class="form-group"> 
+              	<div class="form-group">
                   <label>Pilih Jenis Barang</label><br>
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><b class="material-icons">Barang Dari Gudang</b></button>
                   <button type="button" class="btn btn-default" id="baranguser"><b class="material-icons">Barang Dari User</b></button>
@@ -50,35 +50,35 @@
                   <input class="form-control" placeholder="Masukkan Nomor Ticket" name="NOMOR_TICKET" id="notik" autocomplete="off"> 
                 </div> 
                 {{csrf_field()}}
-                <div class="form-group"> 
-                  <label>Nama Barang</label> 
-                  <input class="form-control" placeholder="Masukkan Nama Barang" name="NAMA_BARANG" id="nambar" readonly=""> 
-                </div> 
+                <div class="form-group">
+                  <label>Nama Barang</label>
+                  <input class="form-control" placeholder="Masukkan Nama Barang" name="NAMA_BARANG" id="nambar" readonly="">
+                </div>
                 {{csrf_field()}}
-                <div class="form-group"> 
-                  <label>No. Registrasi</label> 
-                  <input class="form-control" placeholder="Masukkan No. Registrasi" name="NOMOR_REGISTRASI" id="noreg" readonly=""> 
-                </div> 
+                <div class="form-group">
+                  <label>No. Registrasi</label>
+                  <input class="form-control" placeholder="Masukkan No. Registrasi" name="NOMOR_REGISTRASI" id="noreg" readonly="">
+                </div>
                 {{csrf_field()}}
-                <div class="form-group"> 
-                  <label>Problem</label> 
-                  <textarea class="form-control" placeholder="Jelaskan Masalah yang Dialami" name="PROBLEM" id="problem"></textarea> 
-                </div> 
-                {{csrf_field()}} 
-                <div class="form-group"> 
-                  <label>Vendor</label> 
-                  <input class="form-control" placeholder="masukkan Vendor" name="VENDOR" id="vendor"> 
-                </div> 
+                <div class="form-group">
+                  <label>Problem</label>
+                  <textarea class="form-control" placeholder="Jelaskan Masalah yang Dialami" name="PROBLEM" id="problem"></textarea>
+                </div>
                 {{csrf_field()}}
-                <div class="form-group" hidden=""> 
-                  <label>ID Barang</label> 
-                  <input class="form-control" placeholder="masukkan Vendor" name="ID_BARANG" id="idbar"> 
-                </div> 
+                <div class="form-group">
+                  <label>Vendor</label>
+                  <input class="form-control" placeholder="masukkan Vendor" name="VENDOR" id="vendor">
+                </div>
                 {{csrf_field()}}
-                <div class="form-group"> 
-                  <label>Catatan Jumlah Barang</label> 
+                <div class="form-group" hidden="">
+                  <label>ID Barang</label>
+                  <input class="form-control" placeholder="masukkan Vendor" name="ID_BARANG" id="idbar">
+                </div>
+                {{csrf_field()}}
+                <div class="form-group">
+                  <label>Catatan Jumlah Barang</label>
                   <textarea class="form-control" placeholder="Masukkan catatan. contoh: 'diperbaiki 1 buah' dan sebagainya. Kosongkan jika tidak ada catatan jumlah." name="CATATAN_REPAIR" id="catrep"></textarea>
-                </div> 
+                </div>
                 {{csrf_field()}}
                 <div class="form-group">
                   <label>Tanggal Barang Diperbaiki (YYYY-MM-DD)</label>
@@ -90,7 +90,7 @@
                     <input type="date" class="form-control pull-right" id="datestart" name="TANGGAL_REPAIR">
                   </div>
                   <!-- /.input group -->
-                </div> 
+                </div>
                 {{csrf_field()}}
                 <div class="form-group">
                   <label>Tanggal Perkiraan Barang Selesai (YYYY-MM-DD)</label>
@@ -102,7 +102,7 @@
                     <input type="date" class="form-control pull-right" id="datefinish" name="PERKIRAAN_SELESAI">
                   </div>
                   <!-- /.input group -->
-                </div> 
+                </div>
                 {{csrf_field()}}
               </div>
               <!-- /.box-body -->
@@ -137,7 +137,7 @@
 	                </tr>
 	                </thead>
 	                <tbody>
-	                
+
 	                <!-- buat index di kolom "NO" -->
 	                <?php
 	                  $indexNo=1;
@@ -177,7 +177,7 @@
   <!-- bootstrap datepicker -->
   <script src="{{ URL::asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
   <script type="text/javascript">
-  
+
   $(function () {
         //Date picker
         $('#datestart').datepicker({

@@ -14,7 +14,7 @@ class RepairController extends Controller
 {
     public function index() {
     	$barang = DB::table('BARANG')->select('*')->where('STATUS_BARANG', '=', NULL)->get();
-        return view('repair.inputRepair', compact('barang'));   
+        return view('repair.inputRepair', compact('barang'));
     }
 
     public function input() {
@@ -56,9 +56,9 @@ class RepairController extends Controller
                 'NOMOR_TICKET' => $data['NOMOR_TICKET'],
                 'TANGGAL_REPAIR' => $data['TANGGAL_REPAIR'],
                 'PERKIRAAN_SELESAI' => $data['PERKIRAAN_SELESAI'],
-        	));	
+        	));
         }
-        
+
         return redirect('repair/show')->with('success','Input Barang Sukses'); //return ke /repair/show dengan keterangan sukses
     }
 
@@ -103,7 +103,7 @@ class RepairController extends Controller
 
         $repair = DB::table('REPAIR')->select('*')->where('ID_PERBAIKAN', '=', $ID_PERBAIKAN)->get();
         $data = $repair[0];
-        return view('repair.showEditRepair', compact('data')); //return view halaman showRepair
+        return view('repair.showEditRepair', compact('repair','data')); //return view halaman showRepair
 
     }
 

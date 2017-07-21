@@ -13,11 +13,12 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Form Input Repair
+        Form Edit Data Perbaikan
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Form Input Repair</li>
+				<li><a href="/repair/show"></i> Show Repair</a></li>
+        <li class="active">Form Edit Data Perbaikan</li>
       </ol>
     </section>
 
@@ -43,42 +44,42 @@
 				<input type="hidden" name="_method" value="PUT">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
          	<div class="col-xs-12">
-				
+
 				    <div class="col-xs-6">
-				    	<div class="form-group"> 
-			              <label>No. Ticket</label> 
-			              <input class="form-control" placeholder="Masukkan No. Ticket" name="NOMOR_TICKET" id="nambar" value="{{ $data->NOMOR_TICKET }}"> 
-			            </div> 
+				    	<div class="form-group">
+			              <label>No. Ticket</label>
+			              <input class="form-control" placeholder="Masukkan No. Ticket" name="NOMOR_TICKET" id="nambar" value="{{ $data->NOMOR_TICKET }}">
+			            </div>
 			            {{csrf_field()}}
-			      		<div class="form-group"> 
-			              <label>Nama Barang</label> 
-			              <input class="form-control" placeholder="Masukkan Nama Barang" name="NAMA_BARANG" id="nambar" value="{{ $data->NAMA_BARANG }}"> 
-			            </div> 
+			      		<div class="form-group">
+			              <label>Nama Barang</label>
+			              <input class="form-control" placeholder="Masukkan Nama Barang" name="NAMA_BARANG" id="nambar" value="{{ $data->NAMA_BARANG }}">
+			            </div>
 			            {{csrf_field()}}
-			            <div class="form-group"> 
-			              <label>No. Registrasi</label> 
-			              <input class="form-control" placeholder="Masukkan No. Registrasi" name="NOMOR_REGISTRASI" id="noreg" value="{{ $data->NOMOR_REGISTRASI }}"> 
-			            </div> 
+			            <div class="form-group">
+			              <label>No. Registrasi</label>
+			              <input class="form-control" placeholder="Masukkan No. Registrasi" name="NOMOR_REGISTRASI" id="noreg" value="{{ $data->NOMOR_REGISTRASI }}">
+			            </div>
 			            {{csrf_field()}}
-			            <div class="form-group"> 
-			              <label>Problem</label> 
-			              <textarea class="form-control" placeholder="Jelaskan Masalah yang Dialami" name="PROBLEM" id="problem" >{{ $data->PROBLEM }}</textarea> 
-			            </div> 
-			            {{csrf_field()}} 
-			            <div class="form-group"> 
-			              <label>Vendor</label> 
-			              <input class="form-control" placeholder="masukkan Vendor" name="VENDOR" id="vendor" value="{{ $data->VENDOR }}"> 
-			            </div> 
+			            <div class="form-group">
+			              <label>Problem</label>
+			              <textarea class="form-control" placeholder="Jelaskan Masalah yang Dialami" name="PROBLEM" id="problem" >{{ $data->PROBLEM }}</textarea>
+			            </div>
 			            {{csrf_field()}}
-			            <div class="form-group"> 
-			              <label>Keterangan Barang</label> 
-			              <input class="form-control" placeholder="masukkan Vendor" name="ID_BARANG" id="ketbar" value="{{ $data->KETERANGAN_REPAIR }}"> 
-			            </div> 
+			            <div class="form-group">
+			              <label>Vendor</label>
+			              <input class="form-control" placeholder="masukkan Vendor" name="VENDOR" id="vendor" value="{{ $data->VENDOR }}">
+			            </div>
 			            {{csrf_field()}}
-			            <div class="form-group"> 
-			              <label>Catatan</label> 
+			            <div class="form-group">
+			              <label>Keterangan Barang</label>
+			              <input class="form-control" placeholder="masukkan Vendor" name="ID_BARANG" id="ketbar" value="{{ $data->KETERANGAN_REPAIR }}">
+			            </div>
+			            {{csrf_field()}}
+			            <div class="form-group">
+			              <label>Catatan</label>
 			              <textarea class="form-control" placeholder="Masukkan catatan. contoh: 'diperbaiki 1 buah' dan sebagainya. Kosongkan jika tidak ada catatan." name="CATATAN_REPAIR" id="catrep" >{{ $data->CATATAN_REPAIR }}</textarea>
-			            </div> 
+			            </div>
 			            {{csrf_field()}}
 			    	</div>
 
@@ -91,7 +92,7 @@
 				            </div>
 				            <input type="date" class="form-control pull-right" id="datestart" name="TANGGAL_REPAIR" value="{{ $data->TANGGAL_REPAIR }}">
 				          </div>
-				        </div> 
+				        </div>
 				        {{csrf_field()}}
 				        <div class="form-group">
 				          <label>Tanggal Perkiraan Barang Selesai (YYYY-MM-DD)</label>
@@ -101,10 +102,10 @@
 				            </div>
 				            <input type="date" class="form-control pull-right" id="datefinish" name="PERKIRAAN_SELESAI" value="{{ $data->PERKIRAAN_SELESAI }}">
 				          </div>
-				        </div> 
+				        </div>
 				        {{csrf_field()}}
 				    </div>
-				
+
 			</div>
               <button style="margin-right: 10%; margin-bottom: 5%;" type="submit" class="btn btn-primary btn-lg pull-right">Update</button>
             </form>
@@ -121,7 +122,7 @@
   <!-- bootstrap datepicker -->
   <script src="{{ URL::asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
   <script type="text/javascript">
-  
+
   $(function () {
         //Date picker
         $('#datestart').datepicker({

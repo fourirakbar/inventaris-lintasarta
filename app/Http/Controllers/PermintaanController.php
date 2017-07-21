@@ -86,7 +86,7 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemua() {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->orderBy('PERMINTAAN.ID_PERMINTAAN','DESC')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
         $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
         $jebret2 = array();
         foreach ($jebret3 as $key) {
@@ -142,9 +142,11 @@ class PermintaanController extends Controller
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
         // dd($jebret);
         $jebret2 = Tikpro::query('NAMA_TIKPRO')->join('PERMINTAAN', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get()[0]; //ambil data dari table TIKPRO dan tabel PERMINTAAN dengan ketentuan yang sudah diberikan
-        $listtikpro = DB::table('HISTORY_TIKPRO')->select('TIKPRO_ID', 'TIKPRO_NAMA')->where('PERMINTAAN_ID',$ID_PERMINTAAN)->get(); //ambil data pada kolom ID_TIKPRO dan NAMA_TIKRPO dari tabel TIKPRO
-        // dd($jebret);
-        return view('permintaan.edit', compact('jebret', 'jebret2', 'listtikpro')); //return ke halaman edit dengan data dari variable $jebret, $jebret2, dan $listtikrpo
+        $listtikpro = DB::table('HISTORY_TIKPRO')->select('*')->where('PERMINTAAN_ID',$ID_PERMINTAAN)->get(); //ambil data pada kolom ID_TIKPRO dan NAMA_TIKRPO dari tabel TIKPRO
+        $hitung = DB::table('HISTORY_TIKPRO')->select('TIKPRO_ID', 'TIKPRO_NAMA')->where('PERMINTAAN_ID',$ID_PERMINTAAN)->count();
+        $hitungmin = $hitung - 1;
+        // dd($listtikpro[$hitungmin]->TGL_SELESAI);
+        return view('permintaan.edit', compact('jebret', 'jebret2', 'listtikpro', 'hitungmin')); //return ke halaman edit dengan data dari variable $jebret, $jebret2, dan $listtikrpo
     }
 
     public function doUpdate(Request $request, $ID_PERMINTAAN) {

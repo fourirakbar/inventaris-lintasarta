@@ -7,8 +7,8 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/semua">Data Request Barang yang Belum Selesai</a></li>
-        <li class="active">Detail Data</li>
+        <li><a href="/repair/show">Histori Data Perbaikan</a></li>
+        <li class="active">Detail Data Perbaikan</li>
       </ol>
     </section>
 
@@ -18,9 +18,9 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Detail Pembatalan</h3><br><br>
+              <h3 class="box-title">Detail Data Perbaikan</h3><br><br>
             </div>
-            
+
             <div class="box-body">
               <div class="col-xs-12">
                 <div class="col-xs-6">

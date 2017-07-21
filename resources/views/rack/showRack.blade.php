@@ -2,13 +2,13 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Show Rack 
+        Lihat Semua Rack
         <small>Lihat Semua Data Rack</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Show Rack</li>
-        
+        <li class="active">Lihat Semua Rack</li>
+
       </ol>
     </section>
 
@@ -16,7 +16,7 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-         
+
         <div class="box box-primary">
             @if ($message = Session::get('success'))
               <div class="alert alert-success">
@@ -26,7 +26,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data</h3>
+              <h3 class="box-title">Data Rack</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

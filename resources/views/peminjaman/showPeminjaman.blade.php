@@ -2,13 +2,13 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Show Data Peminjam
+        Data Peminjaman
         <small>Lihat Semua Data Peminjam</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Show Data Peminjam</li>
-        
+        <li class="active">Data Peminjaman</li>
+
       </ol>
     </section>
 
@@ -23,7 +23,7 @@
             @endif
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data</h3>
+              <h3 class="box-title">Data Peminjaman</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -42,7 +42,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                
+
                 <!-- buat index di kolom "NO" -->
                 <?php
                   $indexNo=1;
@@ -75,7 +75,7 @@
                         @elseif (($index->KETERANGAN) == "done")
                           <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">Done</td>
                         @endif
-                      
+
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">
                         <a class="btn btn-block btn-primary" href="/peminjaman/edit/{{ $index->ID_PEMINJAMAN }}"><b class="material-icons">Edit Data</b>

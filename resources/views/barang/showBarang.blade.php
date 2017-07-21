@@ -2,13 +2,13 @@
 @section('content')
 <section class="content-header">
       <h1>
-        Show Barang 
+        Lihat Semua Barang
         <small>Lihat Semua Data Barang</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/home"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Show Barang</li>
-        
+        <li class="active">Lihat Semua Barang</li>
+
       </ol>
     </section>
 
@@ -23,7 +23,7 @@
             @endif
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data</h3>
+              <h3 class="box-title">Data Semua Barang</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -41,7 +41,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                
+
                 <!-- buat index di kolom "NO" -->
                 <?php
                   $indexNo=1;
