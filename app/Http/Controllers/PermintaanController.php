@@ -86,11 +86,18 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemua() {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->orderBy('ID_PERMINTAAN','DESC')->get();
-        // $jebret = Permintaan::query()->join('HISTORY_TIKPRO','HISTORY_TIKPRO.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->whereRaw('HISTORY_TIKPRO.TGL_SELESAI is NULL')->orderBy('ID_PERMINTAAN','DESC')->limit('1')->get();
+        // $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->orderBy('ID_PERMINTAAN','DESC')->get();
+        // dd($jebret);
+        // $jebret = Permintaan::query()->join('HISTORY_TIKPRO','HISTORY_TIKPRO.TIKPRO_ID','=','PERMINTAAN.TIKPRO_ID', 'AND', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->orderBy('PERMINTAAN.ID_PERMINTAAN','DESC')->get();
+
+        $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID order by PERMINTAAN.ID_PERMINTAAN DESC");
+
+        $jebret3 = DB::select("select ID_PERMINTAAN from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID");
+        // dd($jebret);
         // dd($jebret);
         // dd($jebret); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
-        $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
+        // $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
+        // dd($jebret3);
         $jebret2 = array();
         foreach ($jebret3 as $key) {
             $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get(); //ambil semua data dari tabel TIKPRO
@@ -104,8 +111,10 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemuaBelum(Request $request) {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'in progress ')->orderBy('ID_PERMINTAAN','DESC')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
-        $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
+        $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID and PERMINTAAN.STATUS = 'in progress' order by PERMINTAAN.ID_PERMINTAAN DESC");
+
+        $jebret3 = DB::select("select ID_PERMINTAAN from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID and PERMINTAAN.STATUS = 'in progress' ");
+
         $jebret2 = array();
         foreach ($jebret3 as $key) {
             $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get(); //ambil semua data dari tabel TIKPRO
@@ -115,8 +124,10 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemuaSudah(Request $request) {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'done ')->orderBy('ID_PERMINTAAN','DESC')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
-        $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
+        $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID and PERMINTAAN.STATUS = 'done' order by PERMINTAAN.ID_PERMINTAAN DESC");
+
+        $jebret3 = DB::select("select ID_PERMINTAAN from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID and PERMINTAAN.STATUS = 'done' ");
+
         $jebret2 = array();
         foreach ($jebret3 as $key) {
             $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get(); //ambil semua data dari tabel TIKPRO
