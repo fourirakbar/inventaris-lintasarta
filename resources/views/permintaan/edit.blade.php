@@ -71,30 +71,33 @@
 	                  <label>Keterangan</label>
 	                  <textarea class="form-control" rows="3" name="KETERANGAN" value="{{ $jebret->KETERANGAN }}" placeholder="Keterangan"></textarea>
 	                </div>
-
+                  
 	                <div class="form-group">
 	                  <label>Titik Proses</label>
 	                  <input type="hidden" name="_method" value="PUT">
 	                  <select class="form-control" name="TIKPRO_ID">
 	                   	<option disabled selected value><b>-- Pilih Menu Dibawah --</b></option>
-	                   	@foreach ($listtikpro as $tikpros)
-	                   		@if ($tikpros->TIKPRO_ID == $jebret2->TIKPRO_ID)
-                        <option selected="" value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>
-	                  		@else
-                        <option value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>
-	                  		@endif
-          						@endforeach
+
+                      @for ($i=0; $i < count($listtikpro); $i++)
+                        @if ($listtikpro[$i]->TIKPRO_ID <= $jebret2->TIKPRO_ID)
+                          @if ($listtikpro[$i]->TIKPRO_ID == $jebret2->TIKPRO_ID)
+                            <option selected="" value="{{ $listtikpro[$i]->TIKPRO_ID }}">{{ $listtikpro[$i]->TIKPRO_NAMA }}</option>
+                          @else
+                            <option value="{{ $listtikpro[$i]->TIKPRO_ID }}">{{ $listtikpro[$i]->TIKPRO_NAMA }}</option>
+                          @endif
+                        @endif
+                      @endfor
 	                  </select>
 	                </div>
 
                   <div class="form-group">
                     <label>Nama</label>
-                    <input class="form-control" placeholder="Nama" name="NAMA" value="{{ $jebret->NAMA }}">
+                    <input class="form-control" placeholder="Nama" name="NAMA" value="{{ $jebret->NAMA }}" required="">
                   </div>
 
                   <div class="form-group">
                     <label>Tanggal Ganti Titik Proses</label>
-                    <input type="date" class="form-control calendar1" name="TGL_SELESAI" placeholder="Tanggal Ganti Titik Proses" value="{{ $jebret->TGL_SELESAI }}"</div>
+                    <input type="date" class="form-control calendar1" name="TGL_SELESAI" placeholder="Tanggal Ganti Titik Proses" value="{{ $jebret->TGL_SELESAI }}" required="">
                   </div>
 
                   <?php
