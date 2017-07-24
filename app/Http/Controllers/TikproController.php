@@ -177,7 +177,7 @@ class TikproController extends Controller
       DB::statement("$query1");
       DB::statement("$query2"); 
       $url = 'edittikpro';
-      return redirect($url)->with('success','Sukses Tambah Tikpro'); //return ke halaman shwotikpro dengan keterangan sukses
+      return redirect($url)->with('success','Sukses Tambah Tikpro. Klik Update Untuk Melanjutkan'); //return ke halaman shwotikpro dengan keterangan sukses
     }
 
     public function remove($ID_TIKPRO){
@@ -188,7 +188,7 @@ class TikproController extends Controller
       DB::statement($query2);
       // echo($query2);
       $url = 'edittikpro';
-      return redirect($url)->with('success','Sukses Hapus Tikpro'); //return ke halaman shwotikpro dengan keterangan sukses
+      return redirect($url)->with('success','Sukses Hapus Tikpro. Klik Update Untuk Melanjutkan'); //return ke halaman shwotikpro dengan keterangan sukses
     }
 
     public function logClick () {

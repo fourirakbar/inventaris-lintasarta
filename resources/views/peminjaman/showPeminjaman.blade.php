@@ -73,7 +73,7 @@
                         @elseif ($print <= 0 && ($index->KETERANGAN) == "progress")
                           <td style="background-color: red; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
                         @elseif (($index->KETERANGAN) == "done")
-                          <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">Done</td>
+                          <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">DONE</td>
                         @endif
 
                       <td style="text-align: center; vertical-align: middle; ">

@@ -86,7 +86,10 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemua() {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->orderBy('ID_PERMINTAAN','DESC')->get();
+        // $jebret = Permintaan::query()->join('HISTORY_TIKPRO','HISTORY_TIKPRO.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->whereRaw('HISTORY_TIKPRO.TGL_SELESAI is NULL')->orderBy('ID_PERMINTAAN','DESC')->limit('1')->get();
+        // dd($jebret);
+        // dd($jebret); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
         $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
         $jebret2 = array();
         foreach ($jebret3 as $key) {
@@ -101,7 +104,7 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemuaBelum(Request $request) {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'in progress ')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'in progress ')->orderBy('ID_PERMINTAAN','DESC')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
         $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
         $jebret2 = array();
         foreach ($jebret3 as $key) {
@@ -112,7 +115,7 @@ class PermintaanController extends Controller
     }
 
     public function lihatSemuaSudah(Request $request) {
-        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'done ')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('STATUS', 'done ')->orderBy('ID_PERMINTAAN','DESC')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
         $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
         $jebret2 = array();
         foreach ($jebret3 as $key) {
@@ -131,6 +134,7 @@ class PermintaanController extends Controller
         $query = DB::table('PERMINTAAN')->select('TIKPRO.NAMA_TIKPRO')->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
         $jebret2 = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get(); //ambil semua data dari tabel TIKPRO
+        // dd($jebret2);
         $boi = DB::table('HISTORY_TIKPRO')->select('*')->join('PERMINTAAN','PERMINTAAN.ID_PERMINTAAN', '=', 'HISTORY_TIKPRO.PERMINTAAN_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil data dari table HISTORY_TIKPRO dan table PERMINTAAN dengan ketentuan yang sudah diberikan
         // $count = DB::table('TIKPRO')->whereNotNull('NAMA_TIKPRO')->count();
         $count = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->count();
@@ -141,7 +145,8 @@ class PermintaanController extends Controller
     public function doEdit($ID_PERMINTAAN) {
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
         // dd($jebret);
-        $jebret2 = Tikpro::query('NAMA_TIKPRO')->join('PERMINTAAN', 'TIKPRO_ID', '=', 'ID_TIKPRO')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get()[0]; //ambil data dari table TIKPRO dan tabel PERMINTAAN dengan ketentuan yang sudah diberikan
+        $jebret2 = HistoryTikpro::query('NAMA_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.TIKPRO_ID', '=', 'HISTORY_TIKPRO.TIKPRO_ID')->where('PERMINTAAN.ID_PERMINTAAN', $ID_PERMINTAAN)->get()[0]; //ambil data dari table TIKPRO dan tabel PERMINTAAN dengan ketentuan yang sudah diberikan
+        // dd($jebret2);
         $listtikpro = DB::table('HISTORY_TIKPRO')->select('*')->where('PERMINTAAN_ID',$ID_PERMINTAAN)->get(); //ambil data pada kolom ID_TIKPRO dan NAMA_TIKRPO dari tabel TIKPRO
         $hitung = DB::table('HISTORY_TIKPRO')->select('TIKPRO_ID', 'TIKPRO_NAMA')->where('PERMINTAAN_ID',$ID_PERMINTAAN)->count();
         $hitungmin = $hitung - 1;
@@ -153,18 +158,26 @@ class PermintaanController extends Controller
         $jebret = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
         $kelarBoi = Input::get('TGL_SELESAI'); //menginputkan sesuai nilai yang dimasukkan ke TGL_SELESAI
         $nama = Input::get('NAMA');
-        $vape = HistoryTikpro::query()->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get(); //ambil semua data dari tabel HISTORY_TIKPRO dengan ketentuan yang sudah diberikan
+        
+        // dd($jebret);
         Permintaan::find($ID_PERMINTAAN)->update($request->all()); //update data pada tabel PERMINTAAN sesuai input yang diberikan oleh user
+        
 
         $notSoLazy = DB::table('PERMINTAAN')->select('TIKPRO_ID')->where('ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil TIKPRO_ID dari tabel PERMINTAAN dengan ketentuan yang sudah diberikan
         $komodoDream = explode(":", $notSoLazy); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
         $komodoBreakfast = explode("}]", $komodoDream[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+
 
         $notBadLiquid = "UPDATE HISTORY_TIKPRO SET TGL_SELESAI= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?"; //update TGL_SELESAI pada tabel HISTORY_TIKPRO dengan ketentuan yang sudah diberikan
         $updatedb = "UPDATE HISTORY_TIKPRO SET NAMA= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?";
         DB::update($notBadLiquid, array($kelarBoi, $komodoBreakfast[0], $ID_PERMINTAAN));
         DB::update($updatedb, array($nama, $komodoBreakfast[0], $ID_PERMINTAAN));
 
+        $aa = $request->TIKPRO_ID;
+        $bb = (int)$aa + 1;
+        $updatetikproid = "UPDATE PERMINTAAN SET TIKPRO_ID = ? WHERE ID_PERMINTAAN = ?"; //update
+        DB::update($updatetikproid, array($bb, $ID_PERMINTAAN));
+        
         $url = '/semua/lihat/'.$ID_PERMINTAAN;
         return redirect($url)->with ('success','Sukses Update Data'); //return ke /semua/lihat dengan keterangan sukses
     }

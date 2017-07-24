@@ -78,7 +78,7 @@
 	                  <select class="form-control" name="TIKPRO_ID">
 	                   	<option disabled selected value><b>-- Pilih Menu Dibawah --</b></option>
 	                   	@foreach ($listtikpro as $tikpros)
-	                   		@if ($tikpros->TIKPRO_ID == $jebret2->ID_TIKPRO)
+	                   		@if ($tikpros->TIKPRO_ID == $jebret2->TIKPRO_ID)
                         <option selected="" value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>
 	                  		@else
                         <option value="{{ $tikpros->TIKPRO_ID }}">{{ $tikpros->TIKPRO_NAMA }}</option>
