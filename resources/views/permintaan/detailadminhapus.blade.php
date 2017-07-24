@@ -102,19 +102,16 @@
           <form action="{{ url('/semua/reject',  $jebret->ID_PERMINTAAN) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="modal-body">
-              <div class="form-group col-md-6">
+              <div class="form-group">
                 <label>Alasan Reject</label>
-                <textarea class="form-control" name="ALASAN_REJECT" required=""></textarea>
+                <textarea style="display: block;" class="form-control" name="ALASAN_REJECT" required=""></textarea>
               </div>
               <!-- <button type="submit" class="btn btn-primary pull-right">Reject Permintaan</button> -->
               <div class="box-footer">
-                <button style="margin: 5% 0 5% 0" type="submit" class="btn btn-danger pull-left">Reject Request Pembatalan</button>
+                <button type="submit" class="btn btn-danger">Reject Request Pembatalan</button>
               </div>
             </div>
           </form>
-          <div class="modal-footer">
-
-          </div>
         </div>
       </div>
     </div>

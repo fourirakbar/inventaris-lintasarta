@@ -40,11 +40,6 @@
                 </div> 
                 {{csrf_field()}}
                 <div class="form-group">
-                  <label>Nama Requester</label>
-                  <input class="form-control" placeholder="Nama Requester" name="NAMA_REQUESTER">
-                </div>
-                {{csrf_field()}}
-                <div class="form-group">
                   <label>Bagian</label>
                   <input class="form-control" placeholder="Nama Bagian" name="BAGIAN">
                 </div>

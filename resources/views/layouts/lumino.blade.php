@@ -50,7 +50,7 @@
 		@include('includes.header')
 	</header>
 	
-	<aside style="position: fixed;" class="main-sidebar">
+	<aside class="main-sidebar">
 		@include('includes.sidebar')
 	</aside>
 

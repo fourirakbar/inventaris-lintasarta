@@ -9,44 +9,50 @@
   <div class="row">
     <div class="col-lg-6 col-xs-6">
       <!-- small box -->
-      <div class="small-box bg-aqua">
-        <div class="inner">
-          <h3 id="count1">Counting...</h3>
+      <a href={{ URL::to('adminhapus/request') }}>
+        <div class="small-box bg-aqua">
+          <div class="inner">
+            <h3 id="count1">Counting...</h3>
 
-          <p>Permintaan Pembatalan Hari Ini</p>
+            <p>Permintaan pembatalan yang belum diproses</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-android-mail"></i>
+          </div>
         </div>
-        <div class="icon">
-          <i class="ion ion-android-mail"></i>
-        </div>
-      </div>
+      </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-6 col-xs-6">
       <!-- small box -->
-      <div class="small-box bg-green">
-        <div class="inner">
-          <h3 id="count2">Counting...</h3>
+      <a href={{ URL::to('semuabelum') }}>
+        <div class="small-box bg-green">
+          <div class="inner">
+            <h3 id="count2">Counting...</h3>
 
-          <p>Permintaan yang prosesnya terlambat</p>
-        </div>
-        <div class="icon">
-          <i class="ion ion-stats-bars"></i>
+            <p>Permintaan yang prosesnya terlambat</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
     <!-- ./col -->
     <div class="col-lg-6 col-xs-6">
       <!-- small box -->
-      <div class="small-box bg-yellow">
-        <div class="inner">
-          <h3 id="count3">Counting...</h3>
+      <a href={{ URL::to('monitoring3') }}>
+        <div class="small-box bg-yellow">
+          <div class="inner">
+            <h3 id="count3">Counting...</h3>
 
-          <p>Peminjaman lewat dari hari pengembalian</p>
+            <p>Peminjaman lewat dari hari pengembalian</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-person-add"></i>
+          </div>
         </div>
-        <div class="icon">
-          <i class="ion ion-person-add"></i>
-        </div>
-      </div>
+      </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-6 col-xs-6">

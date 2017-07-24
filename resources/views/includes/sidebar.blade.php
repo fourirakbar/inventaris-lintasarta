@@ -1,4 +1,4 @@
-<section class="sidebar" style="position: fixed;">
+<section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
