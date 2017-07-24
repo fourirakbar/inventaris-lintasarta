@@ -39,7 +39,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li @if(\Request::is('request')) class="active" @endif><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>            
+            <li @if(\Request::is('request')) class="active" @endif><a href="{{ URL::to('request') }}"><i class="fa fa-book"></i> <span>Input Permintaan</span></a></li>
             <li @if(\Request::is('semuasudah')) class="active" @endif><a href="{{ URL::to('semuasudah') }}"><i class="fa fa-book"></i> <span>Permintaan Selesai</span></a></li>
             <li @if(\Request::is('semuabelum')) class="active" @endif><a href="{{ URL::to('semuabelum') }}"><i class="fa fa-book"></i> <span>Permintaan Sedang Diproses</span></a></li>
             <li @if(\Request::is('semua')) class="active" @endif><a href="{{ URL::to('semua') }}"><i class="fa fa-book"></i> <span>Histori Permintaan</span></a></li>
