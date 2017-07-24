@@ -67,12 +67,12 @@
                     <tr>
                       <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tanggal Mulai Diperbaiki</th>
                       <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
-                      <td>{{ $data->TANGGAL_REPAIR }}</td>
+                      <td><?php echo date('d F Y', strtotime($data->TANGGAL_REPAIR)); ?></td>
                     </tr>
                     <tr>
                       <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Tangga Perkiraan Selesai</th>
                       <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
-                      <td>{{ $data->PERKIRAAN_SELESAI }}</td>
+                      <td><?php echo date('d F Y', strtotime($data->PERKIRAAN_SELESAI)); ?></td>
                     </tr>
                     <tr>
                       <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Status Repair</th>
