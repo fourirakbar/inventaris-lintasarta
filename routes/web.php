@@ -22,7 +22,9 @@ Route::post('getmsg1', 'HomeController@showbatal')->middleware('admin');
 Route::post('getmsg2', 'HomeController@showminta')->middleware('admin');
 Route::post('getmsg3', 'HomeController@showpinjam')->middleware('admin');
 Route::post('getmsg4', 'HomeController@showrepair')->middleware('admin');
+Route::get('monitoring2', 'HomeController@showminta2')->middleware('admin');
 Route::get('monitoring3', 'HomeController@showpinjam2')->middleware('admin');
+Route::get('monitoring4', 'HomeController@showrepair2')->middleware('admin');
 
 #karyawan cek semua permintaan
 Route::get('/semua', 'PermintaanController@lihatSemua')->middleware('admin');

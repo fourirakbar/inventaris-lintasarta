@@ -115,7 +115,7 @@ class HomeController extends Controller
     {
         $createnow = date_create();
         $datenow = date_format($createnow, 'Y-m-d');        
-        $pinjamreturn = DB::table('PEMINJAMAN')->select('TGL_PENGEMBALIAN')->get();
+        $pinjamreturn = DB::table('PEMINJAMAN')->select('TGL_PENGEMBALIAN')->where('KETERANGAN', '!=', 'done')->get();
         $arraydatepinjam=array();
         foreach ($pinjamreturn as $return) {
         	$new = date_add(date_create($return->TGL_PENGEMBALIAN),date_interval_create_from_date_string("1 days"));
@@ -138,7 +138,7 @@ class HomeController extends Controller
     {
         $createnow = date_create();
         $datenow = date_format($createnow, 'Y-m-d');        
-        $repairreturn = DB::table('REPAIR')->select('PERKIRAAN_SELESAI')->where('STATUS_REPAIR', '=', 'On Repair')->get();
+        $repairreturn = DB::table('REPAIR')->select('PERKIRAAN_SELESAI')->where('STATUS_REPAIR', '!=', 'Done')->get();
         $arraydaterepair=array();
         foreach ($repairreturn as $return) {
         	$new = date_add(date_create($return->PERKIRAAN_SELESAI),date_interval_create_from_date_string("1 days"));
@@ -162,5 +162,27 @@ class HomeController extends Controller
         // dd($peminjaman);
         return view('peminjaman.showPeminjaman', compact('peminjaman'));
         
+    }
+
+    public function showrepair2(){
+        $repair = DB::select("SELECT * FROM `REPAIR` WHERE PERKIRAAN_SELESAI < NOW() AND STATUS_REPAIR != 'Done' ");
+        // dd($peminjaman);
+        return view('repair.showRepair', compact('repair'));
+        
+    }
+
+    public function showminta2() {
+        $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->get(); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
+        $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
+        $jebret2 = array();
+        foreach ($jebret3 as $key) {
+            $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get(); //ambil semua data dari tabel TIKPRO
+            array_push($jebret2, $jebret2a);
+        }
+        // dd($jebret2);
+
+        return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
+
+        // dd($jebret);
     }
 }

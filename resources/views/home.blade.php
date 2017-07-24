@@ -25,7 +25,7 @@
     <!-- ./col -->
     <div class="col-lg-6 col-xs-6">
       <!-- small box -->
-      <a href={{ URL::to('semuabelum') }}>
+      <a href={{ URL::to('monitoring2') }}>
         <div class="small-box bg-green">
           <div class="inner">
             <h3 id="count2">Counting...</h3>
@@ -57,17 +57,19 @@
     <!-- ./col -->
     <div class="col-lg-6 col-xs-6">
       <!-- small box -->
-      <div class="small-box bg-red">
-        <div class="inner">
-          <h3 id="count4">Counting...</h3>
+      <a href={{ URL::to('monitoring4') }}>
+        <div class="small-box bg-red">
+          <div class="inner">
+            <h3 id="count4">Counting...</h3>
 
-          <p>Perbaikan lewat dari tanggal perkiraan selesai</p>
-        </div>
-        <div class="icon">
-          <i class="ion ion-pie-graph"></i>
+            <p>Perbaikan lewat dari tanggal perkiraan selesai</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-pie-graph"></i>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
     <!-- ./col -->
   </div>
 
