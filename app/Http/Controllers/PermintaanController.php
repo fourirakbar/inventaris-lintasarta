@@ -187,6 +187,18 @@ class PermintaanController extends Controller
         $aa = $request->TIKPRO_ID;
         $bb = (int)$aa + 1;
         $updatetikproid = "UPDATE PERMINTAAN SET TIKPRO_ID = ? WHERE ID_PERMINTAAN = ?"; //update
+
+        $ambil = DB::table('HISTORY_TIKPRO')->select('TIKPRO_ID')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get();
+        $ambilarray = array();
+
+        foreach ($ambil as $key) {
+            array_push($ambilarray, $key->TIKPRO_ID);
+        }
+
+        if (!in_array($bb, $ambilarray)) {
+            $bb = $bb - 1;
+        }
+
         DB::update($updatetikproid, array($bb, $ID_PERMINTAAN));
         
         $url = '/semua/lihat/'.$ID_PERMINTAAN;
