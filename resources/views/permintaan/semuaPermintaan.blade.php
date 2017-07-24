@@ -95,10 +95,11 @@
                          if ($key->STATUS == "in progress") {
                              $date1=date_create();
                              $date2=date_create($key->TGL_PERMINTAAN);
-                             foreach ($deadline4 as $jumlaharray) {
-                              for ($i=0; $i < count($jumlaharray) ; $i++) {
-                                if ($key->TIKPRO_ID == $i && $key->ID_PERMINTAAN == $jumlaharray[$i]["idpermintaan"]) {
-                                   $deaddead = $jumlaharray[$i]["deadline"];
+                             $deadlinebaru = array_reverse($deadline4);
+                             foreach ($deadlinebaru as $jumlaharray) {
+                              for ($i=1; $i <= count($jumlaharray) ; $i++) {
+                                if ($key->TIKPRO_ID == $i && $key->ID_PERMINTAAN == $jumlaharray[$i-1]["idpermintaan"]) {
+                                   $deaddead = $jumlaharray[$i-1]["deadline"];
                                   // echo "true";
                                   }
                               }
