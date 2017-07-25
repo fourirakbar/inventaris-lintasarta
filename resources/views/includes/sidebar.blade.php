@@ -14,7 +14,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="/home"><i class="fa fa-home"></i> <span>Home</span></a></li>
-        @if(Auth::user()->jenis_user == 'admin')
+        @if(Auth::user()->jenis_user == 'admin' || Auth::user()->jenis_user == 'superadmin')
         <li class="treeview @if(\Request::is('showtikpro') || \Request::is('log_click') | \Request::is('log_click/details/*') || \Request::is('showtikproo') || \Request::is('edittikpro')) active @endif">
             <a href="#">
               <i class="fa fa-calendar"></i>
@@ -29,7 +29,7 @@
             </ul>
           </li>
         @endif
-        @if(Auth::user()->jenis_user == 'admin')
+        @if(Auth::user()->jenis_user == 'admin' || Auth::user()->jenis_user == 'superadmin')
         <li class="treeview @if(\Request::is('request') || \Request::is('semua') || \Request::is('semuasudah') || \Request::is('semuabelum') || \Request::is('adminhapus')|| \Request::is('adminhapus/*') || \Request::is('semua/lihat/*')) active @endif">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -60,7 +60,7 @@
         @else
         <li><a href="{{ URL::to('caripermintaan') }}"><i class="fa fa-search"></i> Cari Permintaan</a></li>
         @endif
-        @if(Auth::user()->jenis_user == 'admin')
+        @if(Auth::user()->jenis_user == 'admin' || Auth::user()->jenis_user == 'superadmin')
         <li class="treeview @if(\Request::is('barangkeluar') || \Request::is('barangkeluar/*')) active @endif">
             <a href="#">
               <i class="fa fa-calendar"></i>
@@ -75,7 +75,7 @@
             </ul>
           </li>
         @endif
-        @if(Auth::user()->jenis_user == 'admin')
+        @if(Auth::user()->jenis_user == 'admin' || Auth::user()->jenis_user == 'superadmin')
         <li class="treeview @if(\Request::is('peminjaman') || \Request::is('peminjaman/*')) active @endif">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -96,7 +96,7 @@
         @else
         <li><a href="{{ URL::to('caripeminjaman') }}"><i class="fa fa-search"></i> <span>Cari Peminjaman</span></a></li>
         @endif
-        @if(Auth::user()->jenis_user == 'admin')
+        @if(Auth::user()->jenis_user == 'admin' || Auth::user()->jenis_user == 'superadmin')
         <li class="treeview @if(\Request::is('repair') || \Request::is('repair/*')) active @endif">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -113,7 +113,7 @@
           </ul>
         </li>
         @endif
-        @if(Auth::user()->jenis_user == 'admin')
+        @if(Auth::user()->jenis_user == 'admin' || Auth::user()->jenis_user == 'superadmin')
         <li class="treeview @if(\Request::is('barang') || \Request::is('showbarang') || \Request::is('rack') || \Request::is('rack/*')) active @endif">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -141,8 +141,8 @@
         </li>
         @endif
 
-        {{-- @if(Auth::user()->jenis_user == 'admin')
+        @if(Auth::user()->jenis_user == 'superadmin')
           <li><a href="{{ URL::to('register') }}"><i class="fa fa-user"></i> <span>Tambah User Baru</span></a></li>
-        @endif --}}
+        @endif
       </ul>
     </section>

@@ -35,20 +35,25 @@
 
   <div class="register-box-body">
     <p class="login-box-msg">Register a new membership</p>
+    @if ($message = Session::get('error'))
+              <div class="alert alert-danger">
+                <p>{{ $message }}</p>
+              </div>
+    @endif
 
     <form action="{{URL::to('register')}}" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Full name" name="nama">
+        <input type="text" class="form-control" placeholder="Full name" name="nama" required="">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       {{csrf_field()}}
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" name=username>
+        <input type="text" class="form-control" placeholder="Username" name="username" required="">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       {{csrf_field()}}
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name=password>
+        <input type="password" class="form-control" placeholder="Password" name="password" required="">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       {{csrf_field()}}
@@ -64,7 +69,7 @@
       </div>
     </form>
 
-    <a href="{{ URL::to('login') }}" class="text-center">Back to Login Page</a>
+    <a href="{{ URL::to('home') }}" class="text-center">Back to Home Page</a>
   </div>
   <!-- /.form-box -->
 </div>

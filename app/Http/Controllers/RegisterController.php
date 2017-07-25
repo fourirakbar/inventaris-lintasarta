@@ -16,10 +16,12 @@ class RegisterController extends Controller
     public function create() {
         $data = Input::all();
         $pass=Hash::make($data['password']);
+        $jenisuser = 'admin';
         User::insertGetId(array(
             'NAMA_REQUESTER' => $data['nama'],
             'USERNAME' => $data['username'],
             'PASSWORD' => $pass,
+            'jenis_user' => $jenisuser,
         ));
 
         return redirect('login');
