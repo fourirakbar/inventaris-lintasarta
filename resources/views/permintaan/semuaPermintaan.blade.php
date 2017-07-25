@@ -91,29 +91,54 @@
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
                       <td>{{ $key->BARANG_PERMINTAAN }}</td>
                       <?php
+                        $arraytglselesai = array();
+                        foreach ($tglselesai as $index) {
+                          if ($index->PERMINTAAN_ID == $key->ID_PERMINTAAN) {
+                            array_push($arraytglselesai, $index->TGL_SELESAI);
+                          }
+                        }
+                        foreach ($arraytglselesai as $index) {
+                          if($index != NULL){
+                            $tglselesaiterakhir = $index;
+                          }
+                        }
+                        // dd($tglselesaiterakhir);
 
                          if ($key->STATUS == "in progress") {
-                             $date1=date_create();
-                             $date2=date_create($key->TGL_PERMINTAAN);
+                             
                              $deadlinebaru = array_reverse($deadline4);
                              foreach ($deadlinebaru as $jumlaharray) {
                               for ($i=1; $i <= count($jumlaharray) ; $i++) {
                                 if ($key->TIKPRO_ID == $i && $key->ID_PERMINTAAN == $jumlaharray[$i-1]["idpermintaan"]) {
-                                   $deaddead = $jumlaharray[$i-1]["deadline"];
-                                  // echo "true";
+                                  if ($key->TIKPRO_ID == 1) {
+                                    $date1=date_create();
+                                    $date2=date_create($key->TGL_PERMINTAAN);
+                                    $deaddead = $key->DEADLINE;
                                   }
+                                  else{
+                                    $date1=date_create();
+                                    $date2=date_create($tglselesaiterakhir);
+
+                                    $deaddead = $key->DEADLINE;
+                                    // dd($deaddead);
+                                  }
+                                }
                               }
                             }
                              // echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$deaddead,'</td>';
-                             $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead-3)." days"));
+                             $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead)." days"));
+                             // dd($new);
                              $diff=date_diff($date1,$new);
-                             $print = $diff->format('%R%a Hari');
+                             $print = $diff->format('%a');
+                             $print2 = $diff->format('%a')+1;
+                             $print3 = (string)$print2.' Hari';
+                             // dd($print2);
                              if($print == 0){
                                 $print = $diff->format('%a Hari');
                              }
                              if($print >0)
                              {
-                              echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$diff->format('%a Hari'),'</td>';
+                              echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$print3,'</td>';
                              }
                              else
                              {

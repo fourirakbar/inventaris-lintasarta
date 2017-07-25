@@ -12,6 +12,7 @@ class HistoryTikpro extends Model
       'TIKPRO_NAMA',
     	'PERMINTAAN_ID',
     	'TGL_SELESAI',
+      'DEADLINE_NEW',
     );
     public $primaryKey = 'ID_HISTORY';
 }
