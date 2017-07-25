@@ -66,6 +66,8 @@ Route::put('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@execpembata
 Route::get('/barang', 'BarangController@index')->middleware('admin');
 Route::post('/barang2', 'BarangController@input')->middleware('admin');
 Route::get('/showbarang', 'BarangController@show')->middleware('user');
+Route::get('/showbarang/edit/{ID_BARANG}', 'BarangController@editBarang')->middleware('admin');
+Route::put('/showbarang/edit/{ID_BARANG}', 'BarangController@updateBarang')->middleware('admin');
 
 Route::get('/rack', 'RackController@index')->middleware('admin');
 Route::post('/rack2', 'RackController@input')->middleware('admin');

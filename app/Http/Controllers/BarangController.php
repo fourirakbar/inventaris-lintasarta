@@ -44,5 +44,20 @@ class BarangController extends Controller
         return view('barang.showBarang', compact('barang')); //return view halaman showBarang dengan data dari variable barang
     }
 
+    public function editBarang($ID_BARANG) {
+        $barang = DB::table('BARANG')->select('*')->where('ID_BARANG', $ID_BARANG)->get()[0];
+
+        return view('barang.editBarang', compact('barang'));   
+    }
+
+    public function updateBarang (Request $request, $ID_BARANG) {
+        // dd($ID_BARANG);
+        $peminjaman = Barang::find($ID_BARANG); //mencari data peminjaman sesuai dengan ID_PEMINJAMAN yang diklik pada web
+        Barang::find($ID_BARANG)->update($request->all()); //update data sesuai inputan pada tabel PEMINJAMAN dengan ID_PEMINJAMAN sesuai pada web
+
+        $url = '/showbarang';
+        return redirect($url)->with('success','Sukses Update Data'); //return ke halaman /showPeminjaman dengan keterangan sukses
+    }
+
 
 }

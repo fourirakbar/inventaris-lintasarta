@@ -1,3 +1,4 @@
+
 @extends('layouts.lumino')
 @section('content')
 <section class="content-header">
@@ -38,6 +39,7 @@
                         <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
                         <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
                         <th style="text-align: center; vertical-align: middle; ">Status</th>
+                        <th style="text-align: center; vertical-align: middle; ">Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -56,6 +58,9 @@
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_RACK }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->LOKASI_RACK }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->STATUS_BARANG }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">
+                        <input type="hidden" name="method" value="DELETE">
+                        <a class="btn btn-block btn-primary" href="/showbarang/edit/{{ $index->ID_BARANG }}"><b class="material-icons">EDIT</b></td>
                     </tr>
                 @endforeach
                 </tbody>
