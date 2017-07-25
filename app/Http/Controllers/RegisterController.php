@@ -17,13 +17,19 @@ class RegisterController extends Controller
         $data = Input::all();
         $pass=Hash::make($data['password']);
         $jenisuser = 'admin';
-        User::insertGetId(array(
-            'NAMA_REQUESTER' => $data['nama'],
-            'USERNAME' => $data['username'],
-            'PASSWORD' => $pass,
-            'jenis_user' => $jenisuser,
-        ));
+        $username = $data['nama'];
+        if (User::where('username','=', $username)->exists()) {
+            return redirect('register')->with('error','Username Sudah Digunakan!');            
+        }
+        else {
+            User::insertGetId(array(
+                'NAMA_REQUESTER' => $data['nama'],
+                'USERNAME' => $data['username'],
+                'PASSWORD' => $pass,
+                'jenis_user' => $jenisuser,
+            ));
 
-        return redirect('login');
+            return redirect('register')->with('success','Register Admin Baru Berhasil');
+        }
     }
 }

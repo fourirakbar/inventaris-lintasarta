@@ -62,7 +62,7 @@
         <!-- /.col -->
       </div>
     </form>
-    <a href="{{ URL::to('register') }}" class="text-center">Register a new membership</a>
+    <!-- <a href="{{ URL::to('register') }}" class="text-center">Register a new membership</a> -->
 
   </div>
   <!-- /.login-box-body -->

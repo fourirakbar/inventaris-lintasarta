@@ -50,6 +50,7 @@
 	                  <label>Status Barang</label>
 	                  <input class="form-control" value="{{ $barang->STATUS_BARANG }} " name="STATUS_BARANG">
 	                </div>
+
 	                <button type="submit" class="btn btn-primary pull-right">Update</button>&nbsp;&nbsp;
 	                <button type="reset" class="btn btn-default pull-right">Reset</button>&nbsp;&nbsp;
 	              </div>

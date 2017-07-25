@@ -192,7 +192,7 @@ class TikproController extends Controller
     }
 
     public function logClick () {
-      $isi = Log::orderBy('updated_at','ASC')->get();
+      $isi = Log::orderBy('updated_at','DESC')->get();
       $tikproLama = TikproLama::query()->join('LOG_CLICK','TIKPRO_LAMA.LOG_ID','=','LOG_CLICK.ID_LOG')->get();
       // dd($isi);
       $tikproBaru = Tikpro::orderBy('ID_TIKPRO','ASC')->get();
