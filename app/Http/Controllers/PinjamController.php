@@ -75,6 +75,10 @@ class PinjamController extends Controller {
         if ($keterangan == "done") {
             DB::table('BARANG')->where('ID_BARANG', $idbarang)->update(['STATUS_BARANG' => NULL]);    
         }
+        
+        elseif ($keterangan == "progress") {
+            DB::table('BARANG')->where('ID_BARANG', $idbarang)->update(['STATUS_BARANG' => 'Dipinjam']);    
+        }
 
         $url = '/peminjaman/show';
         return redirect($url)->with('success','Sukses Update Data'); //return ke halaman /showPeminjaman dengan keterangan sukses
