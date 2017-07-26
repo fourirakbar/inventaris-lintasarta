@@ -50,6 +50,19 @@
 	                  <label>Status Barang</label>
 	                  <input class="form-control" value="{{ $barang->STATUS_BARANG }} " name="STATUS_BARANG">
 	                </div>
+	                <div class="form-group">
+					  <label>RACK</label>
+					  <select class="form-control" name="RACK_ID">
+					    <option disabled><b>-- Pilih Menu DIbawah --</b></option>
+					    @foreach ($listRack as $key)
+					    	@if($barang->RACK_ID == $key->ID_RACK)
+					      		<option selected value="{{ $key->ID_RACK }}">{{ $key->NAMA_RACK }}</option>
+					      	@else
+					      		<option value="{{ $key->ID_RACK }}">{{ $key->NAMA_RACK }}</option>
+					      	@endif
+					    @endforeach
+					  </select>
+					</div>
 
 	                <button type="submit" class="btn btn-primary pull-right">Update</button>&nbsp;&nbsp;
 	                <button type="reset" class="btn btn-default pull-right">Reset</button>&nbsp;&nbsp;

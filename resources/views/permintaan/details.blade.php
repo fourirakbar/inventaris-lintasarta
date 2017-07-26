@@ -218,11 +218,9 @@
 		    	</tr>
 			    </thead>
               </table>
-              @if (Auth::user()->jenis_user == 'admin')
               <div class="box-header">
                 <a href="/semua/lihat/edit/{{ $jebret->ID_PERMINTAAN }}"><button type="button" class="btn btn-primary btn-lg pull-right">EDIT</button></a>
               </div>
-              @endif
             </div>
 
 

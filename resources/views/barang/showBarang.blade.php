@@ -39,7 +39,7 @@
                         <th style="text-align: center; vertical-align: middle; ">Nama Rack</th>
                         <th style="text-align: center; vertical-align: middle; ">Lokasi Rack</th>
                         <th style="text-align: center; vertical-align: middle; ">Status</th>
-                        <th style="text-align: center; vertical-align: middle; ">Status</th>
+                        <th style="text-align: center; vertical-align: middle; ">Action</th>
                 </tr>
                 </thead>
                 <tbody>
