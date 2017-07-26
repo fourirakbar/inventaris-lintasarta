@@ -14,8 +14,8 @@
 
 Route::get('/', 'UserController@index')->middleware('guest');
 #user request barang
-Route::get('request', 'PermintaanController@index')->middleware('user');
-Route::post('request2', 'PermintaanController@input')->middleware('user');
+Route::get('request', 'PermintaanController@index')->middleware('admin');
+Route::post('request2', 'PermintaanController@input')->middleware('admin');
 
 Route::get('home', 'HomeController@index')->middleware('admin');
 Route::post('getmsg1', 'HomeController@showbatal')->middleware('admin');
@@ -30,21 +30,21 @@ Route::get('monitoring4', 'HomeController@showrepair2')->middleware('admin');
 Route::get('/semua', 'PermintaanController@lihatSemua')->middleware('admin');
 Route::get('/semuabelum', 'PermintaanController@lihatSemuaBelum')->middleware('admin');
 Route::get('/semuasudah', 'PermintaanController@lihatSemuaSudah')->middleware('admin');
-Route::get('/semua/lihat/{ID_PERMINTAAN}', 'PermintaanController@details')->middleware('user');
+Route::get('/semua/lihat/{ID_PERMINTAAN}', 'PermintaanController@details')->middleware('admin');
 Route::get('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doEdit')->middleware('admin');
 Route::put('/semua/lihat/edit/{ID_PERMINTAAN}', 'PermintaanController@doUpdate')->middleware('admin');
 
-Route::get('login', 'LoginController@index')->middleware('guest');;
+Route::get('login', 'LoginController@index');
 Route::post('login2', 'LoginController@login');
 
-Route::get('register', 'RegisterController@index')->middleware('admin');
-Route::post('register', 'RegisterController@create')->middleware('admin');
+Route::get('register', 'RegisterController@index')->middleware('superadmin');
+Route::post('register', 'RegisterController@create')->middleware('superadmin');
 
 Route::get('logout', 'LoginController@logout');
 
 // Auth::routes();
 
-Route::get('/home', 'HomeController@index')->middleware('user');
+Route::get('/home', 'HomeController@index')->middleware('admin');
 
 Route::get('showtikpro', 'TikproController@index')->middleware('admin');
 Route::get('showtikproo', 'TikproController@indexo')->middleware('admin');
@@ -55,7 +55,7 @@ Route::get('removetikpro/{ID_TIKPRO}', 'TikproController@remove')->middleware('a
 Route::get('log_click', 'TikproController@logClick')->middleware('admin');
 Route::get('/log_click/details/{ID_LOG}', 'TikproController@detailLogClick')->middleware('admin');
 
-Route::get('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@hapus')->middleware('user');
+Route::get('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@hapus')->middleware('admin');
 Route::post('/semua/hapus/{ID_PERMINTAAN}', 'PermintaanController@delete');
 Route::post('/semua/reject/{ID_PERMINTAAN}', 'PermintaanController@reject')->middleware('admin');;
 Route::get('adminhapus', 'PermintaanController@showpembatalan')->middleware('admin');
@@ -65,7 +65,7 @@ Route::put('adminhapus/lihat/{ID_PERMINTAAN}', 'PermintaanController@execpembata
 
 Route::get('/barang', 'BarangController@index')->middleware('admin');
 Route::post('/barang2', 'BarangController@input')->middleware('admin');
-Route::get('/showbarang', 'BarangController@show')->middleware('user');
+Route::get('/showbarang', 'BarangController@show')->middleware('admin');
 Route::get('/showbarang/edit/{ID_BARANG}', 'BarangController@editBarang')->middleware('admin');
 Route::put('/showbarang/edit/{ID_BARANG}', 'BarangController@updateBarang')->middleware('admin');
 
@@ -77,8 +77,8 @@ Route::put('/rack/edit/{ID_RACK}', 'RackController@update')->middleware('admin')
 Route::get('/rack/delete/{ID_RACK}', 'RackController@delete')->middleware('admin');
 Route::get('/rack/show/{ID_RACK}', 'RackController@showeach')->middleware('admin');
 
-Route::get('/peminjaman', 'PinjamController@index')->middleware('user');
-Route::post('peminjaman2', 'PinjamController@input')->middleware('user');
+Route::get('/peminjaman', 'PinjamController@index')->middleware('admin');
+Route::post('peminjaman2', 'PinjamController@input')->middleware('admin');
 Route::get('/peminjaman/show', 'PinjamController@show')->middleware('admin');
 Route::get('/peminjaman/show/belum','PinjamController@showBelum')->middleware('admin');
 Route::get('/peminjaman/show/sudah','PinjamController@showSudah')->middleware('admin');
@@ -87,7 +87,7 @@ Route::put('/peminjaman/edit/{ID_PEMINJAMAN}','PinjamController@update')->middle
 Route::get('/peminjaman/delete/{ID_PEMINJAMAN}','PinjamController@delete')->middleware('admin');
 
 Route::get('repair/input', 'RepairController@index')->middleware('admin');
-Route::post('repair/input', 'RepairController@input')->middleware('user');
+Route::post('repair/input', 'RepairController@input')->middleware('admin');
 Route::get('repair/show', 'RepairController@show')->middleware('admin');
 Route::get('repair/show/sudah', 'RepairController@showsudah')->middleware('admin');
 Route::get('repair/show/belum', 'RepairController@showbelum')->middleware('admin');
@@ -100,11 +100,11 @@ Route::get('404', function() {
 });
 
 //user section
-Route::get('caripermintaan', 'PermintaanController@caripermintaan')->middleware('user');
-Route::post('caripermintaan', 'PermintaanController@showpermintaan')->middleware('user');
+Route::get('caripermintaan', 'PermintaanController@caripermintaan')->middleware('admin');
+Route::post('caripermintaan', 'PermintaanController@showpermintaan')->middleware('admin');
 
-Route::get('caripeminjaman', 'PinjamController@caripeminjaman')->middleware('user');
-Route::post('caripeminjaman', 'PinjamController@showpeminjaman')->middleware('user');
+Route::get('caripeminjaman', 'PinjamController@caripeminjaman')->middleware('admin');
+Route::post('caripeminjaman', 'PinjamController@showpeminjaman')->middleware('admin');
 
 Route::get('user-search', 'UserController@index');
 Route::post('user-search', 'UserController@show');

@@ -5,16 +5,16 @@ namespace App\Http\Middleware;
 use Auth;
 use Closure;
 
-class CheckUser
+class CheckSuperAdmin
 {
     public function handle($request, Closure $next)
     {
          if (Auth::user()) {
-         	if (Auth::user()->jenis_user != 'admin') {
+         	if (Auth::user()->jenis_user == 'superadmin') {
          		return $next($request);
          	}
          	else{
-         		return $next($request);
+         		return redirect('404');;
          	}
          }
 
