@@ -114,35 +114,46 @@
                                     $date1=date_create();
                                     $date2=date_create($key->TGL_PERMINTAAN);
                                     $deaddead = $key->DEADLINE;
+                                    $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead)." days"));
+                                    $diff=date_diff($date1,$new);
+                                    $print = $diff->format('%R%a Hari');
+                                    if($print == 0){
+                                      $print = $diff->format('%a Hari');
+                                    }
+                                    if($print >0)
+                                    {
+                                    echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
+                                    }
+                                    else
+                                    {
+                                    echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
+                                    }
                                   }
                                   else{
                                     $date1=date_create();
                                     $date2=date_create($tglselesaiterakhir);
                                     $deaddead = $key->DEADLINE;
+                                    $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead)." days"));
+                                    $diff=date_diff($date1,$new);
+                                    $print = $diff->format('%R%a Hari');
+                                    if($print == 0){
+                                      $print = $diff->format('%a Hari');
+                                    }
+                                    if($print >0)
+                                    {
+                                    echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
+                                    }
+                                    else
+                                    {
+                                    echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
+                                    }
                                     // dd($deaddead);
                                   }
                                 }
                               }
                             }
                              // echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$deaddead,'</td>';
-                             $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead)." days"));
-                             // dd($new);
-                             $diff=date_diff($date1,$new);
-                             $print = $diff->format('%a');
-                             $print2 = $diff->format('%a')+1;
-                             $print3 = (string)$print2.' Hari';
-                             // dd($print2);
-                             if($print == 0){
-                                $print = $diff->format('%a Hari');
-                             }
-                             if($print >0)
-                             {
-                              echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$print3,'</td>';
-                             }
-                             else
-                             {
-                              echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
-                             }
+                             
                          }
                          elseif ($key->STATUS == "done") {
                                echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >DONE</td>';
