@@ -33,7 +33,7 @@
             <p>Permintaan yang prosesnya terlambat</p>
           </div>
           <div class="icon">
-            <i class="ion ion-stats-bars"></i>
+            <i class="ion ion-android-alarm-clock"></i>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
             <p>Peminjaman lewat dari hari pengembalian</p>
           </div>
           <div class="icon">
-            <i class="ion ion-person-add"></i>
+            <i class="ion ion-ios-stopwatch-outline"></i>
           </div>
         </div>
       </a>
@@ -65,7 +65,7 @@
             <p>Perbaikan lewat dari tanggal perkiraan selesai</p>
           </div>
           <div class="icon">
-            <i class="ion ion-pie-graph"></i>
+            <i class="ion ion-android-time"></i>
           </div>
         </div>
       </div>

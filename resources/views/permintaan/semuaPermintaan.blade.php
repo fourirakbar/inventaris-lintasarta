@@ -118,7 +118,6 @@
                                   else{
                                     $date1=date_create();
                                     $date2=date_create($tglselesaiterakhir);
-
                                     $deaddead = $key->DEADLINE;
                                     // dd($deaddead);
                                   }
