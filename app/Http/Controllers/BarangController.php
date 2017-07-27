@@ -56,7 +56,7 @@ class BarangController extends Controller
     public function updateBarang (Request $request, $ID_BARANG) {
         // dd($request->all());
         // dd($ID_BARANG);
-        $peminjaman = Barang::find($ID_BARANG); //mencari data peminjaman sesuai dengan ID_PEMINJAMAN yang diklik pada web
+        // $peminjaman = Barang::find($ID_BARANG); //mencari data peminjaman sesuai dengan ID_PEMINJAMAN yang diklik pada web
         Barang::find($ID_BARANG)->update($request->all()); //update data sesuai inputan pada tabel PEMINJAMAN dengan ID_PEMINJAMAN sesuai pada web
 
         $url = '/showbarang';
