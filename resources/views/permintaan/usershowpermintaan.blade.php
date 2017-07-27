@@ -254,7 +254,7 @@
           </thead>
               </table>
             @endforeach
-            <h3><a href="{{URL::to('user-search')}}"><span style="color: #3C8DBC;" class="fa fa-arrow-circle-o-left" aria-hidden="true">Cari Lagi</a></h3>
+            <a href="{{URL::to('user-search')}}"><button type="button" class="btn btn-primary btn-lg pull-left" data-toggle="modal" data-target="#myModal">Cari Lagi</button></a>
             @if($jebret->STATUS == "in progress")
               <button type="button" class="btn btn-danger btn-lg pull-right" data-toggle="modal" data-target="#myModal">Batalkan Permintaan</button>
             @endif

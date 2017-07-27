@@ -13,6 +13,8 @@ class Barang extends Model
     	'NAMA_BARANG',
       'JUMLAH_BARANG',
     	'KETERANGAN',
+    	'HARGA_BARANG',
+        'STATUS_BARANG',
     );
     public $primaryKey = "ID_BARANG";
 }

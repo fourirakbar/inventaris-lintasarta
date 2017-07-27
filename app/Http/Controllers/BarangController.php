@@ -39,7 +39,25 @@ class BarangController extends Controller
         $barang = DB::table('BARANG')
             ->join('RACK', 'BARANG.RACK_ID', '=', 'RACK.ID_RACK')
             ->select('BARANG.*', 'RACK.*')
+            ->where('STATUS_BARANG', '!=', 'Tidak Terpakai')
+            ->Where('STATUS_BARANG', '!=', 'Rusak')
+            ->orWhereNULL('STATUS_BARANG')
             ->get();
+        // dd($barang);
+
+        return view('barang.showBarang', compact('barang')); //return view halaman showBarang dengan data dari variable barang
+    }
+
+    public function show2(){
+
+        //ambil data dari tabel barang join dengan tabel rack
+        $barang = DB::table('BARANG')
+            ->join('RACK', 'BARANG.RACK_ID', '=', 'RACK.ID_RACK')
+            ->select('BARANG.*', 'RACK.*')
+            ->where('STATUS_BARANG', '=', 'Tidak Terpakai')
+            ->orWhere('STATUS_BARANG', '=', 'Rusak')
+            ->get();
+        // dd($barang);
 
         return view('barang.showBarang', compact('barang')); //return view halaman showBarang dengan data dari variable barang
     }
@@ -53,9 +71,9 @@ class BarangController extends Controller
     }
 
     public function updateBarang (Request $request, $ID_BARANG) {
-        // dd($request);
+        // dd($request->all());
         // dd($ID_BARANG);
-        $peminjaman = Barang::find($ID_BARANG); //mencari data peminjaman sesuai dengan ID_PEMINJAMAN yang diklik pada web
+        // $peminjaman = Barang::find($ID_BARANG); //mencari data peminjaman sesuai dengan ID_PEMINJAMAN yang diklik pada web
         Barang::find($ID_BARANG)->update($request->all()); //update data sesuai inputan pada tabel PEMINJAMAN dengan ID_PEMINJAMAN sesuai pada web
 
         $url = '/showbarang';

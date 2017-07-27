@@ -52,6 +52,10 @@
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Deskripsi</th>
 			        <td colspan="5">{{ $jebret->DESKRIPSI }}</td>
 			    </tr>
+          <tr>
+              <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">Harga Barang</th>
+              <td colspan="5">{{ $jebret->HARGA_BARANG_PERMINTAAN }}</td>
+          </tr>
 			    <tr>
 			        <th style="width: 20%; text-align: left; vertical-align: middle;padding-left: 10px;">No FPBJ</th>
 			        <td colspan="5">{{ $jebret->NO_FPBJ }}</td>

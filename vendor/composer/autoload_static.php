@@ -303,6 +303,7 @@ class ComposerStaticInit996dcc944920a9f0d5f7347da7b308f5
 
     public static $classMap = array (
         'App\\Barang' => __DIR__ . '/../..' . '/app/Barang.php',
+        'App\\BarangKeluar' => __DIR__ . '/../..' . '/app/BarangKeluar.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\DataGudang' => __DIR__ . '/../..' . '/app/DataGudang.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -312,6 +313,7 @@ class ComposerStaticInit996dcc944920a9f0d5f7347da7b308f5
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\BarangController' => __DIR__ . '/../..' . '/app/Http/Controllers/BarangController.php',
+        'App\\Http\\Controllers\\BarangKeluarController' => __DIR__ . '/../..' . '/app/Http/Controllers/BarangKeluarController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
@@ -324,7 +326,7 @@ class ComposerStaticInit996dcc944920a9f0d5f7347da7b308f5
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\CheckAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckAdmin.php',
-        'App\\Http\\Middleware\\CheckUser' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckUser.php',
+        'App\\Http\\Middleware\\CheckSuperAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckSuperAdmin.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
