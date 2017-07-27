@@ -50,7 +50,7 @@
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y - H:i:s', strtotime($key->updated_at)) ?></td>
                       <td style="text-align: center; vertical-align: middle; ">
                         <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><b class="material-icons">Show Detail Perubahan</b></button> -->
-                        <a href="/log_click/details/{{ $key->ID_LOG }}"><button type="button" class="btn btn-primary btn-lg pull-right">Show Detail Perubahan</button></a>
+                        <a href="/log_click/details/{{ $key->ID_LOG }}"><button type="button" class="btn btn-primary btn-lg">Show Detail Perubahan</button></a>
                       </td>
                     </tr>
                     @endforeach

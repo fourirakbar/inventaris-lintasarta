@@ -15,7 +15,7 @@ class RegisterController extends Controller
 
     public function create() {
         $data = Input::all();
-        $pass=Hash::make($data['password']);
+        $pass = Hash::make($data['password']);
         $jenisuser = 'admin';
         $username = $data['nama'];
         if (User::where('username','=', $username)->exists()) {

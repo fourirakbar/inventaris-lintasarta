@@ -27,8 +27,9 @@
               
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-right">
-                  <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                <div>
+                  <a href="/editprofile/{{ Auth::user()->ID_REQUESTER }}" class="btn btn-default btn-flat pull-left">Edit Profile</a>
+                  <a href="/logout" class="btn btn-default btn-flat pull-right">Sign out</a>
                 </div>
               </li>
             </ul>

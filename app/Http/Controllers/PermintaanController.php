@@ -267,37 +267,40 @@ class PermintaanController extends Controller
         
         // dd($jebret);
         Permintaan::find($ID_PERMINTAAN)->update($request->all()); //update data pada tabel PERMINTAAN sesuai input yang diberikan oleh user
-        
 
-        $notSoLazy = DB::table('PERMINTAAN')->select('TIKPRO_ID')->where('ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil TIKPRO_ID dari tabel PERMINTAAN dengan ketentuan yang sudah diberikan
-        $komodoDream = explode(":", $notSoLazy); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
-        $komodoBreakfast = explode("}]", $komodoDream[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+        if ($request->NAMA && $request->TGL_SELESAI) {
+            $notSoLazy = DB::table('PERMINTAAN')->select('TIKPRO_ID')->where('ID_PERMINTAAN', $ID_PERMINTAAN)->get(); //ambil TIKPRO_ID dari tabel PERMINTAAN dengan ketentuan yang sudah diberikan
+            $komodoDream = explode(":", $notSoLazy); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+            $komodoBreakfast = explode("}]", $komodoDream[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+            $notBadLiquid = "UPDATE HISTORY_TIKPRO SET TGL_SELESAI= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?"; //update TGL_SELESAI pada tabel HISTORY_TIKPRO dengan ketentuan yang sudah diberikan
+            $updatedb = "UPDATE HISTORY_TIKPRO SET NAMA= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?";
+            DB::update($notBadLiquid, array($kelarBoi, $komodoBreakfast[0], $ID_PERMINTAAN));
+            DB::update($updatedb, array($nama, $komodoBreakfast[0], $ID_PERMINTAAN));
 
+            $aa = $request->TIKPRO_ID;
+            $bb = (int)$aa + 1;
+            $updatetikproid = "UPDATE PERMINTAAN SET TIKPRO_ID = ? WHERE ID_PERMINTAAN = ?"; //update
 
-        $notBadLiquid = "UPDATE HISTORY_TIKPRO SET TGL_SELESAI= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?"; //update TGL_SELESAI pada tabel HISTORY_TIKPRO dengan ketentuan yang sudah diberikan
-        $updatedb = "UPDATE HISTORY_TIKPRO SET NAMA= ? WHERE TIKPRO_ID= ? AND PERMINTAAN_ID= ?";
-        DB::update($notBadLiquid, array($kelarBoi, $komodoBreakfast[0], $ID_PERMINTAAN));
-        DB::update($updatedb, array($nama, $komodoBreakfast[0], $ID_PERMINTAAN));
+            $ambil = DB::table('HISTORY_TIKPRO')->select('TIKPRO_ID')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get();
+            $ambilarray = array();
 
-        $aa = $request->TIKPRO_ID;
-        $bb = (int)$aa + 1;
-        $updatetikproid = "UPDATE PERMINTAAN SET TIKPRO_ID = ? WHERE ID_PERMINTAAN = ?"; //update
+            foreach ($ambil as $key) {
+                array_push($ambilarray, $key->TIKPRO_ID);
+            }
 
-        $ambil = DB::table('HISTORY_TIKPRO')->select('TIKPRO_ID')->where('PERMINTAAN_ID', $ID_PERMINTAAN)->get();
-        $ambilarray = array();
+            if (!in_array($bb, $ambilarray)) {
+                $bb = $bb - 1;
+            }
 
-        foreach ($ambil as $key) {
-            array_push($ambilarray, $key->TIKPRO_ID);
+            DB::update($updatetikproid, array($bb, $ID_PERMINTAAN));
+            $url = '/semua/lihat/'.$ID_PERMINTAAN;
+            return redirect($url)->with ('success','Sukses Update Data'); //return ke /semua/lihat dengan keterangan sukses
         }
-
-        if (!in_array($bb, $ambilarray)) {
-            $bb = $bb - 1;
+        else
+        {
+            $url = '/semua/lihat/'.$ID_PERMINTAAN;
+            return redirect($url)->with ('success','Sukses Update Data'); //return ke /semua/lihat dengan keterangan sukses
         }
-
-        DB::update($updatetikproid, array($bb, $ID_PERMINTAAN));
-        
-        $url = '/semua/lihat/'.$ID_PERMINTAAN;
-        return redirect($url)->with ('success','Sukses Update Data'); //return ke /semua/lihat dengan keterangan sukses
     }
 
 
@@ -380,6 +383,7 @@ class PermintaanController extends Controller
     public function detailpembatalan($ID_PERMINTAAN)
     {
         $jebret = Permintaan::query()->join('PEMBATALAN','PEMBATALAN.PERMINTAAN_ID','=','PERMINTAAN.ID_PERMINTAAN')->where('ID_PERMINTAAN','=',$ID_PERMINTAAN)->get()[0]; //ambil data dari table PERMINTAAN dan table PEMATALAN dengan ketentuan yang sudah diberikan
+        dd($jebret);
         return view('permintaan.detailadminhapus', compact('jebret')); //return ke halaman detailadminhapus dengan data dari variable $jebret
     }
 
