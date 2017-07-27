@@ -51,8 +51,8 @@ Route::get('/home', 'HomeController@index')->middleware('admin');
 
 Route::get('showtikpro', 'TikproController@index')->middleware('admin');
 Route::get('showtikproo', 'TikproController@indexo')->middleware('admin');
-Route::put('edittikpro', 'TikproController@update')->middleware('admin');
-Route::get('edittikpro', 'TikproController@edit')->middleware('admin');
+Route::put('edittikpro', 'TikproController@update')->middleware('superadmin');
+Route::get('edittikpro', 'TikproController@edit')->middleware('superadmin');
 Route::get('addtikpro/{ID_TIKPRO}', 'TikproController@add')->middleware('admin');
 Route::get('removetikpro/{ID_TIKPRO}', 'TikproController@remove')->middleware('admin');
 Route::get('log_click', 'TikproController@logClick')->middleware('admin');
