@@ -55,12 +55,6 @@
                 array_push($deadline4, $deadline3);
                 $deadline3 = array();
               }
-              // dd($deadline4);
-              // foreach ($deadline4 as $jumlaharray) {
-              //    foreach ($jumlaharray as $eacharray) {
-              //      print_r($eacharray);
-              //    }
-              //  }
 
             ?>
             <!-- /.box-header -->
@@ -97,6 +91,7 @@
                             array_push($arraytglselesai, $index->TGL_SELESAI);
                           }
                         }
+                        // dd($arraytglselesai);
                         foreach ($arraytglselesai as $index) {
                           if($index != NULL){
                             $tglselesaiterakhir = $index;

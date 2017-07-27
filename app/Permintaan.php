@@ -29,6 +29,7 @@ class Permintaan extends Model
         'TGL_DEADLINE',
         'TIKPRO_ID',
         'PEMBATALAN_ID',
+        'HARGA_BARANG_PERMINTAAN',
     );
     public $primaryKey = "ID_PERMINTAAN";
 
