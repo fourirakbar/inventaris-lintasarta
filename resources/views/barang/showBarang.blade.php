@@ -1,4 +1,3 @@
-
 @extends('layouts.lumino')
 @section('content')
 <section class="content-header">

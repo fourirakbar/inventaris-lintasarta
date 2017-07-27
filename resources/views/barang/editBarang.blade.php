@@ -53,7 +53,39 @@
 
 	                <div class="form-group">
 	                  <label>Status Barang</label>
-	                  <input class="form-control" value="{{ $barang->STATUS_BARANG }} " name="STATUS_BARANG">
+	                  <select class="form-control" name="STATUS_BARANG">
+	                  	  @if($barang->STATUS_BARANG == 'Diperbaiki')
+		                  	<option disabled><b>-- Pilih Menu DIbawah --</b></option>
+		                  	<option selected="" value="Diperbaiki">Diperbaiki</option>
+		                  	<option value="Dipinjam">Dipinjam</option>
+		                  	<option value="Rusak">Rusak</option>
+		                  	<option value="Tidak Terpakai">Tidak Terpakai</option>
+		                  @elseif($barang->STATUS_BARANG == 'Dipinjam')
+		                  	<option disabled><b>-- Pilih Menu DIbawah --</b></option>
+		                  	<option value="Diperbaiki">Diperbaiki</option>
+		                  	<option selected="" value="Dipinjam">Dipinjam</option>
+		                  	<option value="Rusak">Rusak</option>
+		                  	<option value="Tidak Terpakai">Tidak Terpakai</option>
+		                  @elseif($barang->STATUS_BARANG == 'Rusak')
+		                  	<option disabled><b>-- Pilih Menu DIbawah --</b></option>
+		                  	<option value="Diperbaiki">Diperbaiki</option>
+		                  	<option value="Dipinjam">Dipinjam</option>
+		                  	<option selected="" value="Rusak">Rusak</option>
+		                  	<option value="Tidak Terpakai">Tidak Terpakai</option>
+		                  @elseif($barang->STATUS_BARANG == 'Tidak Terpakai')
+		                  	<option disabled><b>-- Pilih Menu DIbawah --</b></option>
+		                  	<option value="Diperbaiki">Diperbaiki</option>
+		                  	<option value="Dipinjam">Dipinjam</option>
+		                  	<option value="Rusak">Rusak</option>
+		                  	<option selected="" value="Tidak Terpakai">Tidak Terpakai</option>
+		                  @else
+		                  	<option selected="" disabled><b>-- Pilih Menu DIbawah --</b></option>
+		                  	<option value="Diperbaiki">Diperbaiki</option>
+		                  	<option value="Dipinjam">Dipinjam</option>
+		                  	<option value="Rusak">Rusak</option>
+		                  	<option value="Tidak Terpakai">Tidak Terpakai</option>   
+		                  @endif
+	                  </select>
 	                </div>
 	                <div class="form-group">
 					  <label>RACK</label>
