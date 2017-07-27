@@ -39,6 +39,23 @@ class BarangController extends Controller
         $barang = DB::table('BARANG')
             ->join('RACK', 'BARANG.RACK_ID', '=', 'RACK.ID_RACK')
             ->select('BARANG.*', 'RACK.*')
+            ->where('STATUS_BARANG', '!=', 'Tidak Terpakai')
+            ->Where('STATUS_BARANG', '!=', 'Rusak')
+            ->orWhereNULL('STATUS_BARANG')
+            ->get();
+        // dd($barang);
+
+        return view('barang.showBarang', compact('barang')); //return view halaman showBarang dengan data dari variable barang
+    }
+
+    public function show2(){
+
+        //ambil data dari tabel barang join dengan tabel rack
+        $barang = DB::table('BARANG')
+            ->join('RACK', 'BARANG.RACK_ID', '=', 'RACK.ID_RACK')
+            ->select('BARANG.*', 'RACK.*')
+            ->where('STATUS_BARANG', '=', 'Tidak Terpakai')
+            ->orWhere('STATUS_BARANG', '=', 'Rusak')
             ->get();
         // dd($barang);
 

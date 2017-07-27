@@ -110,6 +110,7 @@
           <ul class="treeview-menu">
             <li class="@if(\Request::is('barang')) active @endif"><a href="{{ URL::to('barang') }}"><i class="fa fa-book"></i> <span>Input Barang</span></a></li>
             <li class="@if(\Request::is('showbarang')) active @endif"><a href="{{ URL::to('showbarang') }}"><i class="fa fa-book"></i> <span>Lihat Semua Barang</span></a></li>
+            <li class="@if(\Request::is('showbarang2')) active @endif"><a href="{{ URL::to('showbarang2') }}"><i class="fa fa-book"></i> <span>Lihat Barang Tidak Terpakai</span></a></li>
             <li class="treeview @if(\Request::is('rack') || \Request::is('rack/*')) active @endif">
               <a href="#">
                 <i class="fa fa-share"></i> <span>Pengaturan Rack</span>
