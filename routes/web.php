@@ -38,7 +38,7 @@ Route::get('login', 'LoginController@index');
 Route::post('login2', 'LoginController@login');
 
 Route::get('register', 'RegisterController@index')->middleware('superadmin');
-Route::put('register', 'RegisterController@create')->middleware('superadmin');
+Route::post('register', 'RegisterController@create')->middleware('superadmin');
 
 Route::get('/editprofile/{ID_REQUESTER}','EditProfileController@index');
 Route::put('/editprofile/edit/{ID_REQUESTER}','EditProfileController@input');
