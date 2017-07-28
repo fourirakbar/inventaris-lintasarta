@@ -15,7 +15,7 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
-          @if ($message = Session::get('success'))
+          @if ($message = Session::get('success')) 
               <div class="alert alert-success">
                 <p>{{ $message }}</p>
               </div>
@@ -111,17 +111,19 @@
                                     $deaddead = $key->DEADLINE;
                                     $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead)." days"));
                                     $diff=date_diff($date1,$new);
-                                    $print = $diff->format('%R%a Hari');
+                                    $jam = $diff->format('%R%h');
+                                    $print = $diff->format('%R%a');
                                     if($print == 0){
-                                      $print = $diff->format('%a Hari');
+                                      $print = $diff->format('%a');
                                     }
-                                    if($print >0)
+                                    
+                                    if($jam >0)
                                     {
-                                    echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
+                                    echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$print+1,' Hari','</td>';
                                     }
                                     else
                                     {
-                                    echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,'</td>';
+                                    echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,' Hari','</td>';
                                     }
                                   }
                                   else{
