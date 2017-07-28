@@ -81,9 +81,9 @@
                     <tr>
                       <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $key->NOMOR_TICKET }}</td>
-                      <td>{{ $key->NAMA_REQUESTER }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $key->NAMA_REQUESTER }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($key->TGL_PERMINTAAN)) ?></td>
-                      <td>{{ $key->BARANG_PERMINTAAN }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $key->BARANG_PERMINTAAN }}</td>
                       <?php
                         $arraytglselesai = array();
                         foreach ($tglselesai as $index) {
