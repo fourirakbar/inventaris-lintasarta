@@ -35,8 +35,13 @@ class PinjamController extends Controller {
                 'ID_BARANG' => $data['ID_BARANG'],
                 'NOMOR_TICKET' => $data['NOMOR_TICKET'],
                 'CATATAN_PEMINJAMAN' => $data['CATATAN_PEMINJAMAN'],
-            ));    
-            $query4 = DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Dipinjam"]);
+            )); 
+            if ($data['CATATAN_PEMINJAMAN'] == "") {
+                DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Dipinjam"]);
+            }
+            else{
+                DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_PEMINJAMAN']]);
+            }
         }
         else {
             Peminjaman::insertGetId(array(
