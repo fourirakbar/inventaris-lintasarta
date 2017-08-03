@@ -17,6 +17,15 @@ use App\Log;
 class TikproController extends Controller
 {
     public function index(Request $request) {
+        $checktable = DB::table('LOG_CLICK')->select('ID_LOG', 'ISI')->orderBy('ID_LOG','DESC')->first();
+        $dummy = "data_dummy";
+        
+          if (is_null($checktable) || $checktable->ISI != "data_dummy") {
+            DB::insert('insert into LOG_CLICK (isi) values (?)', [$dummy]); 
+          }  
+        
+        
+
         $count = DB::table('TIKPRO')->select('ID_TIKPRO')->count(); 
         $id1 = DB::table('TIKPRO')->select('ID_TIKPRO')->get();
         $nama1 = DB::table('TIKPRO')->select('NAMA_TIKPRO')->get();
@@ -47,24 +56,43 @@ class TikproController extends Controller
         // dd($lastint);
 
         $check = DB::table('TIKPRO_LAMA')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
-        // dd($check);
-          $check2 = explode(":", $check);
-          $check3 = explode("}]", $check2[1]);
-          $checkint = (int)$check3[0];
-  
 
-        if ($lastint+1 != $checkint) {
-          for ($i=0; $i < $count ; $i++) { 
-            TikproLama::insertGetId(array(
-                'ID_TIKPRO_LAMA' => $idLama[$i],
-                'LOG_ID' => $lastint+1,
-                'NAMA_TIKPRO_LAMA' => $namaLama[$i],
-                'DEADLINE_TIKPRO_LAMA' => $deadlineLama[$i],
-            ));
-          }  
+
+        if ($check->isEmpty()) {
+          $checkint = $lastint;
+          $checktikprolama = $lastint;
+          $checklogclick = DB::table('LOG_CLICK')->select('ID_LOG', 'ISI')->orderBy('ID_LOG','DESC')->first();
+          if ($checktikprolama == $checklogclick->ID_LOG && $checklogclick->ISI == "data_dummy") {
+            for ($i=0; $i < $count ; $i++) { 
+              TikproLama::insertGetId(array(
+                  'ID_TIKPRO_LAMA' => $idLama[$i],
+                  'LOG_ID' => $lastint,
+                  'NAMA_TIKPRO_LAMA' => $namaLama[$i],
+                  'DEADLINE_TIKPRO_LAMA' => $deadlineLama[$i],
+              ));
+            }
+          }
         }
 
-        
+        else {
+          $check2 = explode(":", $check);
+          $check3 = explode("}]", $check2[1]);
+          $checkint = (int)$check3[0]+1;
+          // dd($checkint);
+          $checklogclick = DB::table('LOG_CLICK')->select('ID_LOG', 'ISI')->orderBy('ID_LOG','DESC')->first();
+
+          if ($checkint == $checklogclick->ID_LOG && $checklogclick->ISI == "data_dummy") {
+            for ($i=0; $i < $count ; $i++) { 
+              TikproLama::insertGetId(array(
+                  'ID_TIKPRO_LAMA' => $idLama[$i],
+                  'LOG_ID' => $checkint,
+                  'NAMA_TIKPRO_LAMA' => $namaLama[$i],
+                  'DEADLINE_TIKPRO_LAMA' => $deadlineLama[$i],
+              ));
+            }
+          }
+        }
+
         $jebret = Tikpro::orderBy('ID_TIKPRO','ASC')->get(); //ambil ID_TIKPRO dari tabel Tikpro dan diurutkan ASC
         // dd($jebret);
         return view('tikpro.showtikpro', compact('jebret')); //return view ke halaman showtikpro dengan data dari $jebret
@@ -77,52 +105,52 @@ class TikproController extends Controller
     }
 
     public function edit(Request $request) {
-        $count = DB::table('TIKPRO')->select('ID_TIKPRO')->count(); 
-        $id1 = DB::table('TIKPRO')->select('ID_TIKPRO')->get();
-        $nama1 = DB::table('TIKPRO')->select('NAMA_TIKPRO')->get();
-        $deadline1 = DB::table('TIKPRO')->select('DEADLINE')->get();
+          // $count = DB::table('TIKPRO')->select('ID_TIKPRO')->count(); 
+          // $id1 = DB::table('TIKPRO')->select('ID_TIKPRO')->get();
+          // $nama1 = DB::table('TIKPRO')->select('NAMA_TIKPRO')->get();
+          // $deadline1 = DB::table('TIKPRO')->select('DEADLINE')->get();
 
-        $idLama = array();
-        $namaLama = array();
-        $deadlineLama = array();
+          // $idLama = array();
+          // $namaLama = array();
+          // $deadlineLama = array();
 
-        foreach ($id1 as $key) {
-          array_push($idLama, $key->ID_TIKPRO);
-        }
-        foreach ($nama1 as $key) {
-         array_push($namaLama, $key->NAMA_TIKPRO); 
-        }
-        foreach ($deadline1 as $key) {
-          array_push($deadlineLama, $key->DEADLINE);
-        }
-        $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
-        // dd($last);
+          // foreach ($id1 as $key) {
+          //   array_push($idLama, $key->ID_TIKPRO);
+          // }
+          // foreach ($nama1 as $key) {
+          //  array_push($namaLama, $key->NAMA_TIKPRO); 
+          // }
+          // foreach ($deadline1 as $key) {
+          //   array_push($deadlineLama, $key->DEADLINE);
+          // }
+          // $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
+          // // dd($last);
+          
+          
+          //   $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+          //   $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+          //   $lastint = (int)$last3[0];  
+          
         
-        
-          $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
-          $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
-          $lastint = (int)$last3[0];  
-        
-      
-        // dd($lastint);
+          // // dd($lastint);
 
-        $check = DB::table('TIKPRO_LAMA')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
-        // dd($check);
-          $check2 = explode(":", $check);
-          $check3 = explode("}]", $check2[1]);
-          $checkint = (int)$check3[0];
-  
+          // $check = DB::table('TIKPRO_LAMA')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
+          // // dd($check);
+          //   $check2 = explode(":", $check);
+          //   $check3 = explode("}]", $check2[1]);
+          //   $checkint = (int)$check3[0];
+    
 
-        if ($lastint+1 != $checkint) {
-          for ($i=0; $i < $count ; $i++) { 
-            TikproLama::insertGetId(array(
-                'ID_TIKPRO_LAMA' => $idLama[$i],
-                'LOG_ID' => $lastint+1,
-                'NAMA_TIKPRO_LAMA' => $namaLama[$i],
-                'DEADLINE_TIKPRO_LAMA' => $deadlineLama[$i],
-            ));
-          }  
-        }
+          // if ($lastint+1 != $checkint) {
+          //   for ($i=0; $i < $count ; $i++) { 
+          //     TikproLama::insertGetId(array(
+          //         'ID_TIKPRO_LAMA' => $idLama[$i],
+          //         'LOG_ID' => $lastint+1,
+          //         'NAMA_TIKPRO_LAMA' => $namaLama[$i],
+          //         'DEADLINE_TIKPRO_LAMA' => $deadlineLama[$i],
+          //     ));
+          //   }  
+          // }
 
         $jebret = Tikpro::orderBy('ID_TIKPRO','ASC')->get(); //ambil ID_TIKPRO dari tabel Tikpro dan diurutkan ASC  
         return view('tikpro.edittikpro', compact('jebret')); //return view ke halaman edittikpro dengan data dari $jebret
@@ -165,12 +193,19 @@ class TikproController extends Controller
       DB::statement("$fullquery2");
       $url = 'showtikproo';
 
+      $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
+      $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+      $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+      $lastint = (int)$last3[0];
+
       $userlogin = Auth::user()->username;
       $datenow = date_create();
       $datenow2 = $datenow->format('d F Y');
       $isi = $userlogin." telah mengupdate nama atau waktu deadline titik proses";
-      $log = "insert into LOG_CLICK (ISI) VALUES ('".$isi."')";
-      DB::statement("$log");
+      // $log = "insert into LOG_CLICK (ISI) VALUES ('".$isi."')";
+      $logbaru = "UPDATE LOG_CLICK SET ISI = ? WHERE ID_LOG = ?";
+      DB::update($logbaru, array($isi, $lastint));
+      // DB::statement("$log");
 
       $count = DB::table('TIKPRO')->select('ID_TIKPRO')->count(); 
       $id1 = DB::table('TIKPRO')->select('ID_TIKPRO')->get();
@@ -190,10 +225,7 @@ class TikproController extends Controller
       foreach ($deadline1 as $key) {
         array_push($deadlineLama, $key->DEADLINE);
       }
-      $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
-      $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
-      $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
-      $lastint = (int)$last3[0];
+      
       // dd($lastint);
 
       // $check = DB::table('TIKPRO_TEMP')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
@@ -222,12 +254,19 @@ class TikproController extends Controller
       DB::statement("$query1");
       DB::statement("$query2");
 
+      $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
+      $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+      $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+      $lastint = (int)$last3[0];
+
       $userlogin = Auth::user()->username;
       $datenow = date_create();
       $datenow2 = $datenow->format('d F Y');
       $isi = $userlogin." telah menambah titik proses";
-      $log = "insert into LOG_CLICK (ISI) VALUES ('".$isi."')";
-      DB::statement("$log");
+      $logbaru = "UPDATE LOG_CLICK SET ISI = ? WHERE ID_LOG = ?";
+      DB::update($logbaru, array($isi, $lastint));
+
+
 
       $count = DB::table('TIKPRO')->select('ID_TIKPRO')->count(); 
       $id1 = DB::table('TIKPRO')->select('ID_TIKPRO')->get();
@@ -247,10 +286,7 @@ class TikproController extends Controller
       foreach ($deadline1 as $key) {
         array_push($deadlineLama, $key->DEADLINE);
       }
-      $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
-      $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
-      $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
-      $lastint = (int)$last3[0];
+      
       // dd($lastint);
 
       // $check = DB::table('TIKPRO_TEMP')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
@@ -278,13 +314,18 @@ class TikproController extends Controller
       // $querytest1 = "SELECT ID_TIKPRO FROM TIKPRO WHERE ID_TIKPRO > ".$ID_TIKPRO;
       DB::statement($query1);
       DB::statement($query2);
+
+      $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
+      $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
+      $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
+      $lastint = (int)$last3[0];
       
       $userlogin = Auth::user()->username;
       $datenow = date_create();
       $datenow2 = $datenow->format('d F Y');
       $isi = $userlogin." telah menghapus titik proses";
-      $log = "insert into LOG_CLICK (ISI) VALUES ('".$isi."')";
-      DB::statement("$log");
+      $logbaru = "UPDATE LOG_CLICK SET ISI = ? WHERE ID_LOG = ?";
+      DB::update($logbaru, array($isi, $lastint));
 
       $count = DB::table('TIKPRO')->select('ID_TIKPRO')->count(); 
       $id1 = DB::table('TIKPRO')->select('ID_TIKPRO')->get();
@@ -304,10 +345,7 @@ class TikproController extends Controller
       foreach ($deadline1 as $key) {
         array_push($deadlineLama, $key->DEADLINE);
       }
-      $last = DB::table('LOG_CLICK')->select('ID_LOG')->orderBy('ID_LOG','DESC')->limit('1')->get();
-      $last2 = explode(":", $last); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
-      $last3 = explode("}]", $last2[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
-      $lastint = (int)$last3[0];
+      
       // dd($lastint);
 
       // $check = DB::table('TIKPRO_TEMP')->select('LOG_ID')->orderBy('LOG_ID','DESC')->limit('1')->get();
