@@ -61,6 +61,11 @@
               </div>
 
               <div class="form-group">
+                <label>Catatan Peminjaman</label>
+                <input class="form-control" value="{{ $peminjaman->CATATAN_PEMINJAMAN }}" name="CATATAN_PEMINJAMAN">
+              </div>
+
+              <div class="form-group">
                 <label>Status</label>
                 <input type="hidden" name="_method" value="PUT">
                 <select class="form-control" name="KETERANGAN">

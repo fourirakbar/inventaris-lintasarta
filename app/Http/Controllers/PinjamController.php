@@ -34,8 +34,27 @@ class PinjamController extends Controller {
                 'KETERANGAN' => $a,
                 'ID_BARANG' => $data['ID_BARANG'],
                 'NOMOR_TICKET' => $data['NOMOR_TICKET'],
+                'CATATAN_PEMINJAMAN' => $data['CATATAN_PEMINJAMAN'],
+            )); 
+            if ($data['CATATAN_PEMINJAMAN'] == "") {
+                DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Dipinjam"]);
+            }
+            else{
+                DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_PEMINJAMAN']]);
+            }
+        }
+        else {
+            Peminjaman::insertGetId(array(
+                'NAMA_PEMINJAM' => $data['NAMA_PEMINJAM'],
+                'PERANGKAT' => $data['PERANGKAT'],
+                'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'],
+                'TGL_PEMINJAMAN' => $data['TGL_PEMINJAMAN'],
+                'TGL_PENGEMBALIAN' => $data['TGL_PENGEMBALIAN'],
+                'KETERANGAN' => $a,
+                'NOMOR_TICKET' => $data['NOMOR_TICKET'],
+                'CATATAN_PEMINJAMAN' => $data['CATATAN_PEMINJAMAN'],
             ));    
-            $query4 = DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Dipinjam"]);
+            // $query4 = DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Dipinjam"]);
         }
 
         return redirect('/peminjaman/show')->with('success','Input Permintaan Sukses'); //return ke /showPeminjaman dengan keterangan sukses

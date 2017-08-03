@@ -40,9 +40,10 @@
             <!-- form start -->
             <form role="form" method="POST" role="form" action="{{ URL::to('peminjaman2') }}">
               <div class="box-body">
-                <div class="form-group"> 
+                <div class="form-group">
                   <label>Pilih Jenis Barang</label><br>
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><b class="material-icons">Barang Dari Gudang</b></button>
+                  <button type="button" class="btn btn-default" id="baranguser"><b class="material-icons">Input Manual</b></button>
                 </div>
                 <div class="form-group"> 
                   <label>Nomor Ticket</label> 
@@ -67,6 +68,11 @@
                 <div class="form-group" style="display: none;"> 
                   <label>ID_BARANG</label> 
                   <input class="form-control" placeholder="Masukkan ID BARANG" name="ID_BARANG" id="idbar" readonly=""></input> 
+                </div> 
+                {{csrf_field()}}
+                <div class="form-group"> 
+                  <label>Catatan Peminjaman</label> 
+                  <input class="form-control" placeholder="Masukkan Catatan" name="CATATAN_PEMINJAMAN" id="catjam"></input> 
                 </div> 
                 {{csrf_field()}} 
                 
