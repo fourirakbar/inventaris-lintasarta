@@ -53,6 +53,13 @@
                   <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
                   <td style="text-align: left; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PENGEMBALIAN)); ?></td>
                 </tr>
+
+                <tr>
+                  <th style="text-align: left; vertical-align: middle; ">Catatan Peminjaman</th>
+                  <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
+                  <td style="text-align: left; vertical-align: middle; ">{{ $index->CATATAN_PEMINJAMAN }}</td>
+                </tr>
+
                 <tr>
                   <th style="text-align: left; vertical-align: middle; ">Sisa Hari</th>
                   <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>

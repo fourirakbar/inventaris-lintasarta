@@ -188,7 +188,7 @@ class HomeController extends Controller
 
     //fungsi untuk menampilkan data peminjaman yang lewat dari batas waktu
     public function showpinjam2(){
-        $peminjaman = DB::select("SELECT * FROM `PEMINJAMAN` WHERE TGL_PENGEMBALIAN < NOW() AND KETERANGAN != 'done' ");
+        $peminjaman = DB::select("SELECT * FROM `PEMINJAMAN` WHERE TGL_PENGEMBALIAN > NOW() AND KETERANGAN != 'done' ");
         // dd($peminjaman);
         return view('peminjaman.showPeminjaman', compact('peminjaman'));
         
@@ -196,7 +196,7 @@ class HomeController extends Controller
 
     //fungsi untuk menampilkan data perbaikan yang lewat dari batas waktu
     public function showrepair2(){
-        $repair = DB::select("SELECT * FROM `REPAIR` WHERE PERKIRAAN_SELESAI < NOW() AND STATUS_REPAIR != 'Done' ");
+        $repair = DB::select("SELECT * FROM `REPAIR` WHERE PERKIRAAN_SELESAI > NOW() AND STATUS_REPAIR != 'Done' ");
         // dd($peminjaman);
         return view('repair.showRepair', compact('repair'));
         
@@ -205,7 +205,7 @@ class HomeController extends Controller
     //fungsi untuk menampilkan data permintaan yang lewat dari batas waktu
     public function showminta2() {
         $tglselesai = DB::select("select * from HISTORY_TIKPRO join PERMINTAAN on PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID");
-        $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID and STATUS = 'in progress' and DATE_ADD(PERMINTAAN.TGL_PERMINTAAN, INTERVAL DEADLINE_NEW DAY) < NOW() order by PERMINTAAN.ID_PERMINTAAN DESC");
+        $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID and STATUS = 'in progress' and DATE_ADD(PERMINTAAN.TGL_PERMINTAAN, INTERVAL DEADLINE_NEW DAY) > NOW() order by PERMINTAAN.ID_PERMINTAAN DESC");
 
         $jebret3 = DB::select("select ID_PERMINTAAN from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID");
         $jebret2 = array();

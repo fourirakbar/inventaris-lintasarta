@@ -37,6 +37,7 @@
                         <th style="text-align: center; vertical-align: middle; ">Nomor Registrasi</th>
                         <th style="text-align: center; vertical-align: middle; ">Tanggal Peminjaman</th>
                         <th style="text-align: center; vertical-align: middle; ">Tanggal Pengembalian</th>
+                        <th style="text-align: center; vertical-align: middle; ">Catatan</th>
                         <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
                         <th style="text-align: center; vertical-align: middle; ">Action</th>
                 </tr>
@@ -56,6 +57,7 @@
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PEMINJAMAN)) ?></td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PENGEMBALIAN)) ?></td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $index->CATATAN_PEMINJAMAN }}</td>
                       <?php
                             $datenow=date_create();
                             $datefinish=date_create($index->TGL_PENGEMBALIAN);

@@ -15,6 +15,7 @@ class Peminjaman extends Model
         'TGL_PENGEMBALIAN',
         'KETERANGAN',
         'NOMOR_TICKET',
+        'CATATAN_PEMINJAMAN',
     );
     public $primaryKey = "ID_PEMINJAMAN";
 }
