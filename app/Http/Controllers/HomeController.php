@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use App\Permintaan;
 use App\Pembatalan;
+use App\Peminjaman;
+use App\Repair;
 use App\Tikpro;
 use App\HistoryTikpro;
 use Session;
@@ -21,7 +23,7 @@ class HomeController extends Controller
     public function index()
     {
     	return view('home');
-        // echo $counter;
+        echo $counter;
     }
 
     //fungsi untuk menghitung permintaan pembatalan yang belum diproses
@@ -88,6 +90,7 @@ class HomeController extends Controller
             $deadline3 = array();
           }
           //looping ke seluruh data, mengambil tanggal selesai dari data permintaan
+          $counter = 0;
           foreach ($jebret as $key) {
               $arraytglselesai = array();
             foreach ($tglselesai as $index) {
@@ -103,8 +106,6 @@ class HomeController extends Controller
             }
             //menghitung seluruh data yang statusnya 'in progress' dan titik prosesnya melewati batas waktu
              if ($key->STATUS == "in progress") {
-                 
-                 $counter = 0;
                  $deadlinebaru = array_reverse($deadline4);
                  foreach ($deadlinebaru as $jumlaharray) {
                   for ($i=1; $i <= count($jumlaharray) ; $i++) {
@@ -215,5 +216,23 @@ class HomeController extends Controller
         }
 
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2', 'tglselesai')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
+    }
+
+    public function showminta3()
+    {
+        $counter = Permintaan::where('STATUS', 'in progress')->count();
+        return response()->json(['success' => true, 'minta' => $counter]);
+    }
+
+    public function showpinjam3()
+    {
+        $counter = Peminjaman::where('KETERANGAN', 'progress')->count();
+        return response()->json(['success' => true, 'pinjam' => $counter]);
+    }
+
+    public function showrepair3()
+    {
+        $counter = Repair::where('STATUS_REPAIR', 'On Repair')->count();
+        return response()->json(['success' => true, 'repair' => $counter]);
     }
 }

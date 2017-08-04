@@ -7,8 +7,7 @@
 <section class="content">
   <!-- Small boxes (Stat box) -->
   <div class="row">
-    <div class="col-lg-6 col-xs-6">
-      <!-- small box -->
+    <!-- <div class="col-lg-4 col-xs-4">
       <a href={{ URL::to('adminhapus/request') }}>
         <div class="small-box bg-aqua">
           <div class="inner">
@@ -21,9 +20,57 @@
           </div>
         </div>
       </a>
+    </div> -->
+    <!-- ./col -->
+    <div class="col-lg-4 col-xs-4">
+      <!-- small box -->
+      <a href={{ URL::to('semuabelum') }}>
+        <div class="small-box bg-blue">
+          <div class="inner">
+            <h3 id="count5">Counting...</h3>
+
+            <p>Permintaan yang sedang diproses</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-android-mail"></i>
+          </div>
+        </div>
+      </a>
     </div>
     <!-- ./col -->
-    <div class="col-lg-6 col-xs-6">
+    <div class="col-lg-4 col-xs-4">
+      <!-- small box -->
+      <a href={{ URL::to('peminjaman/show/belum') }}>
+        <div class="small-box bg-olive">
+          <div class="inner">
+            <h3 id="count6">Counting...</h3>
+
+            <p>Peminjaman yang sedang diproses</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-android-mail"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-4 col-xs-4">
+      <!-- small box -->
+      <a href={{ URL::to('repair/show/belum') }}>
+        <div class="small-box bg-aqua">
+          <div class="inner">
+            <h3 id="count7">Counting...</h3>
+
+            <p>Perbaikan yang sedang diproses</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-android-mail"></i>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-4 col-xs-4">
       <!-- small box -->
       <a href={{ URL::to('monitoring2') }}>
         <div class="small-box bg-green">
@@ -36,10 +83,10 @@
             <i class="ion ion-android-alarm-clock"></i>
           </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
     <!-- ./col -->
-    <div class="col-lg-6 col-xs-6">
+    <div class="col-lg-4 col-xs-4">
       <!-- small box -->
       <a href={{ URL::to('monitoring3') }}>
         <div class="small-box bg-yellow">
@@ -55,7 +102,7 @@
       </a>
     </div>
     <!-- ./col -->
-    <div class="col-lg-6 col-xs-6">
+    <div class="col-lg-4 col-xs-4">
       <!-- small box -->
       <a href={{ URL::to('monitoring4') }}>
         <div class="small-box bg-red">
@@ -68,8 +115,8 @@
             <i class="ion ion-android-time"></i>
           </div>
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
     <!-- ./col -->
   </div>
 
@@ -118,6 +165,36 @@ setInterval(function(){
     success: function (data) {
       console.log(data);
       $('#count4').text(data.repair);
+    }
+  });
+  $.ajax({
+    url: 'getmsg5',
+    type: 'POST',
+    data: {_token: CSRF_TOKEN},
+    dataType: 'JSON',
+    success: function (data) {
+      console.log(data);
+      $('#count5').text(data.minta);
+    }
+  });
+  $.ajax({
+    url: 'getmsg6',
+    type: 'POST',
+    data: {_token: CSRF_TOKEN},
+    dataType: 'JSON',
+    success: function (data) {
+      console.log(data);
+      $('#count6').text(data.pinjam);
+    }
+  });
+  $.ajax({
+    url: 'getmsg7',
+    type: 'POST',
+    data: {_token: CSRF_TOKEN},
+    dataType: 'JSON',
+    success: function (data) {
+      console.log(data);
+      $('#count7').text(data.repair);
     }
   });
 },2000);
