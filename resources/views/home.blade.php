@@ -32,7 +32,7 @@
             <p>Permintaan yang sedang diproses</p>
           </div>
           <div class="icon">
-            <i class="ion ion-android-mail"></i>
+            <i class="ion ion-stats-bars"></i>
           </div>
         </div>
       </a>
@@ -48,7 +48,7 @@
             <p>Peminjaman yang sedang diproses</p>
           </div>
           <div class="icon">
-            <i class="ion ion-android-mail"></i>
+            <i class="ion ion-stats-bars"></i>
           </div>
         </div>
       </a>
@@ -64,7 +64,7 @@
             <p>Perbaikan yang sedang diproses</p>
           </div>
           <div class="icon">
-            <i class="ion ion-android-mail"></i>
+            <i class="ion ion-stats-bars"></i>
           </div>
         </div>
       </a>
