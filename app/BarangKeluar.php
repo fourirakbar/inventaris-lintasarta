@@ -11,9 +11,11 @@ class BarangKeluar extends Model
       'BARANG_ID',
       'NO_TICKET',
       'NAMA_USER',
-      'NAMA_BARANG',
+      'PERANGKAT',
+      'NOMOR_REGISTRASI',
       'KETERANGAN',
       'TGL_KELUAR',
+      'CATATAN_KELUAR',
     );
     public $primaryKey = "ID_BARANGKELUAR";
 }

@@ -40,9 +40,10 @@
             <!-- form start -->
             <form role="form" method="POST" role="form" action="{{ URL::to('barangkeluar') }}">
               <div class="box-body">
-                <div class="form-group"> 
+                <div class="form-group">
                   <label>Pilih Jenis Barang</label><br>
                   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"><b class="material-icons">Barang Dari Gudang</b></button>
+                  <button type="button" class="btn btn-default" id="baranguser"><b class="material-icons">Input Manual</b></button>
                 </div>
                 <div class="form-group"> 
                   <label>Nomor Ticket</label> 
@@ -73,6 +74,11 @@
                   <label>Keterangan</label> 
                   <input class="form-control" placeholder="Masukkan Keterangan" name="KETERANGAN"> 
                 </div> 
+                {{csrf_field()}}
+                <div class="form-group">
+                  <label>Catatan Jumlah Barang</label>
+                  <textarea class="form-control" placeholder="Masukkan catatan. contoh: 'keluar 5 Meter' dan sebagainya. Kosongkan jika tidak ada catatan jumlah." name="CATATAN_KELUAR" id="catkel"></textarea>
+                </div>
                 {{csrf_field()}}
                 
                 <div class="form-group">
