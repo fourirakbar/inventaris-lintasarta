@@ -22,19 +22,40 @@ class BarangKeluarController extends Controller
     public function input() {
       $data = Input::all();
 
-      BarangKeluar::insertGetId(array(
-        'BARANG_ID' => $data['ID_BARANG'],
-        'NAMA_USER' => $data['NAMA_USER'],
-        'NO_TICKET' => $data['NO_TICKET'],
-        'KETERANGAN' => $data['KETERANGAN'],
-        'TGL_KELUAR' => $data['TGL_KELUAR'],
-      ));
-      $query4 = DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Barang Keluar"]);
-      return redirect('/barangkeluar/show')->with('success', 'Input Barang Keluar Sukses');
+      if (isset($data['ID_BARANG'])) {
+            BarangKeluar::insertGetId(array(
+              'BARANG_ID' => $data['ID_BARANG'],
+              'NAMA_USER' => $data['NAMA_USER'],
+              'NO_TICKET' => $data['NO_TICKET'],
+              'PERANGKAT' => $data['PERANGKAT'],
+              'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'],
+              'KETERANGAN' => $data['KETERANGAN'],
+              'TGL_KELUAR' => $data['TGL_KELUAR'],
+              'CATATAN_KELUAR' => $data['CATATAN_KELUAR'],
+            ));
+            if ($data['CATATAN_KELUAR'] == "") {
+                DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Barang Keluar"]);
+            }
+            else{
+                DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_KELUAR']]);
+            }
+        }
+        else {
+            BarangKeluar::insertGetId(array(
+              'NAMA_USER' => $data['NAMA_USER'],
+              'NO_TICKET' => $data['NO_TICKET'],
+              'PERANGKAT' => $data['PERANGKAT'],
+              'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'],
+              'KETERANGAN' => $data['KETERANGAN'],
+              'TGL_KELUAR' => $data['TGL_KELUAR'],
+              'CATATAN_KELUAR' => $data['CATATAN_KELUAR'],
+            ));    
+        }
+        return redirect('/barangkeluar/show')->with('success', 'Input Barang Keluar Sukses');
     }
 
     public function show() {
-      $show = DB::table('BARANG_KELUAR')->join('BARANG','BARANG.ID_BARANG','=','BARANG_KELUAR.BARANG_ID')->select('BARANG.NOMOR_REGISTRASI','BARANG.NAMA_BARANG','BARANG_KELUAR.NAMA_USER','BARANG_KELUAR.KETERANGAN','BARANG_KELUAR.TGL_KELUAR')->get();
+      $show = DB::table('BARANG_KELUAR')->select('*')->get();
       // dd($show);
       return view('barangkeluar.showkeluar', compact('show'));
     }

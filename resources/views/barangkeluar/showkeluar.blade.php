@@ -48,7 +48,7 @@
                     <tr>
                       <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_BARANG }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $index->PERANGKAT }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_USER }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $index->KETERANGAN }}</td>
                       <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_KELUAR)) ?></td>
