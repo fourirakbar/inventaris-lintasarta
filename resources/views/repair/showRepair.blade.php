@@ -55,12 +55,12 @@
                         <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
                         <td style="text-align: center; vertical-align: middle; ">{{ $repair[$i]->NOMOR_TICKET }}</td>
 
-                        <?php
+                        <?php /* kalo di database repair, value nama barang tidak NULL. atau merupakan hasil inputan manual dari user */
                           if (!is_null($repair[$i]->NAMA_BARANG)) { ?>
                             <td style="text-align: center; vertical-align: middle; ">{{ $repair[$i]->NAMA_BARANG}}</td>
                             <td style="text-align: center; vertical-align: middle; ">{{ $repair[$i]->NOMOR_REGISTRASI }}</td>
                         <?php
-                          } else { ?>
+                          } else /* kalo di database repair, value nama barang NULL. atau merupakan hasil inputan dari tabel barang. maka nomor regis & nama barang diambil dari tabel barang sesuai dengan id barangnya */ { ?>
                             <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->NAMA_BARANG}}</td>
                             <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->NOMOR_REGISTRASI }}</td>
                         <?php
