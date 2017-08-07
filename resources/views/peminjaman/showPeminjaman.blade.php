@@ -46,21 +46,35 @@
 
                 <!-- buat index di kolom "NO" -->
                 <?php
+                  // dd($data);
                   $indexNo=1;
+                  $indexTemp=0;
                 ?>
-                @foreach ($peminjaman as $index)
+                @for ($i = 0 ; $i < $count ; $i++)
                     <tr>
                       <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_TICKET }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_PEMINJAM }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->PERANGKAT }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
-                      <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PEMINJAMAN)) ?></td>
-                      <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_PENGEMBALIAN)) ?></td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->CATATAN_PEMINJAMAN }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $peminjaman[$i]->NOMOR_TICKET }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $peminjaman[$i]->NAMA_PEMINJAM }}</td>
+
+                      <?php
+                        if (!is_null($peminjaman[$i]->PERANGKAT)) { ?>
+                          <td style="text-align: center; vertical-align: middle; ">{{ $peminjaman[$i]->PERANGKAT }}</td>
+                          <td style="text-align: center; vertical-align: middle; ">{{ $peminjaman[$i]->NOMOR_REGISTRASI }}</td>                          
+                      <?php
+                        } else { ?>
+                          <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->NAMA_BARANG }}</td>
+                          <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->q }}</td>
+                      <?php
+                          $indexTemp++;
+                        }
+                      ?>
+
+                      <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($peminjaman[$i]->TGL_PEMINJAMAN)) ?></td>
+                      <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($peminjaman[$i]->TGL_PENGEMBALIAN)) ?></td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $peminjaman[$i]->CATATAN_PEMINJAMAN }}</td>
                       <?php
                             $datenow=date_create();
-                            $datefinish=date_create($index->TGL_PENGEMBALIAN);
+                            $datefinish=date_create($peminjaman[$i]->TGL_PENGEMBALIAN);
                             $new = date_add($datefinish,date_interval_create_from_date_string("1 days"));
                             $diff=date_diff($datenow,$new);
                             $print = $diff->format('%R%a Hari');
@@ -70,20 +84,20 @@
                             $printInt = (int)$print;
                         ?>
 
-                        @if($print > 0 && ($index->KETERANGAN) == "progress")
+                        @if($print > 0 && ($peminjaman[$i]->KETERANGAN) == "progress")
                           <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
-                        @elseif ($print <= 0 && ($index->KETERANGAN) == "progress")
+                        @elseif ($print <= 0 && ($peminjaman[$i]->KETERANGAN) == "progress")
                           <td style="background-color: red; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
-                        @elseif (($index->KETERANGAN) == "done")
+                        @elseif (($peminjaman[$i]->KETERANGAN) == "done")
                           <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">DONE</td>
                         @endif
 
                       <td style="text-align: center; vertical-align: middle; ">
                         <input type="hidden" name="method" value="DELETE">
-                        <a class="btn btn-block btn-primary" href="/peminjaman/edit/{{ $index->ID_PEMINJAMAN }}"><b class="material-icons">Edit Data</b>
+                        <a class="btn btn-block btn-primary" href="/peminjaman/edit/{{ $peminjaman[$i]->ID_PEMINJAMAN }}"><b class="material-icons">Edit Data</b>
                       </td>
                     </tr>
-                @endforeach
+                @endfor
                 </tbody>
               </table>
             </div>

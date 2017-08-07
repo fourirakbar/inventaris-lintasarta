@@ -23,8 +23,6 @@ class RepairController extends Controller
         // memasukkan data sesuai input ke dalam databse Repair
         if (isset($data['ID_BARANG'])) {
         	Repair::insertGetId(array(
-		        'NAMA_BARANG' => $data['NAMA_BARANG'] ,
-		        'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'],
 		        'PROBLEM' => $data['PROBLEM'],
 		        'VENDOR' => $data['VENDOR'],
 		        'ID_BARANG' => $data['ID_BARANG'],
@@ -63,23 +61,31 @@ class RepairController extends Controller
     }
 
     public function show(){
-
         $repair = DB::table('REPAIR')->select('*')->get();
-        return view('repair.showRepair', compact('repair')); //return view halaman showRepair
+        $count = $repair->count();
+        $data = DB::table('REPAIR')->join('BARANG','BARANG.ID_BARANG','=','REPAIR.ID_BARANG')->select('BARANG.NAMA_BARANG', 'BARANG.NOMOR_REGISTRASI')->get();
+
+        return view('repair.showRepair', compact('repair', 'count', 'data')); //return view halaman showRepair
 
 	}
 
 	public function showbelum(){
 
         $repair = DB::table('REPAIR')->select('*')->where('STATUS_REPAIR', '=', 'On Repair')->get();
-        return view('repair.showRepair', compact('repair')); //return view halaman showRepair
+        $count = $repair->count();
+        $data = DB::table('REPAIR')->join('BARANG','BARANG.ID_BARANG','=','REPAIR.ID_BARANG')->select('BARANG.NAMA_BARANG', 'BARANG.NOMOR_REGISTRASI')->get();
+
+        return view('repair.showRepair', compact('repair', 'count', 'data')); //return view halaman showRepair
 
 	}
 
 	public function showsudah(){
 
         $repair = DB::table('REPAIR')->select('*')->where('STATUS_REPAIR', '=', 'Done')->get();
-        return view('repair.showRepair', compact('repair')); //return view halaman showRepair
+        $count = $repair->count();
+        $data = DB::table('REPAIR')->join('BARANG','BARANG.ID_BARANG','=','REPAIR.ID_BARANG')->select('BARANG.NAMA_BARANG', 'BARANG.NOMOR_REGISTRASI')->get();
+
+        return view('repair.showRepair', compact('repair', 'count', 'data')); //return view halaman showRepair
 
 	}
 
