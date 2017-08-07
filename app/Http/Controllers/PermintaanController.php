@@ -21,10 +21,14 @@ class PermintaanController extends Controller
     public function index()
     {
         $totaldeadline = 0;
-        $deadline = DB::table('TIKPRO')->select('DEADLINE')->get();
+        $deadline = DB::table('TIKPRO')->select('DEADLINE')->get(); //ambil data DEADLINE untuk tiap titik proses dari tabel TIKPRO
+
+        //isi deadline dari dimasukkan ke array totaldeadline
         foreach ($deadline as $key) {
             $totaldeadline += $key->DEADLINE;
         }
+
+        //return ke halaman request dengan data dari array totaldeadline
         return view('permintaan.request', compact('totaldeadline'));
 
     }
@@ -58,20 +62,22 @@ class PermintaanController extends Controller
         $kuylah = explode(":", $ticket); //data dari $ticket dipisahkan dengan ketentuan : (titik dua)
         $bossku = explode("}]", $kuylah[1]); //dari dari $kuylah index kedua, dipisahkan dengan ketentuan }]
 
-        $count = DB::table('TIKPRO')->whereNotNull('NAMA_TIKPRO')->count();
-        $insertnama = DB::table('TIKPRO')->select('NAMA_TIKPRO')->get();
-        $insertdeadline = DB::table('TIKPRO')->select('DEADLINE')->get();
+        $count = DB::table('TIKPRO')->whereNotNull('NAMA_TIKPRO')->count(); //hitung jumlah data di tabel TIKPRO yang value dari kolom NAMA_TIKPRO tidak kosong / NULL
+        $insertnama = DB::table('TIKPRO')->select('NAMA_TIKPRO')->get(); //ambil semua value NAMA_TIKPRO dari tabel TIKPRO
+        $insertdeadline = DB::table('TIKPRO')->select('DEADLINE')->get(); //ambil semua value DEADLINE dari tabel TIKPRO
         $namatikproarray = array();
         $deadlinetikproarray = array();
 
-
+        //data dari $isernama dimasukkan satu persatu ke dalam array namatikproarray
         foreach ($insertnama as $key) {
             array_push($namatikproarray, $key->NAMA_TIKPRO);
         }
+
+        //data dari $insertdeadline dimasukkan satu persatu ke dalam array deadlinetikproarray
         foreach ($insertdeadline as $key) {
             array_push($deadlinetikproarray, $key->DEADLINE);
         }
-        // dd($deadlinetikproarray);
+        
         for ($i=1; $i < $count+1; $i++) {
             //memasukkan data ke dalam database HistoryTikpro
             HistoryTikpro::insertGetId(array(
@@ -82,12 +88,13 @@ class PermintaanController extends Controller
             ));
         };
 
+
         $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID order by PERMINTAAN.ID_PERMINTAAN DESC");
 
         $jebret3 = DB::select("select ID_PERMINTAAN from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID");
         $jebret2 = array();
         foreach ($jebret3 as $key) {
-            $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get(); //ambil semua data dari tabel TIKPRO
+            $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get(); 
             array_push($jebret2, $jebret2a);
         }
 
@@ -140,11 +147,8 @@ class PermintaanController extends Controller
             }
             
             $deadline_balik = array_reverse($deadline_new);
-            // dd($deadline_balik);
-
             }
         }
-        // $ticket = DB::table('PERMINTAAN')->select('ID_PERMINTAAN')->orderBy('ID_PERMINTAAN', 'DESC')->limit('1')->get(); //
         
         $itung = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID',$bossku[0])->count();
         $updatesemua = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID',$bossku[0])->get();
@@ -152,25 +156,16 @@ class PermintaanController extends Controller
         foreach ($updatesemua as $key) {
             array_push($tikpro_new, $key->TIKPRO_ID);
         }
-        // dd($deadline_balik);
 
         $deadline_balik_baru = array();
         for ($i=0 ; $i<$itung ; $i++) {
             array_push($deadline_balik_baru, $deadline_balik[$i]);
         }
-        // dd($deadline_balik_baru);
         
         for ($i=1 ; $i<=$itung ; $i++) {
             $updatedeadline = "UPDATE HISTORY_TIKPRO SET DEADLINE_NEW = ? WHERE PERMINTAAN_ID = ? AND TIKPRO_ID = ?";
             DB::update($updatedeadline, array(array_reverse($deadline_balik_baru)[$i-1], $bossku[0], $tikpro_new[$i-1]));            
         }
-
-        // foreach ($deadline_new as $key) {
-        //     $updatedeadline = "UPDATE HISTORY_TIKPRO SET DEADLINE_NEW = ? WHERE PERMINTAAN_ID = ?";
-
-        //     DB::update($updatedeadline, array($key));
-        // }
-      
 
         return redirect('/request')->with('success','Request Barang Sukses'); //return ke halaman request dengan keterangan sukses
     }
