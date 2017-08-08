@@ -27,8 +27,6 @@ class BarangKeluarController extends Controller
               'BARANG_ID' => $data['ID_BARANG'],
               'NAMA_USER' => $data['NAMA_USER'],
               'NO_TICKET' => $data['NO_TICKET'],
-              'PERANGKAT' => $data['PERANGKAT'],
-              'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'],
               'KETERANGAN' => $data['KETERANGAN'],
               'TGL_KELUAR' => $data['TGL_KELUAR'],
               'CATATAN_KELUAR' => $data['CATATAN_KELUAR'],
@@ -56,7 +54,9 @@ class BarangKeluarController extends Controller
 
     public function show() {
       $show = DB::table('BARANG_KELUAR')->select('*')->get();
-      // dd($show);
-      return view('barangkeluar.showkeluar', compact('show'));
+      $count = $show->count();
+      $data = DB::table('BARANG_KELUAR')->join('BARANG','BARANG.ID_BARANG','=','BARANG_KELUAR.BARANG_ID')->select('BARANG.NOMOR_REGISTRASI as q','BARANG_KELUAR.NOMOR_REGISTRASI as w','BARANG.NAMA_BARANG', 'BARANG_KELUAR.ID_BARANGKELUAR','BARANG_KELUAR.BARANG_ID','BARANG_KELUAR.NO_TICKET','BARANG_KELUAR.NAMA_USER','BARANG_KELUAR.PERANGKAT','BARANG_KELUAR.KETERANGAN','BARANG_KELUAR.CATATAN_KELUAR','BARANG_KELUAR.TGL_KELUAR')->get();
+      
+      return view('barangkeluar.showkeluar', compact('show','data','count'));
     }
 }

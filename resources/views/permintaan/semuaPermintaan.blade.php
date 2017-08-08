@@ -36,24 +36,25 @@
               $deadline4 = array();
               foreach ($jebret2 as $key) {
                 foreach ($key as $value) {
+                  /* id permintaan & deadline dari tiap-tiap tikrpo dimasukkan ke dalam array deadline */
                   array_push($deadline, ["idpermintaan" => $value->ID_PERMINTAAN, "deadline" => $value->DEADLINE, "idtikpro" => $value->TIKPRO_ID]);
                 }
-                array_push($deadline2, $deadline);
-                $deadline = array();
+                array_push($deadline2, $deadline); /* isi dari array deadline dimasukkan ke dalam array deadline2 */
+                $deadline = array(); /* array deadline dikosongkan kembali */
 
               }
               for ($i=1; $i <= count($deadline2) ; $i++) {
                 for ($j=1; $j <= count($deadline2[$i-1]) ; $j++) {
 
-                  if (empty($deadline3)) {
-                    array_push($deadline3, ["idpermintaan" => $deadline2[$i-1][$j-1]["idpermintaan"], "deadline" => $deadline2[$i-1][$j-1]["deadline"], "idtikpro" => $deadline2[$i-1][$j-1]["idtikpro"]]);
+                  if (empty($deadline3)) { /* digunakan saat iterasi pertama */
+                    array_push($deadline3, ["idpermintaan" => $deadline2[$i-1][$j-1]["idpermintaan"], "deadline" => $deadline2[$i-1][$j-1]["deadline"], "idtikpro" => $deadline2[$i-1][$j-1]["idtikpro"]]); /* idpermintaan dan dedline yang sudah berjalan dari tiap-tiap permintaan dimasukkan ke dalam array deadline3 */
                   }
-                  else{
-                    array_push($deadline3, ["idpermintaan" => $deadline2[$i-1][$j-1]["idpermintaan"], "deadline" => $deadline2[$i-1][$j-1]["deadline"]+ $deadline3[$j-2]["deadline"], "idtikpro" => $deadline2[$i-1][$j-1]["idtikpro"]]);
+                  else{ /* digunakan untuk iterasi kedua sampai selesai */
+                    array_push($deadline3, ["idpermintaan" => $deadline2[$i-1][$j-1]["idpermintaan"], "deadline" => $deadline2[$i-1][$j-1]["deadline"]+ $deadline3[$j-2]["deadline"], "idtikpro" => $deadline2[$i-1][$j-1]["idtikpro"]]); /* idpermintaan dan dedline yang sudah berjalan dari tiap-tiap permintaan dimasukkan ke dalam array deadline3 */
                   }
                 }
-                array_push($deadline4, $deadline3);
-                $deadline3 = array();
+                array_push($deadline4, $deadline3); /* isi dari array deadline3 dimasukkan ke dalam array deadline4 */
+                $deadline3 = array(); /* array deadline3 dikosongkan kembali */
               }
 
             ?>
@@ -87,17 +88,16 @@
                       <?php
                         $arraytglselesai = array();
                         foreach ($tglselesai as $index) {
-                          if ($index->PERMINTAAN_ID == $key->ID_PERMINTAAN) {
-                            array_push($arraytglselesai, $index->TGL_SELESAI);
+                          if ($index->PERMINTAAN_ID == $key->ID_PERMINTAAN) { /* dicocokkan dengan id permintaan yg sama */
+                            array_push($arraytglselesai, $index->TGL_SELESAI); /* diambil value dari kolom tgl selesai dan dimasukkan ke arraytglselesai */
                           }
                         }
-                        // dd($arraytglselesai);
+                        
                         foreach ($arraytglselesai as $index) {
                           if($index != NULL){
                             $tglselesaiterakhir = $index;
                           }
                         }
-                        // dd($tglselesaiterakhir);
 
                          if ($key->STATUS == "in progress") {
                              
@@ -105,19 +105,19 @@
                              foreach ($deadlinebaru as $jumlaharray) {
                               for ($i=1; $i <= count($jumlaharray) ; $i++) {
                                 if ($key->TIKPRO_ID == $i && $key->ID_PERMINTAAN == $jumlaharray[$i-1]["idpermintaan"]) {
-                                  if ($key->TIKPRO_ID == 1) {
-                                    $date1=date_create();
-                                    $date2=date_create($key->TGL_PERMINTAAN);
+                                  if ($key->TIKPRO_ID == 1) { /* untuk iterasi pertama */
+                                    $date1=date_create(); /* ambil tanggal hari ini */
+                                    $date2=date_create($key->TGL_PERMINTAAN); /* ambil value dari kolom tgl_permintaan */
                                     $deaddead = $key->DEADLINE;
-                                    $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead)." days"));
-                                    $diff=date_diff($date1,$new);
-                                    $jam = $diff->format('%R%h');
-                                    $print = $diff->format('%R%a');
+                                    $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead)." days")); /* jumlah hari di variabel date2 ditambahkan dengan variabel deaddead */
+                                    $diff=date_diff($date1,$new); /* dicari perbandingan hari dari tanggal hari ini di variabel date1 dengan tgl permintaan yg sudah ditambah dengan deaddead */
+                                    $jam = $diff->format('%R%h'); /* untuk melihat "hours"nya */
+                                    $print = $diff->format('%R%a'); /* print perbandingan harinya dengan format tertentu */
                                     if($print == 0){
                                       $print = $diff->format('%a');
                                     }
                                     
-                                    if($jam >0)
+                                    if($jam >0) /* kalo hari > 0 tetepi jamnya < 0, maka hari ditambah 1 */
                                     {
                                     echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$print+1,' Hari','</td>';
                                     }
@@ -126,19 +126,19 @@
                                     echo '<td style="background-color: red; color: white; text-align: center; vertical-align: middle;" >',$print,' Hari','</td>';
                                     }
                                   }
-                                  else{
-                                    $date1=date_create();
-                                    $date2=date_create($tglselesaiterakhir);
+                                  else{ /* untuk iterasi kedua sampai selesai */
+                                    $date1=date_create(); /* ambil tanggal hari ini */
+                                    $date2=date_create($tglselesaiterakhir); /* value dari tglselesaiterakhir dijadikan tanggal */
                                     $deaddead = $key->DEADLINE;
-                                    $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead)." days"));
-                                    $diff=date_diff($date1,$new);
-                                    $jam = $diff->format('%R%h');
-                                    $print = $diff->format('%R%a');
+                                    $new = date_add($date2,date_interval_create_from_date_string((string)((int)$deaddead)." days")); /* jumlah hari di variabel date2 ditambahkan dengan variabel deaddead */
+                                    $diff=date_diff($date1,$new); /* dicari perbandingan hari dari tanggal hari ini di variabel date1 dengan tgl permintaan yg sudah ditambah dengan deaddead */
+                                    $jam = $diff->format('%R%h'); /* untuk melihat "hours"nya */
+                                    $print = $diff->format('%R%a'); /* print perbandingan harinya dengan format tertentu */
                                     if($print == 0){
                                       $print = $diff->format('%a');
                                     }
                                     
-                                    if($jam >0)
+                                    if($jam >0) /* kalo hari > 0 tetepi jamnya < 0, maka hari ditambah 1 */
                                     {
                                     echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$print+1,' Hari','</td>';
                                     }
@@ -150,7 +150,6 @@
                                 }
                               }
                             }
-                             // echo '<td style="background-color: green; color: white; text-align: center; vertical-align: middle;" >',$deaddead,'</td>';
                              
                          }
                          elseif ($key->STATUS == "done") {

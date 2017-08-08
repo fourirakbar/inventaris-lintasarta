@@ -52,7 +52,7 @@
                 {{csrf_field()}}
                 <div class="form-group"> 
                   <label>Nama User</label> 
-                  <input class="form-control" placeholder="Masukkan Nama Peminjam" name="NAMA_USER" id="namauser"> 
+                  <input class="form-control" placeholder="Masukkan Nama User" name="NAMA_USER" id="namauser"> 
                 </div> 
                 {{csrf_field()}}
                 <div class="form-group"> 

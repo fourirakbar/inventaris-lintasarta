@@ -42,18 +42,33 @@
 
                 <!-- buat index di kolom "NO" -->
                 <?php
+                  // dd($data);
                   $indexNo=1;
+                  $indexTemp=0
                 ?>
-                @foreach ($show as $index)
+                @for ($i = 0 ; $i < $count ; $i++)
                     <tr>
                       <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->PERANGKAT }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_USER }}</td>
-                      <td style="text-align: center; vertical-align: middle; ">{{ $index->KETERANGAN }}</td>
-                      <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($index->TGL_KELUAR)) ?></td>
+
+                      <?php
+                      //kalo di database barang keluar, value perangkat tidak NULL. atau merupakan hasil inputan manual dari user
+                        if (!is_null($show[$i]->PERANGKAT)) { ?>
+                          <td style="text-align: center; vertical-align: middle; ">{{ $show[$i]->NOMOR_REGISTRASI }}</td>
+                          <td style="text-align: center; vertical-align: middle; ">{{ $show[$i]->PERANGKAT }}</td>
+                      <?php
+                        } else /* kalo di database barang keluar, value perangkat NULL. atau merupakan hasil inputan dari tabel barang. maka nomor regis & nama barang diambil dari tabel barang sesuai dengan id barangnya */ { ?>
+                          <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->q }}</td>
+                          <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->NAMA_BARANG }}</td>
+                          <?php
+                            $indexTemp++;
+                        }
+                      ?>
+
+                      <td style="text-align: center; vertical-align: middle; ">{{ $show[$i]->NAMA_USER }}</td>
+                      <td style="text-align: center; vertical-align: middle; ">{{ $show[$i]->KETERANGAN }}</td>
+                      <td style="text-align: center; vertical-align: middle; "><?php echo date('d F Y', strtotime($show[$i]->TGL_KELUAR)) ?></td>
                     </tr>
-                @endforeach
+                @endfor
                 </tbody>
               </table>
             </div>

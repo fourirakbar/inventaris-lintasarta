@@ -46,19 +46,34 @@
                   </thead>
                   <tbody>
                   <?php
+                  // dd($data);
                     $indexNo=1;
+                    $indexTemp=0;
                   ?>
-                  @foreach ($repair as $index)
+                  @for ($i = 0 ; $i < $count ; $i++)
                       <tr>
                         <td style="text-align: center; vertical-align: middle; ">{{ $indexNo++ }}</td>
-                        <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_TICKET }}</td>
-                        <td style="text-align: center; vertical-align: middle; ">{{ $index->NAMA_BARANG}}</td>
-                        <td style="text-align: center; vertical-align: middle; ">{{ $index->NOMOR_REGISTRASI }}</td>
-                        <td style="text-align: center; vertical-align: middle; ">{{ $index->PROBLEM }}</td>
-                        <td style="text-align: center; vertical-align: middle; ">{{ $index->VENDOR }}</td>
+                        <td style="text-align: center; vertical-align: middle; ">{{ $repair[$i]->NOMOR_TICKET }}</td>
+
+                        <?php /* kalo di database repair, value nama barang tidak NULL. atau merupakan hasil inputan manual dari user */
+                          if (!is_null($repair[$i]->NAMA_BARANG)) { ?>
+                            <td style="text-align: center; vertical-align: middle; ">{{ $repair[$i]->NAMA_BARANG}}</td>
+                            <td style="text-align: center; vertical-align: middle; ">{{ $repair[$i]->NOMOR_REGISTRASI }}</td>
+                        <?php
+                          } else /* kalo di database repair, value nama barang NULL. atau merupakan hasil inputan dari tabel barang. maka nomor regis & nama barang diambil dari tabel barang sesuai dengan id barangnya */ { ?>
+                            <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->NAMA_BARANG}}</td>
+                            <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->NOMOR_REGISTRASI }}</td>
+                        <?php
+                          $indexTemp++;
+                          }
+                        ?>
+                        
+
+                        <td style="text-align: center; vertical-align: middle; ">{{ $repair[$i]->PROBLEM }}</td>
+                        <td style="text-align: center; vertical-align: middle; ">{{ $repair[$i]->VENDOR }}</td>
                         <?php
                             $datenow=date_create();
-                            $datefinish=date_create($index->PERKIRAAN_SELESAI);
+                            $datefinish=date_create($repair[$i]->PERKIRAAN_SELESAI);
                             $new = date_add($datefinish,date_interval_create_from_date_string("1 days"));
                             $diff=date_diff($datenow,$new);
                             $print = $diff->format('%R%a Hari');
@@ -67,19 +82,19 @@
                             }
                             $printInt = (int)$print;
                         ?>
-                        @if($print > 0 && ($index->STATUS_REPAIR) != "Done")
+                        @if($print > 0 && ($repair[$i]->STATUS_REPAIR) != "Done")
                           <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
-                        @elseif ($print <= 0 && ($index->STATUS_REPAIR) != "Done")
+                        @elseif ($print <= 0 && ($repair[$i]->STATUS_REPAIR) != "Done")
                           <td style="background-color: red; color: white; text-align: center; vertical-align: middle; ">{{ $print }}</td>
-                        @elseif (($index->STATUS_REPAIR) == "Done")
+                        @elseif (($repair[$i]->STATUS_REPAIR) == "Done")
                           <td style="background-color: green; color: white; text-align: center; vertical-align: middle; ">Done</td>
                         @endif
                         <td style="text-align: center; vertical-align: middle; ">
-                          <a class="btn btn-info" href="/repair/show/detail/{{ $index->ID_PERBAIKAN }}">
+                          <a class="btn btn-info" href="/repair/show/detail/{{ $repair[$i]->ID_PERBAIKAN }}">
                             <i class="fa fa-search"></i> Detail
                           </a>
-                          @if ($index->STATUS_REPAIR !== "Done")
-                            <a class="btn btn-primary" href="/repair/selesai/{{ $index->ID_PERBAIKAN }}">
+                          @if ($repair[$i]->STATUS_REPAIR !== "Done")
+                            <a class="btn btn-primary" href="/repair/selesai/{{ $repair[$i]->ID_PERBAIKAN }}">
                               <i class="fa fa-check"></i> Selesai
                             </a>
                           @else
@@ -88,7 +103,7 @@
                         </td>
 
                       </tr>
-                  @endforeach
+                  @endfor
                   </tbody>
                 </table>
             </div>
