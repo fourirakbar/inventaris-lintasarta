@@ -52,7 +52,19 @@
                 <div class="form-group"> 
                   <label>Keterangan</label> 
                   <input class="form-control" placeholder="Keterangan" name="KETERANGAN"> 
-                </div> 
+                </div>
+
+                <div class="form-group">
+                    <label>Status Barang</label>
+                    <select class="form-control" name="STATUS_BARANG">
+                      <option selected="" disabled="" value=""><b>-- Pilih Menu DIbawah --</b></option>
+                      <option value="Diperbaiki">Diperbaiki</option>
+                      <option value="Dipinjam">Dipinjam</option>
+                      <option value="Rusak">Rusak</option>
+                      <option value="Tidak Terpakai">Tidak Terpakai</option>
+                    </select>
+                  </div>
+
                 {{csrf_field()}}
                 <div class="form-group">
                   <label>RACK</label>

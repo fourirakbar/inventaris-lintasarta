@@ -29,6 +29,7 @@ class BarangController extends Controller
             'KETERANGAN' => $data['KETERANGAN'],
             'RACK_ID' => $data['RACK_ID'],
             'HARGA_BARANG' => $data['HARGA_BARANG'],
+            'STATUS_BARANG' => $data['STATUS_BARANG'],
         ));
 
         return redirect('/showbarang')->with('success','Input Barang Sukses'); //return ke /showbarang dengan keterangan sukses
