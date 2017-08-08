@@ -64,11 +64,11 @@
                   <th style="text-align: left; vertical-align: middle; ">Sisa Hari</th>
                   <th style="width: 1px; text-align: center; vertical-align: middle;">:</th>
                   <?php
-                      $datenow=date_create();
-                      $datefinish=date_create($index->TGL_PENGEMBALIAN);
-                      $new = date_add($datefinish,date_interval_create_from_date_string("1 days"));
-                      $diff=date_diff($datenow,$new);
-                      $print = $diff->format('%R%a Hari');
+                      $datenow=date_create(); /* ambil tanggal hari ini */
+                      $datefinish=date_create($index->TGL_PENGEMBALIAN); /* ambil tanggal dari kolom tgl pengembalian */
+                      $new = date_add($datefinish,date_interval_create_from_date_string("1 days")); /* dari variabel $datefinisih ditambah 1 hari */
+                      $diff=date_diff($datenow,$new); /* dari tanggal hari ini dikurangin dengan variabel new */
+                      $print = $diff->format('%R%a Hari'); /* dari variabel $diff di print dengan format angka */
                       if($print == 0){
                           $print = $diff->format('%a Hari');
                       }

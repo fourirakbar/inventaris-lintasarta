@@ -56,12 +56,12 @@
                       <td style="text-align: center; vertical-align: middle; ">{{ $peminjaman[$i]->NOMOR_TICKET }}</td>
                       <td style="text-align: center; vertical-align: middle; ">{{ $peminjaman[$i]->NAMA_PEMINJAM }}</td>
 
-                      <?php
+                      <?php /* //kalo di database peminjaman, value perangkat tidak NULL. atau merupakan hasil inputan manual dari user */
                         if (!is_null($peminjaman[$i]->PERANGKAT)) { ?>
                           <td style="text-align: center; vertical-align: middle; ">{{ $peminjaman[$i]->PERANGKAT }}</td>
                           <td style="text-align: center; vertical-align: middle; ">{{ $peminjaman[$i]->NOMOR_REGISTRASI }}</td>                          
                       <?php
-                        } else { ?>
+                        } else /* kalo di database peminjaman, value perangkat NULL. atau merupakan hasil inputan dari tabel barang. maka nomor regis & nama barang diambil dari tabel barang sesuai dengan id barangnya */ { ?>
                           <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->NAMA_BARANG }}</td>
                           <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->q }}</td>
                       <?php
