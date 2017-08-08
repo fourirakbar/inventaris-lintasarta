@@ -88,28 +88,42 @@ class PermintaanController extends Controller
             ));
         };
 
-
+        //query - pilih data pada tabel permintaan yang di join dengan tabel tikpro dengan ketentuan id tikpro pada tabel permintaan sama dengan id tikpro pada tabel history tikpro dan id permintaan pada tabel permintaan sama dengan id permintaan pada tabel history tikpro (untuk listing seluruh data permintaan)
         $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID order by PERMINTAAN.ID_PERMINTAAN DESC");
 
+        //query - pilih data pada tabel permintaan yang di join dengan tabel tikpro dengan ketentuan id tikpro pada tabel permintaan sama dengan id tikpro pada tabel history tikpro dan id permintaan pada tabel permintaan sama dengan id permintaan pada tabel history tikpro (untuk listing seluruh data permintaan)
         $jebret3 = DB::select("select ID_PERMINTAAN from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID");
+
+        //inisiasi array
         $jebret2 = array();
+
+        //looping seluruh data pada variabel $jebret3 sebagai variabel $key
         foreach ($jebret3 as $key) {
-            $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get(); 
+            $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get();
+
+            //memasukkan seluruh data pada variabel $jebret2a kedalam array $jebret2
             array_push($jebret2, $jebret2a);
         }
 
+        //inisiasi array
         $deadline = array();
         $deadline2 = array();
         $deadline3 = array();
         $deadline4 = array();
+        //looping seluruh data array pada variabel $jebret2
         foreach ($jebret2 as $key) {
+            //looping seluruh data array pada setiap array yang didifinisikan dalam variabel $key
             foreach ($key as $value) {
+                //memasukkan seluruh ID_PERMINTAAN, deadline, id tikpro pada setiap data permintaan ke variabel $deadline
               array_push($deadline, ["idpermintaan" => $value->ID_PERMINTAAN, "deadline" => $value->DEADLINE, "idtikpro" => $value->TIKPRO_ID]);
             }
+            //memasukkan variabel $deadline setiap loop kedalam variabel $deadline2
             array_push($deadline2, $deadline);
+            //mengosongkan variabel $deadline agar mereset setiap looping
             $deadline = array();
         }
 
+        //masukkan seluruh idpermintaan, deadline, id tikpro ke variabel $deadline4
         for ($i=1; $i <= count($deadline2) ; $i++) {
             for ($j=1; $j <= count($deadline2[$i-1]) ; $j++) { 
               if (empty($deadline3)) {
@@ -123,6 +137,7 @@ class PermintaanController extends Controller
             $deadline3 = array();
         }
 
+        //looping ke seluruh data, mengambil tanggal selesai dari data permintaan
         $counter = 0;
         foreach ($jebret as $key) {
             if ($key->STATUS == "in progress") {
@@ -149,8 +164,9 @@ class PermintaanController extends Controller
             $deadline_balik = array_reverse($deadline_new);
             }
         }
-        
+        //hitung banyaknya data history tikpro yang datanya baru masuk
         $itung = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID',$bossku[0])->count();
+        //ambil seluruh data yang baru masuk pada history tikpro
         $updatesemua = DB::table('HISTORY_TIKPRO')->where('PERMINTAAN_ID',$bossku[0])->get();
         $tikpro_new = array();
         foreach ($updatesemua as $key) {
@@ -161,44 +177,42 @@ class PermintaanController extends Controller
         for ($i=0 ; $i<$itung ; $i++) {
             array_push($deadline_balik_baru, $deadline_balik[$i]);
         }
-        
+        //update data deadline new pada tabel history tikpro
         for ($i=1 ; $i<=$itung ; $i++) {
             $updatedeadline = "UPDATE HISTORY_TIKPRO SET DEADLINE_NEW = ? WHERE PERMINTAAN_ID = ? AND TIKPRO_ID = ?";
             DB::update($updatedeadline, array(array_reverse($deadline_balik_baru)[$i-1], $bossku[0], $tikpro_new[$i-1]));            
         }
 
+        //redirect ke halaman /request`
         return redirect('/request')->with('success','Request Barang Sukses'); //return ke halaman request dengan keterangan sukses
     }
 
+    //fungsi list semua permintaa (history permintaan)
     public function lihatSemua() {
-        // $jebret = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->orderBy('ID_PERMINTAAN','DESC')->get();
-        // dd($jebret);
-        // $jebret = Permintaan::query()->join('HISTORY_TIKPRO','HISTORY_TIKPRO.TIKPRO_ID','=','PERMINTAAN.TIKPRO_ID', 'AND', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->orderBy('PERMINTAAN.ID_PERMINTAAN','DESC')->get();
-
+        //query - pilih data pada tabel permintaan yang di join dengan tabel tikpro dengan ketentuan id tikpro pada tabel permintaan sama dengan id tikpro pada tabel history tikpro dan id permintaan pada tabel permintaan sama dengan id permintaan pada tabel history tikpro (untuk listing seluruh data permintaan)
         $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID order by PERMINTAAN.ID_PERMINTAAN DESC");
 
+        //query - pilih data pada tabel permintaan yang di join dengan tabel tikpro dengan ketentuan id tikpro pada tabel permintaan sama dengan id tikpro pada tabel history tikpro dan id permintaan pada tabel permintaan sama dengan id permintaan pada tabel history tikpro (untuk listing seluruh data permintaan)
         $jebret3 = DB::select("select ID_PERMINTAAN from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID");
 
+        //query - pilih data pada tabel permintaan yang di join dengan tabel tikpro dengan ketentuan id permintaan pada tabel permintaan sama dengan id permintaan pada tabel history tikpro (untuk mengambil data pada kolom tanggal selesai)
         $tglselesai = DB::select("select * from HISTORY_TIKPRO join PERMINTAAN on PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID");
-        // dd($tglselesai);
-        // dd($jebret);
-        // dd($jebret);
-        // dd($jebret); //ambil data dari table PERMINTAAN dan table TIKPRO dengan ketentuan yang sudah diberikan
-        // $jebret3 = Permintaan::query()->join('TIKPRO','TIKPRO.ID_TIKPRO','=','PERMINTAAN.TIKPRO_ID')->select('PERMINTAAN.ID_PERMINTAAN')->get();
-        // dd($jebret3);
+        
+        //inisiasi array
         $jebret2 = array();
+        //looping seluruh data pada variabel $jebret3 sebagai variabel $key
         foreach ($jebret3 as $key) {
             $jebret2a = DB::table('HISTORY_TIKPRO')->join('PERMINTAAN', 'PERMINTAAN.ID_PERMINTAAN','=','HISTORY_TIKPRO.PERMINTAAN_ID')->where('HISTORY_TIKPRO.PERMINTAAN_ID',$key->ID_PERMINTAAN)->get(); //ambil semua data dari tabel TIKPRO
+            //memasukkan seluruh data pada variabel $jebret2a kedalam array $jebret2
             array_push($jebret2, $jebret2a);
         }
-        // dd($tglselesai);
-
+        
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2', 'tglselesai')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
-
-        // dd($jebret);
     }
 
+    //fungsi list seluruh permintaan yang belum selesai
     public function lihatSemuaBelum(Request $request) {
+        //list data permintaan yang belum selesai
         $tglselesai = DB::select("select * from HISTORY_TIKPRO join PERMINTAAN on PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID");
         $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID and PERMINTAAN.STATUS = 'in progress' order by PERMINTAAN.ID_PERMINTAAN DESC");
 
@@ -212,7 +226,9 @@ class PermintaanController extends Controller
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2', 'tglselesai')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
     }
 
+    //fungsi untuk list seluruh data permintaan yang sudah selesai
     public function lihatSemuaSudah(Request $request) {
+        //list data dengan ketentuan statusnya sudah donne
         $tglselesai = DB::select("select * from HISTORY_TIKPRO join PERMINTAAN on PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID");
         $jebret = DB::select("select * from PERMINTAAN inner join HISTORY_TIKPRO where PERMINTAAN.TIKPRO_ID = HISTORY_TIKPRO.TIKPRO_ID and PERMINTAAN.ID_PERMINTAAN = HISTORY_TIKPRO.PERMINTAAN_ID and PERMINTAAN.STATUS = 'done' order by PERMINTAAN.ID_PERMINTAAN DESC");
 
@@ -225,7 +241,7 @@ class PermintaanController extends Controller
         }
         return view('permintaan.semuaPermintaan', compact('jebret', 'jebret2', 'tglselesai')); //return view ke halaman semuaPermintaan dengan data dari variable $jebret dan $jebret2
     }
-
+    
     public function tindakLanjut($ID_PERMINTAAN) {
         $jebret2 = Permintaan::find($ID_PERMINTAAN); //mencari data di table PERMINTAAN sesuai dengan ID_PERMINTAAN pada web
         return view('permintaan.tindakLanjut',compact('jebret2')); //return ke halaman tindakLanjut dengan data dari variable $jebret2
