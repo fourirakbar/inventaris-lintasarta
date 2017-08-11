@@ -42,6 +42,7 @@
                             <th style="text-align: center; vertical-align: middle; ">Vendor</th>
                             <th style="text-align: center; vertical-align: middle; ">Sisa Hari</th>
                             <th style="text-align: center; vertical-align: middle; ">Action</th>
+                            
                     </tr>
                   </thead>
                   <tbody>
@@ -61,8 +62,8 @@
                             <td style="text-align: center; vertical-align: middle; ">{{ $repair[$i]->NOMOR_REGISTRASI }}</td>
                         <?php
                           } else /* kalo di database repair, value nama barang NULL. atau merupakan hasil inputan dari tabel barang. maka nomor regis & nama barang diambil dari tabel barang sesuai dengan id barangnya */ { ?>
-                            <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->NAMA_BARANG}}</td>
-                            <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->NOMOR_REGISTRASI }}</td>
+                            <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->e}}</td>
+                            <td style="text-align: center; vertical-align: middle; ">{{ $data[$indexTemp]->r }}</td>
                         <?php
                           $indexTemp++;
                           }

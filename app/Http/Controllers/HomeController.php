@@ -189,17 +189,27 @@ class HomeController extends Controller
 
     //fungsi untuk menampilkan data peminjaman yang lewat dari batas waktu
     public function showpinjam2(){
-        $peminjaman = DB::select("SELECT * FROM `PEMINJAMAN` WHERE TGL_PENGEMBALIAN > NOW() AND KETERANGAN != 'done' ");
+        $peminjaman = DB::table('PEMINJAMAN')->select('*')->where('TGL_PENGEMBALIAN','>','NOW()')->where('KETERANGAN','!=','done')->get(); //ambil semua data dari tabel PEMINJAMAN
+        $count = $peminjaman->count();
+        $data = DB::table('PEMINJAMAN')->join('BARANG','BARANG.ID_BARANG','=','PEMINJAMAN.ID_BARANG')->select('PEMINJAMAN.ID_PEMINJAMAN', 'PEMINJAMAN.ID_BARANG', 'PEMINJAMAN.NOMOR_TICKET', 'PEMINJAMAN.PERANGKAT', 'PEMINJAMAN.NOMOR_REGISTRASI as w', 'PEMINJAMAN.CATATAN_PEMINJAMAN', 'PEMINJAMAN.TGL_PEMINJAMAN', 'PEMINJAMAN.TGL_PENGEMBALIAN', 'PEMINJAMAN.KETERANGAN', 'BARANG.NOMOR_REGISTRASI as q', 'BARANG.NAMA_BARANG')->where('PEMINJAMAN.TGL_PENGEMBALIAN','>','NOW()')->where('PEMINJAMAN.KETERANGAN','!=','done')->get();
+        dd($data);
+        return view('peminjaman.showPeminjaman', compact('peminjaman', 'count', 'data')); //return ke halaman showPeminjaman dengan data dari variable $peminjaman
+        // $peminjaman = DB::select("SELECT * FROM `PEMINJAMAN` WHERE TGL_PENGEMBALIAN > NOW() AND KETERANGAN != 'done' ");
         // dd($peminjaman);
-        return view('peminjaman.showPeminjaman', compact('peminjaman'));
+        // return view('peminjaman.showPeminjaman', compact('peminjaman'));
         
     }
 
     //fungsi untuk menampilkan data perbaikan yang lewat dari batas waktu
     public function showrepair2(){
-        $repair = DB::select("SELECT * FROM `REPAIR` WHERE PERKIRAAN_SELESAI > NOW() AND STATUS_REPAIR != 'Done' ");
+        $repair = DB::table('REPAIR')->select('*')->where('PERKIRAAN_SELESAI','>','NOW()')->where('STATUS_REPAIR','!=','Done')->get();
+        $count = $repair->count();
+        $data = DB::table('REPAIR')->join('BARANG','BARANG.ID_BARANG','=','REPAIR.ID_BARANG')->select('REPAIR.ID_PERBAIKAN','REPAIR.ID_BARANG','REPAIR.NOMOR_TICKET','REPAIR.NAMA_BARANG as q','REPAIR.NOMOR_REGISTRASI as w','REPAIR.PROBLEM','REPAIR.VENDOR','REPAIR.KETERANGAN_REPAIR','REPAIR.CATATAN_REPAIR','REPAIR.STATUS_REPAIR','REPAIR.TANGGAL_REPAIR','REPAIR.PERKIRAAN_SELESAI','BARANG.NOMOR_REGISTRASI as e','BARANG.NAMA_BARANG as r')->where('REPAIR.PERKIRAAN_SELESAI','>','NOW()')->where('REPAIR.STATUS_REPAIR','!=','Done')->get();
+        // dd($data);
+        return view('repair.showRepair', compact('repair','count','data'));
+        // $repair = DB::select("SELECT * FROM `REPAIR` WHERE PERKIRAAN_SELESAI > NOW() AND STATUS_REPAIR != 'Done' ");
         // dd($peminjaman);
-        return view('repair.showRepair', compact('repair'));
+        // return view('repair.showRepair', compact('repair'));
         
     }
 
