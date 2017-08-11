@@ -192,7 +192,7 @@ class HomeController extends Controller
         $peminjaman = DB::table('PEMINJAMAN')->select('*')->where('TGL_PENGEMBALIAN','>','NOW()')->where('KETERANGAN','!=','done')->get(); //ambil semua data dari tabel PEMINJAMAN
         $count = $peminjaman->count();
         $data = DB::table('PEMINJAMAN')->join('BARANG','BARANG.ID_BARANG','=','PEMINJAMAN.ID_BARANG')->select('PEMINJAMAN.ID_PEMINJAMAN', 'PEMINJAMAN.ID_BARANG', 'PEMINJAMAN.NOMOR_TICKET', 'PEMINJAMAN.PERANGKAT', 'PEMINJAMAN.NOMOR_REGISTRASI as w', 'PEMINJAMAN.CATATAN_PEMINJAMAN', 'PEMINJAMAN.TGL_PEMINJAMAN', 'PEMINJAMAN.TGL_PENGEMBALIAN', 'PEMINJAMAN.KETERANGAN', 'BARANG.NOMOR_REGISTRASI as q', 'BARANG.NAMA_BARANG')->where('PEMINJAMAN.TGL_PENGEMBALIAN','>','NOW()')->where('PEMINJAMAN.KETERANGAN','!=','done')->get();
-        dd($data);
+        // dd($data);
         return view('peminjaman.showPeminjaman', compact('peminjaman', 'count', 'data')); //return ke halaman showPeminjaman dengan data dari variable $peminjaman
         // $peminjaman = DB::select("SELECT * FROM `PEMINJAMAN` WHERE TGL_PENGEMBALIAN > NOW() AND KETERANGAN != 'done' ");
         // dd($peminjaman);
