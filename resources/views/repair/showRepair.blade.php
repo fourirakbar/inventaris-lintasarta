@@ -107,6 +107,9 @@
                   @endfor
                   </tbody>
                 </table>
+                @if(\Request::is('repair/show'))
+                <a href="/export/perbaikan" class="btn btn-primary pull-left">Download Excel File</a>
+              @endif
             </div>
             <!-- /.box-body -->
           </div>

@@ -82,6 +82,7 @@
                                 $print = $diff->format('%a Hari');
                             }
                             $printInt = (int)$print;
+                            $printplus = $print+1;
                         ?>
 
                         @if($print > 0 && ($peminjaman[$i]->KETERANGAN) == "progress")
@@ -100,6 +101,9 @@
                 @endfor
                 </tbody>
               </table>
+              @if(\Request::is('peminjaman/show'))
+                <a href="/export/peminjaman" class="btn btn-primary pull-left">Download Excel File</a>
+              @endif
             </div>
             <!-- /.box-body -->
           </div>

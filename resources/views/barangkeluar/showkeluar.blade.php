@@ -71,6 +71,9 @@
                 @endfor
                 </tbody>
               </table>
+              @if(\Request::is('barangkeluar/show'))
+                <a href="/export/barangkeluar" class="btn btn-primary pull-left">Download Excel File</a>
+              @endif
             </div>
             <!-- /.box-body -->
           </div>

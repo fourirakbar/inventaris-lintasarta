@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PinjamController extends Controller {
     public function index () {
@@ -128,5 +129,38 @@ class PinjamController extends Controller {
         $peminjaman = DB::table('PEMINJAMAN')->select('*')->where('ID_PEMINJAMAN', '=', $request->ID_PEMINJAMAN)->get(); //ambil semua data dari tabel PEMINJAMAN
         // dd($peminjaman);
         return view('peminjaman.usershowpeminjaman', compact('peminjaman')); 
+    }
+
+    public function exporttoexcel() {
+        $peminjamans = Peminjaman::query()->select('NOMOR_TICKET', 'NAMA_PEMINJAM', 'PERANGKAT', 'NOMOR_REGISTRASI', 'TGL_PEMINJAMAN', 'TGL_PENGEMBALIAN', 'CATATAN_PEMINJAMAN')->get();
+
+        $data = Peminjaman::query()->join('BARANG', 'BARANG.ID_BARANG', 'PEMINJAMAN.ID_BARANG')->select('PEMINJAMAN.NOMOR_TICKET', 'PEMINJAMAN.NAMA_PEMINJAM', 'BARANG.NAMA_BARANG as PERANGKAT', 'BARANG.NOMOR_REGISTRASI as NOMOR_REGISTRASI', 'PEMINJAMAN.TGL_PEMINJAMAN', 'PEMINJAMAN.TGL_PENGEMBALIAN', 'PEMINJAMAN.CATATAN_PEMINJAMAN')->get();
+
+        $peminjamanarray = [];
+        $peminjamanarray[] = ['NOMOR_TICKET', 'NAMA_PEMINJAM', 'NAMA_BARANG', 'NOMOR_REGISTRASI', 'TGL_PEMINJAMAN', 'TGL_PENGEMBALIAN', 'CATATAN_PEMINJAMAN'];
+
+        $j=0;
+        for ($i=0 ; $i < count($peminjamans) ; $i++) {
+            if (!is_null($peminjamans[$i]->PERANGKAT)) {
+                $peminjamanarray[] = $peminjamans[$i]->toArray();
+            }
+            else {
+                $peminjamanarray[] = $data[$j]->toArray();
+                $j++;
+            }
+        }
+
+        $datenow = date_create();
+        $newdate = date_format($datenow, "d-m-Y");
+        $namafile = 'laporan-peminjaman_'.$newdate;
+
+        Excel::create($namafile, function($excel) use ($peminjamanarray) {
+        $excel->setTitle('Data Peminjaman');
+        $excel->setCreator('Laravel')->setCompany('TI Infrastruktur, LINTASARTA');
+        $excel->setDescription('Peminjaman File');
+        $excel->sheet('sheet1', function($sheet) use ($peminjamanarray) {
+          $sheet->fromArray($peminjamanarray, null, 'A1', false, false);
+        });
+      })->download('xlsx');
     }
 }

@@ -119,6 +119,11 @@ Route::get('user-search/cancel', 'UserController@showCancel');
 Route::post('user-search/cancel', 'UserController@cancel');
 
 Route::get('export/permintaan', 'PermintaanController@exporttoexcel')->middleware('admin');
+Route::get('export/barangkeluar', 'BarangKeluarController@exporttoexcel')->middleware('admin');
+Route::get('export/peminjaman', 'PinjamController@exporttoexcel')->middleware('admin');
+Route::get('export/perbaikan', 'RepairController@exporttoexcel')->middleware('admin');
+Route::get('export/barang', 'BarangController@exporttoexcel')->middleware('admin');
+Route::get('export/rack', 'RackController@exporttoexcel')->middleware('admin');
 
 Route::get('/barangkeluar', 'BarangKeluarController@index');
 Route::post('/barangkeluar', 'BarangKeluarController@input');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Maatwebsite\Excel\Facades\Excel;
 use App\Repair;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -120,5 +121,38 @@ class RepairController extends Controller
         $url = 'repair/show/detail/'.$ID_PERBAIKAN;
         // echo $url;
         return redirect($url)->with('success','Sukses Update Data'); //return ke halaman /showPeminjaman dengan keterangan sukses
+    }
+
+    public function exporttoexcel () {
+        $repairs = Repair::query()->select('NOMOR_TICKET', 'NAMA_BARANG', 'NOMOR_REGISTRASI', 'PROBLEM', 'VENDOR', 'KETERANGAN_REPAIR', 'CATATAN_REPAIR', 'TANGGAL_REPAIR', 'PERKIRAAN_SELESAI')->get();
+
+        $data = Repair::query()->join('BARANG', 'BARANG.ID_BARANG', 'REPAIR.ID_BARANG')->select('REPAIR.NOMOR_TICKET', 'BARANG.NAMA_BARANG as NAMA_BARANG', 'BARANG.NOMOR_REGISTRASI as NOMOR_REGISTRASI', 'REPAIR.PROBLEM', 'REPAIR.VENDOR', 'REPAIR.KETERANGAN_REPAIR', 'REPAIR.CATATAN_REPAIR', 'REPAIR.TANGGAL_REPAIR', 'REPAIR.PERKIRAAN_SELESAI')->get();
+
+        $repairarray = [];
+        $repairarray[] = ['NOMOR_TICKET', 'NAMA_BARANG', 'NOMOR_REGISTRASI', 'PROBLEM', 'VENDOR', 'KETERANGAN_REPAIR', 'CATATAN_REPAIR', 'TANGGAL_REPAIR', 'PERKIRAAN_SELESAI'];
+
+        $j=0;
+        for ($i=0 ; $i < count($repairs) ; $i++) {
+            if (!is_null($repairs[$i]->NAMA_BARANG)) {
+                $repairarray[] = $repairs[$i]->toArray();
+            }
+            else {
+                $repairarray[] = $data[$j]->toArray();
+                $j++;
+            }
+        }
+        
+        $datenow = date_create();
+        $newdate = date_format($datenow, "d-m-Y");
+        $namafile = 'laporan-repair_'.$newdate;
+
+        Excel::create($namafile, function($excel) use ($repairarray) {
+            $excel->setTitle('Repair');
+            $excel->setCreator('Laravel')->setCompany('TI Infrastruktur, LINTASARTA');
+            $excel->setDescription('Repair File');
+            $excel->sheet('sheet1', function($sheet) use ($repairarray) {
+              $sheet->fromArray($repairarray, null, 'A1', false, false);
+            });
+        })->download('xlsx');
     }
 }
