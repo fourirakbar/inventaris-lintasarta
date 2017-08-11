@@ -64,6 +64,9 @@
                 @endforeach
                 </tbody>
               </table>
+              @if(\Request::is('showbarang'))
+                <a href="/export/barang" class="btn btn-primary pull-left">Download Excel File</a>
+              @endif
             </div>
             <!-- /.box-body -->
           </div>

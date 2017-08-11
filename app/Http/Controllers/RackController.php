@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RackController extends Controller
 {
@@ -61,5 +62,29 @@ class RackController extends Controller
         $url = '/rack/edit/'.$ID_RACK;
         return Redirect::to($url)->with('error','Kosongkan Rack Jika Ingin Menghapus Rack'); //return ke halaman /rack/edit/(sesuai dengan ID_RACK) dengan keterangan error
       }
+    }
+
+    public function exporttoexcel () {
+      $racks = Rack::query()->select('NAMA_RACK', 'LOKASI_RACK')->get();
+
+      $rackarray = [];
+      $rackarray[] = ['NAMA_RACK', 'LOKASI_RACK'];
+
+      for ($i=0 ; $i < count($racks) ; $i++) {
+        $rackarray[] = $racks[$i]->toArray();
+      }
+
+      $datenow = date_create();
+      $newdate = date_format($datenow, "d-m-Y");
+      $namafile = 'laporan-rack_'.$newdate;
+
+      Excel::create($namafile, function($excel) use ($rackarray) {
+        $excel->setTitle('Barang Keluar');
+        $excel->setCreator('Laravel')->setCompany('TI Infrastruktur, LINTASARTA');
+        $excel->setDescription('Barang Keluar File');
+        $excel->sheet('sheet1', function($sheet) use ($rackarray) {
+          $sheet->fromArray($rackarray, null, 'A1', false, false);
+        });
+      })->download('xlsx');
     }
 }

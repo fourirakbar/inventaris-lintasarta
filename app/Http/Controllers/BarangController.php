@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BarangController extends Controller
 {
@@ -80,6 +81,30 @@ class BarangController extends Controller
 
         $url = '/showbarang';
         return redirect($url)->with('success','Sukses Update Data'); //return ke halaman /showPeminjaman dengan keterangan sukses
+    }
+
+    public function exporttoexcel () {
+        $barangs = Barang::query()->select('NOMOR_REGISTRASI', 'NAMA_BARANG', 'JUMLAH', 'KETERANGAN', 'STATUS_BARANG', 'HARGA_BARANG')->get();
+
+        $barangarray = [];
+        $barangarray[] = ['NOMOR_REGISTRASI', 'NAMA_BARANG', 'JUMLAH', 'KETERANGAN', 'STATUS_BARANG', 'HARGA_BARANG'];
+
+        for ($i=0 ; $i < count($barangs) ; $i++) {
+            $barangarray[] = $barangs[$i]->toArray();
+        }
+
+        $datenow = date_create();  
+        $newdate = date_format($datenow, "d-m-Y");
+        $namafile = 'laporan-data-barang_'.$newdate;
+
+        Excel::create($namafile, function($excel) use ($barangarray) {
+            $excel->setTitle('Barang Keluar');
+            $excel->setCreator('Laravel')->setCompany('TI Infrastruktur, LINTASARTA');
+            $excel->setDescription('Barang Keluar File');
+            $excel->sheet('sheet1', function($sheet) use ($barangarray) {
+              $sheet->fromArray($barangarray, null, 'A1', false, false);
+            });
+        })->download('xlsx');
     }
 
 

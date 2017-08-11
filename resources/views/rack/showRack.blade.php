@@ -62,6 +62,9 @@
                   @endforeach
                   </tbody>
                 </table>
+                @if(\Request::is('rack/show'))
+                <a href="/export/rack" class="btn btn-primary pull-left">Download Excel File</a>
+              @endif
               </div>
               <div class="col-xs-2"></div>
             </div>
