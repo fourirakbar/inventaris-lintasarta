@@ -21,7 +21,10 @@ class BarangController extends Controller
 
     public function input() {
         $data = Input::all(); //ambil input barang
-
+        // dd($data);
+        if (!isset($data['STATUS_BARANG'])) {
+            $data['STATUS_BARANG'] = null;
+        }
         //memasukkan data sesuai input ke dalam databse Barang
         Barang::insertGetId(array(
             'NOMOR_REGISTRASI' => $data['NOMOR_REGISTRASI'] ,
