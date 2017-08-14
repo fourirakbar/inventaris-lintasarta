@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 class RepairController extends Controller
 {
     public function index() {
-    	$barang = DB::table('BARANG')->select('*')->where('STATUS_BARANG', '=', NULL)->get();
+    	$barang = DB::table('BARANG')->select('*')->where('STATUS_BARANG', '=', NULL)->where('JUMLAH','>', 0)->get();
         return view('repair.inputRepair', compact('barang'));
     }
 
@@ -23,6 +23,9 @@ class RepairController extends Controller
         // dd($data);
         // memasukkan data sesuai input ke dalam databse Repair
         if (isset($data['ID_BARANG'])) {
+            $jumlahasli = DB::table('BARANG')->select('JUMLAH')->where('ID_BARANG', $data['ID_BARANG'])->get();
+            $x = $jumlahasli[0]->JUMLAH;
+            $y = $x - 1;
         	Repair::insertGetId(array(
 		        'PROBLEM' => $data['PROBLEM'],
 		        'VENDOR' => $data['VENDOR'],
@@ -34,12 +37,17 @@ class RepairController extends Controller
                 'PERKIRAAN_SELESAI' => $data['PERKIRAAN_SELESAI'],
                 'NOMOR_TICKET' => $data['NOMOR_TICKET'],
         	));
-        	if ($data['CATATAN_REPAIR'] == "") {
-        		DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Diperbaiki"]);
-        	}
-        	else{
-        		DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_REPAIR']]);
-        	}
+            if ($x <= 1) {
+                if ($data['CATATAN_REPAIR'] == "") {
+                    DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Diperbaiki"]);
+                }
+                else{
+                    DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_REPAIR']]);
+                }
+            }
+
+            $update = "UPDATE BARANG SET JUMLAH = ? WHERE ID_BARANG = ?";
+            DB::update($update, array($y, $data['ID_BARANG']));
         }
         else {
         	Repair::insertGetId(array(

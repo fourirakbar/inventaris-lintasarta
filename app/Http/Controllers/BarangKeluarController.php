@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class BarangKeluarController extends Controller
 {
     public function index() {
-      $barang = DB::table('BARANG')->select('*')->where('STATUS_BARANG', '=', NULL)->get();
+      $barang = DB::table('BARANG')->select('*')->where('STATUS_BARANG', '=', NULL)->where('JUMLAH','>', 0)->get();
       return view('barangkeluar.inputkeluar', compact('barang'));
     }
 
@@ -24,6 +24,10 @@ class BarangKeluarController extends Controller
       $data = Input::all();
 
       if (isset($data['ID_BARANG'])) {
+            $jumlahasli = DB::table('BARANG')->select('JUMLAH')->where('ID_BARANG', $data['ID_BARANG'])->get();
+            $a = $jumlahasli[0]->JUMLAH;
+            $b = $a - 1;
+            // dd($b);
             BarangKeluar::insertGetId(array(
               'BARANG_ID' => $data['ID_BARANG'],
               'NAMA_USER' => $data['NAMA_USER'],
@@ -32,12 +36,17 @@ class BarangKeluarController extends Controller
               'TGL_KELUAR' => $data['TGL_KELUAR'],
               'CATATAN_KELUAR' => $data['CATATAN_KELUAR'],
             ));
-            if ($data['CATATAN_KELUAR'] == "") {
+            if ($a <= 1) {
+              if ($data['CATATAN_KELUAR'] == "") {
                 DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Barang Keluar"]);
+              }
+              else {
+                  DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_KELUAR']]);
+              }
             }
-            else{
-                DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_KELUAR']]);
-            }
+
+            $update = "UPDATE BARANG SET JUMLAH = ? WHERE ID_BARANG = ?";
+            DB::update($update, array($b, $data['ID_BARANG']));
         }
         else {
             BarangKeluar::insertGetId(array(

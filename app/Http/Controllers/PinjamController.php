@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PinjamController extends Controller {
     public function index () {
-        $barang = DB::table('BARANG')->select('*')->where('STATUS_BARANG', '=', NULL)->get();
+        $barang = DB::table('BARANG')->select('*')->where('STATUS_BARANG', '=', NULL)->where('JUMLAH','>', 0)->get();
 
         return view('peminjaman.inputPeminjaman', compact('barang')); //return ke halaman inputPeminjaman
     }
@@ -26,6 +26,9 @@ class PinjamController extends Controller {
             
         //jika input peminjaman diambil dari databse gudang, maka ada value dari ID_BARANG
         if (isset($data['ID_BARANG'])) {
+            $jumlahasli = DB::table('BARANG')->select('JUMLAH')->where('ID_BARANG', $data['ID_BARANG'])->get();
+            $x = $jumlahasli[0]->JUMLAH;
+            $y = $x - 1;
             Peminjaman::insertGetId(array(
                 'NAMA_PEMINJAM' => $data['NAMA_PEMINJAM'],
                 'TGL_PEMINJAMAN' => $data['TGL_PEMINJAMAN'],
@@ -34,13 +37,20 @@ class PinjamController extends Controller {
                 'ID_BARANG' => $data['ID_BARANG'],
                 'NOMOR_TICKET' => $data['NOMOR_TICKET'],
                 'CATATAN_PEMINJAMAN' => $data['CATATAN_PEMINJAMAN'],
-            )); 
-            if ($data['CATATAN_PEMINJAMAN'] == "") {
+            ));
+
+            if ($x <= 1) {
+                if ($data['CATATAN_PEMINJAMAN'] == "") {
                 DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => "Dipinjam"]);
-            }
-            else{
-                DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_PEMINJAMAN']]);
-            }
+                }
+                else{
+                    DB::table('BARANG')->where('ID_BARANG', $data['ID_BARANG'])->update(['STATUS_BARANG' => $data['CATATAN_PEMINJAMAN']]);
+                }    
+            } 
+
+            $update = "UPDATE BARANG SET JUMLAH = ? WHERE ID_BARANG = ?";
+            DB::update($update, array($y, $data['ID_BARANG']));
+            
         }
         else {
             Peminjaman::insertGetId(array(

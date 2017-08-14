@@ -82,7 +82,7 @@
                                 $print = $diff->format('%a Hari');
                             }
                             $printInt = (int)$print;
-                            $printplus = $print+1;
+                            $printplus = $printInt+1;
                         ?>
 
                         @if($print > 0 && ($peminjaman[$i]->KETERANGAN) == "progress")
