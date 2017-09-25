@@ -315,6 +315,7 @@ class ComposerStaticInit996dcc944920a9f0d5f7347da7b308f5
         'App\\Http\\Controllers\\BarangController' => __DIR__ . '/../..' . '/app/Http/Controllers/BarangController.php',
         'App\\Http\\Controllers\\BarangKeluarController' => __DIR__ . '/../..' . '/app/Http/Controllers/BarangKeluarController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\EditProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/EditProfileController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\PermintaanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PermintaanController.php',

@@ -19,6 +19,7 @@ return array(
     'App\\Http\\Controllers\\BarangController' => $baseDir . '/app/Http/Controllers/BarangController.php',
     'App\\Http\\Controllers\\BarangKeluarController' => $baseDir . '/app/Http/Controllers/BarangKeluarController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\EditProfileController' => $baseDir . '/app/Http/Controllers/EditProfileController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\LoginController' => $baseDir . '/app/Http/Controllers/LoginController.php',
     'App\\Http\\Controllers\\PermintaanController' => $baseDir . '/app/Http/Controllers/PermintaanController.php',
